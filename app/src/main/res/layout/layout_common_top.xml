@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/top_size"
+    android:background="@color/default_blue"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <ImageView
+        android:id="@+id/iv_scan"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="match_parent"
+        android:src="@mipmap/icon_scan"
+        android:padding="@dimen/dp_13"/>
+
+
+    <com.yyy.wrsf.view.editclear.EditClearView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:layout_toRightOf="@+id/iv_scan"
+        android:paddingRight="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_5"
+        app:ecHint="@string/common_select_order"
+        app:ecHintColor="@color/white"
+        app:ecSrc="@mipmap/icon_search"
+        app:ecTextColor="@color/white"
+        app:ecType="img"
+        android:background="@drawable/bg_commonttop_edit"/>
+
+</LinearLayout>

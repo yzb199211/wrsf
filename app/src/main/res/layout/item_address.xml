@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:padding="@dimen/dp_2"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_name"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_toRightOf="@id/tv_name"
+        android:padding="@dimen/dp_2"
+        android:paddingBottom="@dimen/dp_2"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_common_min" />
+
+    <TextView
+        android:id="@+id/tv_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@color/order_yellow_shallow"
+        android:padding="@dimen/dp_2"
+        android:text="@string/common_default"
+        android:textColor="@color/order_yellow"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginRight="@dimen/dp_10"
+        android:maxLines="2"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common_min" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:layout_below="@+id/tv_address"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@color/line_color" />
+
+</RelativeLayout>

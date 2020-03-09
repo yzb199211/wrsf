@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
+    tools:context=".main.MainFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        android:background="@color/default_blue" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_setting"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:padding="@dimen/dp_10"
+            android:src="@mipmap/icon_setting" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_160"
+            android:layout_below="@+id/iv_setting"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/dp_10"
+            app:cardElevation="@dimen/dp_4">
+
+            <ImageView
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:src="@mipmap/icon_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_100"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:singleLine="true"
+                android:text="张三"
+                android:textColor="@color/text_common"
+                android:textSize="@dimen/text_common"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_100"
+                android:layout_marginTop="@dimen/dp_50"
+                android:layout_marginRight="@dimen/dp_20"
+                android:singleLine="true"
+                android:text="15868396666"
+                android:textColor="@color/text_common"
+                android:textSize="@dimen/text_common" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/icon_logo"
+                    app:miTitle="@string/person_order" />
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/icon_logo"
+                    app:miTitle="@string/person_invoice" />
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/icon_logo"
+                    app:miTitle="@string/person_address" />
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/icon_logo"
+                    app:miTitle="@string/person_info" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_about"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/cardView"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/icon_logo"
+            app:tmiText="账号"
+            app:tmiTitle="@string/person_about" />
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_about"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/icon_logo"
+            app:tmiTitle="@string/person_phone" />
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_person_bill"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_phone"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/icon_logo"
+            app:tmiTitle="@string/person_bill" />
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_person_company"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_person_bill"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/icon_logo"
+            app:tmiTitle="@string/person_company" />
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_modify_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_person_company"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/icon_logo"
+            app:tmiTitle="@string/person_modify_pwd" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_modify_pwd"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="@string/common_exit"
+            android:textSize="@dimen/text_common" />
+    </RelativeLayout>
+</FrameLayout>

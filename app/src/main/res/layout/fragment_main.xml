@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".main.MainActivity">
+
+    <include layout="@layout/layout_common_top" />
+
+    <com.yyy.wrsf.view.cycle.CircleBanner
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_140"
+        android:visibility="visible"
+        app:indicator_gravity="end"
+        app:indicator_radius="6dp"
+        app:interval="5000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:orientation="horizontal">
+
+        <com.yyy.wrsf.view.MenuItem
+            android:id="@+id/mi_receipt"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:miSrc="@mipmap/icon_receipt"
+            app:miTitle="@string/main_receipt"
+            app:miTitlteColor="@color/default_blue" />
+
+        <com.yyy.wrsf.view.MenuItem
+            android:id="@+id/mi_send_notice"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:miSrc="@mipmap/icon_send_notice"
+            app:miTitle="@string/main_send_notice"
+            app:miTitlteColor="@color/default_blue" />
+
+        <com.yyy.wrsf.view.MenuItem
+            android:id="@+id/mi_pending_payment"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:miSrc="@mipmap/icon_pending_payment"
+            app:miTitle="@string/main_pending_payment"
+            app:miTitlteColor="@color/default_blue" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:orientation="horizontal">
+
+        <com.yyy.wrsf.view.MenuItem
+            android:id="@+id/mi_insured_tansportation"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:miSrc="@mipmap/icon_insured_tansportation"
+            app:miTitle="@string/main_insured_transportation"
+            app:miTitlteColor="@color/default_blue" />
+
+        <com.yyy.wrsf.view.MenuItem
+            android:id="@+id/mi_statements"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:miSrc="@mipmap/icon_statements"
+            app:miTitle="@string/main_statements"
+            app:miTitlteColor="@color/default_blue" />
+
+        <com.yyy.wrsf.view.MenuItem
+            android:id="@+id/mi_apply_month"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:miSrc="@mipmap/icon_apply_month"
+            app:miTitle="@string/main_apply_month"
+            app:miTitlteColor="@color/default_blue" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_110"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/btn_shipping"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_1"
+            android:layout_weight="1"
+            android:background="@color/default_blue"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_shipping"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:src="@mipmap/icon_shipping_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="@string/main_shipping"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_title_max" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_receive"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_1"
+            android:layout_weight="1"
+            android:background="@color/default_blue"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_receive"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:src="@mipmap/icon_receive_white" />
+
+            <TextView
+                android:id="@+id/tv_receive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="@string/main_receive"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_title_max" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

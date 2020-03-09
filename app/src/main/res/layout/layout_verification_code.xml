@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.yyy.wrsf.view.editclear.EditClearView
+        android:id="@+id/ec_text"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:ecHint="@string/common_code"
+        app:ecTitle="@string/common_code"
+        app:ecType="tv"
+        app:ecTextLength="6"/>
+
+    <com.yyy.wrsf.view.timecount.CountDownButton
+        android:id="@+id/count_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"
+        android:background="@drawable/btn_timecount" />
+</merge>

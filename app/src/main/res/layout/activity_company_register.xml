@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
+    android:orientation="vertical"
+
+    tools:context=".company.CompanyRegisterActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/company_titlte_register"
+        app:topTitleColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/company_name"
+                app:ecTitle="@string/company_name"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/hint_address_detail"
+                app:ecType="noTitle" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/company_legal_person"
+                app:ecTitle="@string/company_legal_person"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/company_contact_person"
+                app:ecTitle="@string/company_contact_person"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/company_contact_phone"
+                app:ecTitle="@string/company_contact_phone"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.VerificationCode
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/company_business_license"
+                app:ecTitle="@string/company_business_license"
+                app:ecType="tv" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:padding="@dimen/dp_8"
+                android:text="@string/company_upload_license"
+                android:textColor="@color/text_eidt_title"
+                android:textSize="@dimen/text_title_edit" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_8" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:padding="@dimen/dp_8"
+                android:text="@string/company_upload_IDCard"
+                android:textColor="@color/text_eidt_title"
+                android:textSize="@dimen/text_title_edit" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/iv_obverse"
+                    android:layout_width="@dimen/dp_160"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:src="@mipmap/bg_id_card" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_obverse"
+                    android:layout_marginLeft="@dimen/dp_67"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:text="@string/company_upload_obverse" />
+
+                <ImageView
+                    android:id="@+id/iv_reverse"
+                    android:layout_width="@dimen/dp_160"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_weight="1"
+                    android:src="@mipmap/bg_id_card" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_reverse"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginRight="@dimen/dp_67"
+                    android:text="@string/company_upload_reverse" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+
+                <include layout="@layout/btn_login" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:singleLine="true"
+                    android:text="@string/company_upload_protocol"
+                    android:textSize="@dimen/text_common_min" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

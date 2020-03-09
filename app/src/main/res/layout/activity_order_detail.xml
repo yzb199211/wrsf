@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".mine.order.detail.OrderDetailActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/order_title_detail"
+        app:topTitleColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/bg_order_blue"
+                android:padding="@dimen/dp_10">
+
+
+                <TextView
+                    android:id="@+id/tv_order_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单号：sf123465"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_common_min" />
+
+
+                <TextView
+                    android:id="@+id/tv_date_lasts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:singleLine="true"
+                    android:text="更新日期2018-10-10 12:20:20"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_common_min" />
+
+                <TextView
+                    android:id="@+id/tv_order_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_date_lasts"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="派送中"
+                    android:textColor="@color/order_yellow"
+                    android:textSize="@dimen/text_common"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_below="@+id/tv_order_type"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_send_area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="嘉兴市"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_common_max" />
+
+                        <TextView
+                            android:id="@+id/tv_send_person"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="张三"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_common" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_120"
+                        android:layout_height="@dimen/dp_10"
+                        android:src="@mipmap/arrow_order_white" />
+
+                    <LinearLayout
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_receive_area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="嘉兴市"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_common_max" />
+
+                        <TextView
+                            android:id="@+id/tv_receive_person"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="张三"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_common" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/default_bg_gray" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

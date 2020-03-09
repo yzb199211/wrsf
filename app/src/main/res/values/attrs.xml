@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--轮播图属性-->
+    <declare-styleable name="CircleViewPager">
+        <!--页面切换时间间隔-->
+        <attr name="interval" format="integer" />
+        <attr name="isCanLoop" format="boolean" />
+        <attr name="isAutoPlay" format="boolean" />
+        <!--<attr name="indicator_gravity" format="integer"/>-->
+        <attr name="indicator_checked_color" format="color" />
+        <attr name="indicator_normal_color" format="color" />
+        <attr name="indicator_radius" format="dimension" />
+        <attr name="indicator_gravity" format="enum">
+            <enum name="center" value="0" />
+            <enum name="start" value="1" />
+            <enum name="end" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="EditClear">
+        <attr name="ecTitle" format="string" />
+        <attr name="ecTitleSize" format="dimension" />
+        <attr name="ecTitleColor" format="color" />
+        <attr name="ecText" format="string" />
+        <attr name="ecTextSize" format="dimension" />
+        <attr name="ecTextColor" format="color" />
+        <attr name="ecTextLength" format="integer" />
+        <attr name="ecTextType">
+            <enum name="pwd" value="1"></enum>
+            <enum name="num" value="2"></enum>
+        </attr>
+        <attr name="ecHint" format="string" />
+        <attr name="ecHintColor" format="color" />
+        <attr name="ecSrc" format="reference" />
+        <attr name="ecSrcPadding" format="dimension" />
+        <attr name="ecType">
+            <enum name="img" value="1"></enum>
+            <enum name="tv" value="2"></enum>
+            <enum name="noTitle" value="0"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="LoginMiddle">
+        <attr name="lmTitle" format="string" />
+        <attr name="lmTitleSize" format="dimension" />
+        <attr name="lmTitleColor" format="color" />
+        <attr name="lmText" format="string" />
+        <attr name="lmTextSize" format="dimension" />
+        <attr name="lmTextColor" format="color" />
+        <attr name="lmType">
+            <enum name="hasDetail" value="1"></enum>
+            <enum name="nonDetail" value="2"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TopView">
+        <attr name="topLeftIvShow" format="boolean" />
+        <attr name="topLeftSrc" format="reference" />
+        <attr name="topTitle" format="string" />
+        <attr name="topTitleColor" format="color" />
+        <attr name="topTitleSize" format="dimension" />
+        <attr name="topRightTvShow" format="boolean" />
+        <attr name="topRightText" format="string" />
+        <attr name="topRightTextColor" format="color" />
+        <attr name="topRightTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TextMenuItem">
+        <attr name="tmiLeftIvShow" format="boolean" />
+        <attr name="tmiLeftSrc" format="reference" />
+        <attr name="tmiLeftSize" format="dimension" />
+        <attr name="tmiTitle" format="string" />
+        <attr name="tmiTitleColor" format="color" />
+        <attr name="tmiTitleSize" format="dimension" />
+        <attr name="tmiText" format="string" />
+        <attr name="tmiTextColor" format="color" />
+        <attr name="tmiTextSize" format="dimension" />
+        <attr name="tmiSelected" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="MenuItem">
+        <attr name="miSrc" format="reference" />
+        <attr name="miSrcSize" format="dimension" />
+        <attr name="miTitle" format="string" />
+        <attr name="miTitleSize" format="dimension" />
+        <attr name="miTitlteColor" format="color" />
+    </declare-styleable>
+</resources>

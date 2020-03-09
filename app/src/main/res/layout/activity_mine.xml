@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
+    android:orientation="vertical"
+    tools:context=".mine.MineActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/person_info"
+        app:topTitleColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/person_photo"
+            android:textColor="@color/text_gray2"
+            android:textSize="@dimen/text_title_max" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_default_photo" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:src="@mipmap/arrow_right" />
+    </LinearLayout>
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_person_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@id/tmi_phone"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiSelected="true"
+        app:tmiTitle="@string/person_nick_name"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_person_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@id/tmi_phone"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiSelected="true"
+        app:tmiTitle="@string/person_name"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_person_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@id/tmi_phone"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiSelected="true"
+        app:tmiTitle="@string/person_phone_num"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_person_brithday"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@id/tmi_phone"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiSelected="true"
+        app:tmiTitle="@string/person_brithday"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_person_sex"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@id/tmi_phone"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiSelected="true"
+        app:tmiTitle="@string/person_sex"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_person_email"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@id/tmi_phone"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiSelected="true"
+        app:tmiTitle="@string/person_email"
+        app:tmiTitleColor="@color/text_gray2" />
+</LinearLayout>

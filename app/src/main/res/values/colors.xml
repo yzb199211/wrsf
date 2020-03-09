@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#999999</color>
+    <color name="gray2">#cccccc</color>
+    <color name="line_color">#999999</color>
+    <color name="colorless">#00ffffff</color>
+
+    <color name="default_bg_gray">#eeeeee</color>
+    <color name="default_blue">#143D8F</color>
+    <color name="default_blue_shallow">#7085AE</color>
+    <color name="text_eidt_title">#000000</color>
+    <color name="text_common">#000000</color>
+    <color name="text_gray">#999999</color>
+    <color name="text_gray2">#666666</color>
+
+    <!--login-->
+    <color name="login_normal">#FE6F10</color>
+    <color name="login_checked">#FACBB1</color>
+    <!--main-->
+    <color name="main_menu">#BFBFBF</color>
+    <!--order-->
+    <color name="order_yellow">#E5A600</color>
+    <color name="order_yellow_shallow">#FCF3DD</color>
+</resources>
