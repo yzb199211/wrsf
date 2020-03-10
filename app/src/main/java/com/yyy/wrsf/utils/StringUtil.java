@@ -159,4 +159,8 @@ public class StringUtil {
 
         return b1.multiply(b2).doubleValue();
     }
+
+    public static String formatString(String s) {
+        return TextUtils.isEmpty(s) ? "" : s;
+    }
 }

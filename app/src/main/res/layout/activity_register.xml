@@ -43,6 +43,7 @@
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_10"
                 app:ecHint="@string/login_phone"
+                app:ecTextType="num"
                 app:ecTitle="@string/login_phone"
                 app:ecType="tv" />
 
@@ -70,6 +71,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 app:ecHint="@string/hint_pwd"
                 app:ecTextLength="20"
+                app:ecTextType="pwd"
                 app:ecTitle="@string/login_pwd"
                 app:ecType="tv" />
 
@@ -85,6 +87,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 app:ecHint="@string/hint_pwd"
                 app:ecTextLength="20"
+                app:ecTextType="pwd"
                 app:ecTitle="@string/login_pwd_confirm"
                 app:ecType="tv" />
 

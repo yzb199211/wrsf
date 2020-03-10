@@ -49,6 +49,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private int leftSrc;
     private int leftSrcPadding;
     private int commonPadding;
+
+    private boolean editable;
     private OnTextChange onTextChange;
 
     public EditClearView(Context context) {
@@ -77,6 +79,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         leftSrc = array.getResourceId(R.styleable.EditClear_ecSrc, -1);
         leftSrcPadding = array.getDimensionPixelSize(R.styleable.EditClear_ecSrcPadding, 0);
         type = array.getInteger(R.styleable.EditClear_ecType, 2);
+        editable = array.getBoolean(R.styleable.EditClear_ecEditable, true);
+        textType = array.getInteger(R.styleable.EditClear_ecTextType, 0);
         array.recycle();
     }
 
@@ -88,7 +92,11 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         } else if (type == 2) {
             initTitle();
         }
-        initText();
+        if (editable) {
+            initText();
+        } else {
+            initTvText();
+        }
         initDelete();
     }
 
@@ -121,11 +129,25 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         editText.setSingleLine();
         editText.setBackground(null);
         editText.setOnKeyListener(this);
+        editText.setInputType(getInputType());
         setTextLength();
         addTextListener();
         if (hintColor != 0)
             editText.setHintTextColor(hintColor);
         addView(editText);
+    }
+
+    private int getInputType() {
+        if (textType == 1) {
+            return InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+        }
+        if (textType == 2) {
+            return EditorInfo.TYPE_CLASS_NUMBER;
+        }
+        if (textType == 3) {
+            return EditorInfo.TYPE_NUMBER_FLAG_DECIMAL;
+        }
+        return InputType.TYPE_TEXT_VARIATION_NORMAL;
     }
 
     private void setTextLength() {

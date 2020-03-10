@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mine.address.AddressDetailActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/address_title_receive"
+        app:topTitleColor="@color/white" />
+</LinearLayout>

@@ -23,6 +23,10 @@
     <string name="common_select_order">订单号查询</string>
     <string name="common_pay">付款</string>
     <string name="common_default">默认</string>
+    <string name="common_edit">编辑</string>
+    <string name="common_delete">删除</string>
+    <string name="common_add_manully">手动添加</string>
+    <string name="common_area_select">地区选择</string>
     <!--hint-->
     <string name="hint_pwd">6-20位密码</string>
     <string name="hint_address_detail">街道、门牌号等信息</string>
@@ -69,6 +73,8 @@
     <string name="person_brithday">生日</string>
     <string name="person_sex">性别</string>
     <string name="person_email">邮箱</string>
+    <!--地址-->
+    <string name="address_title_receive">收货地址</string>
     <!--网点-->
     <string name="outlets_search_title">网点查询</string>
 

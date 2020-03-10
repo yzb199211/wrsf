@@ -28,6 +28,8 @@
         <attr name="ecTextType">
             <enum name="pwd" value="1"></enum>
             <enum name="num" value="2"></enum>
+            <enum name="num_float" value="3"></enum>
+            <enum name="normal" value="0"></enum>
         </attr>
         <attr name="ecHint" format="string" />
         <attr name="ecHintColor" format="color" />
@@ -38,8 +40,15 @@
             <enum name="tv" value="2"></enum>
             <enum name="noTitle" value="0"></enum>
         </attr>
+        <attr name="ecEditable" format="boolean" />
     </declare-styleable>
-
+    <declare-styleable name="ButtonWithImg">
+        <attr name="bwiTilte" format="string" />
+        <attr name="bwiTitleSize" format="dimension" />
+        <attr name="bwiTitleColor" format="color" />
+        <attr name="bwiSrc" format="reference" />
+        <attr name="bwiSrcSize" format="dimension" />
+    </declare-styleable>
     <declare-styleable name="LoginMiddle">
         <attr name="lmTitle" format="string" />
         <attr name="lmTitleSize" format="dimension" />

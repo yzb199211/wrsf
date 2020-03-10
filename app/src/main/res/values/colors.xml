@@ -27,4 +27,5 @@
     <!--order-->
     <color name="order_yellow">#E5A600</color>
     <color name="order_yellow_shallow">#FCF3DD</color>
+    <color name="order_yellow_shallow2">#A38948</color>
 </resources>

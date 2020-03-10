@@ -6,13 +6,11 @@ import android.os.Bundle;
 
 import com.yyy.wrsf.R;
 
-public class AddressActivity extends AppCompatActivity {
-    AddressAdapter addressAdapter;
-
+public class AddressDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_address);
+        setContentView(R.layout.activity_address_detail);
     }
 }

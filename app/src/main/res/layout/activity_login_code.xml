@@ -45,12 +45,15 @@
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_10"
                 app:ecHint="@string/login_phone"
+                app:ecTextType="num"
                 app:ecTitle="@string/login_phone"
                 app:ecType="tv" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_0_5"
                 android:background="@color/line_color" />
+
             <com.yyy.wrsf.view.VerificationCode
                 android:id="@+id/vc_code"
                 android:layout_width="match_parent"
