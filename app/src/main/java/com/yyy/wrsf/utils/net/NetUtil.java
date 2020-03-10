@@ -29,6 +29,8 @@ public class NetUtil {
     private RequstType requstType = RequstType.GET;
     private List<NetParams> params = new ArrayList<>();
 
+    SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper(application.getApplicationContext(), application.getApplicationContext().getString(R.string.preferenceCache));
+
     /**
      * 直接调用接口
      *
@@ -108,12 +110,14 @@ public class NetUtil {
     private void postRequest(String url, MultipartBody.Builder builder) {
         request = new Request.Builder()
                 .url(url)
+                .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
                 .post(builder.build()).build();
     }
 
     private void getRequest(String url, MultipartBody.Builder builder) {
         request = new Request.Builder()
                 .url(getUrl(url))
+                .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
                 .get()
                 .build();
     }
@@ -129,12 +133,14 @@ public class NetUtil {
     private void putRequest(String url, MultipartBody.Builder builder) {
         request = new Request.Builder()
                 .url(url)
+                .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
                 .put(builder.build()).build();
     }
 
     private void deleteRequest(String url, MultipartBody.Builder builder) {
         request = new Request.Builder()
                 .url(url)
+                .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
                 .delete(builder.build()).build();
     }
 

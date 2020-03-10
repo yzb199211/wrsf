@@ -6,11 +6,31 @@ public class Result {
      * success : false
      * code : 400
      * msg : 验证码不正确
+     * data
+     * token
      */
 
     private boolean success;
     private int code;
     private String msg;
+    private String data;
+    private String token;
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public boolean isSuccess() {
         return success;

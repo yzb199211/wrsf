@@ -19,22 +19,54 @@
             android:textSize="@dimen/text_common" />
 
         <ImageView
+            android:id="@+id/iv_delete"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_10" />
+            android:layout_marginRight="@dimen/dp_10"
+            android:padding="@dimen/dp_4"
+            android:src="@mipmap/common_color" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10">
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5">
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_province"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/common_select_privince"
+            android:padding="@dimen/dp_5"
+            android:textColor="@color/text_common"
+            android:textSize="@dimen/text_common_min" />
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/common_select_city"
+            android:padding="@dimen/dp_5"
+            android:textColor="@color/text_common"
+            android:textSize="@dimen/text_common_min"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_district"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/common_select_district"
+            android:padding="@dimen/dp_5"
+            android:textColor="@color/text_common"
+            android:textSize="@dimen/text_common_min"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0_5"
         android:background="@color/line_color" />

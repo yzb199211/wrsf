@@ -27,6 +27,9 @@
     <string name="common_delete">删除</string>
     <string name="common_add_manully">手动添加</string>
     <string name="common_area_select">地区选择</string>
+    <string name="common_select_privince">请选择省份</string>
+    <string name="common_select_city">请选择城市</string>
+    <string name="common_select_district">请选择地区</string>
     <!--hint-->
     <string name="hint_pwd">6-20位密码</string>
     <string name="hint_address_detail">街道、门牌号等信息</string>

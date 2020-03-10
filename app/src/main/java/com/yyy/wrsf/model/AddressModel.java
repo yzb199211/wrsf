@@ -25,6 +25,9 @@ public class AddressModel {
     private int recNo;
     private String secondAdd;
     private String thirdAdd;
+    private int firstId;
+    private int secondId;
+    private int thirdId;
 
     public String getCompanyName() {
         return companyName;
@@ -98,11 +101,35 @@ public class AddressModel {
         this.thirdAdd = thirdAdd;
     }
 
+
+    public int getFirstId() {
+        return firstId;
+    }
+
+    public void setFirstId(int firstId) {
+        this.firstId = firstId;
+    }
+
+    public int getSecondId() {
+        return secondId;
+    }
+
+    public void setSecondId(int secondId) {
+        this.secondId = secondId;
+    }
+
+    public int getThirdId() {
+        return thirdId;
+    }
+
+    public void setThirdId(int thirdId) {
+        this.thirdId = thirdId;
+    }
+
     public String getWholeAddress() {
         return (TextUtils.isEmpty(getFirstAdd()) ? "" : getFirstAdd() + "\u3000")
                 + (TextUtils.isEmpty(getSecondAdd()) ? "" : getSecondAdd() + "\u3000")
                 + (TextUtils.isEmpty(getThirdAdd()) ? "" : getThirdAdd() + "\u3000")
                 + (TextUtils.isEmpty(getDetailAdd()) ? "" : getDetailAdd());
     }
-
 }
