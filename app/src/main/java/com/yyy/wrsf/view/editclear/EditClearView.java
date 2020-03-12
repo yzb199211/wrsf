@@ -227,6 +227,13 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         return params;
     }
 
+    public void setText(String s) {
+        if (editable)
+            editText.setText(s);
+        else
+            tvText.setText(s);
+    }
+
     public String getText() {
         return editText.getText().toString();
     }

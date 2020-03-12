@@ -19,14 +19,14 @@
             android:textSize="@dimen/text_common" />
 
         <ImageView
-            android:id="@+id/iv_delete"
+            android:id="@+id/iv_close"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_10"
             android:padding="@dimen/dp_4"
-            android:src="@mipmap/common_color" />
+            android:src="@mipmap/common_close" />
     </RelativeLayout>
 
     <LinearLayout

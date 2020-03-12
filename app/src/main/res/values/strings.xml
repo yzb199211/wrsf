@@ -9,6 +9,8 @@
     <string name="error_pwd_confirm">请确认密码是否正确</string>
     <string name="error_phone">请输入正确手机号码</string>
     <string name="error_user">用户名不能为空</string>
+    <!--net-->
+    <string name="net_empty_data">未获取到详细信息</string>
     <!--empty-->
     <string name="empty_params">请求参数为空</string>
 

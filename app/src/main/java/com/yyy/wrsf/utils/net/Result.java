@@ -1,5 +1,7 @@
 package com.yyy.wrsf.utils.net;
 
+import org.json.JSONObject;
+
 public class Result {
 
     /**
@@ -13,15 +15,15 @@ public class Result {
     private boolean success;
     private int code;
     private String msg;
-    private String data;
+    private Object rows;
     private String token;
 
-    public String getData() {
-        return data;
+    public Object getData() {
+        return rows;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(Object data) {
+        this.rows = data;
     }
 
     public String getToken() {

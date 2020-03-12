@@ -9,8 +9,13 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.main.MainActivity;
+import com.yyy.wrsf.model.LoginModel;
+import com.yyy.wrsf.model.MemberModel;
+import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.NetConfig;
@@ -18,8 +23,12 @@ import com.yyy.wrsf.utils.net.NetParams;
 import com.yyy.wrsf.utils.net.NetUtil;
 import com.yyy.wrsf.utils.net.RequstType;
 import com.yyy.wrsf.utils.net.ResponseListener;
+import com.yyy.wrsf.utils.net.Result;
 import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.view.editclear.EditClearView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,17 +46,20 @@ public class LoginActivity extends AppCompatActivity {
     EditClearView ecvPwd;
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
+    SharedPreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
         initView();
     }
 
     private void initView() {
         btnConfirm.setText(getString(R.string.common_login));
+        ecvUser.setText((String) preferencesHelper.getSharedPreference("tel",""));
     }
 
     @OnClick({R.id.tv_pwd_switch, R.id.tv_register, R.id.btn_confirm})
@@ -79,7 +91,27 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String string) {
                 LoadingFinish(null);
-                Log.e(LoginActivity.this.getClass().getName(), "data:" + string);
+//                Log.e(LoginActivity.this.getClass().getName(), "data:" + string);
+                Result result = new Gson().fromJson(string, Result.class);
+                if (result.isSuccess()) {
+                    LoadingFinish(null);
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(result.getData()));
+                        String data = jsonObject.optString("loginUser", "");
+                        if (TextUtils.isEmpty(data)) {
+                            Toast(getString(R.string.net_empty_data));
+                        } else {
+                            setPreference(jsonObject, new Gson().fromJson(data, LoginModel.class));
+                            go2Main();
+                        }
+//                        Log.e("sex", model.getMemberTel());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    LoadingFinish(result.getMsg());
+                    Log.e(LoginActivity.this.getClass().getName(), result.getMsg());
+                }
             }
 
             @Override
@@ -88,6 +120,28 @@ public class LoginActivity extends AppCompatActivity {
                 LoadingFinish(e.getMessage());
             }
         });
+    }
+
+    private void go2Main() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent().setClass(LoginActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+    }
+
+    private void setPreference(JSONObject data, LoginModel model) {
+        preferencesHelper.put("member", data);
+        preferencesHelper.put("recNo", model.getRecNo());
+        preferencesHelper.put("tel", model.getTel());
+        preferencesHelper.put("sex", model.getSex());
+        preferencesHelper.put("petname", model.getPetname());
+        preferencesHelper.put("main", model.getMail());
+        preferencesHelper.put("companyName", model.getCompanyName());
+        preferencesHelper.put("roleType", (int) model.getRoleType());
+        preferencesHelper.put("token", data.optString("token", ""));
     }
 
     private List<NetParams> loginParam() {

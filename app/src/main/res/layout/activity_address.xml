@@ -9,6 +9,7 @@
     tools:context=".mine.address.AddressActivity">
 
     <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_size"
         android:background="@color/default_blue"
@@ -18,12 +19,13 @@
         app:topTitleColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/refresh_list"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
         android:layout_weight="1" />
 
     <TextView
+        android:id="@+id/btn_add"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
         android:background="@drawable/btn_yellow"

@@ -1,6 +1,8 @@
 package com.yyy.wrsf.main;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -11,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.common.AreaSelect;
+import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.view.cycle.bean.DataBean;
 
 import java.util.ArrayList;
@@ -82,14 +86,21 @@ public class MainActivity extends AppCompatActivity {
         currentFragment = targetFragment;
     }
 
+    AreaSelect areaSelect;
+
     @OnClick({R.id.rl_main, R.id.rl_send, R.id.rl_notice, R.id.rl_company, R.id.rl_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_main:
+                if (areaSelect == null)
+                    areaSelect = new AreaSelect(MainActivity.this);
+                areaSelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
                 break;
             case R.id.rl_send:
+
                 break;
             case R.id.rl_notice:
+                go2Address();
                 break;
             case R.id.rl_company:
                 break;
@@ -98,5 +109,9 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+    private void go2Address() {
+        startActivity(new Intent().setClass(this, AddressActivity.class).putExtra("isSelect", false));
     }
 }

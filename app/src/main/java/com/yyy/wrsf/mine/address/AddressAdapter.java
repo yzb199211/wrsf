@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
+import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.AddressModel;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.view.button.ButtonWithImg;
@@ -23,6 +24,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
     private List<AddressModel> list;
     private OnDeleteListener onDeleteListener;
     private OnEditListener onEditListener;
+    private OnItemClickListener onItemClickListener;
 
     public AddressAdapter(Context context, List<AddressModel> list) {
         this.context = context;
@@ -59,6 +61,14 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
                 }
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -91,5 +101,9 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
 
     public void setOnEditListener(OnEditListener onEditListener) {
         this.onEditListener = onEditListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }
