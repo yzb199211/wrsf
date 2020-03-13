@@ -29,6 +29,9 @@
     <string name="common_edit">编辑</string>
     <string name="common_delete">删除</string>
     <string name="common_submit">提交</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_confirm">确认</string>
+    <string name="common_info">提示</string>
     <string name="common_add_manully">手动添加</string>
     <string name="common_area_select">地区选择</string>
     <string name="common_select_privince">请选择省份</string>

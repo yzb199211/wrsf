@@ -80,4 +80,5 @@
 	<dimen name="dp_200">227.7778dp</dimen>
 	<dimen name="dp_300">341.6667dp</dimen>
 	<dimen name="dp_400">455.5556dp</dimen>
+	<dimen name="dp_500">569.4444dp</dimen>
 </resources>

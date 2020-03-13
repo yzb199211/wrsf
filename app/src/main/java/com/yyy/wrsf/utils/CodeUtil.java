@@ -6,4 +6,7 @@ public class CodeUtil {
     public static final int MODIFY = 0x0000898;
     public static final int DELETE = 0x0000897;
 
+
+    public static final int Address = 0x0000700;
+
 }

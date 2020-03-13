@@ -84,6 +84,7 @@
         app:bwiSrcSize="@dimen/dp_15"
         app:bwiTilte="@string/common_delete"
         app:bwiTitleColor="@color/text_gray"
+        android:layout_marginRight="@dimen/dp_10"
         app:bwiTitleSize="@dimen/text_common_min" />
 
     <com.yyy.wrsf.view.button.ButtonWithImg

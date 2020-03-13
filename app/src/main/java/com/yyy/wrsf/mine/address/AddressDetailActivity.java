@@ -1,5 +1,6 @@
 package com.yyy.wrsf.mine.address;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -67,6 +68,7 @@ public class AddressDetailActivity extends AppCompatActivity {
     private SharedPreferencesHelper preferencesHelper;
 
     private int code;
+    private int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class AddressDetailActivity extends AppCompatActivity {
 
     private void intiIntentData() {
         code = getIntent().getIntExtra("code", -1);
+        pos = getIntent().getIntExtra("pos", -1);
         if (code == CodeUtil.MODIFY) {
             addressModel = new Gson().fromJson(getIntent().getStringExtra("data"), AddressModel.class);
             initAreaData();
@@ -160,30 +163,34 @@ public class AddressDetailActivity extends AppCompatActivity {
     private void saveAddress() {
         if (canSave()) {
             LoadingDialog.showDialogForLoading(this);
-            new NetUtil(getAddressParams(), NetConfig.address + AddressUrl.AddAddress, RequstType.POST, new ResponseListener() {
-                @Override
-                public void onSuccess(String string) {
-                    LoadingFinish(null);
-                    Log.e(AddressDetailActivity.class.getName(), "data:" + string);
-                    try {
-                        Result result = new Result(string);
-                        if (result.isSuccess()) {
-                            finish();
-                        } else {
-                            LoadingFinish(result.getMsg());
+            new NetUtil(getAddressParams(),
+                    NetConfig.address + (addressModel.getRecNo() == 0 ? AddressUrl.AddAddress : AddressUrl.updateAddress),
+                    addressModel.getRecNo() == 0 ? RequstType.POST : RequstType.PUT,
+                    new ResponseListener() {
+                        @Override
+                        public void onSuccess(String string) {
+                            LoadingFinish(null);
+                            Log.e(AddressDetailActivity.class.getName(), "data:" + string);
+                            try {
+                                Result result = new Result(string);
+                                if (result.isSuccess()) {
+                                    setResult(code, new Intent().putExtra("data", new Gson().toJson(addressModel)).putExtra("pos", pos));
+                                    finish();
+                                } else {
+                                    LoadingFinish(result.getMsg());
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace(); LoadingFinish(e.getMessage());
+                            }
+
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
 
-                }
-
-                @Override
-                public void onFail(IOException e) {
-                    LoadingFinish(e.getMessage());
-                    e.printStackTrace();
-                }
-            });
+                        @Override
+                        public void onFail(IOException e) {
+                            LoadingFinish(e.getMessage());
+                            e.printStackTrace();
+                        }
+                    });
         }
     }
 
@@ -240,10 +247,10 @@ public class AddressDetailActivity extends AppCompatActivity {
     }
 
     private void selectArea(View view) {
-        if (areaSelect == null&&province==null)
+        if (areaSelect == null && province == null)
             areaSelect = new AreaSelect(AddressDetailActivity.this);
-        else if (areaSelect==null){
-            areaSelect = new AreaSelect(this,province,city,district);
+        else if (areaSelect == null) {
+            areaSelect = new AreaSelect(this, province, city, district);
         }
         areaSelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         areaSelect.setOnBackAreaListener(new OnBackAreaListener() {
@@ -282,4 +289,5 @@ public class AddressDetailActivity extends AppCompatActivity {
     private void Toast(String msg) {
         Toasts.showShort(this, msg);
     }
+
 }

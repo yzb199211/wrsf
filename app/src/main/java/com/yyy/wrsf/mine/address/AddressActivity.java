@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.dialog.JudgeDialog;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
@@ -88,6 +89,7 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     private void getData() {
+
         new NetUtil(getParams(), NetConfig.address + AddressUrl.getAddressList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
@@ -107,6 +109,7 @@ public class AddressActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    LoadingFinish(e.getMessage());
                 }
 
             }
@@ -139,13 +142,15 @@ public class AddressActivity extends AppCompatActivity {
 
     }
 
+    JudgeDialog deleteDialog;
+
     private void initAdapter() {
         addressAdapter = new AddressAdapter(this, addresses);
         recyclerView.setAdapter(addressAdapter);
         addressAdapter.setOnDeleteListener(new OnDeleteListener() {
             @Override
             public void onDelete(int pos) {
-
+                showDeleteDialog(pos);
             }
         });
         addressAdapter.setOnEditListener(new OnEditListener() {
@@ -162,10 +167,61 @@ public class AddressActivity extends AppCompatActivity {
             addressAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(int pos) {
-
+                    setResult(CodeUtil.Address, new Intent().putExtra("data", new Gson().toJson(addresses.get(pos))));
+                    finish();
                 }
             });
 
+    }
+
+    private void showDeleteDialog(int pos) {
+        if (deleteDialog == null) {
+            deleteDialog = new JudgeDialog(this);
+        }
+        deleteDialog.setOnCloseListener(new JudgeDialog.OnCloseListener() {
+            @Override
+            public void onClick(boolean confirm) {
+                if (confirm) {
+                    delete(pos);
+                }
+            }
+        });
+        deleteDialog.show();
+    }
+
+    private void delete(int pos) {
+        new NetUtil(deleteParams(pos), NetConfig.address + AddressUrl.deleteAddress, RequstType.DELETE, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                Log.e("data", string);
+                try {
+                    Result result = new Result(string);
+                    LoadingFinish(null);
+                    if (result.isSuccess()) {
+                        addresses.remove(pos);
+                        refrishList();
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onFail(IOException e) {
+                e.printStackTrace();
+                LoadingFinish(e.getMessage());
+            }
+        });
+    }
+
+    private List<NetParams> deleteParams(int pos) {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("recNo", addresses.get(pos).getRecNo() + ""));
+        return params;
     }
 
     private void initView() {
@@ -198,6 +254,19 @@ public class AddressActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == CodeUtil.ADD) {
+            addresses.clear();
+            refrishList();
+            getData();
+        } else if (resultCode == CodeUtil.MODIFY) {
+            if (data != null) {
+                int pos = data.getIntExtra("pos", -1);
+                if (pos > -1 && pos < addresses.size()) {
+                    addresses.set(pos, new Gson().fromJson(data.getStringExtra("data"), AddressModel.class));
+//                    addresses.get(pos) = ;
+                }
+            }
+        }
     }
 
     private void LoadingFinish(String msg) {
@@ -214,5 +283,14 @@ public class AddressActivity extends AppCompatActivity {
 
     private void Toast(String msg) {
         Toasts.showShort(this, msg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (deleteDialog != null && deleteDialog.isShowing()) {
+            deleteDialog.dismiss();
+            deleteDialog = null;
+        }
     }
 }

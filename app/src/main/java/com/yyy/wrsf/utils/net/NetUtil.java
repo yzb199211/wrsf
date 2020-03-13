@@ -137,7 +137,7 @@ public class NetUtil {
     }
 
     private void putRequest(String url, MultipartBody.Builder builder) {
-        RequestBody body = RequestBody.create(JSON, "{\"pageIndex\":0}");
+        RequestBody body = RequestBody.create(JSON, params.get(0).getValue());
         request = new Request.Builder()
                 .url(url)
                 .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
@@ -145,11 +145,11 @@ public class NetUtil {
     }
 
     private void deleteRequest(String url, MultipartBody.Builder builder) {
-        RequestBody body = RequestBody.create(JSON, new Gson().toJson(params.get(0)));
+//        RequestBody body = RequestBody.create(JSON, new Gson().toJson(params.get(0)));
         request = new Request.Builder()
-                .url(url)
+                .url(getUrl(url))
                 .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
-                .delete(body).build();
+                .delete().build();
     }
 
     public NetUtil(final String fileUrl, final String destFileDir, final String destFileName, final OnDownloadListener listener) {
