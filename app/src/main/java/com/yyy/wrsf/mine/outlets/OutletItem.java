@@ -1,10 +1,12 @@
 package com.yyy.wrsf.mine.outlets;
 
-public class OutletItem {
-    private String title="";
-    private String address="";
-    private String detail="";
-    private String phone="";
+import java.io.Serializable;
+
+public class OutletItem implements Serializable {
+    private String title;
+    private String address;
+    private String detail;
+    private String phone;
 
     public String getTitle() {
         return title;

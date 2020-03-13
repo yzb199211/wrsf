@@ -28,6 +28,8 @@ import com.yyy.wrsf.utils.net.ResponseListener;
 import com.yyy.wrsf.utils.net.Result;
 import com.yyy.wrsf.utils.net.address.AddressUrl;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +126,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
     }
 
     private void initClick(int pos) {
-        switch (areaLevel) {
+        switch (this.areaLevel) {
             case PROVINCE:
                 province = provinces.get(pos);
                 tvProvince.setText(province.getAreaName());
@@ -155,8 +157,26 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
         if (province == null) {
             areaLevel = AreaLevel.PROVINCE;
             getData(0);
-        } else {
-
+        } else if (province != null && city == null) {
+            areaLevel = AreaLevel.CITY;
+            getData(province.getId());
+            tvProvince.setText(province.getAreaName());
+            tvCity.setVisibility(View.VISIBLE);
+        } else if (province != null && city != null && districts == null) {
+            areaLevel = AreaLevel.DISTRICT;
+            getData(city.getId());
+            tvProvince.setText(province.getAreaName());
+            tvCity.setText(city.getAreaName());
+            tvCity.setVisibility(View.VISIBLE);
+            tvDistrict.setVisibility(View.VISIBLE);
+        } else if (province != null && city != null && districts != null) {
+            areaLevel = AreaLevel.DISTRICT;
+            getData(city.getId());
+            tvProvince.setText(province.getAreaName());
+            tvCity.setText(city.getAreaName());
+            tvDistrict.setText(district.getAreaName());
+            tvCity.setVisibility(View.VISIBLE);
+            tvDistrict.setVisibility(View.VISIBLE);
         }
     }
 
@@ -166,18 +186,23 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
         new NetUtil(areaParams(parentId), NetConfig.address + AddressUrl.getArea, RequstType.GET, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
-                Log.e("data", string);
-                Result result = new Gson().fromJson(string, Result.class);
-                if (result.isSuccess()) {
-                    String data = new Gson().toJson(result.getData());
-                    if (!TextUtils.isEmpty(data)) {
-                        List<AreaModel> list = new Gson().fromJson(data, new TypeToken<List<AreaModel>>() {
-                        }.getType());
-                        setList(list);
+//                Log.e("data", string);
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        String data = result.getData();
+                        if (!TextUtils.isEmpty(data)) {
+                            List<AreaModel> list = new Gson().fromJson(data, new TypeToken<List<AreaModel>>() {
+                            }.getType());
+                            setList(list);
+                        }
+                    } else {
+                        Log.e(AreaSelect.class.getName(), result.getMsg());
                     }
-                } else {
-                    Log.e(AreaSelect.class.getName(), result.getMsg());
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
             }
 
             @Override
@@ -203,6 +228,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
                 break;
             case DISTRICT:
 //                clearDistrict();
+                districts.clear();
                 districts.addAll(list);
                 showList.addAll(list);
                 refreshList();
@@ -261,6 +287,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
 
     private void clickProvince() {
         if (provinces.size() == 0) {
+            areaLevel = AreaLevel.PROVINCE;
             getData(0);
         } else {
             if (areaLevel != AreaLevel.PROVINCE) {
@@ -274,6 +301,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
 
     private void clickCity() {
         if (citys.size() == 0) {
+            areaLevel = AreaLevel.CITY;
             getData(province.getId());
         } else {
             if (areaLevel != AreaLevel.CITY) {
@@ -289,10 +317,10 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
         if (districts.size() == 0) {
             getData(city.getId());
         } else {
-            if (areaLevel != AreaLevel.CITY) {
+            if (areaLevel != AreaLevel.DISTRICT) {
                 areaLevel = AreaLevel.DISTRICT;
                 showList.clear();
-                showList.addAll(citys);
+                showList.addAll(districts);
                 refreshList();
             }
         }

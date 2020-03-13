@@ -86,15 +86,12 @@ public class MainActivity extends AppCompatActivity {
         currentFragment = targetFragment;
     }
 
-    AreaSelect areaSelect;
 
     @OnClick({R.id.rl_main, R.id.rl_send, R.id.rl_notice, R.id.rl_company, R.id.rl_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_main:
-                if (areaSelect == null)
-                    areaSelect = new AreaSelect(MainActivity.this);
-                areaSelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+
                 break;
             case R.id.rl_send:
 

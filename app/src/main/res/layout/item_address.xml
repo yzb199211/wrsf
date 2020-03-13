@@ -14,7 +14,8 @@
         android:layout_marginLeft="@dimen/dp_10"
         android:padding="@dimen/dp_2"
         android:textColor="@color/text_common"
-        android:textSize="@dimen/text_common" />
+        android:textSize="@dimen/text_common_max"
+        />
 
     <TextView
         android:id="@+id/tv_phone"
@@ -26,7 +27,7 @@
         android:padding="@dimen/dp_2"
         android:paddingBottom="@dimen/dp_2"
         android:textColor="@color/text_gray"
-        android:textSize="@dimen/text_common_min" />
+        android:textSize="@dimen/text_common" />
 
     <TextView
         android:id="@+id/tv_default"
@@ -38,11 +39,11 @@
         android:padding="@dimen/dp_2"
         android:text="@string/common_default"
         android:textColor="@color/order_yellow"
-        android:textSize="@dimen/text_common"
+        android:textSize="@dimen/text_common_max"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/tv_address"
+        android:id="@+id/tv_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_name"
@@ -51,7 +52,18 @@
         android:layout_marginRight="@dimen/dp_10"
         android:maxLines="2"
         android:textColor="@color/text_common"
-        android:textSize="@dimen/text_common_min" />
+        android:textSize="@dimen/text_common" />
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_company"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginRight="@dimen/dp_10"
+        android:maxLines="2"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common" />
 
     <View
         android:id="@+id/line"
@@ -67,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/line"
         android:layout_alignParentRight="true"
-        android:padding="@dimen/dp_10"
+        android:padding="@dimen/dp_5"
         app:bwiSrc="@mipmap/common_delete"
         app:bwiSrcSize="@dimen/dp_15"
         app:bwiTilte="@string/common_delete"
@@ -80,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/line"
         android:layout_toLeftOf="@id/bwi_delete"
-        android:padding="@dimen/dp_10"
+        android:padding="@dimen/dp_5"
         app:bwiSrc="@mipmap/common_edit"
         app:bwiSrcSize="@dimen/dp_15"
         app:bwiTilte="@string/common_edit"

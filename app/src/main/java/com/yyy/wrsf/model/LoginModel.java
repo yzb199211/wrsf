@@ -28,8 +28,8 @@ public class LoginModel {
     private double loginTime;
     private double expireTime;
 
-    public double getRecNo() {
-        return recNo;
+    public int getRecNo() {
+        return new Double(recNo).intValue();
     }
 
     public void setRecNo(double recNo) {
@@ -84,8 +84,8 @@ public class LoginModel {
         this.companyName = companyName;
     }
 
-    public double getRoleType() {
-        return roleType;
+    public int getRoleType() {
+        return new Double(roleType).intValue();
     }
 
     public void setRoleType(double roleType) {
@@ -100,16 +100,16 @@ public class LoginModel {
         this.token = token;
     }
 
-    public double getLoginTime() {
-        return loginTime;
+    public int getLoginTime() {
+        return new Double(loginTime).intValue();
     }
 
     public void setLoginTime(double loginTime) {
         this.loginTime = loginTime;
     }
 
-    public double getExpireTime() {
-        return expireTime;
+    public int getExpireTime() {
+        return new Double(expireTime).intValue();
     }
 
     public void setExpireTime(double expireTime) {

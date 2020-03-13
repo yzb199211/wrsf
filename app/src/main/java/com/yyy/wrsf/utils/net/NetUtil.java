@@ -2,6 +2,7 @@ package com.yyy.wrsf.utils.net;
 
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -16,9 +17,11 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class NetUtil {
@@ -28,6 +31,7 @@ public class NetUtil {
     private ResponseListener responseListener;
     private RequstType requstType = RequstType.GET;
     private List<NetParams> params = new ArrayList<>();
+    private final MediaType JSON = MediaType.parse("application/json");
 
     SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper(application.getApplicationContext(), application.getApplicationContext().getString(R.string.preferenceCache));
 
@@ -108,10 +112,12 @@ public class NetUtil {
     }
 
     private void postRequest(String url, MultipartBody.Builder builder) {
+        RequestBody body = RequestBody.create(JSON, params.get(0).getValue());
         request = new Request.Builder()
                 .url(url)
                 .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
-                .post(builder.build()).build();
+                .post(body)
+                .build();
     }
 
     private void getRequest(String url, MultipartBody.Builder builder) {
@@ -131,17 +137,19 @@ public class NetUtil {
     }
 
     private void putRequest(String url, MultipartBody.Builder builder) {
+        RequestBody body = RequestBody.create(JSON, "{\"pageIndex\":0}");
         request = new Request.Builder()
                 .url(url)
                 .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
-                .put(builder.build()).build();
+                .put(body).build();
     }
 
     private void deleteRequest(String url, MultipartBody.Builder builder) {
+        RequestBody body = RequestBody.create(JSON, new Gson().toJson(params.get(0)));
         request = new Request.Builder()
                 .url(url)
                 .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
-                .delete(builder.build()).build();
+                .delete(body).build();
     }
 
     public NetUtil(final String fileUrl, final String destFileDir, final String destFileName, final OnDownloadListener listener) {

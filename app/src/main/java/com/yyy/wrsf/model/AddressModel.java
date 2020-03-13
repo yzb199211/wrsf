@@ -2,7 +2,9 @@ package com.yyy.wrsf.model;
 
 import android.text.TextUtils;
 
-public class AddressModel {
+import java.io.Serializable;
+
+public class AddressModel implements Serializable {
 
     /**
      * companyName : string

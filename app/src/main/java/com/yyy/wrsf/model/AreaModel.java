@@ -1,6 +1,8 @@
 package com.yyy.wrsf.model;
 
-public class AreaModel {
+import java.io.Serializable;
+
+public class AreaModel implements Serializable {
 
     /**
      * id : 1

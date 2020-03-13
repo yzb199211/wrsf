@@ -49,6 +49,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private int leftSrc;
     private int leftSrcPadding;
     private int commonPadding;
+    private int lines;
 
     private boolean editable;
     private OnTextChange onTextChange;
@@ -81,12 +82,14 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         type = array.getInteger(R.styleable.EditClear_ecType, 2);
         editable = array.getBoolean(R.styleable.EditClear_ecEditable, true);
         textType = array.getInteger(R.styleable.EditClear_ecTextType, 0);
+        lines = array.getInteger(R.styleable.EditClear_ecTextLines, 1);
         array.recycle();
     }
 
     private void initView() {
         setFocusable(true);
         setFocusableInTouchMode(true);
+        setGravity(Gravity.CENTER_VERTICAL);
         if (type == 1) {
             initLeft();
         } else if (type == 2) {
@@ -114,7 +117,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         tvTitle.setTextColor(titleColor);
         tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
         tvTitle.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
-        tvTitle.setGravity(Gravity.CENTER);
+//        tvTitle.setGravity(Gravity.CENTER);
         addView(tvTitle);
     }
 
@@ -137,6 +140,20 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         addView(editText);
     }
 
+    private void initTvText() {
+        tvText = new TextView(context);
+        tvText.setText(text);
+        tvText.setHint(TextUtils.isEmpty(hint) ? "" : context.getString(R.string.common_input) + hint);
+        tvText.setTextColor(textColor);
+        tvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        tvText.setLayoutParams(etParams());
+        tvText.setGravity(Gravity.CENTER_VERTICAL);
+        tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
+        tvText.setSingleLine();
+        tvText.setBackground(null);
+        addView(tvText, type == 0 ? 0 : 1);
+    }
+
     private int getInputType() {
         if (textType == 1) {
             return InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
@@ -147,7 +164,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         if (textType == 3) {
             return EditorInfo.TYPE_NUMBER_FLAG_DECIMAL;
         }
-        return InputType.TYPE_TEXT_VARIATION_NORMAL;
+        return InputType.TYPE_CLASS_TEXT;
     }
 
     private void setTextLength() {
@@ -185,17 +202,6 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         });
     }
 
-    private void initTvText() {
-        tvText = new TextView(context);
-        tvText.setText(text);
-        tvText.setTextColor(textColor);
-        tvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        tvText.setLayoutParams(etParams());
-        tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
-        tvText.setSingleLine();
-        tvText.setBackground(null);
-        addView(tvText, type == 0 ? 0 : 1);
-    }
 
     private void initDelete() {
         ivDelete = new ImageView(context);
@@ -227,16 +233,6 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         return params;
     }
 
-    public void setText(String s) {
-        if (editable)
-            editText.setText(s);
-        else
-            tvText.setText(s);
-    }
-
-    public String getText() {
-        return editText.getText().toString();
-    }
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -269,5 +265,30 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
             ivDelete.setVisibility(GONE);
             initTvText();
         }
+    }
+
+    public void setText(String s) {
+        if (editable)
+            editText.setText(s);
+        else
+            tvText.setText(s);
+    }
+
+    public String getText() {
+        if (editText != null) {
+            return editText.getText().toString();
+        }
+        if (tvText != null) {
+            return tvText.getText().toString();
+        }
+        return "";
+    }
+
+    public TextView getTvText() {
+        return tvText;
+    }
+
+    public String getHint() {
+        return TextUtils.isEmpty(hint) ? "" : context.getString(R.string.common_input) + hint;
     }
 }

@@ -45,6 +45,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
         holder.tvName.setText(StringUtil.formatString(item.getContractPerson()));
         holder.tvPhone.setText(StringUtil.formatString(item.getContractTel()));
         holder.tvAddress.setText(item.getWholeAddress());
+        holder.tvCompany.setText(StringUtil.formatString(item.getCompanyName()));
         holder.bwiEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +82,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
         private TextView tvPhone;
         private TextView tvAddress;
         private TextView tvDefault;
+        private TextView tvCompany;
         private ButtonWithImg bwiDelete;
         private ButtonWithImg bwiEdit;
 
@@ -92,6 +94,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
             tvDefault = v.findViewById(R.id.tv_default);
             bwiDelete = v.findViewById(R.id.bwi_delete);
             bwiEdit = v.findViewById(R.id.bwi_edit);
+            tvCompany = v.findViewById(R.id.tv_company);
         }
     }
 

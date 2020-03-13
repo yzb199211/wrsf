@@ -1,19 +1,21 @@
 package com.yyy.wrsf.model;
 
-public class MemberModel {
-    private int accountType = 0;
-    private String brithday = "";
-    private String companyName = "";
-    private String mail = "";
-    private String memberName = "";
-    private String memberPetname = "";
-    private String memberSex = "";
-    private String memberTel = "";
-    private String passWord = "";
-    private int recNo = 0;
-    private int roleType = 0;
-    private int stopYesno = 0;
-    private String validate = "";
+import java.io.Serializable;
+
+public class MemberModel implements Serializable {
+    private int accountType;
+    private String brithday;
+    private String companyName;
+    private String mail;
+    private String memberName;
+    private String memberPetname;
+    private String memberSex;
+    private String memberTel;
+    private String passWord;
+    private int recNo;
+    private int roleType;
+    private int stopYesno;
+    private String validate;
 
     public int getAccountType() {
         return accountType;

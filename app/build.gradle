@@ -54,4 +54,12 @@ dependencies {
     /*网络请求*/
     implementation("com.squareup.okhttp3:okhttp:3.14.1")
     implementation('com.google.code.gson:gson:2.8.5')
+
+//    implementation 'com.alibaba:fastjson:1.2.66'
+//
+//
+//    implementation 'com.fasterxml.jackson.core:jackson-core:2.7.1'
+//    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.7.1'
+//    implementation 'com.fasterxml.jackson.core:jackson-databind:2.7.1'
 }
+

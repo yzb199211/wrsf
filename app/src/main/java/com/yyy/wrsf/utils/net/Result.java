@@ -1,8 +1,14 @@
 package com.yyy.wrsf.utils.net;
 
+
+import com.google.gson.Gson;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
 
     /**
      * success : false
@@ -13,16 +19,26 @@ public class Result {
      */
 
     private boolean success;
-    private int code;
+    private Integer code;
     private String msg;
-    private Object rows;
+    private String rows;
     private String token;
+    private long loginTime;
 
-    public Object getData() {
+    public Result(String string) throws JSONException {
+        JSONObject jsonObject = new JSONObject(string);
+        setSuccess(jsonObject.optBoolean("success", false));
+        setData(jsonObject.optString("rows", ""));
+        setToken(jsonObject.optString("token", ""));
+        setCode(jsonObject.optInt("code", -1));
+        setMsg(jsonObject.optString("msg"));
+    }
+
+    public String getData() {
         return rows;
     }
 
-    public void setData(Object data) {
+    public void setData(String data) {
         this.rows = data;
     }
 

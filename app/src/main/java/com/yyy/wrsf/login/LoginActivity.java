@@ -14,7 +14,6 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.main.MainActivity;
 import com.yyy.wrsf.model.LoginModel;
-import com.yyy.wrsf.model.MemberModel;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -59,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initView() {
         btnConfirm.setText(getString(R.string.common_login));
-        ecvUser.setText((String) preferencesHelper.getSharedPreference("tel",""));
+        ecvUser.setText((String) preferencesHelper.getSharedPreference("tel", ""));
     }
 
     @OnClick({R.id.tv_pwd_switch, R.id.tv_register, R.id.btn_confirm})
@@ -84,34 +83,38 @@ public class LoginActivity extends AppCompatActivity {
                 break;
         }
     }
-
     private void login() {
         LoadingDialog.showDialogForLoading(this);
         new NetUtil(loginParam(), NetConfig.address + MemberURL.Login, RequstType.GET, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 LoadingFinish(null);
-//                Log.e(LoginActivity.this.getClass().getName(), "data:" + string);
-                Result result = new Gson().fromJson(string, Result.class);
-                if (result.isSuccess()) {
-                    LoadingFinish(null);
-                    try {
-                        JSONObject jsonObject = new JSONObject(new Gson().toJson(result.getData()));
-                        String data = jsonObject.optString("loginUser", "");
-                        if (TextUtils.isEmpty(data)) {
-                            Toast(getString(R.string.net_empty_data));
-                        } else {
-                            setPreference(jsonObject, new Gson().fromJson(data, LoginModel.class));
-                            go2Main();
+
+                Result result = null;
+                try {
+                    result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(null);
+                        try {
+                            JSONObject jsonObject = new JSONObject(result.getData());
+                            String data = jsonObject.optString("loginUser", "");
+                            if (TextUtils.isEmpty(data)) {
+                                Toast(getString(R.string.net_empty_data));
+                            } else {
+                                setPreference(jsonObject, new Gson().fromJson(data, LoginModel.class));
+                                go2Main();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-//                        Log.e("sex", model.getMemberTel());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    } else {
+                        LoadingFinish(result.getMsg());
+                        Log.e(LoginActivity.this.getClass().getName(), result.getMsg());
                     }
-                } else {
-                    LoadingFinish(result.getMsg());
-                    Log.e(LoginActivity.this.getClass().getName(), result.getMsg());
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
             }
 
             @Override

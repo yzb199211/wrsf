@@ -1,6 +1,8 @@
 package com.yyy.wrsf.model.filter;
 
-public class AddressFilterModel {
+import java.io.Serializable;
+
+public class AddressFilterModel implements Serializable {
 
     /**
      * companyName : string
@@ -22,13 +24,13 @@ public class AddressFilterModel {
     private String contractTel;
     private String detailAdd;
     private String firstAdd;
-    private int firstId;
-    private int platMemberRecNo;
-    private int recNo;
+    private Integer firstId;
+    private Integer platMemberRecNo;
+    private Integer recNo;
     private String secondAdd;
-    private int secondId;
+    private Integer secondId;
     private String thirdAdd;
-    private int thirdId;
+    private Integer thirdId;
 
     public String getCompanyName() {
         return companyName;

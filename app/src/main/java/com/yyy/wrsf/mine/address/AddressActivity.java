@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
@@ -18,6 +19,7 @@ import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.AddressModel;
 import com.yyy.wrsf.model.filter.AddressFilterModel;
 import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.NetConfig;
@@ -26,9 +28,12 @@ import com.yyy.wrsf.utils.net.NetUtil;
 import com.yyy.wrsf.utils.net.PagerRequestBean;
 import com.yyy.wrsf.utils.net.RequstType;
 import com.yyy.wrsf.utils.net.ResponseListener;
+import com.yyy.wrsf.utils.net.Result;
 import com.yyy.wrsf.utils.net.address.AddressUrl;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,31 +50,41 @@ public class AddressActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private List<AddressModel> list = new ArrayList<>();
+    SharedPreferencesHelper preferencesHelper;
+
+    private List<AddressModel> addresses = new ArrayList<>();
     private AddressAdapter addressAdapter;
 
     private boolean isSelect = false;
-    private PagerRequestBean pager;
+    private PagerRequestBean<AddressFilterModel> pager;
+    private int memberId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         ButterKnife.bind(this);
+        preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
         initDefaultData();
         initView();
         getData();
     }
 
     private void initDefaultData() {
-        initPagerData();
         isSelect = getIntent().getBooleanExtra("isSelect", false);
+        memberId = (Integer) preferencesHelper.getSharedPreference("recNo", 0);
+        initPagerData();
     }
 
     private void initPagerData() {
         pager = new PagerRequestBean();
         pager.setPageIndex(0);
         pager.setPageSize(500);
+        AddressFilterModel filterModel = new AddressFilterModel();
+        filterModel.setRecNo(memberId);
+        pager.setQueryParam(filterModel);
+
+        String s = new Gson().toJson(filterModel);
     }
 
     private void getData() {
@@ -77,6 +92,23 @@ public class AddressActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String string) {
                 Log.e(AddressActivity.this.getClass().getName(), "data:" + string);
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        List<AddressModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<AddressModel>>() {
+                        }.getType());
+                        if (list != null) {
+                            addresses.clear();
+                            addresses.addAll(list);
+                            refrishList();
+                        }
+                    } else {
+                        Log.e(AddressActivity.class.getName(), result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
@@ -89,8 +121,7 @@ public class AddressActivity extends AppCompatActivity {
 
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
-//        pager.setQueryParam(new AddressFilterModel());
-        params.add(new NetParams("bean", new Gson().toJson(pager)));
+        params.add(new NetParams("platMemberRecaddBo", new Gson().toJson(pager)));
         return params;
     }
 
@@ -109,7 +140,7 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     private void initAdapter() {
-        addressAdapter = new AddressAdapter(this, list);
+        addressAdapter = new AddressAdapter(this, addresses);
         recyclerView.setAdapter(addressAdapter);
         addressAdapter.setOnDeleteListener(new OnDeleteListener() {
             @Override
@@ -120,7 +151,11 @@ public class AddressActivity extends AppCompatActivity {
         addressAdapter.setOnEditListener(new OnEditListener() {
             @Override
             public void onEdit(int pos) {
-
+                startActivityForResult(new Intent()
+                                .setClass(AddressActivity.this, AddressDetailActivity.class)
+                                .putExtra("data", new Gson().toJson(addresses.get(pos)))
+                                .putExtra("code", CodeUtil.MODIFY)
+                        , CodeUtil.MODIFY);
             }
         });
         if (isSelect)
@@ -154,7 +189,10 @@ public class AddressActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
-        startActivityForResult(new Intent().setClass(this, AddressDetailActivity.class), CodeUtil.ADD);
+        startActivityForResult(new Intent()
+                        .setClass(this, AddressDetailActivity.class)
+                        .putExtra("code", CodeUtil.ADD)
+                , CodeUtil.ADD);
     }
 
     @Override
