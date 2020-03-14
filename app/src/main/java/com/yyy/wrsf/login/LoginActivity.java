@@ -7,9 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.gson.Gson;
+import com.yyy.wrsf.BaseActivity;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.main.MainActivity;
@@ -37,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.ecv_user)
     EditClearView ecvUser;
@@ -83,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 break;
         }
     }
+
     private void login() {
         LoadingDialog.showDialogForLoading(this);
         new NetUtil(loginParam(), NetConfig.address + MemberURL.Login, RequstType.GET, new ResponseListener() {
@@ -179,4 +179,5 @@ public class LoginActivity extends AppCompatActivity {
     private void Toast(String msg) {
         Toasts.showShort(this, msg);
     }
+
 }

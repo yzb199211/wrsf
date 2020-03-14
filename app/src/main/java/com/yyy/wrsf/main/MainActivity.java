@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.common.AreaSelect;
+import com.yyy.wrsf.company.CompanyRegisterActivity;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.view.cycle.bean.DataBean;
 
@@ -100,12 +101,17 @@ public class MainActivity extends AppCompatActivity {
                 go2Address();
                 break;
             case R.id.rl_company:
+                go2Company();
                 break;
             case R.id.rl_mine:
                 break;
             default:
                 break;
         }
+    }
+
+    private void go2Company() {
+        startActivity(new Intent().setClass(this, CompanyRegisterActivity.class));
     }
 
     private void go2Address() {

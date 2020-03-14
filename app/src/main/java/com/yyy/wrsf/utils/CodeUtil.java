@@ -8,5 +8,9 @@ public class CodeUtil {
 
 
     public static final int Address = 0x0000700;
+    public static final int Photo_Reverse = 0x0000796;
+    public static final int Photo_Obverse = 0x0000797;
+    public static final int Photo_License = 0x0000798;
+    public static final int Photo = 0x0000799;
 
 }

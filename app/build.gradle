@@ -46,7 +46,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     //glide引用
     implementation 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     /*刷新列表*/
     implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
     /*加载动画*/
@@ -55,10 +55,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:3.14.1")
     implementation('com.google.code.gson:gson:2.8.5')
 
-//    implementation 'com.alibaba:fastjson:1.2.66'
-//
-//
-//    implementation 'com.fasterxml.jackson.core:jackson-core:2.7.1'
-//    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.7.1'
-//    implementation 'com.fasterxml.jackson.core:jackson-databind:2.7.1'
+//    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
+    implementation 'com.lxj:matisse:1.0.8'
+
 }

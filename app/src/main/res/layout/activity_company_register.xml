@@ -10,6 +10,7 @@
     tools:context=".company.CompanyRegisterActivity">
 
     <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_size"
         android:background="@color/default_blue"
@@ -29,6 +30,7 @@
             android:orientation="vertical">
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_company"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
@@ -38,6 +40,7 @@
                 app:ecHint="@string/company_name"
                 app:ecTitle="@string/company_name"
                 app:ecType="tv" />
+
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_area"
                 android:layout_width="match_parent"
@@ -46,11 +49,13 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
                 app:ecHint="@string/company_address"
                 app:ecTitle="@string/company_address"
-                app:ecType="tv"
-                app:ecEditable="false"/>
+                app:ecType="tv" />
+
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_address_detail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:background="@color/white"
@@ -60,6 +65,7 @@
                 app:ecType="noTitle" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_legal_person"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
@@ -71,37 +77,44 @@
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_contract"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
+                android:visibility="gone"
                 app:ecHint="@string/company_contact_person"
                 app:ecTitle="@string/company_contact_person"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_tel"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
+                android:visibility="gone"
                 app:ecHint="@string/company_contact_phone"
                 app:ecTitle="@string/company_contact_phone"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.VerificationCode
+                android:id="@+id/vc_code"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5" />
+                android:paddingRight="@dimen/dp_5"
+                android:visibility="gone" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_business_license"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
@@ -123,6 +136,7 @@
                 android:textSize="@dimen/text_title_edit" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
