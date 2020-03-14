@@ -19,6 +19,7 @@ import com.yyy.wrsf.utils.net.NetParams;
 import com.yyy.wrsf.utils.net.NetUtil;
 import com.yyy.wrsf.utils.net.RequstType;
 import com.yyy.wrsf.utils.net.ResponseListener;
+import com.yyy.wrsf.utils.net.Result;
 import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.utils.net.member.VerifyType;
 import com.yyy.wrsf.view.VerificationCode;
@@ -26,6 +27,8 @@ import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.timecount.OnSendListener;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,6 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         initConfirm();
         initCode();
     }
+
     private void initTop() {
         topView.setOnLeftClickListener(new OnLeftClickListener() {
             @Override
@@ -71,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initCode() {
         vcCode.getCountDownButton().setOnSendListener(new OnSendListener() {
             @Override
@@ -91,6 +96,19 @@ public class RegisterActivity extends AppCompatActivity {
             public void onSuccess(String string) {
                 LoadingFinish(null);
                 Log.e(RegisterActivity.this.getClass().getName(), "code:" + string);
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(getString(R.string.common_code_success));
+//                        finish();
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+
             }
 
             @Override
@@ -107,7 +125,6 @@ public class RegisterActivity extends AppCompatActivity {
         params.add(new NetParams("type", VerifyType.REGISTER.getCode()));
         return params;
     }
-
 
 
     private void initConfirm() {
@@ -138,6 +155,18 @@ public class RegisterActivity extends AppCompatActivity {
             public void onSuccess(String string) {
                 LoadingFinish(null);
                 Log.e(RegisterActivity.this.getClass().getName(), "data:" + string);
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(getString(R.string.login_register_success));
+                        finish();
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
             }
 
             @Override

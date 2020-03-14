@@ -18,6 +18,7 @@
     <string name="common_exit">退出登录</string>
     <string name="common_login">登录</string>
     <string name="common_code">验证码</string>
+    <string name="common_code_success">发送成功</string>
     <string name="common_code_get">获取验证码</string>
     <string name="common_code_reacquire">重新获取</string>
     <string name="common_code_count">s后重新获取</string>
@@ -49,6 +50,7 @@
     <string name="login_pwd_bcak">找回密码</string>
     <string name="login_welcome">您好，欢迎万瑞三富账号</string>
     <string name="login_register">注册</string>
+    <string name="login_register_success">注册成功</string>
     <string name="login_register_phone">手机号注册</string>
     <string name="login_enter_user">密码登录</string>
     <string name="login_enter_phone">验证码登录</string>
@@ -97,6 +99,7 @@
     <string name="company_titlte">物流公司</string>
     <string name="company_titlte_register">申请物流公司</string>
     <string name="company_name">公司名称</string>
+    <string name="company_address">公司地址</string>
     <string name="company_legal_person">法人</string>
     <string name="company_contact_person">联系人</string>
     <string name="company_contact_phone">联系电话</string>
@@ -113,5 +116,14 @@
     <string name="order_send_short">寄</string>
     <string name="order_receive_short">收</string>
     <string name="order_cancle">取消订单</string>
-
+    <!--申请月结-->
+    <string name="month_bill">开票资料</string>
+    <string name="month_bill_company">开票名称</string>
+    <string name="month_bill_company_hint">开票公司抬头</string>
+    <string name="month_bill_address">地址</string>
+    <string name="month_bill_address_hint">开票公司地址</string>
+    <string name="month_bill_tel">电话</string>
+    <string name="month_bill_tel_hint">开票公司电话</string>
+    <string name="month_bill_tax">税号</string>
+    <string name="month_bill_tax_hint">开票公司税号</string>
 </resources>
