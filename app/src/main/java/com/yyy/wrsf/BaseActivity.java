@@ -11,7 +11,10 @@ import androidx.fragment.app.FragmentActivity;
 
 
 import com.yyy.wrsf.application.BaseApplication;
+import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
+import com.yyy.wrsf.utils.StringUtil;
+import com.yyy.wrsf.utils.Toasts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,4 +82,6 @@ public class BaseActivity extends FragmentActivity {
                 break;
         }
     }
+
+
 }

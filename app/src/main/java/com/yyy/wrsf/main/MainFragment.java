@@ -1,6 +1,7 @@
 package com.yyy.wrsf.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.mine.month.MonthApplyActivity;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.view.cycle.CircleBanner;
 import com.yyy.wrsf.view.cycle.adapter.DataViewHolder;
@@ -115,6 +117,7 @@ public class MainFragment extends Fragment {
             case R.id.mi_statements:
                 break;
             case R.id.mi_apply_month:
+                go2Month();
                 break;
             case R.id.btn_shipping:
                 break;
@@ -123,6 +126,10 @@ public class MainFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    private void go2Month() {
+        startActivity(new Intent().setClass(getActivity(), MonthApplyActivity.class));
     }
 
     @Override

@@ -10,12 +10,13 @@
     tools:context=".company.CompanyRegisterActivity">
 
     <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_size"
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitle="@string/company_titlte_register"
+        app:topTitle="@string/month_title"
         app:topTitleColor="@color/white" />
 
     <ScrollView
@@ -29,6 +30,20 @@
             android:orientation="vertical">
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_trans"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
+                app:ecHint="@string/company_titlte"
+                app:ecTitle="@string/company_titlte"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_company"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
@@ -47,20 +62,25 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
                 app:ecHint="@string/company_address"
                 app:ecTitle="@string/company_address"
-                app:ecType="tv"
-                app:ecEditable="false"/>
+                app:ecType="tv" />
+
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_address_detail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
-                app:ecHint="@string/hint_address_detail"
-                app:ecType="noTitle" />
+                app:ecHint="@string/address_detail"
+                app:ecTitle="@string/address_detail"
+                app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_legal_person"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
@@ -72,37 +92,44 @@
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_contract"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
+                android:visibility="gone"
                 app:ecHint="@string/company_contact_person"
                 app:ecTitle="@string/company_contact_person"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_tel"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
+                android:visibility="gone"
                 app:ecHint="@string/company_contact_phone"
                 app:ecTitle="@string/company_contact_phone"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.VerificationCode
+                android:id="@+id/vc_code"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5" />
+                android:paddingRight="@dimen/dp_5"
+                android:visibility="gone" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_business_license"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
@@ -123,13 +150,36 @@
                 android:textColor="@color/text_eidt_title"
                 android:textSize="@dimen/text_title_edit" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/dp_8"
                 android:paddingRight="@dimen/dp_8"
-                android:paddingBottom="@dimen/dp_8" />
+                android:paddingBottom="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/iv_one"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_80"
+                    android:src="@mipmap/bg_id_card" />
+
+                <ImageView
+                    android:id="@+id/iv_two"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_80"
+
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/bg_id_card" />
+
+                <ImageView
+                    android:id="@+id/iv_three"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/bg_id_card" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -183,60 +233,6 @@
                     android:layout_marginRight="@dimen/dp_67"
                     android:text="@string/company_upload_reverse" />
             </RelativeLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:background="@color/login_normal"
-                android:gravity="center_vertical"
-                android:padding="@dimen/sp_8"
-                android:text="@string/month_bill"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_common" />
-
-            <com.yyy.wrsf.view.editclear.EditClearView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
-                app:ecHint="@string/month_bill_company_hint"
-                app:ecTitle="@string/month_bill_company"
-                app:ecType="tv" />
-
-            <com.yyy.wrsf.view.editclear.EditClearView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
-                app:ecHint="@string/month_bill_address_hint"
-                app:ecTitle="@string/month_bill_address"
-                app:ecType="tv" />
-
-            <com.yyy.wrsf.view.editclear.EditClearView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
-                app:ecHint="@string/month_bill_tax_hint"
-                app:ecTitle="@string/month_bill_tax"
-                app:ecType="tv" />
-
-            <com.yyy.wrsf.view.editclear.EditClearView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
-                app:ecHint="@string/month_bill_tel_hint"
-                app:ecTitle="@string/month_bill_tel"
-                app:ecType="tv" />
 
             <LinearLayout
                 android:layout_width="match_parent"

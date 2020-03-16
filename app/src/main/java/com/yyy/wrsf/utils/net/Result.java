@@ -1,8 +1,6 @@
 package com.yyy.wrsf.utils.net;
 
 
-import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,19 +16,14 @@ public class Result implements Serializable {
      * token
      */
 
-    private boolean success;
-    private Integer code;
+    private int success;
     private String msg;
     private String rows;
-    private String token;
-    private long loginTime;
 
     public Result(String string) throws JSONException {
         JSONObject jsonObject = new JSONObject(string);
-        setSuccess(jsonObject.optBoolean("success", false));
+        setSuccess(jsonObject.optInt("success", -1));
         setData(jsonObject.optString("rows", ""));
-        setToken(jsonObject.optString("token", ""));
-        setCode(jsonObject.optInt("code", -1));
         setMsg(jsonObject.optString("msg"));
     }
 
@@ -42,32 +35,16 @@ public class Result implements Serializable {
         this.rows = data;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public boolean isSuccess() {
-        return success;
+        return success == 200 ? true : false;
     }
 
-    public void setSuccess(boolean success) {
+    public void setSuccess(int success) {
         this.success = success;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
     public String getMsg() {
-        return msg;
+        return success + ":" + msg;
     }
 
     public void setMsg(String msg) {

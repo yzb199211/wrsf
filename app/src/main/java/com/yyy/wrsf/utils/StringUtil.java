@@ -47,6 +47,95 @@ public class StringUtil {
     public static boolean isColor(String color) {
         return color.matches(colorFormat);
     }
+    /**
+     * 营业执照 统一社会信用代码（15位）
+     * @param license
+     * @return
+     */
+    public static boolean isLicense15(String license) {
+        if(TextUtils.isEmpty(license)) {
+            return false;
+        }
+        if(license.length() != 15) {
+            return false;
+        }
+
+        String businesslicensePrex14 = license.substring(0,14);// 获取营业执照注册号前14位数字用来计算校验码
+        String businesslicense15 = license.substring(14, license.length());// 获取营业执照号的校验码
+        char[] chars = businesslicensePrex14.toCharArray();
+        int[] ints = new int[chars.length];
+        for(int i=0; i<chars.length;i++) {
+            ints[i] = Integer.parseInt(String.valueOf(chars[i]));
+        }
+        getCheckCode(ints);
+        if(businesslicense15.equals(getCheckCode(ints)+"")) {// 比较 填写的营业执照注册号的校验码和计算的校验码是否一致
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 获取 营业执照注册号的校验码
+     * @param ints
+     * @return
+     */
+    private static int getCheckCode(int[] ints) {
+        if(null != ints && ints.length > 1) {
+            int ti = 0;
+            int si = 0;// pi|11+ti
+            int cj = 0;// （si||10==0？10：si||10）*2
+            int pj = 10;// pj=cj|11==0?10:cj|11
+            for (int i=0;i<ints.length;i++) {
+                ti = ints[i];
+                pj = (cj % 11) == 0 ? 10 : (cj % 11);
+                si = pj + ti;
+                cj = (0 == si % 10 ? 10 : si % 10) * 2;
+                if (i == ints.length-1) {
+                    pj = (cj % 11) == 0 ? 10 : (cj % 11);
+                    return pj == 1 ? 1 : 11 - pj;
+                }
+            }
+        }// end if
+        return -1;
+    }
+
+    /**
+     * 营业执照 统一社会信用代码（18位）
+     * @param license
+     * @return
+     */
+    public static boolean isLicense18(String license) {
+        if(TextUtils.isEmpty(license)) {
+            return false;
+        }
+        if(license.length() != 18) {
+            return false;
+        }
+
+        String regex = "^([159Y]{1})([1239]{1})([0-9ABCDEFGHJKLMNPQRTUWXY]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{9})([0-90-9ABCDEFGHJKLMNPQRTUWXY])$";
+        if (!license.matches(regex)) {
+            return false;
+        }
+        String str = "0123456789ABCDEFGHJKLMNPQRTUWXY";
+        int[] ws = { 1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28 };
+        String[] codes = new String[2];
+        codes[0] = license.substring(0, license.length() - 1);
+        codes[1] = license.substring(license.length() - 1, license.length());
+        int sum = 0;
+        for (int i = 0; i < 17; i++) {
+            sum += str.indexOf(codes[0].charAt(i)) * ws[i];
+        }
+        int c18 = 31 - (sum % 31);
+        if (c18 == 31) {
+            c18 = 'Y';
+        } else if (c18 == 30) {
+            c18 = '0';
+        }
+        if (str.charAt(c18) != codes[1].charAt(0)) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 获取时间格式，type=1时间格式为yyyy-MM-dd HH:mm

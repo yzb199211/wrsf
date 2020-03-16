@@ -186,7 +186,7 @@ public class AddressDetailActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFail(IOException e) {
+                        public void onFail(Exception e) {
                             LoadingFinish(e.getMessage());
                             e.printStackTrace();
                         }

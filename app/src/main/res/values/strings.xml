@@ -9,10 +9,12 @@
     <string name="error_pwd_confirm">请确认密码是否正确</string>
     <string name="error_phone">请输入正确手机号码</string>
     <string name="error_user">用户名不能为空</string>
+    <string name="error_license">营业执照错误</string>
     <!--net-->
     <string name="net_empty_data">未获取到详细信息</string>
     <!--empty-->
     <string name="empty_params">请求参数为空</string>
+
 
     <!--常用-->
     <string name="common_exit">退出登录</string>
@@ -117,6 +119,7 @@
     <string name="order_receive_short">收</string>
     <string name="order_cancle">取消订单</string>
     <!--申请月结-->
+    <string name="month_title">申请月结</string>
     <string name="month_bill">开票资料</string>
     <string name="month_bill_company">开票名称</string>
     <string name="month_bill_company_hint">开票公司抬头</string>

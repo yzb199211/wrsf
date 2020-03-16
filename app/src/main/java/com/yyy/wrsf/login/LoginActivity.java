@@ -17,6 +17,7 @@ import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.NetConfig;
+import com.yyy.wrsf.utils.net.NetLogin;
 import com.yyy.wrsf.utils.net.NetParams;
 import com.yyy.wrsf.utils.net.NetUtil;
 import com.yyy.wrsf.utils.net.RequstType;
@@ -85,28 +86,16 @@ public class LoginActivity extends BaseActivity {
 
     private void login() {
         LoadingDialog.showDialogForLoading(this);
-        new NetUtil(loginParam(), NetConfig.address + MemberURL.Login, RequstType.GET, new ResponseListener() {
+        new NetLogin(loginParam(), NetConfig.address + MemberURL.Login, RequstType.GET, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 LoadingFinish(null);
-
-                Result result = null;
                 try {
-                    result = new Result(string);
+                    Result result = new Result(string);
                     if (result.isSuccess()) {
                         LoadingFinish(null);
-                        try {
-                            JSONObject jsonObject = new JSONObject(result.getData());
-                            String data = jsonObject.optString("loginUser", "");
-                            if (TextUtils.isEmpty(data)) {
-                                Toast(getString(R.string.net_empty_data));
-                            } else {
-                                setPreference(jsonObject, new Gson().fromJson(data, LoginModel.class));
-                                go2Main();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        setPreference(result.getData(), new Gson().fromJson(result.getData(), LoginModel.class));
+                        go2Main();
                     } else {
                         LoadingFinish(result.getMsg());
                         Log.e(LoginActivity.this.getClass().getName(), result.getMsg());
@@ -118,7 +107,7 @@ public class LoginActivity extends BaseActivity {
             }
 
             @Override
-            public void onFail(IOException e) {
+            public void onFail(Exception e) {
                 e.printStackTrace();
                 LoadingFinish(e.getMessage());
             }
@@ -135,23 +124,22 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    private void setPreference(JSONObject data, LoginModel model) {
+    private void setPreference(String data, LoginModel model) {
         preferencesHelper.put("member", data);
         preferencesHelper.put("recNo", model.getRecNo());
-        preferencesHelper.put("tel", model.getTel());
-        preferencesHelper.put("sex", model.getSex());
-        preferencesHelper.put("petname", model.getPetname());
+        preferencesHelper.put("tel", model.getMemberTel());
+        preferencesHelper.put("sex", model.getMemberSex());
+        preferencesHelper.put("petname", model.getMemberPetname());
         preferencesHelper.put("main", model.getMail());
         preferencesHelper.put("companyName", model.getCompanyName());
         preferencesHelper.put("roleType", (int) model.getRoleType());
-        preferencesHelper.put("token", data.optString("token", ""));
+        preferencesHelper.put("token", model.getToken());
     }
 
     private List<NetParams> loginParam() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("memberTel", ecvUser.getText()));
         params.add(new NetParams("password", ecvPwd.getText()));
-        params.add(new NetParams("roleType", "1"));
         return params;
     }
 

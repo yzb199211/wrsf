@@ -101,7 +101,7 @@ public class OutletsActivity extends BaseActivity implements XRecyclerView.Loadi
             }
 
             @Override
-            public void onFail(IOException e) {
+            public void onFail(Exception e) {
                 String error = OutletsActivity.this.getString(R.string.error_net) + e.getMessage();
                 Log.e(this.getClass().getName(), error);
                 LoadingFinish(error);

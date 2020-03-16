@@ -1,53 +1,60 @@
 package com.yyy.wrsf.company;
 
 import android.Manifest;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lxj.matisse.Matisse;
 import com.lxj.matisse.MimeType;
 import com.yyy.wrsf.BaseActivity;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.common.AreaSelect;
+import com.yyy.wrsf.common.OnBackAreaListener;
+import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
+import com.yyy.wrsf.mine.address.AddressDetailActivity;
+import com.yyy.wrsf.model.AreaModel;
+import com.yyy.wrsf.model.CompanyRegister;
+import com.yyy.wrsf.model.ImageModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
+import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.NetConfig;
+import com.yyy.wrsf.utils.net.NetParams;
+import com.yyy.wrsf.utils.net.NetUtil;
+import com.yyy.wrsf.utils.net.RequstType;
+import com.yyy.wrsf.utils.net.ResponseListener;
+import com.yyy.wrsf.utils.net.Result;
+import com.yyy.wrsf.utils.net.UploadFile;
+import com.yyy.wrsf.utils.net.address.AddressUrl;
+import com.yyy.wrsf.utils.net.company.CompanyUrl;
 import com.yyy.wrsf.view.VerificationCode;
 import com.yyy.wrsf.view.editclear.EditClearView;
+import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
 
+import org.json.JSONException;
+
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class CompanyRegisterActivity extends BaseActivity {
 
@@ -67,16 +74,33 @@ public class CompanyRegisterActivity extends BaseActivity {
     VerificationCode vcCode;
     @BindView(R.id.ecv_business_license)
     EditClearView ecvBusinessLicense;
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
     @BindView(R.id.iv_obverse)
     ImageView ivObverse;
     @BindView(R.id.iv_reverse)
     ImageView ivReverse;
     @BindView(R.id.top_view)
     TopView topView;
+    @BindView(R.id.iv_one)
+    ImageView ivOne;
+    @BindView(R.id.iv_two)
+    ImageView ivTwo;
+    @BindView(R.id.iv_three)
+    ImageView ivThree;
+    @BindView(R.id.btn_confirm)
+    Button btnConfirm;
 
     SharedPreferencesHelper preferencesHelper;
+
+    private AreaSelect areaSelect;
+    private AreaModel province;
+    private AreaModel city;
+    private AreaModel district;
+    private File fileObverse;
+    private File fileReverse;
+    private File fileOne;
+    private File fileTwo;
+    private File fileThree;
+    private CompanyRegister companyRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +112,60 @@ public class CompanyRegisterActivity extends BaseActivity {
     }
 
     private void init() {
+        companyRegister = new CompanyRegister();
+        initArea();
+        initSubmit();
+        initTop();
+    }
+
+    private void initTop() {
+        topView.setOnLeftClickListener(new OnLeftClickListener() {
+            @Override
+            public void onLeft() {
+                finish();
+            }
+        });
+    }
+
+    private void initSubmit() {
+        btnConfirm.setText(getString(R.string.common_submit));
+    }
+
+    private void initArea() {
+        ecvArea.getTvText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectArea(v);
+            }
+        });
+    }
+
+    private void selectArea(View view) {
+        if (areaSelect == null && province == null)
+            areaSelect = new AreaSelect(CompanyRegisterActivity.this);
+        else if (areaSelect == null) {
+            areaSelect = new AreaSelect(this, province, city, district);
+        }
+        areaSelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        areaSelect.setOnBackAreaListener(new OnBackAreaListener() {
+            @Override
+            public void backArea(AreaModel province, AreaModel city, AreaModel district) {
+                CompanyRegisterActivity.this.province = province;
+                CompanyRegisterActivity.this.city = city;
+                CompanyRegisterActivity.this.district = district;
+                setArea();
+            }
+        });
+    }
+
+    private void setArea() {
+        if (province != null & city != null & district != null) {
+            ecvArea.setText(province.getAreaName() + "\u3000" + city.getAreaName() + "\u3000" + district.getAreaName());
+        } else if (province != null & city != null & district == null) {
+            ecvArea.setText(province.getAreaName() + "\u3000" + city.getAreaName());
+        } else if (province != null & city == null & district == null) {
+            ecvArea.setText(province.getAreaName());
+        }
     }
 
     private void setPhoto(int type, int size) {
@@ -113,44 +191,53 @@ public class CompanyRegisterActivity extends BaseActivity {
         });
     }
 
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == CodeUtil.Address) {
-
-        } else if (resultCode == RESULT_OK) {
-//            Log.e("s", Matisse.obtainOriginalState(data) + "");
-            initPhoto(requestCode, data);
+        if (resultCode == RESULT_OK) {
+            initPhoto(requestCode, getPath(data));
         }
     }
 
-    File fileObverse;
-    File fileReverse;
+    private String getPath(Intent data) {
+        String path = Matisse.obtainCaptureImageResult(data);
+        if (TextUtils.isEmpty(path))
+            path = Matisse.obtainSelectPathResult(data).get(0);
+        return path;
+    }
 
-    private void initPhoto(int requestCode, Intent data) {
+    private void initPhoto(int requestCode, String path) {
         switch (requestCode) {
-            case CodeUtil.Photo_License:
-                break;
             case CodeUtil.Photo_Obverse:
-                String path = Matisse.obtainCaptureImageResult(data);
-                if (TextUtils.isEmpty(path))
-                    path = Matisse.obtainSelectPathResult(data).get(0);
+
                 fileObverse = new File(path);
                 if (fileObverse.exists()) {
                     Glide.with(this).load(fileObverse).into(ivObverse);
                 }
                 break;
             case CodeUtil.Photo_Reverse:
-                String path1 = Matisse.obtainCaptureImageResult(data);
-                if (TextUtils.isEmpty(path1))
-                    path1 = Matisse.obtainSelectPathResult(data).get(0);
-                fileReverse = new File(path1);
+                fileReverse = new File(path);
                 if (fileReverse.exists()) {
                     Glide.with(this).load(fileReverse).into(ivReverse);
+                }
+                break;
+            case CodeUtil.Photo_One:
+                fileOne = new File(path);
+                if (fileOne.exists()) {
+                    Glide.with(this).load(fileOne).into(ivOne);
+                }
+                break;
+            case CodeUtil.Photo_Two:
+                fileTwo = new File(path);
+                if (fileTwo.exists()) {
+                    Glide.with(this).load(fileTwo).into(ivTwo);
+                }
+                break;
+            case CodeUtil.Photo_Three:
+                fileThree = new File(path);
+                if (fileThree.exists()) {
+                    Glide.with(this).load(fileThree).into(ivThree);
                 }
                 break;
             default:
@@ -159,7 +246,7 @@ public class CompanyRegisterActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.iv_obverse, R.id.iv_reverse, R.id.btn_confirm})
+    @OnClick({R.id.iv_obverse, R.id.iv_reverse, R.id.btn_confirm, R.id.iv_one, R.id.iv_two, R.id.iv_three})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_obverse:
@@ -168,56 +255,199 @@ public class CompanyRegisterActivity extends BaseActivity {
             case R.id.iv_reverse:
                 setPhoto(CodeUtil.Photo_Reverse, 1);
                 break;
-            case R.id.ecv_area:
-
-                break;
             case R.id.btn_confirm:
-                List<File> files = new ArrayList<>();
-                files.add(fileObverse);
-                files.add(fileReverse);
-                uploadMultiFiles(NetConfig.address + "/files/uploadFiles", files);
+                if (canSave()) {
+                    uploadFile(getLicenses(), 2);
+                }
+                break;
+            case R.id.iv_one:
+                setPhoto(CodeUtil.Photo_One, 1);
+                break;
+            case R.id.iv_two:
+                setPhoto(CodeUtil.Photo_Two, 1);
+                break;
+            case R.id.iv_three:
+                setPhoto(CodeUtil.Photo_Three, 1);
+                break;
+            default:
                 break;
         }
     }
 
-    private void uploadMultiFiles(String url, List<File> files) {
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        for (int i = 0; i < files.size(); i++) {
-            File file = files.get(i);
-            RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), file);
-            builder.addFormDataPart("fileList", file.getName(), fileBody);
+    private List<File> getLicenses() {
+        List<File> files = new ArrayList<>();
+        if (fileOne != null) {
+            files.add(fileOne);
         }
-        builder.addFormDataPart("userType", "3");
-        MultipartBody multipartBody = builder.build();
-        Request request = new Request.Builder()
-                .url(url)
-                .post(multipartBody)
-                .addHeader("token", (String) preferencesHelper.getSharedPreference("token", ""))
-                .build();
+        if (fileTwo != null) {
+            files.add(fileTwo);
+        }
+        if (fileThree != null) {
+            files.add(fileThree);
+        }
+        return files;
+    }
 
-        final okhttp3.OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-        OkHttpClient okHttpClient = httpBuilder
-                //设置超时
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
+    private boolean canSave() {
+        if (TextUtils.isEmpty(ecvCompany.getText())) {
+            Toast(ecvCompany.getHint());
+            return false;
+        }
+        if (TextUtils.isEmpty(ecvArea.getText())) {
+            Toast(ecvArea.getText());
+            return false;
+        }
+        if (TextUtils.isEmpty(ecvAddressDetail.getText())) {
+            Toast(ecvAddressDetail.getHint());
+            return false;
+        }
+        if (TextUtils.isEmpty(ecvLegalPerson.getText())) {
+            Toast(ecvLegalPerson.getHint());
+            return false;
+        }
+        if (TextUtils.isEmpty(ecvBusinessLicense.getText())) {
+            Toast(ecvBusinessLicense.getHint());
+            return false;
+        }
+//        if (!StringUtil.isLicense15(ecvBusinessLicense.getText()) && !StringUtil.isLicense18(ecvBusinessLicense.getText())) {
+//            Toast(getString(R.string.error_license));
+//            return false;
+//        }
+        if (fileOne == null && fileTwo == null && fileThree == null) {
+            Toast(getString(R.string.company_upload_license));
+        }
+        if (fileObverse == null || fileReverse == null) {
+            Toast(getString(R.string.company_upload_IDCard));
+        }
+        setUploadData();
+        return true;
+    }
+
+    private void setUploadData() {
+        companyRegister.setCompanyName(ecvCompany.getText());
+        companyRegister.setPerson(ecvLegalPerson.getText());
+        if (province != null) companyRegister.setFristAdd(province.getAreaName());
+        if (city != null) companyRegister.setSecondAdd(city.getAreaName());
+        if (district != null) companyRegister.setThirdAdd(district.getAreaName());
+        companyRegister.setDetailAdd(ecvAddressDetail.getText());
+        companyRegister.setZhiZhao(ecvBusinessLicense.getText());
+    }
+
+    private void uploadCard() {
+        List<File> files = new ArrayList<>();
+        files.add(fileObverse);
+        files.add(fileReverse);
+        uploadFile(files, 3);
+    }
+
+    private void uploadFile(List<File> files, int type) {
+        LoadingFinish(null);
+        runOnUiThread(new Runnable() {
             @Override
-            public void onFailure(okhttp3.Call call, IOException e) {
-                e.printStackTrace();
+            public void run() {
+                LoadingDialog.showDialogForLoading(CompanyRegisterActivity.this);
             }
-
+        });
+        UploadFile uploadFile = new UploadFile();
+        uploadFile.uploadMultiFiles(NetConfig.address + "/files/uploadFiles", files, type);
+        uploadFile.setResponseListener(new ResponseListener() {
             @Override
-            public void onResponse(okhttp3.Call call, Response response) throws IOException {
+            public void onSuccess(String string) {
                 try {
-                    String jsonStr = response.body().string();
-                    Log.i("EvaluateActivity", "uploadMultiFile() response=" + jsonStr);
-                } catch (Exception e) {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(null);
+                        if (type == 2) {
+                            companyRegister.setZhiZhaoPics(setPics(result.getData()));
+                            uploadCard();
+                        } else if (type == 3) {
+                            companyRegister.setContractPersonPics(setPics(result.getData()));
+                            uploadData();
+                        }
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
                     e.printStackTrace();
+                    LoadingFinish(e.getMessage());
                 }
             }
 
+            @Override
+            public void onFail(Exception e) {
+                LoadingFinish(e.getMessage());
+                e.printStackTrace();
+            }
         });
+    }
+
+    private String setPics(String data) {
+        List<ImageModel> imageModels = new Gson().fromJson(data, new TypeToken<List<ImageModel>>() {
+        }.getType());
+        String string = "";
+        for (ImageModel item : imageModels) {
+            string = string + item.getId() + ",";
+        }
+        return string;
+    }
+
+    private void uploadData() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LoadingFinish(null);
+                LoadingDialog.showDialogForLoading(CompanyRegisterActivity.this);
+            }
+        });
+        new NetUtil(uploadParams(),
+                NetConfig.address + CompanyUrl.insert,
+                RequstType.POST,
+                new ResponseListener() {
+                    @Override
+                    public void onSuccess(String string) {
+                        LoadingFinish(null);
+                        Log.e(CompanyRegisterActivity.class.getName(), "data:" + string);
+                        try {
+                            Result result = new Result(string);
+                            if (result.isSuccess()) {
+                                finish();
+                            } else {
+                                LoadingFinish(result.getMsg());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            LoadingFinish(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        LoadingFinish(e.getMessage());
+                        e.printStackTrace();
+                    }
+                });
+    }
+
+    private List<NetParams> uploadParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("param", new Gson().toJson(companyRegister)));
+        return params;
+    }
+
+    private void LoadingFinish(String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (StringUtil.isNotEmpty(msg)) {
+                    Toast(msg);
+                }
+                LoadingDialog.cancelDialogForLoading();
+            }
+        });
+    }
+
+    private void Toast(String msg) {
+        Toasts.showShort(this, msg);
     }
 
 }

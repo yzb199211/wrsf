@@ -85,7 +85,7 @@ public class AddressActivity extends AppCompatActivity {
         filterModel.setRecNo(memberId);
         pager.setQueryParam(filterModel);
 
-        String s = new Gson().toJson(filterModel);
+//        String s = new Gson().toJson(filterModel);
     }
 
     private void getData() {
@@ -105,6 +105,7 @@ public class AddressActivity extends AppCompatActivity {
                             refrishList();
                         }
                     } else {
+                        LoadingFinish(result.getMsg());
                         Log.e(AddressActivity.class.getName(), result.getMsg());
                     }
                 } catch (JSONException e) {
@@ -115,7 +116,7 @@ public class AddressActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFail(IOException e) {
+            public void onFail(Exception e) {
                 e.printStackTrace();
                 LoadingFinish(e.getMessage());
             }
@@ -211,7 +212,7 @@ public class AddressActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFail(IOException e) {
+            public void onFail(Exception e) {
                 e.printStackTrace();
                 LoadingFinish(e.getMessage());
             }

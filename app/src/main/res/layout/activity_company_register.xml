@@ -58,11 +58,13 @@
                 android:id="@+id/ecv_address_detail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
-                app:ecHint="@string/hint_address_detail"
-                app:ecType="noTitle" />
+                app:ecHint="@string/address_detail"
+                app:ecTitle="@string/address_detail"
+                app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_legal_person"
@@ -135,14 +137,36 @@
                 android:textColor="@color/text_eidt_title"
                 android:textSize="@dimen/text_title_edit" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/dp_8"
                 android:paddingRight="@dimen/dp_8"
-                android:paddingBottom="@dimen/dp_8" />
+                android:paddingBottom="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/iv_one"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_80"
+                    android:src="@mipmap/bg_id_card" />
+
+                <ImageView
+                    android:id="@+id/iv_two"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_80"
+
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/bg_id_card" />
+
+                <ImageView
+                    android:id="@+id/iv_three"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/bg_id_card" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"

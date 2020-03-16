@@ -112,7 +112,7 @@ public class PwdBackActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFail(IOException e) {
+            public void onFail(Exception e) {
                 e.printStackTrace();
                 LoadingFinish(e.getMessage());
             }
