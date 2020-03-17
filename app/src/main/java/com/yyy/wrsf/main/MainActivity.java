@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tv_mine)
     TextView tvMine;
     MainFragment mainFragment;
+    MineFragment mineFragment;
     Fragment currentFragment;
 
     @Override
@@ -95,15 +96,17 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.rl_send:
-
                 break;
             case R.id.rl_notice:
-                go2Address();
                 break;
             case R.id.rl_company:
                 go2Company();
                 break;
             case R.id.rl_mine:
+                if (mineFragment == null) {
+                    mineFragment = new MineFragment();
+                }
+                switchFragment(mineFragment);
                 break;
             default:
                 break;
@@ -112,9 +115,5 @@ public class MainActivity extends AppCompatActivity {
 
     private void go2Company() {
         startActivity(new Intent().setClass(this, CompanyRegisterActivity.class));
-    }
-
-    private void go2Address() {
-        startActivity(new Intent().setClass(this, AddressActivity.class).putExtra("isSelect", false));
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
+    android:orientation="vertical"
+    tools:context=".mine.EditActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topRightText="@string/common_submit"
+        app:topRightTextColor="@color/white"
+        app:topRightTvShow="true"
+        app:topTitle="@string/person_info"
+        app:topTitleColor="@color/white" />
+
+    <com.yyy.wrsf.view.editclear.EditClearView
+        android:id="@+id/ecv_data"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_5"
+        app:ecText="sad"
+        app:ecTextColor="@color/text_common"
+        app:ecType="noTitle" />
+</LinearLayout>

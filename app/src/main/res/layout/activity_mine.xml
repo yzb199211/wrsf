@@ -9,12 +9,12 @@
     tools:context=".mine.MineActivity">
 
     <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_size"
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitle="@string/person_info"
         app:topTitleColor="@color/white" />
 
     <LinearLayout
@@ -35,6 +35,7 @@
             android:textSize="@dimen/text_title_max" />
 
         <ImageView
+            android:id="@+id/iv_logo"
             android:layout_width="@dimen/dp_50"
             android:layout_height="@dimen/dp_50"
             android:layout_gravity="center_vertical"
@@ -52,12 +53,12 @@
         android:id="@+id/tmi_person_nickname"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
-        android:layout_below="@id/tmi_phone"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
         app:tmiSelected="true"
+        app:tmiTextColor="@color/text_gray"
         app:tmiTitle="@string/person_nick_name"
         app:tmiTitleColor="@color/text_gray2" />
 
@@ -65,12 +66,11 @@
         android:id="@+id/tmi_person_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
-        android:layout_below="@id/tmi_phone"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
-        app:tmiSelected="true"
+        app:tmiTextColor="@color/text_gray"
         app:tmiTitle="@string/person_name"
         app:tmiTitleColor="@color/text_gray2" />
 
@@ -78,12 +78,11 @@
         android:id="@+id/tmi_person_mobile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
-        android:layout_below="@id/tmi_phone"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
-        app:tmiSelected="true"
+        app:tmiTextColor="@color/text_gray"
         app:tmiTitle="@string/person_phone_num"
         app:tmiTitleColor="@color/text_gray2" />
 
@@ -91,12 +90,12 @@
         android:id="@+id/tmi_person_brithday"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
-        android:layout_below="@id/tmi_phone"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
         app:tmiSelected="true"
+        app:tmiTextColor="@color/text_gray"
         app:tmiTitle="@string/person_brithday"
         app:tmiTitleColor="@color/text_gray2" />
 
@@ -104,12 +103,12 @@
         android:id="@+id/tmi_person_sex"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
-        android:layout_below="@id/tmi_phone"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
         app:tmiSelected="true"
+        app:tmiTextColor="@color/text_gray"
         app:tmiTitle="@string/person_sex"
         app:tmiTitleColor="@color/text_gray2" />
 
@@ -117,12 +116,12 @@
         android:id="@+id/tmi_person_email"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
-        android:layout_below="@id/tmi_phone"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
         app:tmiSelected="true"
+        app:tmiTextColor="@color/text_gray"
         app:tmiTitle="@string/person_email"
         app:tmiTitleColor="@color/text_gray2" />
 </LinearLayout>

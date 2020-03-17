@@ -47,28 +47,30 @@ public class StringUtil {
     public static boolean isColor(String color) {
         return color.matches(colorFormat);
     }
+
     /**
      * 营业执照 统一社会信用代码（15位）
+     *
      * @param license
      * @return
      */
     public static boolean isLicense15(String license) {
-        if(TextUtils.isEmpty(license)) {
+        if (TextUtils.isEmpty(license)) {
             return false;
         }
-        if(license.length() != 15) {
+        if (license.length() != 15) {
             return false;
         }
 
-        String businesslicensePrex14 = license.substring(0,14);// 获取营业执照注册号前14位数字用来计算校验码
+        String businesslicensePrex14 = license.substring(0, 14);// 获取营业执照注册号前14位数字用来计算校验码
         String businesslicense15 = license.substring(14, license.length());// 获取营业执照号的校验码
         char[] chars = businesslicensePrex14.toCharArray();
         int[] ints = new int[chars.length];
-        for(int i=0; i<chars.length;i++) {
+        for (int i = 0; i < chars.length; i++) {
             ints[i] = Integer.parseInt(String.valueOf(chars[i]));
         }
         getCheckCode(ints);
-        if(businesslicense15.equals(getCheckCode(ints)+"")) {// 比较 填写的营业执照注册号的校验码和计算的校验码是否一致
+        if (businesslicense15.equals(getCheckCode(ints) + "")) {// 比较 填写的营业执照注册号的校验码和计算的校验码是否一致
             return true;
         }
         return false;
@@ -76,21 +78,22 @@ public class StringUtil {
 
     /**
      * 获取 营业执照注册号的校验码
+     *
      * @param ints
      * @return
      */
     private static int getCheckCode(int[] ints) {
-        if(null != ints && ints.length > 1) {
+        if (null != ints && ints.length > 1) {
             int ti = 0;
             int si = 0;// pi|11+ti
             int cj = 0;// （si||10==0？10：si||10）*2
             int pj = 10;// pj=cj|11==0?10:cj|11
-            for (int i=0;i<ints.length;i++) {
+            for (int i = 0; i < ints.length; i++) {
                 ti = ints[i];
                 pj = (cj % 11) == 0 ? 10 : (cj % 11);
                 si = pj + ti;
                 cj = (0 == si % 10 ? 10 : si % 10) * 2;
-                if (i == ints.length-1) {
+                if (i == ints.length - 1) {
                     pj = (cj % 11) == 0 ? 10 : (cj % 11);
                     return pj == 1 ? 1 : 11 - pj;
                 }
@@ -101,14 +104,15 @@ public class StringUtil {
 
     /**
      * 营业执照 统一社会信用代码（18位）
+     *
      * @param license
      * @return
      */
     public static boolean isLicense18(String license) {
-        if(TextUtils.isEmpty(license)) {
+        if (TextUtils.isEmpty(license)) {
             return false;
         }
-        if(license.length() != 18) {
+        if (license.length() != 18) {
             return false;
         }
 
@@ -117,7 +121,7 @@ public class StringUtil {
             return false;
         }
         String str = "0123456789ABCDEFGHJKLMNPQRTUWXY";
-        int[] ws = { 1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28 };
+        int[] ws = {1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28};
         String[] codes = new String[2];
         codes[0] = license.substring(0, license.length() - 1);
         codes[1] = license.substring(license.length() - 1, license.length());
@@ -153,6 +157,17 @@ public class StringUtil {
             date = date.replace("T", " ");
             return date;
         } else if (type == 2 && date.length() > 9) {
+            date = date.substring(0, 10);
+            return date;
+        } else
+            return date;
+    }
+
+    public static String getBrithDay(String date) {
+        if (!StringUtil.isNotEmpty(date)) {
+            return date;
+        }
+        if (date.length() > 9) {
             date = date.substring(0, 10);
             return date;
         } else

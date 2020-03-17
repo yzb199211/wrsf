@@ -71,9 +71,9 @@ public class TextMenuItem extends LinearLayout {
         }
         initTitle();
         initText();
-        if (isSelected) {
-            initSelected();
-        }
+
+        initSelected();
+
     }
 
 
@@ -109,6 +109,11 @@ public class TextMenuItem extends LinearLayout {
         ImageView ivSelect = new ImageView(context);
         ivSelect.setImageResource(R.mipmap.arrow_right);
         ivSelect.setLayoutParams(selectParams());
+        if (isSelected) {
+            ivSelect.setVisibility(VISIBLE);
+        } else {
+            ivSelect.setVisibility(INVISIBLE);
+        }
         addView(ivSelect);
     }
 
@@ -132,5 +137,11 @@ public class TextMenuItem extends LinearLayout {
         LayoutParams params = new LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
         params.leftMargin = context.getResources().getDimensionPixelSize(R.dimen.dp_10);
         return params;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+        if (tvDetail != null)
+            tvDetail.setText(text);
     }
 }

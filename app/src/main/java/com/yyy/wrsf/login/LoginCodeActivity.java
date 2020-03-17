@@ -163,7 +163,7 @@ public class LoginCodeActivity extends AppCompatActivity {
                         Log.e(LoginCodeActivity.this.getClass().getName(), result.getMsg());
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    e.printStackTrace(); LoadingFinish(e.getMessage());
                 }
             }
 

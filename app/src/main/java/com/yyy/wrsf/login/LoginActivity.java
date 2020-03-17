@@ -102,6 +102,7 @@ public class LoginActivity extends BaseActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    LoadingFinish(e.getMessage());
                 }
 
             }

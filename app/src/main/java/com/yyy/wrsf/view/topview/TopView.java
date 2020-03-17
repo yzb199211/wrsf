@@ -104,6 +104,7 @@ public class TopView extends RelativeLayout {
         tvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightSize);
         tvRight.setLayoutParams(rightTvParams());
         tvRight.setGravity(Gravity.CENTER);
+        tvRight.setPadding(context.getResources().getDimensionPixelSize(R.dimen.padding_common), context.getResources().getDimensionPixelSize(R.dimen.padding_common), context.getResources().getDimensionPixelSize(R.dimen.padding_common), context.getResources().getDimensionPixelSize(R.dimen.padding_common));
         tvRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,5 +140,12 @@ public class TopView extends RelativeLayout {
 
     public void setOnRightClickListener(OnRightClickListener onRightClickListener) {
         this.onRightClickListener = onRightClickListener;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+        if (tvTitle != null) {
+            tvTitle.setText(title);
+        }
     }
 }
