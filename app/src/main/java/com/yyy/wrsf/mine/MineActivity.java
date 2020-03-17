@@ -141,7 +141,7 @@ public class MineActivity extends AppCompatActivity {
     }
 
     private void sendData() {
-        new NetUtil(sexParams(), NetConfig.address + MemberURL.updateMember, RequstType.GET, new ResponseListener() {
+        new NetUtil(sexParams(), NetConfig.address + MemberURL.updateMember, RequstType.PUT, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 Log.e("data", string);
@@ -192,13 +192,14 @@ public class MineActivity extends AppCompatActivity {
     }
 
     private void initPvDate() throws Exception {
+        Calendar calendar = Calendar.getInstance();
         pvDate = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
                 tmiPersonBrithday.setText(StringUtil.getDate(date));
             }
-        }).setRangDate(TimeUtil.str2calendar(getString(R.string.common_date_min)), Calendar.getInstance())
-                .setDate(TextUtils.isEmpty(memberModel.getBrithday()) ? Calendar.getInstance() : TimeUtil.str2calendar(memberModel.getBrithday()))
+        }).setRangDate(TimeUtil.str2calendar(getString(R.string.common_date_min)),calendar )
+                .setDate(TextUtils.isEmpty(memberModel.getBrithday()) ? calendar: TimeUtil.str2calendar(memberModel.getBrithday()))
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .setContentTextSize(18)

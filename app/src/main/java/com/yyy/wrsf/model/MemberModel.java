@@ -3,7 +3,7 @@ package com.yyy.wrsf.model;
 import java.io.Serializable;
 
 public class MemberModel implements Serializable {
-    private int accountType;
+    private Integer accountType;
     private String brithday;
     private String companyName;
     private String mail;
@@ -12,9 +12,9 @@ public class MemberModel implements Serializable {
     private String memberSex;
     private String memberTel;
     private String passWord;
-    private int recNo;
-    private int roleType;
-    private int stopYesno;
+    private Integer recNo;
+    private Integer roleType;
+    private Integer stopYesno;
     private String validate;
 
     public int getAccountType() {
