@@ -5,4 +5,5 @@ public class MemberURL {
     public static String REGISTER = "/member/register";
     public static String fastLogin = "/member/fastLogin";
     public static String Login = "/member/login";
+    public static String updateMember = "/member/updateMember";
 }

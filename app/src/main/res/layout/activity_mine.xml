@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,12 +15,14 @@
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitleColor="@color/white"
-        app:topTitle="@string/person_info"/>
+        app:topTitle="@string/person_info"
+        app:topTitleColor="@color/white" />
 
     <LinearLayout
+        android:id="@+id/ll_logo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_80"
+        android:layout_below="@id/top_view"
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_10"
@@ -54,6 +56,7 @@
         android:id="@+id/tmi_person_nickname"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/ll_logo"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
@@ -67,6 +70,7 @@
         android:id="@+id/tmi_person_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_person_nickname"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
@@ -79,6 +83,7 @@
         android:id="@+id/tmi_person_mobile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_person_name"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
@@ -91,6 +96,7 @@
         android:id="@+id/tmi_person_brithday"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_person_mobile"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
@@ -104,6 +110,7 @@
         android:id="@+id/tmi_person_sex"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_person_brithday"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
@@ -117,6 +124,7 @@
         android:id="@+id/tmi_person_email"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_person_sex"
         android:layout_marginTop="@dimen/dp_1"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
@@ -125,4 +133,16 @@
         app:tmiTextColor="@color/text_gray"
         app:tmiTitle="@string/person_email"
         app:tmiTitleColor="@color/text_gray2" />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:background="@drawable/btn_yellow"
+        android:gravity="center"
+        android:text="@string/common_submit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_common" />
+</RelativeLayout>

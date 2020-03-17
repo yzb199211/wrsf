@@ -1,8 +1,10 @@
 package com.yyy.wrsf.mine;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +23,27 @@ import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.TimeUtil;
+import com.yyy.wrsf.utils.net.NetConfig;
+import com.yyy.wrsf.utils.net.NetParams;
+import com.yyy.wrsf.utils.net.NetUtil;
+import com.yyy.wrsf.utils.net.RequstType;
+import com.yyy.wrsf.utils.net.ResponseListener;
+import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
+import com.yyy.yyylibrary.pick.builder.OptionsPickerBuilder;
 import com.yyy.yyylibrary.pick.builder.TimePickerBuilder;
+import com.yyy.yyylibrary.pick.listener.OnOptionsSelectListener;
 import com.yyy.yyylibrary.pick.listener.OnTimeSelectListener;
 import com.yyy.yyylibrary.pick.view.BasePickerView;
+import com.yyy.yyylibrary.pick.view.OptionsPickerView;
 import com.yyy.yyylibrary.pick.view.TimePickerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +70,8 @@ public class MineActivity extends AppCompatActivity {
     private MemberModel memberModel;
 
     private TimePickerView pvDate;
+    private OptionsPickerView pvSex;
+    List<SexUtil.Sex> sexes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +83,7 @@ public class MineActivity extends AppCompatActivity {
     }
 
     private void init() {
+        sexes = new SexUtil().getSexs();
         memberModel = new Gson().fromJson((String) preferencesHelper.getSharedPreference("member", ""), MemberModel.class);
         tmiPersonName.setText(memberModel.getMemberName());
         tmiPersonNickname.setText(memberModel.getMemberPetname());
@@ -87,7 +103,7 @@ public class MineActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick({R.id.iv_logo, R.id.tmi_person_nickname, R.id.tmi_person_brithday, R.id.tmi_person_sex, R.id.tmi_person_email})
+    @OnClick({R.id.iv_logo, R.id.tmi_person_nickname, R.id.tmi_person_brithday, R.id.tmi_person_sex, R.id.tmi_person_email, R.id.btn_add})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_logo:
@@ -107,13 +123,72 @@ public class MineActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.tmi_person_sex:
+                if (pvSex == null) {
+                    initPvSex();
+                } else {
+                    pvSex.show();
+                }
                 break;
             case R.id.tmi_person_email:
                 eidtMail();
                 break;
+            case R.id.btn_add:
+                sendData();
+                break;
             default:
                 break;
         }
+    }
+
+    private void sendData() {
+        new NetUtil(sexParams(), NetConfig.address + MemberURL.updateMember, RequstType.GET, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                Log.e("data", string);
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                e.printStackTrace();
+
+            }
+        });
+    }
+
+    private List<NetParams> sexParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("params", getMember()));
+        return params;
+    }
+
+    private String getMember() {
+        MemberModel member = new MemberModel();
+        member.setMail(tmiPersonEmail.getText());
+        member.setMemberPetname(tmiPersonNickname.getText());
+        member.setMemberSex(tmiPersonSex.getText());
+        member.setBrithday(tmiPersonBrithday.getText());
+        member.setRecNo(memberModel.getRecNo());
+        return new Gson().toJson(member);
+    }
+
+    private void initPvSex() {
+        pvSex = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                tmiPersonSex.setText(sexes.get(options1).getPickerViewText());
+            }
+        }).setContentTextSize(18)//设置滚轮文字大小
+                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+                .setSelectOptions(0)//默认选中项
+                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .setLabels("", "", "")
+                .isDialog(true)
+                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
+                .build();
+        pvSex.setPicker(sexes);//一级选择器
+        setDialog(pvSex);
+        pvSex.show();
     }
 
     private void initPvDate() throws Exception {
@@ -123,7 +198,7 @@ public class MineActivity extends AppCompatActivity {
                 tmiPersonBrithday.setText(StringUtil.getDate(date));
             }
         }).setRangDate(TimeUtil.str2calendar(getString(R.string.common_date_min)), Calendar.getInstance())
-                .setDate(TextUtils.isEmpty(memberModel.getBrithday()) ? Calendar.getInstance() : TimeUtil.str2calendar(getString(R.string.common_date_min)))
+                .setDate(TextUtils.isEmpty(memberModel.getBrithday()) ? Calendar.getInstance() : TimeUtil.str2calendar(memberModel.getBrithday()))
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .setContentTextSize(18)
@@ -178,7 +253,7 @@ public class MineActivity extends AppCompatActivity {
     }
 
     private void initDialogWindow(Window window) {
-//        window.setWindowAnimations(R.style.picker_view_slide_anim);//修改动画样式
+        window.setWindowAnimations(R.style.picker_view_slide_anim);//修改动画样式
         window.setGravity(Gravity.BOTTOM);//改成Bottom,底部显示
         window.setDimAmount(0.1f);
         window.setAttributes(getDialogWindowLayoutParams(window));
