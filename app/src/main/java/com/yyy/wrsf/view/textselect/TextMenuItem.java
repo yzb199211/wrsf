@@ -144,4 +144,12 @@ public class TextMenuItem extends LinearLayout {
         if (tvDetail != null)
             tvDetail.setText(text);
     }
+
+    public String getText() {
+        return tvDetail.getText().toString();
+    }
+
+    public String getTitle() {
+        return tvTitle.getText().toString();
+    }
 }

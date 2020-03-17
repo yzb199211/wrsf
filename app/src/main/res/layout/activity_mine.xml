@@ -15,7 +15,8 @@
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitleColor="@color/white" />
+        app:topTitleColor="@color/white"
+        app:topTitle="@string/person_info"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +33,7 @@
             android:gravity="center_vertical"
             android:text="@string/person_photo"
             android:textColor="@color/text_gray2"
-            android:textSize="@dimen/text_title_max" />
+            android:textSize="@dimen/text_common" />
 
         <ImageView
             android:id="@+id/iv_logo"
