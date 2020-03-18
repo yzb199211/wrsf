@@ -58,4 +58,5 @@ dependencies {
 //    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
     implementation 'com.lxj:matisse:1.0.8'
     implementation(name: 'yyylibrary-release', ext: 'aar')
+    implementation 'org.greenrobot:eventbus:3.0.0'
 }

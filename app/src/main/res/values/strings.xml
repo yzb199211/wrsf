@@ -103,6 +103,7 @@
     <string name="company_titlte_register">申请物流公司</string>
     <string name="company_name">公司名称</string>
     <string name="company_address">公司地址</string>
+    <string name="company_address_detail">地址详情</string>
     <string name="company_legal_person">法人</string>
     <string name="company_contact_person">联系人</string>
     <string name="company_contact_phone">联系电话</string>
@@ -112,6 +113,13 @@
     <string name="company_upload_obverse">正面</string>
     <string name="company_upload_reverse">反面</string>
     <string name="company_upload_protocol">已阅读并同意以下协议：万瑞三富平台申请物流公司协议</string>
+    <string name="company_order">订单中心</string>
+    <string name="company_car">车辆管理</string>
+    <string name="company_outlets">网点管理</string>
+    <string name="company_checkbill">对账</string>
+    <string name="company_detail">公司资料</string>
+    <string name="company_member">客户管理</string>
+    <string name="company_driver">驾驶员</string>
 
     <!--订单-->
     <string name="order_title">订单管理</string>
@@ -130,4 +138,7 @@
     <string name="month_bill_tel_hint">开票公司电话</string>
     <string name="month_bill_tax">税号</string>
     <string name="month_bill_tax_hint">开票公司税号</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

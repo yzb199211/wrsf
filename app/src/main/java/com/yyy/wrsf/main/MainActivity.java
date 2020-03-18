@@ -16,7 +16,10 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.common.AreaSelect;
 import com.yyy.wrsf.company.CompanyRegisterActivity;
 import com.yyy.wrsf.mine.address.AddressActivity;
+import com.yyy.wrsf.mine.notice.NoticeFragment;
 import com.yyy.wrsf.view.cycle.bean.DataBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +52,13 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivMine;
     @BindView(R.id.tv_mine)
     TextView tvMine;
+
     MainFragment mainFragment;
     MineFragment mineFragment;
+    NoticeFragment noticeFragment;
+    CompanyFragment companyFragment;
     Fragment currentFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,14 +100,23 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_main:
-
+                switchFragment(mainFragment);
                 break;
             case R.id.rl_send:
                 break;
             case R.id.rl_notice:
+                if (noticeFragment == null) {
+                    noticeFragment = new NoticeFragment();
+                }
+                switchFragment(noticeFragment);
+                EventBus.getDefault().post("");
                 break;
             case R.id.rl_company:
-                go2Company();
+//                go2Company();
+                if (companyFragment == null) {
+                    companyFragment = new CompanyFragment();
+                }
+                switchFragment(companyFragment);
                 break;
             case R.id.rl_mine:
                 if (mineFragment == null) {

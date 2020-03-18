@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".company.CompanyDetailActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/company_detail"
+        app:topTitleColor="@color/white" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_company_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/top_view"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiTextColor="@color/text_gray"
+        app:tmiTitle="@string/company_name"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_company_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_company_name"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiTextColor="@color/text_gray"
+        app:tmiTitle="@string/company_address"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_company_address_detail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_company_address"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiTextColor="@color/text_gray"
+        app:tmiTitle="@string/company_address_detail"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_company_legal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_company_address_detail"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiTextColor="@color/text_gray"
+        app:tmiTitle="@string/company_legal_person"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_company_contract"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_company_legal"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiTextColor="@color/text_gray"
+        app:tmiTitle="@string/company_contact_person"
+        app:tmiTitleColor="@color/text_gray2" />
+
+    <com.yyy.wrsf.view.textselect.TextMenuItem
+        android:id="@+id/tmi_company_tel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_below="@+id/tmi_company_contract"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        app:tmiTextColor="@color/text_gray"
+        app:tmiTitle="@string/company_contact_phone"
+        app:tmiTitleColor="@color/text_gray2" />
+</RelativeLayout>

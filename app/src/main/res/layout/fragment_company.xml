@@ -1,9 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.CompanyFragment">
+    android:background="@color/default_bg_gray"
+    tools:context=".main.MainFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        android:background="@color/default_blue" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_setting"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:padding="@dimen/dp_10"
+            android:src="@mipmap/icon_setting"
+            android:visibility="invisible" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_160"
+            android:layout_below="@+id/iv_setting"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/dp_10"
+            app:cardElevation="@dimen/dp_4">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:src="@mipmap/icon_default_photo" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_100"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:singleLine="true"
+                android:text="张三"
+                android:textColor="@color/text_common"
+                android:textSize="@dimen/text_common"
+                android:textStyle="bold" />
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:id="@+id/mi_order"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/company_order"
+                    app:miTitle="@string/company_order" />
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:id="@+id/mi_car"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/company_car"
+                    app:miTitle="@string/company_car" />
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:id="@+id/mi_outlets"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/company_outlets"
+                    app:miTitle="@string/company_outlets" />
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:id="@+id/mi_check_bill"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/company_check_bill"
+                    app:miTitle="@string/company_checkbill" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_company_detail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/cardView"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/company_detail"
+            app:tmiTitle="@string/company_detail" />
+
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_company_member"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_company_detail"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/company_member"
+            app:tmiTitle="@string/company_member" />
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_company_driver"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_company_member"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/company_driver"
+            app:tmiTitle="@string/company_driver" />
+
+
+    </RelativeLayout>
 </FrameLayout>

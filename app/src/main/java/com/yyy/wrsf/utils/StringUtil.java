@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -173,6 +174,54 @@ public class StringUtil {
         } else
             return date;
     }
+
+    /**
+     * 判断给定字符串时间是否为今日
+     *
+     * @param sdate
+     * @return boolean
+     */
+    public static String isToday(String sdate) {
+//        boolean b = false;
+        Date time = toDate(sdate);
+        Date today = new Date();
+        String nowDate = dateFormater2.get().format(today);
+        String timeDate = dateFormater2.get().format(time);
+        if (nowDate.equals(timeDate)) {
+            return sdate.substring(11, 16);
+        } else {
+            return nowDate;
+        }
+
+    }
+
+    /**
+     * 将字符串转位日期类型
+     *
+     * @param sdate
+     * @return
+     */
+    public static Date toDate(String sdate) {
+        try {
+            return dateFormater.get().parse(sdate);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    private final static ThreadLocal<SimpleDateFormat> dateFormater = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
+    };
+
+    private final static ThreadLocal<SimpleDateFormat> dateFormater2 = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd");
+        }
+    };
 
     /**
      * 判断字符串是否为空
