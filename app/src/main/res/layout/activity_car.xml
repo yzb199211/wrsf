@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
+    android:orientation="vertical"
+    tools:context=".company.car.CarActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topRightTextColor="@color/white"
+        app:topTitle="@string/company_driver"
+        app:topTitleColor="@color/white" />
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1" />
+    <TextView
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:background="@drawable/btn_yellow"
+        android:gravity="center"
+        android:text="@string/common_add_manully"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_common" />
+</LinearLayout>

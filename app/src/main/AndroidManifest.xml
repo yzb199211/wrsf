@@ -22,10 +22,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".company.car.CarDetailActivity"></activity>
+        <activity android:name=".company.driver.DriverDetailActivity" />
+        <activity android:name=".company.car.CarActivity" />
+        <activity android:name=".company.driver.DriverActivity" />
         <activity
             android:name=".company.CompanyDetailActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".mine.notice.NoticeFragment"
             android:screenOrientation="portrait" />

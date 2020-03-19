@@ -40,7 +40,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        holder.setIsRecyclable(false);
+//        holder.setIsRecyclable(false);
         AddressModel item = list.get(position);
         holder.tvName.setText(StringUtil.formatString(item.getContractPerson()));
         holder.tvPhone.setText(StringUtil.formatString(item.getContractTel()));

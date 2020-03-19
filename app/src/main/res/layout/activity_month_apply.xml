@@ -114,6 +114,7 @@
                 android:paddingRight="@dimen/dp_5"
                 android:visibility="gone"
                 app:ecHint="@string/company_contact_phone"
+                app:ecTextType="num"
                 app:ecTitle="@string/company_contact_phone"
                 app:ecType="tv" />
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/row_common"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="@dimen/dp_5"
+        android:layout_height="match_parent"
+        android:background="@color/default_blue" />
+
+    <ImageView
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:src="@mipmap/company_driver" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_weight="2"
+        android:singleLine="true"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_tel"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:singleLine="true"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_common" />
+
+    <ImageView
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:src="@mipmap/driver_lisence" />
+
+    <TextView
+        android:id="@+id/tv_lisence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_20"
+        android:singleLine="true"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_common" />
+
+    <View
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@color/text_gray" />
+
+    <TextView
+        android:id="@+id/tv_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="@string/common_edit"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_common" />
+</LinearLayout>

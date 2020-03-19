@@ -11,6 +11,7 @@ public class CodeUtil {
     public static final int PersonInfo = 0x0000701;
     public static final int PersonInfoName = 0x0000702;
     public static final int PersonInfoMail = 0x0000703;
+
     public static final int Photo_One = 0x0000793;
     public static final int Photo_Two = 0x0000794;
     public static final int Photo_Three = 0x0000795;

@@ -120,7 +120,17 @@
     <string name="company_detail">公司资料</string>
     <string name="company_member">客户管理</string>
     <string name="company_driver">驾驶员</string>
-
+    <!--驾驶员-->
+    <string name="driver_license">驾照类型</string>
+    <string name="driver_type">状态</string>
+    <!--车辆管理-->
+    <string name="car_name">车辆名称</string>
+    <string name="car_license_plate">车辆牌照</string>
+    <string name="car_license_driving">行驶证</string>
+    <string name="car_type">车辆类型</string>
+    <string name="car_company">所属公司</string>
+    <string name="car_driver">驾驶员</string>
+    <string name="car_status">车辆状态</string>
     <!--订单-->
     <string name="order_title">订单管理</string>
     <string name="order_title_detail">订单详情</string>

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.company.CompanyDetailActivity;
+import com.yyy.wrsf.company.driver.DriverActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,10 +58,15 @@ public class CompanyFragment extends Fragment {
             case R.id.tmi_company_member:
                 break;
             case R.id.tmi_company_driver:
+                go2Driver();
                 break;
             default:
                 break;
         }
+    }
+
+    private void go2Driver() {
+        startActivity(new Intent().setClass(getActivity(), DriverActivity.class));
     }
 
     private void go2Detail() {

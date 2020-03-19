@@ -74,7 +74,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
         preferencesHelper = new SharedPreferencesHelper(context, context.getString(R.string.preferenceCache));
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.layout_area_select, null);
-        setHeight(PxUtil.getHeight(context));
+        setHeight(((Activity) context).getWindowManager().getDefaultDisplay().getHeight());
         setWidth(PxUtil.getWidth(context));
         setContentView(view);
         init();
