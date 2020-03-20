@@ -1,5 +1,7 @@
 package com.yyy.wrsf.model;
 
+import android.text.TextUtils;
+
 import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 
 import java.io.Serializable;
@@ -20,14 +22,23 @@ public class DriverModel implements Serializable, IPickerViewData {
     private String driverName;
     private Integer driverStatus;
     private String driverTel;
+    private String driverTypeName;
     private Integer driverType;
     private Integer recNo;
     private Integer sex;
     private Integer transCompanyRecno;
     private Integer transShopInfoRecno;
 
+    public String getDriverTypeName() {
+        return TextUtils.isEmpty(driverTypeName) ? "" : driverTypeName;
+    }
+
+    public void setDriverTypeName(String driverTypeName) {
+        this.driverTypeName = driverTypeName;
+    }
+
     public String getDriverName() {
-        return driverName;
+        return TextUtils.isEmpty(driverName) ? "" : driverName;
     }
 
     public void setDriverName(String driverName) {
@@ -35,7 +46,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getDriverStatus() {
-        return driverStatus;
+        return driverStatus==null?-1:driverStatus;
     }
 
     public void setDriverStatus(int driverStatus) {
@@ -43,7 +54,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public String getDriverTel() {
-        return driverTel;
+        return TextUtils.isEmpty(driverTel) ? "" : driverTel;
     }
 
     public void setDriverTel(String driverTel) {
@@ -59,7 +70,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getRecNo() {
-        return recNo;
+        return recNo==null?0:recNo;
     }
 
     public void setRecNo(int recNo) {
@@ -67,7 +78,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getSex() {
-        return sex;
+        return sex == null ? 1 :sex;
     }
 
     public void setSex(int sex) {
@@ -75,7 +86,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getTransCompanyRecno() {
-        return transCompanyRecno;
+        return transCompanyRecno==null?0:transCompanyRecno;
     }
 
     public void setTransCompanyRecno(int transCompanyRecno) {
@@ -83,7 +94,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getTransShopInfoRecno() {
-        return transShopInfoRecno;
+        return transShopInfoRecno==null?0:transShopInfoRecno;
     }
 
     public void setTransShopInfoRecno(int transShopInfoRecno) {

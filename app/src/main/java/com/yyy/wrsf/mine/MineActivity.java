@@ -16,10 +16,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.model.MemberModel;
+import com.yyy.wrsf.model.Sex;
 import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.SexUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.TimeUtil;
@@ -71,7 +72,7 @@ public class MineActivity extends AppCompatActivity {
 
     private TimePickerView pvDate;
     private OptionsPickerView pvSex;
-    List<SexUtil.Sex> sexes;
+    List<Sex> sexes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

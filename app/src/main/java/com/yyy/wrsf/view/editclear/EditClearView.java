@@ -25,6 +25,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.interfaces.OnItemClickListener;
 
 public class EditClearView extends LinearLayout implements View.OnKeyListener {
     Context context;
@@ -53,6 +54,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     private boolean editable;
     private OnTextChange onTextChange;
+    private OnItemClickListener onItemClickListener;
 
     public EditClearView(Context context) {
         this(context, null);
@@ -151,6 +153,14 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         tvText.setSingleLine();
         tvText.setBackground(null);
+        tvText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(0);
+                }
+            }
+        });
         addView(tvText, type == 0 ? 0 : 1);
     }
 
@@ -284,11 +294,19 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         return "";
     }
 
+    public String getTitle() {
+        return TextUtils.isEmpty(title) ? "" : title;
+    }
+
     public TextView getTvText() {
         return tvText;
     }
 
     public String getHint() {
         return TextUtils.isEmpty(hint) ? "" : context.getString(R.string.common_input) + hint;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

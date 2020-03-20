@@ -166,6 +166,7 @@ public class DriverActivity extends AppCompatActivity {
     private void go2detail(int code, DriverModel driver) {
         Intent intent = new Intent();
         intent.setClass(this, DriverDetailActivity.class);
+        intent.putExtra("code", code);
         if (driver != null) {
             intent.putExtra("data", new Gson().toJson(driver));
         }

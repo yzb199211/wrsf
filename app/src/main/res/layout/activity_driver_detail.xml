@@ -80,7 +80,7 @@
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
-                android:id="@+id/ecv_type"
+                android:id="@+id/ecv_status"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_5"
