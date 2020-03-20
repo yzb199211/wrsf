@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -142,7 +143,7 @@ public class DriverActivity extends AppCompatActivity {
                     driverAdapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(int pos) {
-                            go2detail(CodeUtil.MODIFY, driverModels.get(pos));
+                            go2detail(CodeUtil.MODIFY, pos);
                         }
                     });
                 } else {
@@ -160,17 +161,37 @@ public class DriverActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
-        go2detail(CodeUtil.ADD, null);
+        go2detail(CodeUtil.ADD, -1);
     }
 
-    private void go2detail(int code, DriverModel driver) {
+    private void go2detail(int code, int pos) {
         Intent intent = new Intent();
         intent.setClass(this, DriverDetailActivity.class);
         intent.putExtra("code", code);
-        if (driver != null) {
-            intent.putExtra("data", new Gson().toJson(driver));
+        intent.putExtra("pos", pos);
+        if (pos != -1) {
+            intent.putExtra("data", new Gson().toJson(driverModels.get(pos)));
         }
         startActivityForResult(intent, code);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == CodeUtil.ADD) {
+            driverModels.clear();
+            refrishList();
+            getData();
+        } else if (resultCode == CodeUtil.MODIFY) {
+            if (data != null) {
+                int pos = data.getIntExtra("pos", -1);
+                if (pos > -1 && pos < driverModels.size()) {
+                    driverModels.set(pos, new Gson().fromJson(data.getStringExtra("data"), DriverModel.class));
+//                    addresses.get(pos) = ;
+                    refrishList();
+                }
+            }
+        }
     }
 
     private void LoadingFinish(String msg) {

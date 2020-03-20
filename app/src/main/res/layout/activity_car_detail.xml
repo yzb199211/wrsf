@@ -85,7 +85,6 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
-                app:ecEditable="false"
                 app:ecHint="@string/car_company"
                 app:ecTitle="@string/car_company"
                 app:ecType="tv" />
@@ -100,6 +99,7 @@
                 android:paddingRight="@dimen/dp_5"
                 app:ecHint="@string/car_driver"
                 app:ecTitle="@string/car_driver"
+                app:ecEditable="false"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView

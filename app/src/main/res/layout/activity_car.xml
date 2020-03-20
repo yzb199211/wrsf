@@ -16,7 +16,7 @@
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
         app:topRightTextColor="@color/white"
-        app:topTitle="@string/company_driver"
+        app:topTitle="@string/company_car"
         app:topTitleColor="@color/white" />
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView

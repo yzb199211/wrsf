@@ -265,6 +265,7 @@ public class AddressActivity extends AppCompatActivity {
                 if (pos > -1 && pos < addresses.size()) {
                     addresses.set(pos, new Gson().fromJson(data.getStringExtra("data"), AddressModel.class));
 //                    addresses.get(pos) = ;
+                    refrishList();
                 }
             }
         }
