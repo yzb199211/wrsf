@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -173,7 +174,24 @@ public class CarActivity extends AppCompatActivity {
         go2detail(CodeUtil.ADD, -1);
 
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == CodeUtil.ADD) {
+            cars.clear();
+            refrishList();
+            getData();
+        } else if (resultCode == CodeUtil.MODIFY) {
+            if (data != null) {
+                int pos = data.getIntExtra("pos", -1);
+                if (pos > -1 && pos < cars.size()) {
+                    cars.set(pos, new Gson().fromJson(data.getStringExtra("data"), CarModel.class));
+//                    addresses.get(pos) = ;
+                    refrishList();
+                }
+            }
+        }
+    }
     private void LoadingFinish(String msg) {
         runOnUiThread(new Runnable() {
             @Override

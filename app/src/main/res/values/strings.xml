@@ -97,7 +97,17 @@
     <string name="address_contract_tel">联系电话</string>
     <!--网点-->
     <string name="outlets_search_title">网点查询</string>
-
+    <!--开票资料-->
+    <string name="bill_company">公司名称</string>
+    <string name="bill_tax">税号</string>
+    <string name="bill_bank">开户行</string>
+    <string name="bill_account">银行账户</string>
+    <string name="bill_type">开票类型</string>
+    <string name="bill_company_tel">公司电话</string>
+    <string name="bill_company_address">公司地址</string>
+    <string name="bill_contract">收货人</string>
+    <string name="bill_contract_tel">收货电话</string>
+    <string name="bill_contract_address">收货地址</string>
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>
     <string name="company_titlte_register">申请物流公司</string>

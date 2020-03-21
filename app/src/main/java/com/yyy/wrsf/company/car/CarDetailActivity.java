@@ -1,7 +1,9 @@
 package com.yyy.wrsf.company.car;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +32,7 @@ import com.yyy.wrsf.utils.net.NetUtil;
 import com.yyy.wrsf.utils.net.RequstType;
 import com.yyy.wrsf.utils.net.ResponseListener;
 import com.yyy.wrsf.utils.net.Result;
+import com.yyy.wrsf.utils.net.car.CarUrl;
 import com.yyy.wrsf.utils.net.driver.DriverUrl;
 import com.yyy.wrsf.utils.net.publics.PublicUrl;
 import com.yyy.wrsf.view.editclear.EditClearView;
@@ -81,7 +84,6 @@ public class CarDetailActivity extends AppCompatActivity {
     private DriverFilterModel driverFilter;
 
     private CarModel car;
-    private CarAdapter carAdapter;
 
     private int code;
     private int pos;
@@ -315,6 +317,7 @@ public class CarDetailActivity extends AppCompatActivity {
                     public void onOptionsSelect(int options1, int options2, int options3, View v) {
                         ecvDriver.setText(drivers.get(options1).getPickerViewText());
                         car.setDriverRecNo(drivers.get(options1).getRecNo());
+                        car.setDriverName(drivers.get(options1).getDriverName());
 //                        car.setCarTypeName(drivers.get(options1).getPickerViewText());
                     }
                 }).setContentTextSize(18)//设置滚轮文字大小
@@ -341,6 +344,7 @@ public class CarDetailActivity extends AppCompatActivity {
     }
 
     private void setCar() {
+        setDefaultData();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -355,6 +359,22 @@ public class CarDetailActivity extends AppCompatActivity {
 
     }
 
+    private void setDefaultData() {
+        if (car.getCarStatus() == 0 && status.size() > 0) {
+            for (PublicModel item : status) {
+                if (item.getDetailCode() == 1) {
+                    car.setCarStatus(item.getRecNo());
+                    car.setCarStatusName(item.getDetailName());
+                    break;
+                }
+            }
+        }
+        if (car.getCarType() == 0 && carTypes.size() > 0) {
+            car.setCarType(carTypes.get(0).getRecNo());
+            car.setCarTypeName(carTypes.get(0).getDetailName());
+        }
+    }
+
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("params", new Gson().toJson(publicFilter)));
@@ -363,6 +383,66 @@ public class CarDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_confirm)
     public void onViewClicked() {
+        if (canSave())
+            saveData();
+    }
+
+    private boolean canSave() {
+        if (TextUtils.isEmpty(ecvName.getText())) {
+            Toast(ecvName.getHint());
+            return false;
+        }
+        if (TextUtils.isEmpty(ecvLicensePlate.getText())) {
+            Toast(ecvLicensePlate.getHint());
+            return false;
+        }
+        if (TextUtils.isEmpty(ecvLicenseDriving.getText())) {
+            Toast(ecvLicenseDriving.getHint());
+            return false;
+        }
+        if (TextUtils.isEmpty(ecvDriver.getText())) {
+            Toast(ecvDriver.getHint());
+            return false;
+        }
+        car.setCarName(ecvName.getText());
+        car.setCarCode(ecvLicensePlate.getText());
+        car.setDriverCer(ecvLicenseDriving.getText());
+
+        return true;
+    }
+
+    private void saveData() {
+        new NetUtil(sendParams(), NetConfig.address + (code == CodeUtil.MODIFY ? CarUrl.update : CarUrl.insert), code == CodeUtil.MODIFY ? RequstType.PUT : RequstType.POST, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                Log.e(CarDetailActivity.class.getName(), "data:" + string);
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        setResult(code, new Intent().putExtra("data", new Gson().toJson(car)).putExtra("pos", pos));
+                        finish();
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                LoadingFinish(e.getMessage());
+                e.printStackTrace();
+                Log.e("error", e.getMessage());
+            }
+        });
+    }
+
+    private List<NetParams> sendParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("params", new Gson().toJson(car)));
+        return params;
     }
 
     private void LoadingFinish(String msg) {

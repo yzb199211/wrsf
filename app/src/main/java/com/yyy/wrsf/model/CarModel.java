@@ -2,7 +2,9 @@ package com.yyy.wrsf.model;
 
 import android.text.TextUtils;
 
-public class CarModel {
+import java.io.Serializable;
+
+public class CarModel implements Serializable {
 
     /**
      * recNo : 1
@@ -15,7 +17,7 @@ public class CarModel {
      * carStatusName : 香锅
      */
 
-    private int recNo;
+    private Integer recNo;
     private int driverRecNo;
     private String carCode;
     private int carStatus;

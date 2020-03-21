@@ -343,6 +343,7 @@ public class DriverDetailActivity extends AppCompatActivity {
             Toast(ecvName.getHint());
             return false;
         }
+
         if (TextUtils.isEmpty(ecvTel.getText())) {
             Toast(ecvTel.getHint());
             return false;
