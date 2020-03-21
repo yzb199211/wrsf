@@ -15,6 +15,7 @@ import com.yyy.wrsf.login.LoginActivity;
 import com.yyy.wrsf.login.PwdBackActivity;
 import com.yyy.wrsf.mine.MineActivity;
 import com.yyy.wrsf.mine.address.AddressActivity;
+import com.yyy.wrsf.mine.bill.BillActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
@@ -80,6 +81,7 @@ public class MineFragment extends Fragment {
             case R.id.mi_order:
                 break;
             case R.id.mi_invoice:
+                go2bill();
                 break;
             case R.id.mi_address:
                 go2Address();
@@ -92,6 +94,7 @@ public class MineFragment extends Fragment {
             case R.id.tmi_about:
                 break;
             case R.id.tmi_person_bill:
+
                 break;
             case R.id.tmi_person_company:
                 break;
@@ -106,12 +109,17 @@ public class MineFragment extends Fragment {
         }
     }
 
+
     private void go2Detail() {
         startActivityForResult(new Intent().setClass(getActivity(), MineActivity.class), CodeUtil.PersonInfo);
     }
 
     private void go2pwd() {
         startActivity(new Intent().setClass(getActivity(), PwdBackActivity.class));
+    }
+
+    private void go2bill() {
+        startActivity(new Intent().setClass(getActivity(), BillActivity.class));
     }
 
     private void go2Address() {

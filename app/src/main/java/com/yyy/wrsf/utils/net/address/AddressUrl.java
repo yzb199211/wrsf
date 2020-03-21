@@ -1,9 +1,9 @@
 package com.yyy.wrsf.utils.net.address;
 
 public class AddressUrl {
-    public static String getArea = "/area/getArea";
-    public static String getAddressList = "/memberRecadd/getMemberRecaddPageList";
-    public static String AddAddress = "/memberRecadd/insertRecadd";
-    public static String updateAddress = "/memberRecadd/updateRecadd";
-    public static String deleteAddress = "/memberRecadd/deleteRecadd";
+    public final static String getArea = "/area/getArea";
+    public final static String getAddressList = "/memberRecadd/getMemberRecaddPageList";
+    public final static String AddAddress = "/memberRecadd/insertRecadd";
+    public final static String updateAddress = "/memberRecadd/updateRecadd";
+    public final static String deleteAddress = "/memberRecadd/deleteRecadd";
 }

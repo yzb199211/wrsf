@@ -130,6 +130,8 @@
     <string name="company_detail">公司资料</string>
     <string name="company_member">客户管理</string>
     <string name="company_driver">驾驶员</string>
+    <!--月结-->
+    <string name="month_total">应收账款：</string>
     <!--驾驶员-->
     <string name="driver_license">驾照类型</string>
     <string name="driver_type">状态</string>

@@ -24,6 +24,7 @@
         android:layout_weight="1">
 
         <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -73,10 +74,10 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
                 app:ecHint="@string/address_area"
                 app:ecTitle="@string/address_area"
-                app:ecType="tv"
-                app:ecEditable="false"/>
+                app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_address_detail"

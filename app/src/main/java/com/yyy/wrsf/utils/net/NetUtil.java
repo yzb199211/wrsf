@@ -63,7 +63,7 @@ public class NetUtil {
      */
     public NetUtil params(List<NetParams> list, String url, RequstType requstType) {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if (list.size() > 0) {
+        if (list != null) {
             for (int i = 0; i < list.size(); i++)
                 builder.addFormDataPart(list.get(i).getKey(), list.get(i).getValue());
             setRequest(url, builder);

@@ -7,4 +7,6 @@ public class PublicCode {
     public final static int CarStatus = 110;
     public final static int CarType = 106;
 
+    public final static int BillType = 104;
+
 }
