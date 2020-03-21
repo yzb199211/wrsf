@@ -20,6 +20,7 @@ import com.yyy.wrsf.model.PublicArray;
 import com.yyy.wrsf.model.PublicModel;
 import com.yyy.wrsf.model.filter.DriverFilterModel;
 import com.yyy.wrsf.model.filter.PublicFilterModel;
+import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -78,6 +79,7 @@ public class CarDetailActivity extends AppCompatActivity {
 
     private PublicFilterModel publicFilter;
     private DriverFilterModel driverFilter;
+
     private CarModel car;
     private CarAdapter carAdapter;
 
@@ -98,6 +100,7 @@ public class CarDetailActivity extends AppCompatActivity {
         initPublicFilter();
         initDriverFilter();
         initView();
+        initData();
     }
 
 
@@ -106,6 +109,20 @@ public class CarDetailActivity extends AppCompatActivity {
         initDriver();
         initcarTypes();
         initStatus();
+    }
+
+    private void initData() {
+        code = getIntent().getIntExtra("code", 0);
+        pos = getIntent().getIntExtra("pos", -1);
+        initCar();
+    }
+
+    private void initCar() {
+        if (code == CodeUtil.MODIFY) {
+            car = new Gson().fromJson(getIntent().getStringExtra("data"), CarModel.class);
+        } else {
+            car = new CarModel();
+        }
     }
 
     private void initDriverFilter() {
@@ -257,7 +274,7 @@ public class CarDetailActivity extends AppCompatActivity {
 
     private void getDriverData() {
         LoadingDialog.showDialogForLoading(this);
-        new NetUtil(carParams(), NetConfig.address + DriverUrl.getList, RequstType.POST, new ResponseListener() {
+        new NetUtil(driverParams(), NetConfig.address + DriverUrl.getList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 try {
@@ -317,14 +334,24 @@ public class CarDetailActivity extends AppCompatActivity {
         });
     }
 
-    private List<NetParams> carParams() {
+    private List<NetParams> driverParams() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("param", new Gson().toJson(driverFilter)));
         return params;
     }
 
     private void setCar() {
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ecvName.setText(car.getCarName());
+                ecvLicensePlate.setText(car.getCarCode());
+                ecvLicenseDriving.setText(car.getDriverCer());
+                ecvType.setText(car.getCarTypeName());
+                ecvDriver.setText(car.getDriverName());
+                ecvStatus.setText(car.getCarStatusName());
+            }
+        });
 
     }
 

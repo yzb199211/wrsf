@@ -45,8 +45,8 @@ public class DriverModel implements Serializable, IPickerViewData {
         this.driverName = driverName;
     }
 
-    public int getDriverStatus() {
-        return driverStatus==null?-1:driverStatus;
+    public Integer getDriverStatus() {
+        return driverStatus;
     }
 
     public void setDriverStatus(int driverStatus) {
@@ -70,7 +70,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getRecNo() {
-        return recNo==null?0:recNo;
+        return recNo == null ? 0 : recNo;
     }
 
     public void setRecNo(int recNo) {
@@ -78,7 +78,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getSex() {
-        return sex == null ? 1 :sex;
+        return sex == null ? 1 : sex;
     }
 
     public void setSex(int sex) {
@@ -86,7 +86,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getTransCompanyRecno() {
-        return transCompanyRecno==null?0:transCompanyRecno;
+        return transCompanyRecno == null ? 0 : transCompanyRecno;
     }
 
     public void setTransCompanyRecno(int transCompanyRecno) {
@@ -94,7 +94,7 @@ public class DriverModel implements Serializable, IPickerViewData {
     }
 
     public int getTransShopInfoRecno() {
-        return transShopInfoRecno==null?0:transShopInfoRecno;
+        return transShopInfoRecno == null ? 0 : transShopInfoRecno;
     }
 
     public void setTransShopInfoRecno(int transShopInfoRecno) {

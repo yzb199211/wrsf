@@ -1,5 +1,7 @@
 package com.yyy.wrsf.model;
 
+import android.text.TextUtils;
+
 public class CarModel {
 
     /**
@@ -21,6 +23,8 @@ public class CarModel {
     private String carName;
     private String carTypeName;
     private String carStatusName;
+    private String driverName;
+    private String driverCer;
 
     public int getRecNo() {
         return recNo;
@@ -39,7 +43,7 @@ public class CarModel {
     }
 
     public String getCarCode() {
-        return carCode;
+        return TextUtils.isEmpty(carCode) ? "" : carCode;
     }
 
     public void setCarCode(String carCode) {
@@ -63,7 +67,7 @@ public class CarModel {
     }
 
     public String getCarName() {
-        return carName;
+        return TextUtils.isEmpty(carName) ? "" : carName;
     }
 
     public void setCarName(String carName) {
@@ -71,7 +75,7 @@ public class CarModel {
     }
 
     public String getCarTypeName() {
-        return carTypeName;
+        return TextUtils.isEmpty(carTypeName) ? "" : carTypeName;
     }
 
     public void setCarTypeName(String carTypeName) {
@@ -79,10 +83,26 @@ public class CarModel {
     }
 
     public String getCarStatusName() {
-        return carStatusName;
+        return TextUtils.isEmpty("carStatusName") ? "" : carStatusName;
     }
 
     public void setCarStatusName(String carStatusName) {
         this.carStatusName = carStatusName;
+    }
+
+    public String getDriverName() {
+        return TextUtils.isEmpty(driverName) ? "" : driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
+
+    public String getDriverCer() {
+        return driverCer;
+    }
+
+    public void setDriverCer(String driverCer) {
+        this.driverCer = driverCer;
     }
 }

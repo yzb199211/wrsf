@@ -127,12 +127,13 @@ public class DriverDetailActivity extends AppCompatActivity {
         if (code == CodeUtil.MODIFY) {
             driver = new Gson().fromJson(getIntent().getStringExtra("data"), DriverModel.class);
 
-        } else if (code == CodeUtil.ADD) {
+        } else {
             driver = new DriverModel();
         }
     }
 
     private void setDriver() {
+        setDefaultData();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -143,6 +144,21 @@ public class DriverDetailActivity extends AppCompatActivity {
                 ecvStatus.setText(getStatusName());
             }
         });
+    }
+
+    private void setDefaultData() {
+        if (TextUtils.isEmpty(driver.getDriverTypeName()) && licenses.size() > 0) {
+            driver.setDriverType(licenses.get(0).getRecNo());
+            driver.setDriverTypeName(licenses.get(0).getDetailName());
+        }
+        if (driver.getDriverStatus() == null && status.size() > 0) {
+            for (PublicModel item : status) {
+                if (item.getDetailCode() == 1) {
+                    driver.setDriverStatus(item.getRecNo());
+                    break;
+                }
+            }
+        }
     }
 
     private String getStatusName() {
