@@ -9,4 +9,10 @@ public class PublicCode {
 
     public final static int BillType = 104;
 
+    public final static int GoodsType = 116;
+    public final static int SendType = 115;
+    public final static int DeliveryType = 114;
+    public final static int transType = 113;
+
+
 }

@@ -42,6 +42,7 @@
             <enum name="noTitle" value="0"></enum>
         </attr>
         <attr name="ecEditable" format="boolean" />
+        <attr name="ecFormatTitle" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ButtonWithImg">
         <attr name="bwiTilte" format="string" />

@@ -53,6 +53,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private int lines;
 
     private boolean editable;
+    private boolean formatTitle = true;
     private OnTextChange onTextChange;
     private OnItemClickListener onItemClickListener;
 
@@ -71,7 +72,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         commonPadding = context.getResources().getDimensionPixelSize(R.dimen.padding_common);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.EditClear);
         title = array.getString(R.styleable.EditClear_ecTitle);
-        titleColor = array.getColor(R.styleable.EditClear_ecTextColor, context.getResources().getColor(R.color.text_common));
+        titleColor = array.getColor(R.styleable.EditClear_ecTitleColor, context.getResources().getColor(R.color.text_common));
         titleSize = array.getDimensionPixelSize(R.styleable.EditClear_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_title_edit));
         text = array.getString(R.styleable.EditClear_ecText);
         textColor = array.getColor(R.styleable.EditClear_ecTextColor, context.getResources().getColor(R.color.text_common));
@@ -85,6 +86,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         editable = array.getBoolean(R.styleable.EditClear_ecEditable, true);
         textType = array.getInteger(R.styleable.EditClear_ecTextType, 0);
         lines = array.getInteger(R.styleable.EditClear_ecTextLines, 1);
+        formatTitle = array.getBoolean(R.styleable.EditClear_ecFormatTitle, true);
         array.recycle();
     }
 
@@ -115,10 +117,10 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     private void initTitle() {
         tvTitle = new TextView(context);
-        tvTitle.setText(StringUtil.formatTitle(title));
+        tvTitle.setText(formatTitle ? StringUtil.formatTitle(title) : title);
         tvTitle.setTextColor(titleColor);
         tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
-        tvTitle.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
+//        tvTitle.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
 //        tvTitle.setGravity(Gravity.CENTER);
         addView(tvTitle);
     }
@@ -300,6 +302,10 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     public TextView getTvText() {
         return tvText;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getHint() {
