@@ -22,7 +22,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".company.month.MonthActivity"></activity>
+        <activity android:name=".mine.shipping.ShippingPersonActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".company.outlets.OutletsActivity" />
+        <activity android:name=".mine.shipping.ShippingGoodsActivity" />
+        <activity android:name=".mine.shipping.ShippingValueAddActivity" />
+        <activity android:name=".mine.shipping.ShippingActivity" />
+        <activity android:name=".company.month.MonthActivity" />
         <activity
             android:name=".mine.bill.BillActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />

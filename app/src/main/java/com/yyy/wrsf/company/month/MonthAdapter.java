@@ -11,14 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.CustomerMonthModel;
-import com.yyy.wrsf.model.MonthModel;
+import com.yyy.wrsf.view.cycle.util.ImageLoaderUtil;
 
 import java.util.List;
 
 public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
     private Context context;
     private List<CustomerMonthModel> list;
+    private OnItemClickListener onItemClickListener;
 
     public MonthAdapter(Context context, List<CustomerMonthModel> list) {
         this.context = context;
@@ -36,8 +38,9 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.tvName.setText(list.get(position).getCompanyName());
         holder.tvTel.setText(list.get(position).getContractTel());
+        ImageLoaderUtil.loadImg(holder.ivLogo, "");
         if (list.get(position).getYskTotal() != null) {
-            holder.tvTotal.setText(context.getString(R.string.month_total)+list.get(position).getYskTotal().toString());
+            holder.tvTotal.setText(context.getString(R.string.month_total) + list.get(position).getYskTotal().toString());
         }
     }
 
@@ -59,5 +62,9 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
             tvTotal = v.findViewById(R.id.tv_total);
             ivLogo = v.findViewById(R.id.iv_logo);
         }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

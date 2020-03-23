@@ -95,6 +95,7 @@
     <string name="address_company">收货公司</string>
     <string name="address_contract">联系人</string>
     <string name="address_contract_tel">联系电话</string>
+    <string name="address_menu">地址簿</string>
     <!--网点-->
     <string name="outlets_search_title">网点查询</string>
     <!--开票资料-->
@@ -108,6 +109,16 @@
     <string name="bill_contract">收货人</string>
     <string name="bill_contract_tel">收货电话</string>
     <string name="bill_contract_address">收货地址</string>
+    <!--寄件-->
+    <string name="send_company">物流公司</string>
+    <string name="send_goods">货物信息</string>
+    <string name="send_value_add">增值服务</string>
+    <string name="send_remark">备注</string>
+    <string name="send_type">支付方式</string>
+    <string name="send_date">取货时间</string>
+    <string name="send_sumbit">提交订单</string>
+    <string name="send_total">预估费用：</string>
+    <string name="send_protocol">查看并同意《万瑞三富物流服务协议》</string>
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>
     <string name="company_titlte_register">申请物流公司</string>

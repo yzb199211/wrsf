@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/default_bg_gray"
     android:orientation="vertical"
-    tools:context=".company.month.MonthActivity">
+    tools:context=".mine.shipping.ShippingGoodsActivity">
 
     <com.yyy.wrsf.view.topview.TopView
         android:id="@+id/top_view"
@@ -15,12 +15,29 @@
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitle="@string/company_member"
+        app:topTitle="@string/send_goods"
         app:topTitleColor="@color/white" />
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/recycler_view"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:background="@drawable/btn_yellow"
+        android:gravity="center"
+        android:text="@string/common_submit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_common" />
 </LinearLayout>
