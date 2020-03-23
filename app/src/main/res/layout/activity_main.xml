@@ -15,9 +15,37 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0_5"
-        android:background="@color/line_color"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/row_common"/>
+        android:layout_marginBottom="@dimen/row_common"
+        android:background="@color/line_color" />
 
     <include layout="@layout/main_menu_bottom" />
+
+    <LinearLayout
+        android:id="@+id/ll_send"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/row_common"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_send"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:src="@mipmap/menu_main" />
+
+        <TextView
+            android:id="@+id/tv_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_1"
+            android:text="@string/main_menu"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/sp_8" />
+    </LinearLayout>
+
+
 </RelativeLayout>

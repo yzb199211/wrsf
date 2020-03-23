@@ -29,6 +29,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_send"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -93,6 +94,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_receive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
@@ -159,7 +161,7 @@
             <com.yyy.wrsf.view.textselect.TextMenuItem
                 android:id="@+id/tmi_company"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
+                android:layout_height="49dp"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
@@ -194,6 +196,7 @@
                 app:tmiTextColor="@color/text_common"
                 app:tmiTitle="@string/send_value_add"
                 app:tmiTitleColor="@color/text_gray2" />
+
             <com.yyy.wrsf.view.textselect.TextMenuItem
                 android:id="@+id/tmi_pick_date"
                 android:layout_width="match_parent"
@@ -206,6 +209,7 @@
                 app:tmiTextColor="@color/text_common"
                 app:tmiTitle="@string/send_date"
                 app:tmiTitleColor="@color/text_gray2" />
+
             <com.yyy.wrsf.view.textselect.TextMenuItem
                 android:id="@+id/tmi_remark"
                 android:layout_width="match_parent"
@@ -222,8 +226,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
                 android:background="@color/white"
-                android:orientation="vertical" android:layout_marginTop="@dimen/dp_1"
+                android:orientation="vertical"
                 android:padding="@dimen/dp_10">
 
                 <TextView
@@ -232,8 +237,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/send_type"
                     android:textColor="@color/text_common"
-                    android:textSize="@dimen/text_common"
-                   />
+                    android:textSize="@dimen/text_common" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -245,26 +249,27 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/tv_protocol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_toLeftOf="@+id/tv_submit"
-            android:paddingTop="@dimen/dp_2"
-            android:paddingBottom="@dimen/dp_2"
-            android:text="@string/send_protocol" />
-
-        <TextView
             android:id="@+id/tv_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_toLeftOf="@+id/tv_submit"
             android:paddingTop="@dimen/dp_5"
             android:paddingBottom="@dimen/dp_5"
             android:text="@string/send_total"
             android:textColor="@color/text_common" />
+
+        <TextView
+            android:id="@+id/tv_protocol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/tv_submit"
+            android:paddingTop="@dimen/dp_2"
+            android:paddingBottom="@dimen/dp_2"
+            android:text="@string/send_protocol" />
+
 
         <TextView
             android:id="@+id/tv_submit"

@@ -1,6 +1,8 @@
 package com.yyy.wrsf.mine.shipping;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +11,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.PublicArray;
 import com.yyy.wrsf.model.PublicModel;
+import com.yyy.wrsf.model.ShipGoodsModel;
 import com.yyy.wrsf.model.filter.PublicFilterModel;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.StringUtil;
@@ -23,6 +27,7 @@ import com.yyy.wrsf.utils.net.ResponseListener;
 import com.yyy.wrsf.utils.net.Result;
 import com.yyy.wrsf.utils.net.publics.PublicUrl;
 import com.yyy.wrsf.view.editclear.EditClearView;
+import com.yyy.wrsf.view.popwin.Popwin;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -62,6 +67,13 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     private List<PublicModel> delivery = new ArrayList<>();
 
     private PublicFilterModel publicFilter;
+    private Popwin popGoods;
+    private Popwin popSend;
+    private Popwin popTrans;
+    private Popwin popDelivery;
+    private ShipGoodsModel goodsModel;
+
+    private boolean isEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,26 +84,66 @@ public class ShippingGoodsActivity extends AppCompatActivity {
         getData();
     }
 
-    private void init() {
-        initTop();
-        initData();
-    }
-
-    private void initData() {
-        initPublicFilter();
-    }
-
     private void initTop() {
         topView.setOnLeftClickListener(() -> {
             finish();
         });
     }
 
+    private void init() {
+        initTop();
+        initdensity();
+        initData();
+    }
+
+
+    private void initdensity() {
+        setWeightListener();
+        setVolumeListener();
+    }
+
+
+    private void setWeightListener() {
+        ecvWeight.setOnTextChangeAfter(() -> {
+            if (ecvWeight.getText().length() > 0 && Integer.parseInt(ecvWeight.getText()) > 0 & TextUtils.isEmpty(ecvVolume.getText()) && Integer.parseInt(ecvVolume.getText()) > 0) {
+                ecvDensity.setText(Integer.parseInt(ecvWeight.getText()) / (1000 * Integer.parseInt(ecvVolume.getText())) + "");
+            }
+        });
+    }
+
+    private void setVolumeListener() {
+        ecvVolume.setOnTextChangeAfter(() -> {
+            if (ecvWeight.getText().length() > 0 && Integer.parseInt(ecvWeight.getText()) > 0 & TextUtils.isEmpty(ecvVolume.getText()) && Integer.parseInt(ecvVolume.getText()) > 0) {
+                ecvDensity.setText(Integer.parseInt(ecvWeight.getText()) / (1000 * Integer.parseInt(ecvVolume.getText())) + "");
+            }
+        });
+    }
+
+    private void initData() {
+        initPublicFilter();
+        initGoodsModel();
+    }
+
+    private void initGoodsModel() {
+        String data = getIntent().getStringExtra("data");
+        isEmpty = TextUtils.isEmpty(data);
+        goodsModel = isEmpty ? new ShipGoodsModel() : new Gson().fromJson(data, new TypeToken<List<ShipGoodsModel>>() {
+        }.getType());
+        setGoodsView();
+    }
+
+    private void setGoodsView() {
+        tmiGoodsName.setText(goodsModel.getGoodsName());
+
+    }
+
     private void initPublicFilter() {
         publicFilter = new PublicFilterModel();
         List<Integer> list = new ArrayList<>();
-        list.add(PublicCode.CarType);
-        list.add(PublicCode.CarStatus);
+        list.add(PublicCode.GoodsType);
+        list.add(PublicCode.SendType);
+        list.add(PublicCode.DeliveryType);
+        list.add(PublicCode.transType);
         publicFilter.setPublicCodes(list);
     }
 
@@ -149,18 +201,81 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tmi_goods_name:
+                initGoods();
                 break;
             case R.id.tmi_delivery:
+                initDelivery();
                 break;
             case R.id.tmi_trans:
+                initTrans();
                 break;
             case R.id.tmi_send:
+                initSend();
                 break;
             case R.id.btn_add:
-
                 break;
             default:
                 break;
+        }
+    }
+
+    private void initGoods() {
+        if (popGoods == null) {
+            popGoods = new Popwin(this, goods, tmiGoodsName.getTextView().getWidth());
+            popGoods.showAsDropDown(tmiGoodsName.getTextView());
+            popGoods.setOnItemClickListener((int pos) -> {
+                String type = goods.get(pos).getPickerViewText();
+                tmiGoodsName.setText(type);
+                goodsModel.setGoodsId(goods.get(pos).getRecNo());
+                goodsModel.setGoodsName(goods.get(pos).getPickerViewText());
+            });
+        } else {
+            popGoods.showAsDropDown(tmiGoodsName.getTextView());
+        }
+    }
+
+    private void initDelivery() {
+        if (popDelivery == null) {
+            popDelivery = new Popwin(this, delivery, tmiDelivery.getTextView().getWidth());
+            popDelivery.showAsDropDown(tmiDelivery.getTextView());
+            popDelivery.setOnItemClickListener((int pos) -> {
+                String type = delivery.get(pos).getPickerViewText();
+                tmiDelivery.setText(type);
+                goodsModel.setDeliveryId(delivery.get(pos).getRecNo());
+                goodsModel.setDeliveryName(delivery.get(pos).getPickerViewText());
+            });
+        } else {
+            popDelivery.showAsDropDown(tmiDelivery.getTextView());
+        }
+    }
+
+    private void initSend() {
+        if (popSend == null) {
+            popSend = new Popwin(this, send, tmiSend.getTextView().getWidth());
+            popSend.showAsDropDown(tmiSend.getTextView());
+            popSend.setOnItemClickListener((int pos) -> {
+                String type = send.get(pos).getPickerViewText();
+                tmiSend.setText(type);
+                goodsModel.setSendId(send.get(pos).getRecNo());
+                goodsModel.setSendName(send.get(pos).getPickerViewText());
+            });
+        } else {
+            popSend.showAsDropDown(tmiSend.getTextView());
+        }
+    }
+
+    private void initTrans() {
+        if (popTrans == null) {
+            popTrans = new Popwin(this, trans, tmiTrans.getTextView().getWidth());
+            popTrans.showAsDropDown(tmiTrans.getTextView());
+            popTrans.setOnItemClickListener((int pos) -> {
+                String type = trans.get(pos).getPickerViewText();
+                tmiTrans.setText(type);
+                goodsModel.setTransId(trans.get(pos).getRecNo());
+                goodsModel.setTransName(trans.get(pos).getPickerViewText());
+            });
+        } else {
+            popTrans.showAsDropDown(tmiTrans.getTextView());
         }
     }
 

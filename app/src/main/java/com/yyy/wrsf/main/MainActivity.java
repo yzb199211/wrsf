@@ -17,6 +17,7 @@ import com.yyy.wrsf.common.AreaSelect;
 import com.yyy.wrsf.company.CompanyRegisterActivity;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
+import com.yyy.wrsf.mine.shipping.ShippingActivity;
 import com.yyy.wrsf.view.cycle.bean.DataBean;
 
 import org.greenrobot.eventbus.EventBus;
@@ -96,13 +97,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.rl_main, R.id.rl_send, R.id.rl_notice, R.id.rl_company, R.id.rl_mine})
+    @OnClick({R.id.rl_main, R.id.rl_send, R.id.rl_notice, R.id.rl_company, R.id.rl_mine, R.id.ll_send})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_main:
                 switchFragment(mainFragment);
                 break;
             case R.id.rl_send:
+
                 break;
             case R.id.rl_notice:
                 if (noticeFragment == null) {
@@ -124,9 +126,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 switchFragment(mineFragment);
                 break;
+            case R.id.ll_send:
+                go2Shipping();
+                break;
             default:
                 break;
         }
+    }
+
+    private void go2Shipping() {
+        startActivity(new Intent().setClass(this, ShippingActivity.class));
     }
 
     private void go2Company() {

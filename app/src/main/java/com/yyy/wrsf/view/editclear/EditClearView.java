@@ -55,6 +55,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private boolean editable;
     private boolean formatTitle = true;
     private OnTextChange onTextChange;
+    private OnTextChangeAfter onTextChangeAfter;
     private OnItemClickListener onItemClickListener;
 
     public EditClearView(Context context) {
@@ -209,7 +210,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (onTextChangeAfter != null)
+                    onTextChangeAfter.onText();
             }
         });
     }
@@ -314,5 +316,9 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setOnTextChangeAfter(OnTextChangeAfter onTextChangeAfter) {
+        this.onTextChangeAfter = onTextChangeAfter;
     }
 }

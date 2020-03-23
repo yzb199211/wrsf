@@ -38,6 +38,7 @@
                 android:paddingRight="@dimen/dp_10"
                 app:tmiSelected="true"
                 app:tmiTextColor="@color/text_common"
+                app:tmiTextGravity="left"
                 app:tmiTitle="@string/send_goods_name"
                 app:tmiTitleColor="@color/text_gray2" />
 
@@ -122,6 +123,7 @@
                     android:background="@color/white"
                     app:tmiSelected="true"
                     app:tmiTextColor="@color/text_common"
+                    app:tmiTextGravity="left"
                     app:tmiTitle="@string/send_goods_delivery"
                     app:tmiTitleColor="@color/text_gray2" />
 
@@ -133,6 +135,7 @@
                     android:background="@color/white"
                     app:tmiSelected="true"
                     app:tmiTextColor="@color/text_common"
+                    app:tmiTextGravity="left"
                     app:tmiTitle="@string/send_goods_trans"
                     app:tmiTitleColor="@color/text_gray2" />
             </LinearLayout>
@@ -147,6 +150,7 @@
                 android:paddingRight="@dimen/dp_10"
                 app:tmiSelected="true"
                 app:tmiTextColor="@color/text_common"
+                app:tmiTextGravity="left"
                 app:tmiTitle="@string/send_goods_send"
                 app:tmiTitleColor="@color/text_gray2" />
         </LinearLayout>

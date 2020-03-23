@@ -84,6 +84,10 @@
         <attr name="tmiTitleColor" format="color" />
         <attr name="tmiTitleSize" format="dimension" />
         <attr name="tmiText" format="string" />
+        <attr name="tmiTextGravity">
+            <enum name="right" value="5"></enum>
+            <enum name="left" value="3"></enum>
+        </attr>
         <attr name="tmiTextColor" format="color" />
         <attr name="tmiTextSize" format="dimension" />
         <attr name="tmiSelected" format="boolean" />

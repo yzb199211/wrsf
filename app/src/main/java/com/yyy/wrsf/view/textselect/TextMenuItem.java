@@ -28,8 +28,10 @@ public class TextMenuItem extends LinearLayout {
     private String text;
     private int textSize;
     private int textColor;
+    private int textGravity;
     private int leftSrc;
     private int leftSize;
+
 
     private boolean isSelected;
 
@@ -62,6 +64,7 @@ public class TextMenuItem extends LinearLayout {
         leftSrc = array.getResourceId(R.styleable.TextMenuItem_tmiLeftSrc, -1);
         leftSize = array.getResourceId(R.styleable.TextMenuItem_tmiLeftSize, context.getResources().getDimensionPixelSize(R.dimen.dp_20));
         isSelected = array.getBoolean(R.styleable.TextMenuItem_tmiSelected, false);
+        textGravity = array.getInteger(R.styleable.TextMenuItem_tmiTextGravity, Gravity.RIGHT);
         array.recycle();
     }
 
@@ -71,7 +74,6 @@ public class TextMenuItem extends LinearLayout {
         }
         initTitle();
         initText();
-
         initSelected();
 
     }
@@ -101,7 +103,7 @@ public class TextMenuItem extends LinearLayout {
         tvDetail.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tvDetail.setLayoutParams(textParams());
         tvDetail.setSingleLine();
-        tvDetail.setGravity(Gravity.RIGHT);
+        tvDetail.setGravity(textGravity);
         addView(tvDetail);
     }
 
@@ -151,5 +153,9 @@ public class TextMenuItem extends LinearLayout {
 
     public String getTitle() {
         return tvTitle.getText().toString();
+    }
+
+    public TextView getTextView() {
+        return tvDetail;
     }
 }
