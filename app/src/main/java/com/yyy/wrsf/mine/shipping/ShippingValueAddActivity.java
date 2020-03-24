@@ -1,5 +1,6 @@
 package com.yyy.wrsf.mine.shipping;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.model.ShippingAddValueModel;
+import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -144,6 +146,9 @@ public class ShippingValueAddActivity extends AppCompatActivity {
                 switchNotice(view, 0);
                 break;
             case R.id.btn_add:
+                save();
+                break;
+            default:
                 break;
         }
     }
@@ -172,5 +177,10 @@ public class ShippingValueAddActivity extends AppCompatActivity {
         } else {
             currentNotice.setChecked(true);
         }
+    }
+
+    private void save() {
+        setResult(CodeUtil.ShipAddValue, new Intent().putExtra("data", new Gson().toJson(shippingAddValue)));
+        finish();
     }
 }
