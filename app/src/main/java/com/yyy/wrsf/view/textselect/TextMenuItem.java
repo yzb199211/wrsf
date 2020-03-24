@@ -2,6 +2,7 @@ package com.yyy.wrsf.view.textselect;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -29,6 +30,7 @@ public class TextMenuItem extends LinearLayout {
     private int textSize;
     private int textColor;
     private int textGravity;
+    private String hint;
     private int leftSrc;
     private int leftSize;
 
@@ -65,6 +67,7 @@ public class TextMenuItem extends LinearLayout {
         leftSize = array.getResourceId(R.styleable.TextMenuItem_tmiLeftSize, context.getResources().getDimensionPixelSize(R.dimen.dp_20));
         isSelected = array.getBoolean(R.styleable.TextMenuItem_tmiSelected, false);
         textGravity = array.getInteger(R.styleable.TextMenuItem_tmiTextGravity, Gravity.RIGHT);
+        hint = array.getString(R.styleable.TextMenuItem_tmiHint);
         array.recycle();
     }
 
@@ -104,6 +107,7 @@ public class TextMenuItem extends LinearLayout {
         tvDetail.setLayoutParams(textParams());
         tvDetail.setSingleLine();
         tvDetail.setGravity(textGravity);
+        tvDetail.setHint(TextUtils.isEmpty(hint) ? "" : context.getString(R.string.common_input) + hint);
         addView(tvDetail);
     }
 

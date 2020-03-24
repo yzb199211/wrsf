@@ -14,6 +14,7 @@ public class CodeUtil {
     public static final int Address = 0x0000710;
     public static final int AddressSend = 0x0000711;
     public static final int AddressReceive = 0x0000712;
+    public static final int Goods = 0x0000720;
 
     public static final int Photo_One = 0x0000793;
     public static final int Photo_Two = 0x0000794;

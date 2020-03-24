@@ -1,5 +1,7 @@
 package com.yyy.wrsf.model;
 
+import android.text.TextUtils;
+
 public class ShipGoodsModel {
     private int goodsId;
     private String goodsName;
@@ -22,7 +24,7 @@ public class ShipGoodsModel {
     }
 
     public String getGoodsName() {
-        return goodsName;
+        return TextUtils.isEmpty(goodsName)?"":goodsName;
     }
 
     public void setGoodsName(String goodsName) {
@@ -62,7 +64,7 @@ public class ShipGoodsModel {
     }
 
     public String getDeliveryName() {
-        return deliveryName;
+        return TextUtils.isEmpty(deliveryName)?"":deliveryName;
     }
 
     public void setDeliveryName(String deliveryName) {
@@ -78,7 +80,7 @@ public class ShipGoodsModel {
     }
 
     public String getSendName() {
-        return sendName;
+        return TextUtils.isEmpty(sendName)?"":sendName;
     }
 
     public void setSendName(String sendName) {
@@ -94,7 +96,7 @@ public class ShipGoodsModel {
     }
 
     public String getTransName() {
-        return transName;
+        return TextUtils.isEmpty(transName)?"":transName;
     }
 
     public void setTransName(String transName) {

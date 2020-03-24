@@ -172,7 +172,7 @@ public class ShippingActivity extends AppCompatActivity {
     }
 
     private void initGoods() {
-        startActivityForResult(new Intent().setClass(this, ShippingGoodsActivity.class), 0);
+        startActivityForResult(new Intent().setClass(this, ShippingGoodsActivity.class), CodeUtil.Goods);
     }
 
     @Override

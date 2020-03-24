@@ -1,38 +1,59 @@
-package com.yyy.wrsf.model;
-
-import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
+package com.yyy.wrsf.model.filter;
 
 import java.io.Serializable;
 
-public class MemberModel implements Serializable, IPickerViewData {
-    private Integer accountType;
-    private String brithday;
+public class MemberFilterModel implements Serializable {
+
+    /**
+     * birthday : 2020-03-24T04:37:54.114Z
+     * companyId : 0
+     * companyName : string
+     * mail : string
+     * memberCer : string
+     * memberName : string
+     * memberPetname : string
+     * memberSex : string
+     * memberTel : string
+     * passWord : string
+     * personCode : string
+     * recNo : 0
+     * roleId : 0
+     * shopId : 0
+     * stopYesno : 0
+     * validate : string
+     */
+
+    private String birthday;
+    private Integer companyId;
     private String companyName;
     private String mail;
+    private String memberCer;
     private String memberName;
     private String memberPetname;
     private String memberSex;
     private String memberTel;
     private String passWord;
+    private String personCode;
     private Integer recNo;
-    private Integer roleType;
+    private Integer roleId;
+    private Integer shopId;
     private Integer stopYesno;
     private String validate;
 
-    public int getAccountType() {
-        return accountType;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setAccountType(int accountType) {
-        this.accountType = accountType;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
-    public String getBrithday() {
-        return brithday;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setBrithday(String brithday) {
-        this.brithday = brithday;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public String getCompanyName() {
@@ -49,6 +70,14 @@ public class MemberModel implements Serializable, IPickerViewData {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getMemberCer() {
+        return memberCer;
+    }
+
+    public void setMemberCer(String memberCer) {
+        this.memberCer = memberCer;
     }
 
     public String getMemberName() {
@@ -91,6 +120,14 @@ public class MemberModel implements Serializable, IPickerViewData {
         this.passWord = passWord;
     }
 
+    public String getPersonCode() {
+        return personCode;
+    }
+
+    public void setPersonCode(String personCode) {
+        this.personCode = personCode;
+    }
+
     public int getRecNo() {
         return recNo;
     }
@@ -99,12 +136,20 @@ public class MemberModel implements Serializable, IPickerViewData {
         this.recNo = recNo;
     }
 
-    public int getRoleType() {
-        return roleType;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRoleType(int roleType) {
-        this.roleType = roleType;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public int getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 
     public int getStopYesno() {
@@ -121,10 +166,5 @@ public class MemberModel implements Serializable, IPickerViewData {
 
     public void setValidate(String validate) {
         this.validate = validate;
-    }
-
-    @Override
-    public String getPickerViewText() {
-        return memberName;
     }
 }

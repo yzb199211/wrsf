@@ -1,9 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
+    android:orientation="vertical"
     tools:context=".mine.shipping.ShippingValueAddActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/send_value_add"
+        app:topTitleColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/bg_white_fillet"
+                android:padding="@dimen/dp_15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_goods_insured"
+                    android:textColor="@color/text_common"
+                    android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:id="@+id/tv_price_insured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/login_normal"
+                    android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_price_insured"
+                    android:text="@string/send_goods_insured_price"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
+
+                <EditText
+                    android:id="@+id/et_insured"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_price_insured"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_edit_line"
+                    android:hint="@string/send_goods_insured_hint"
+                    android:inputType="number"
+                    android:padding="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:textColor="@color/text_common"
+                    android:textSize="@dimen/text_common" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/bg_white_fillet"
+                android:padding="@dimen/dp_15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_goods_collection"
+                    android:textColor="@color/text_common"
+                    android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:id="@+id/tv_price_collection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/login_normal"
+                    android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_price_collection"
+                    android:text="@string/send_goods_collection_price"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
+
+                <EditText
+                    android:id="@+id/et_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_price_collection"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_edit_line"
+                    android:hint="@string/send_goods_collection_hint"
+                    android:inputType="number"
+                    android:padding="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:textColor="@color/text_common"
+                    android:textSize="@dimen/text_common" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/bg_white_fillet"
+                 android:padding="@dimen/dp_15">
+
+                <TextView
+                    android:id="@+id/tv_sign_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_sign_back"
+                    android:textColor="@color/text_common"
+                    android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:id="@+id/tv_price_signback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/login_normal"
+                    android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_price_signback"
+                    android:text="@string/send_sign_back_price"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
+
+                <RadioButton
+                    android:id="@+id/rb_none"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_below="@+id/tv_sign_back"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_radio"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/sign_back_none"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_common" />
+
+                <RadioButton
+                    android:id="@+id/rb_paper"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_below="@+id/tv_sign_back"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_radio"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/sign_back_paper"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
+
+                <RadioButton
+                    android:id="@+id/rb_electronic"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_below="@+id/tv_sign_back"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_radio"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/sign_back_electronic"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/bg_white_fillet"
+                 android:padding="@dimen/dp_15">
+
+                <TextView
+                    android:id="@+id/tv_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_sign_back"
+                    android:textColor="@color/text_common"
+                    android:textSize="@dimen/text_common" />
+
+                <RadioButton
+                    android:id="@+id/rb_yes"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_below="@+id/tv_notice"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_radio"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/common_yes"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_common" />
+
+                <RadioButton
+                    android:id="@+id/rb_no"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_below="@+id/tv_notice"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_radio"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/common_no"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:background="@drawable/btn_yellow"
+        android:gravity="center"
+        android:text="@string/common_submit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_common" />
+</LinearLayout>

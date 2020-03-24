@@ -39,6 +39,7 @@
                 app:ecEditable="false"
                 app:ecHint="@string/outlet_name"
                 app:ecTitle="@string/outlet_name"
+                app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
@@ -52,20 +53,24 @@
                 app:ecEditable="false"
                 app:ecHint="@string/outlet_address"
                 app:ecTitle="@string/outlet_address"
+                app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
 
-            <com.yyy.wrsf.view.editclear.EditClearView
+            <com.yyy.wrsf.view.textselect.TextMenuItem
                 android:id="@+id/ecv_person"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
+                android:layout_below="@+id/tmi_person_mobile"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
-                app:ecEditable="false"
-                app:ecHint="@string/outlet_person"
-                app:ecTitle="@string/outlet_person"
-                app:ecType="tv" />
+                app:tmiHint="@string/outlet_person"
+                app:tmiSelected="true"
+                app:tmiTextGravity="left"
+                app:tmiTitle="@string/outlet_person"
+                app:tmiTitleColor="@color/text_gray2" />
+
 
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_send_tel"
@@ -78,6 +83,7 @@
                 app:ecHint="@string/outlet_send_tel"
                 app:ecTextType="num"
                 app:ecTitle="@string/outlet_send_tel"
+                app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
@@ -91,6 +97,7 @@
                 app:ecHint="@string/outlet_receive_tel"
                 app:ecTextType="num"
                 app:ecTitle="@string/outlet_receive_tel"
+                app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
@@ -104,6 +111,7 @@
                 app:ecEditable="false"
                 app:ecHint="@string/outlet_status"
                 app:ecTitle="@string/outlet_status"
+                app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
@@ -116,6 +124,7 @@
                 android:paddingRight="@dimen/dp_5"
                 app:ecHint="@string/send_remark"
                 app:ecTitle="@string/send_remark"
+                app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
 
             <Button

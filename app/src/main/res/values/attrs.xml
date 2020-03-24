@@ -81,6 +81,7 @@
         <attr name="tmiLeftSrc" format="reference" />
         <attr name="tmiLeftSize" format="dimension" />
         <attr name="tmiTitle" format="string" />
+        <attr name="tmiHint" format="string" />
         <attr name="tmiTitleColor" format="color" />
         <attr name="tmiTitleSize" format="dimension" />
         <attr name="tmiText" format="string" />

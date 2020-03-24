@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -126,6 +127,7 @@ public class OutletActivity extends AppCompatActivity {
         startActivityForResult(
                 new Intent()
                         .setClass(this, OutletDetailActivity.class)
+                        .putExtra("pos",pos)
                         .putExtra("data", new Gson().toJson(outletModels.get(pos)))
                 , CodeUtil.MODIFY);
 
@@ -147,7 +149,6 @@ public class OutletActivity extends AppCompatActivity {
         recyclerView.setPullRefreshEnabled(false);
         recyclerView.setLoadingMoreEnabled(false);
         recyclerView.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.VERTICAL));
-
     }
 
     private void initPager() {
@@ -179,5 +180,18 @@ public class OutletActivity extends AppCompatActivity {
 
     private void Toast(String msg) {
         Toasts.showShort(this, msg);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && requestCode == CodeUtil.MODIFY) {
+            int pos = data.getIntExtra("pos", -1);
+            if (pos > -1 && pos < outletModels.size()) {
+                outletModels.set(pos, new Gson().fromJson(data.getStringExtra("data"), OutletModel.class));
+//                    addresses.get(pos) = ;
+                refrishList();
+            }
+        }
     }
 }

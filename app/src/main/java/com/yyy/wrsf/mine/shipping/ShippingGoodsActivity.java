@@ -1,5 +1,6 @@
 package com.yyy.wrsf.mine.shipping;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.yyy.wrsf.model.PublicArray;
 import com.yyy.wrsf.model.PublicModel;
 import com.yyy.wrsf.model.ShipGoodsModel;
 import com.yyy.wrsf.model.filter.PublicFilterModel;
+import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -127,14 +129,15 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     private void initGoodsModel() {
         String data = getIntent().getStringExtra("data");
         isEmpty = TextUtils.isEmpty(data);
-        goodsModel = isEmpty ? new ShipGoodsModel() : new Gson().fromJson(data, new TypeToken<List<ShipGoodsModel>>() {
-        }.getType());
+        goodsModel = isEmpty ? new ShipGoodsModel() : new Gson().fromJson(data, ShipGoodsModel.class);
         setGoodsView();
     }
 
     private void setGoodsView() {
         tmiGoodsName.setText(goodsModel.getGoodsName());
-
+        tmiTrans.setText(goodsModel.getSendName());
+        tmiSend.setText(goodsModel.getSendName());
+        tmiDelivery.setText(goodsModel.getDeliveryName());
     }
 
     private void initPublicFilter() {
@@ -213,11 +216,27 @@ public class ShippingGoodsActivity extends AppCompatActivity {
                 initSend();
                 break;
             case R.id.btn_add:
-
+                setGoods();
+                save();
                 break;
             default:
                 break;
         }
+    }
+
+    private void save() {
+        if (goodsModel.isEmpty()) {
+            LoadingFinish(getString(R.string.send_goods_empty));
+            return;
+        }
+        setResult(CodeUtil.Goods,new Intent().putExtra("data",new Gson().toJson(goodsModel)));
+        finish();
+    }
+
+    private void setGoods() {
+        goodsModel.setWeight(TextUtils.isEmpty(ecvWeight.getText()) ? 0 : Integer.parseInt(ecvWeight.getText()));
+        goodsModel.setVolume(TextUtils.isEmpty(ecvVolume.getText()) ? 0 : Integer.parseInt(ecvVolume.getText()));
+        goodsModel.setNum(TextUtils.isEmpty(ecvNum.getText()) ? 0 : Integer.parseInt(ecvNum.getText()));
     }
 
     private void initGoods() {

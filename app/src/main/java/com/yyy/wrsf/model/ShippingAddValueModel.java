@@ -3,9 +3,10 @@ package com.yyy.wrsf.model;
 public class ShippingAddValueModel {
     private int insureValue;
     private int insureFee;
-    private int colletionMoney;
+    private int colletionValue;
+    private int colletionFee;
     private int signType;
-    private int signMoney;
+    private int signFee;
     private int receiveType;
 
     public int getInsureValue() {
@@ -24,13 +25,6 @@ public class ShippingAddValueModel {
         this.insureFee = insureFee;
     }
 
-    public int getColletionMoney() {
-        return colletionMoney;
-    }
-
-    public void setColletionMoney(int colletionMoney) {
-        this.colletionMoney = colletionMoney;
-    }
 
     public int getSignType() {
         return signType;
@@ -40,12 +34,28 @@ public class ShippingAddValueModel {
         this.signType = signType;
     }
 
-    public int getSignMoney() {
-        return signMoney;
+    public int getColletionValue() {
+        return colletionValue;
     }
 
-    public void setSignMoney(int signMoney) {
-        this.signMoney = signMoney;
+    public void setColletionValue(int colletionValue) {
+        this.colletionValue = colletionValue;
+    }
+
+    public int getColletionFee() {
+        return colletionFee;
+    }
+
+    public void setColletionFee(int colletionFee) {
+        this.colletionFee = colletionFee;
+    }
+
+    public int getSignFee() {
+        return signFee;
+    }
+
+    public void setSignFee(int signFee) {
+        this.signFee = signFee;
     }
 
     public int getReceiveType() {
