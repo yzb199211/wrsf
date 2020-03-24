@@ -246,7 +246,7 @@ public class AddressSendActivity extends AppCompatActivity {
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
         startActivityForResult(new Intent()
-                        .setClass(this, AddressDetailActivity.class)
+                        .setClass(this, AddressDetailSendActivity.class)
                         .putExtra("code", CodeUtil.ADD)
                 , CodeUtil.ADD);
     }
