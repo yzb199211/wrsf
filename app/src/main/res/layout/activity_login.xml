@@ -47,7 +47,7 @@
                 app:ecTextType="num"
                 app:ecTitle="@string/login_user"
                 app:ecType="tv"
-                app:ecText="17858956196"/>
+                app:ecText=""/>
 
             <View
                 android:layout_width="match_parent"

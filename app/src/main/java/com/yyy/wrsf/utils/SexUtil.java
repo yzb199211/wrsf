@@ -13,4 +13,11 @@ public class SexUtil {
         sexes.add(new Sex("女", 0));
         return sexes;
     }
+
+    public static List<Sex> getShopStatus() {
+        List<Sex> sexes = new ArrayList<>();
+        sexes.add(new Sex("正常", 1));
+        sexes.add(new Sex("暂停", 0));
+        return sexes;
+    }
 }

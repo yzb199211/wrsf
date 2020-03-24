@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
+import com.yyy.wrsf.model.AddressModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.TopView;
@@ -56,28 +59,57 @@ public class ShippingActivity extends AppCompatActivity {
     TextView tvTotal;
     @BindView(R.id.tv_protocol)
     TextView tvProtocol;
+    @BindView(R.id.tv_pay_now)
+    RadioButton tvPayNow;
+    @BindView(R.id.tv_pay_receive)
+    RadioButton tvPayReceive;
+    @BindView(R.id.tv_pay_month)
+    RadioButton tvPayMonth;
+
+    AddressModel addressSend;
+    AddressModel addressReceive;
+    RadioButton currentPay;
+    int payType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipping);
         ButterKnife.bind(this);
+        init();
     }
 
-    @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add, R.id.tmi_pick_date, R.id.tmi_remark, R.id.tv_total, R.id.tv_protocol, R.id.tv_submit})
+    private void init() {
+        initView();
+    }
+
+    private void initView() {
+        initPay();
+    }
+
+    private void initPay() {
+        currentPay = tvPayNow;
+        payType = 1;
+    }
+
+    @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add,
+            R.id.tmi_pick_date, R.id.tmi_remark, R.id.tv_total, R.id.tv_protocol, R.id.tv_submit, R.id.tv_pay_now, R.id.tv_pay_receive, R.id.tv_pay_month})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_address_send:
                 go2addressSend();
                 break;
             case R.id.ll_send:
+                go2AddressDetail(addressSend, CodeUtil.AddressSend);
                 break;
             case R.id.tv_address_receive:
                 go2addressReceive();
                 break;
             case R.id.ll_receive:
+                go2AddressDetail(addressReceive, CodeUtil.AddressReceive);
                 break;
             case R.id.tmi_company:
+
                 break;
             case R.id.tmi_goods:
                 initGoods();
@@ -94,8 +126,40 @@ public class ShippingActivity extends AppCompatActivity {
                 break;
             case R.id.tv_submit:
                 break;
+            case R.id.tv_pay_now:
+                switchPay(view, 1);
+                break;
+            case R.id.tv_pay_receive:
+                switchPay(view, 3);
+                break;
+            case R.id.tv_pay_month:
+                switchPay(view, 2);
+                break;
             default:
                 break;
+        }
+    }
+
+    private void go2AddressDetail(AddressModel address, int code) {
+        Intent intent = new Intent();
+        intent.setClass(this, ShippingPersonActivity.class);
+        intent.putExtra("code", code);
+        if (address != null) {
+            intent.putExtra("data", new Gson().toJson(address));
+        }
+        startActivityForResult(intent, code);
+    }
+
+    private void switchPay(View view, int i) {
+        if (view.getId() != currentPay.getId()) {
+            currentPay.setChecked(false);
+            currentPay.setTextColor(getColor(R.color.text_gray));
+            currentPay = (RadioButton) view;
+            currentPay.setTextColor(getColor(R.color.white));
+            currentPay.setChecked(true);
+            payType = i;
+        } else {
+            currentPay.setChecked(true);
         }
     }
 
@@ -123,12 +187,27 @@ public class ShippingActivity extends AppCompatActivity {
         Log.e("data", data.getStringExtra("data"));
         switch (requestCode) {
             case CodeUtil.AddressSend:
-
+                addressSend = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
+                setSend();
                 break;
             case CodeUtil.AddressReceive:
+                addressReceive = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
+                setReceive();
                 break;
             default:
                 break;
         }
+    }
+
+    private void setSend() {
+        tvNameSend.setText(addressSend.getContractPerson());
+        tvTelSend.setText(addressSend.getContractTel());
+        tvAddressDetailSend.setText(addressSend.getFirstAdd() + addressSend.getSecondAdd() + addressSend.getThirdAdd() + addressSend.getDetailAdd());
+    }
+
+    private void setReceive() {
+        tvNameReceive.setText(addressReceive.getContractPerson());
+        tvTelReceive.setText(addressReceive.getContractTel());
+        tvAddressDetailReceive.setText(addressReceive.getFirstAdd() + addressReceive.getSecondAdd() + addressReceive.getThirdAdd() + addressReceive.getDetailAdd());
     }
 }

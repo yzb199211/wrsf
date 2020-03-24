@@ -149,6 +149,13 @@
     <string name="company_detail">公司资料</string>
     <string name="company_member">客户管理</string>
     <string name="company_driver">驾驶员</string>
+    <!--网点-->
+    <string name="outlet_name">网点名称</string>
+    <string name="outlet_address">网点地址</string>
+    <string name="outlet_status">网点状态</string>
+    <string name="outlet_person">负责人</string>
+    <string name="outlet_send_tel">发货电话</string>
+    <string name="outlet_receive_tel">收货电话</string>
     <!--月结-->
     <string name="month_total">应收账款：</string>
     <!--驾驶员-->
@@ -171,6 +178,8 @@
     <string name="order_pay_month">月结</string>
     <string name="order_pay_now">现付</string>
     <string name="order_pay_receive">到付</string>
+    <string name="order_hint_send">请输入寄件人信息</string>
+    <string name="order_hint_receive">请输入收货人信息</string>
     <!--申请月结-->
     <string name="month_title">申请月结</string>
     <string name="month_bill">开票资料</string>

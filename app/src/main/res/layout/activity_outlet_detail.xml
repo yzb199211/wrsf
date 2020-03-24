@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
+    android:orientation="vertical"
+    tools:context=".company.outlets.OutletDetailActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/company_outlets"
+        app:topTitleColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
+                app:ecHint="@string/outlet_name"
+                app:ecTitle="@string/outlet_name"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
+                app:ecHint="@string/outlet_address"
+                app:ecTitle="@string/outlet_address"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_person"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
+                app:ecHint="@string/outlet_person"
+                app:ecTitle="@string/outlet_person"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_send_tel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/outlet_send_tel"
+                app:ecTextType="num"
+                app:ecTitle="@string/outlet_send_tel"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_receive_tel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/outlet_receive_tel"
+                app:ecTextType="num"
+                app:ecTitle="@string/outlet_receive_tel"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_status"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
+                app:ecHint="@string/outlet_status"
+                app:ecTitle="@string/outlet_status"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_remark"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecHint="@string/send_remark"
+                app:ecTitle="@string/send_remark"
+                app:ecType="tv" />
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_20"
+                android:background="@drawable/btn_login"
+                android:gravity="center"
+                android:text="@string/common_submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_common" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

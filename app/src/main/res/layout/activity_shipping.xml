@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/ll_send"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -43,6 +43,7 @@
                     android:src="@mipmap/icon_send" />
 
                 <RelativeLayout
+                    android:id="@+id/ll_send"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -53,8 +54,9 @@
                         android:id="@+id/tv_name_send"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:hint="@string/order_hint_send"
                         android:singleLine="true"
-                        android:text="zhangsan"
+                        android:text=""
                         android:textColor="@color/text_common"
                         android:textSize="@dimen/text_common" />
 
@@ -65,7 +67,7 @@
                         android:layout_alignBottom="@+id/tv_name"
                         android:layout_alignParentRight="true"
                         android:singleLine="true"
-                        android:text="15888888888"
+                        android:text=""
                         android:textColor="@color/text_gray"
                         android:textSize="@dimen/text_common_min" />
 
@@ -73,6 +75,7 @@
                         android:id="@+id/tv_address_detail_send"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_name_send"
                         android:layout_marginTop="@dimen/dp_5"
                         android:lines="3"
                         android:textColor="@color/text_common"
@@ -94,7 +97,7 @@
 
 
             <LinearLayout
-                android:id="@+id/ll_receive"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
@@ -109,6 +112,7 @@
                     android:src="@mipmap/icon_receive" />
 
                 <RelativeLayout
+                    android:id="@+id/ll_receive"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -119,8 +123,9 @@
                         android:id="@+id/tv_name_receive"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:hint="@string/order_hint_receive"
                         android:singleLine="true"
-                        android:text="zhangsan"
+                        android:text=""
                         android:textColor="@color/text_common"
                         android:textSize="@dimen/text_common" />
 
@@ -131,7 +136,7 @@
                         android:layout_alignBottom="@+id/tv_name_receive"
                         android:layout_alignParentRight="true"
                         android:singleLine="true"
-                        android:text="15888888888"
+                        android:text=""
                         android:textColor="@color/text_gray"
                         android:textSize="@dimen/text_common_min" />
 
@@ -139,6 +144,7 @@
                         android:id="@+id/tv_address_detail_receive"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_name_receive"
                         android:layout_marginTop="@dimen/dp_5"
                         android:lines="3"
                         android:textColor="@color/text_common"
@@ -239,36 +245,43 @@
                     android:textColor="@color/text_common"
                     android:textSize="@dimen/text_common" />
 
-                <TextView
+                <RadioButton
+                    android:id="@+id/tv_pay_now"
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="@dimen/dp_30"
                     android:layout_below="@+id/tv_type"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/bg_radio"
+                    android:button="@null"
+                    android:checked="true"
                     android:gravity="center"
                     android:text="@string/order_pay_now"
-                    android:textColor="@color/text_gray"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/text_common" />
 
-                <TextView
+                <RadioButton
+                    android:id="@+id/tv_pay_receive"
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="@dimen/dp_30"
                     android:layout_below="@+id/tv_type"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/bg_radio"
+                    android:button="@null"
                     android:gravity="center"
                     android:text="@string/order_pay_receive"
                     android:textColor="@color/text_gray"
                     android:textSize="@dimen/text_common" />
 
-                <TextView
+                <RadioButton
+                    android:id="@+id/tv_pay_month"
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="@dimen/dp_30"
                     android:layout_below="@+id/tv_type"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/bg_radio"
+                    android:button="@null"
                     android:gravity="center"
                     android:text="@string/order_pay_month"
                     android:textColor="@color/text_gray"

@@ -89,7 +89,7 @@ public class ShippingPersonActivity extends AppCompatActivity {
     private void intiIntentData() {
         code = getIntent().getIntExtra("code", -1);
         pos = getIntent().getIntExtra("pos", -1);
-        if (code == CodeUtil.MODIFY) {
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("data"))) {
             addressModel = new Gson().fromJson(getIntent().getStringExtra("data"), AddressModel.class);
             initAreaData();
             setArea();
@@ -150,7 +150,6 @@ public class ShippingPersonActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_add:
-//                saveAddress();
                 if (canSave()) {
                     setResult(code, new Intent().putExtra("data", new Gson().toJson(addressModel)).putExtra("pos", pos));
                     finish();
@@ -159,47 +158,6 @@ public class ShippingPersonActivity extends AppCompatActivity {
         }
     }
 
-    private void saveAddress() {
-        if (canSave()) {
-            LoadingDialog.showDialogForLoading(this);
-            new NetUtil(getAddressParams(),
-                    NetConfig.address + (addressModel.getRecNo() == 0 ? AddressUrl.AddAddress : AddressUrl.updateAddress),
-                    addressModel.getRecNo() == 0 ? RequstType.POST : RequstType.PUT,
-                    new ResponseListener() {
-                        @Override
-                        public void onSuccess(String string) {
-                            LoadingFinish(null);
-                            Log.e(ShippingPersonActivity.class.getName(), "data:" + string);
-                            try {
-                                Result result = new Result(string);
-                                if (result.isSuccess()) {
-                                    setResult(code, new Intent().putExtra("data", new Gson().toJson(addressModel)).putExtra("pos", pos));
-                                    finish();
-                                } else {
-                                    LoadingFinish(result.getMsg());
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                LoadingFinish(e.getMessage());
-                            }
-
-                        }
-
-                        @Override
-                        public void onFail(Exception e) {
-                            LoadingFinish(e.getMessage());
-                            e.printStackTrace();
-                        }
-                    });
-        }
-    }
-
-    private List<NetParams> getAddressParams() {
-        getAddress();
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("platMemberRecaddBo", new Gson().toJson(addressModel)));
-        return params;
-    }
 
     private void getAddress() {
         if (addressModel == null) {
@@ -243,6 +201,7 @@ public class ShippingPersonActivity extends AppCompatActivity {
             Toast(ecvAddressDetail.getHint());
             return false;
         }
+        getAddress();
         return true;
     }
 
@@ -274,17 +233,6 @@ public class ShippingPersonActivity extends AppCompatActivity {
         }
     }
 
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
 
     private void Toast(String msg) {
         Toasts.showShort(this, msg);

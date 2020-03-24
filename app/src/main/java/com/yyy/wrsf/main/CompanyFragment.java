@@ -16,6 +16,7 @@ import com.yyy.wrsf.company.car.CarActivity;
 import com.yyy.wrsf.company.car.CarAdapter;
 import com.yyy.wrsf.company.driver.DriverActivity;
 import com.yyy.wrsf.company.month.MonthActivity;
+import com.yyy.wrsf.company.outlets.OutletActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +54,7 @@ public class CompanyFragment extends Fragment {
                 go2Car();
                 break;
             case R.id.mi_outlets:
+                go2Outlet();
                 break;
             case R.id.mi_check_bill:
                 break;
@@ -68,6 +70,10 @@ public class CompanyFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    private void go2Outlet() {
+        startActivity(new Intent().setClass(getActivity(), OutletActivity.class));
     }
 
     private void go2Month() {
