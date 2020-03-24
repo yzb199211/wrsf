@@ -2,12 +2,17 @@ package com.yyy.wrsf.mine.shipping;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.mine.address.AddressActivity;
+import com.yyy.wrsf.mine.address.AddressSendActivity;
+import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -59,14 +64,16 @@ public class ShippingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.tv_address_detail_send, R.id.ll_send, R.id.tv_address_detail_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add, R.id.tmi_pick_date, R.id.tmi_remark, R.id.tv_total, R.id.tv_protocol, R.id.tv_submit})
+    @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add, R.id.tmi_pick_date, R.id.tmi_remark, R.id.tv_total, R.id.tv_protocol, R.id.tv_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_address_detail_send:
+            case R.id.tv_address_send:
+                go2addressSend();
                 break;
             case R.id.ll_send:
                 break;
-            case R.id.tv_address_detail_receive:
+            case R.id.tv_address_receive:
+                go2addressReceive();
                 break;
             case R.id.ll_receive:
                 break;
@@ -92,7 +99,36 @@ public class ShippingActivity extends AppCompatActivity {
         }
     }
 
+    private void go2addressSend() {
+        startActivityForResult(new Intent().setClass(this, AddressSendActivity.class).putExtra("isSelect", true), CodeUtil.AddressSend);
+    }
+
+    private void go2addressReceive() {
+        startActivityForResult(new Intent().setClass(this, AddressActivity.class).putExtra("isSelect", true), CodeUtil.AddressReceive);
+    }
+
     private void initGoods() {
         startActivityForResult(new Intent().setClass(this, ShippingGoodsActivity.class), 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            setData(requestCode, data);
+        }
+    }
+
+    private void setData(int requestCode, Intent data) {
+        Log.e("data", data.getStringExtra("data"));
+        switch (requestCode) {
+            case CodeUtil.AddressSend:
+
+                break;
+            case CodeUtil.AddressReceive:
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -239,6 +239,40 @@
                     android:textColor="@color/text_common"
                     android:textSize="@dimen/text_common" />
 
+                <TextView
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_below="@+id/tv_type"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_radio"
+                    android:gravity="center"
+                    android:text="@string/order_pay_now"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_below="@+id/tv_type"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_radio"
+                    android:gravity="center"
+                    android:text="@string/order_pay_receive"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_below="@+id/tv_type"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/bg_radio"
+                    android:gravity="center"
+                    android:text="@string/order_pay_month"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/text_common" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
