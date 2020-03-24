@@ -229,7 +229,7 @@ public class ShippingGoodsActivity extends AppCompatActivity {
             LoadingFinish(getString(R.string.send_goods_empty));
             return;
         }
-        setResult(CodeUtil.Goods,new Intent().putExtra("data",new Gson().toJson(goodsModel)));
+        setResult(CodeUtil.ShipGoods,new Intent().putExtra("data",new Gson().toJson(goodsModel)));
         finish();
     }
 

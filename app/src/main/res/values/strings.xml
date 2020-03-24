@@ -139,9 +139,11 @@
     <string name="send_goods_collection_hint">请输入代收货款</string>
     <string name="send_sign_back">签收单返还</string>
     <string name="send_sign_back_price">返单服务费</string>
+    <string name="send_notice">等通知放货</string>
     <string name="sign_back_none">无需签收单</string>
     <string name="sign_back_paper">纸质签收单</string>
     <string name="sign_back_electronic">电子签收单</string>
+
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>
     <string name="company_titlte_register">申请物流公司</string>

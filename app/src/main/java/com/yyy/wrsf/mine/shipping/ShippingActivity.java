@@ -15,6 +15,8 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
 import com.yyy.wrsf.model.AddressModel;
+import com.yyy.wrsf.model.ShipGoodsModel;
+import com.yyy.wrsf.model.ShippingAddValueModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.TopView;
@@ -66,10 +68,12 @@ public class ShippingActivity extends AppCompatActivity {
     @BindView(R.id.tv_pay_month)
     RadioButton tvPayMonth;
 
-    AddressModel addressSend;
-    AddressModel addressReceive;
-    RadioButton currentPay;
-    int payType;
+    private AddressModel addressSend;
+    private AddressModel addressReceive;
+    private ShipGoodsModel goods;
+    private ShippingAddValueModel addValue;
+    private RadioButton currentPay;
+    private int payType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +116,10 @@ public class ShippingActivity extends AppCompatActivity {
 
                 break;
             case R.id.tmi_goods:
-                initGoods();
+                go2Goods();
                 break;
             case R.id.tmi_value_add:
+                go2ValueAdd();
                 break;
             case R.id.tmi_pick_date:
                 break;
@@ -139,6 +144,7 @@ public class ShippingActivity extends AppCompatActivity {
                 break;
         }
     }
+
 
     private void go2AddressDetail(AddressModel address, int code) {
         Intent intent = new Intent();
@@ -171,8 +177,20 @@ public class ShippingActivity extends AppCompatActivity {
         startActivityForResult(new Intent().setClass(this, AddressActivity.class).putExtra("isSelect", true), CodeUtil.AddressReceive);
     }
 
-    private void initGoods() {
-        startActivityForResult(new Intent().setClass(this, ShippingGoodsActivity.class), CodeUtil.Goods);
+    private void go2Goods() {
+        startActivityForResult(
+                new Intent()
+                        .setClass(this, ShippingGoodsActivity.class)
+                        .putExtra("data", goods == null ? "" : new Gson().toJson(goods))
+                , CodeUtil.ShipGoods);
+    }
+
+    private void go2ValueAdd() {
+        startActivityForResult(
+                new Intent()
+                        .setClass(this, ShippingValueAddActivity.class)
+                        .putExtra("data", addValue == null ? "" : new Gson().toJson(addValue))
+                , CodeUtil.ShipAddValue);
     }
 
     @Override

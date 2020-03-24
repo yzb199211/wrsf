@@ -53,6 +53,10 @@ public class ShippingValueAddActivity extends AppCompatActivity {
     private ShippingAddValueModel shippingAddValue;
     private String rmb;
 
+    private RadioButton currentSign;
+    private RadioButton currentNotice;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +84,36 @@ public class ShippingValueAddActivity extends AppCompatActivity {
         tvPriceCollection.setText(rmb + shippingAddValue.getColletionFee());
         etCollection.setText(shippingAddValue.getColletionValue());
         tvPriceSignback.setText(rmb + shippingAddValue.getSignFee());
+        initSign();
+        initNotice();
+    }
+
+    private void initSign() {
+        switch (shippingAddValue.getSignType()) {
+            case 1:
+                currentSign = rbNo;
+                break;
+            case 2:
+                currentSign = rbPaper;
+                break;
+            case 3:
+                currentSign = rbElectronic;
+                break;
+            default:
+                currentSign = rbNo;
+                shippingAddValue.setSignType(1);
+                break;
+        }
+        currentSign.setChecked(true);
+    }
+
+    private void initNotice() {
+        if (shippingAddValue.getReceiveType() == 1) {
+            currentNotice = rbYes;
+        } else {
+            currentNotice = rbNo;
+        }
+        currentNotice.setChecked(true);
     }
 
     private void initTop() {
@@ -95,17 +129,48 @@ public class ShippingValueAddActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rb_none:
+                switchSign(view, 1);
                 break;
             case R.id.rb_paper:
+                switchSign(view, 2);
                 break;
             case R.id.rb_electronic:
+                switchSign(view, 3);
                 break;
             case R.id.rb_yes:
+                switchNotice(view, 1);
                 break;
             case R.id.rb_no:
+                switchNotice(view, 0);
                 break;
             case R.id.btn_add:
                 break;
+        }
+    }
+
+    private void switchSign(View view, int i) {
+        if (view.getId() != currentSign.getId()) {
+            currentSign.setChecked(false);
+            currentSign.setTextColor(getColor(R.color.text_gray));
+            currentSign = (RadioButton) view;
+            currentSign.setTextColor(getColor(R.color.white));
+            currentSign.setChecked(true);
+            shippingAddValue.setSignType(i);
+        } else {
+            currentSign.setChecked(true);
+        }
+    }
+
+    private void switchNotice(View view, int i) {
+        if (view.getId() != currentNotice.getId()) {
+            currentNotice.setChecked(false);
+            currentNotice.setTextColor(getColor(R.color.text_gray));
+            currentNotice = (RadioButton) view;
+            currentNotice.setTextColor(getColor(R.color.white));
+            currentNotice.setChecked(true);
+            shippingAddValue.setReceiveType(i);
+        } else {
+            currentNotice.setChecked(true);
         }
     }
 }
