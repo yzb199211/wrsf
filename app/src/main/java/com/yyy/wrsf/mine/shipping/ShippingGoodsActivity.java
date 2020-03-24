@@ -213,6 +213,7 @@ public class ShippingGoodsActivity extends AppCompatActivity {
                 initSend();
                 break;
             case R.id.btn_add:
+
                 break;
             default:
                 break;
