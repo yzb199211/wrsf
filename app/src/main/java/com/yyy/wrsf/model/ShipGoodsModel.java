@@ -10,12 +10,21 @@ public class ShipGoodsModel {
     private long weight;
     private long volume;
     private long num;
+    private double density;
     private int deliveryId;
     private String deliveryName;
     private int sendId;
     private String sendName;
     private int transId;
     private String transName;
+
+    public double getDensity() {
+        return density;
+    }
+
+    public void setDensity(double density) {
+        this.density = density;
+    }
 
     public int getGoodsId() {
         return goodsId;

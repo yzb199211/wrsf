@@ -143,6 +143,10 @@ public class ShippingGoodsActivity extends AppCompatActivity {
         tmiTrans.setText(goodsModel.getSendName());
         tmiSend.setText(goodsModel.getSendName());
         tmiDelivery.setText(goodsModel.getDeliveryName());
+        ecvWeight.setText(goodsModel.getWeight() == 0 ? "" : goodsModel.getWeight() + "");
+        ecvNum.setText(goodsModel.getNum() == 0 ? "" : goodsModel.getNum() + "");
+        ecvVolume.setText(goodsModel.getVolume() == 0 ? "" : goodsModel.getVolume() + "");
+        ecvDensity.setText(goodsModel.getDensity() == 0 ? "" : goodsModel.getDensity() + "");
     }
 
     private void initPublicFilter() {
@@ -242,6 +246,7 @@ public class ShippingGoodsActivity extends AppCompatActivity {
         goodsModel.setWeight(TextUtils.isEmpty(ecvWeight.getText()) ? 0 : Integer.parseInt(ecvWeight.getText()));
         goodsModel.setVolume(TextUtils.isEmpty(ecvVolume.getText()) ? 0 : Integer.parseInt(ecvVolume.getText()));
         goodsModel.setNum(TextUtils.isEmpty(ecvNum.getText()) ? 0 : Integer.parseInt(ecvNum.getText()));
+        goodsModel.setDensity(TextUtils.isEmpty(ecvDensity.getText()) ? 0 : Double.parseDouble(ecvDensity.getText()));
     }
 
     private void initGoods() {
