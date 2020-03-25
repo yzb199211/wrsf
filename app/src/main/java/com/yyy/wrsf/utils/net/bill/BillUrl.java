@@ -5,4 +5,6 @@ public class BillUrl {
     public final static String insert = "/memberInvoice/insertMemberInvoice";
     public final static String update = "/memberInvoice/updateMemberInvoice";
 
+    public final static String getTransCompanyList = "/price/getTransCompanyList";
+
 }

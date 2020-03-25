@@ -46,25 +46,25 @@ public class ShippingModel {
      */
 
     private int baoAsk;
-    private int baoPrice;
+    private int baoPrice;//保价价格
     private String contractNo;
     private int contractStatus;
-    private int contractTotal;
+    private long contractTotal;//总金额
     private String createDate;
     private int daiPrice;
-    private int daiTotal;
+    private int daiTotal;//代收货款
     private int deliverType;
-    private int density;
+    private long density;
     private String goodsName;
     private int noticeYesNo;
-    private int packNumber;
-    private int picTotal;
+    private long packNumber;//数量
+    private int picTotal;//提货价格
     private String pickDate;
     private String platMemberName;
     private int platMemberRecNo;
     private String platMemberTel;
-    private int price;
-    private int qianPrice;
+    private int price;//单价
+    private int qianPrice;//签单费
     private int qianType;
     private String recDetail;
     private String recName;
@@ -74,17 +74,17 @@ public class ShippingModel {
     private String sendName;
     private int sendRegion;
     private String sendTel;
-    private int sendTotal;
+    private long sendTotal;//送货费
     private int sendType;
-    private int size;
+    private long size;
     private int transCompanyRecNo;
     private int transCustomerMonthRecNo;
     private int transRecShopRecNo;
     private int transShopRecNo;
-    private int transTotal;
+    private long transTotal;//运费
     private int transType;
     private String updateDate;
-    private int weight;
+    private long weight;//重量
 
     public int getBaoAsk() {
         return baoAsk;
@@ -118,11 +118,11 @@ public class ShippingModel {
         this.contractStatus = contractStatus;
     }
 
-    public int getContractTotal() {
+    public long getContractTotal() {
         return contractTotal;
     }
 
-    public void setContractTotal(int contractTotal) {
+    public void setContractTotal(long contractTotal) {
         this.contractTotal = contractTotal;
     }
 
@@ -158,11 +158,11 @@ public class ShippingModel {
         this.deliverType = deliverType;
     }
 
-    public int getDensity() {
+    public long getDensity() {
         return density;
     }
 
-    public void setDensity(int density) {
+    public void setDensity(long density) {
         this.density = density;
     }
 
@@ -182,11 +182,11 @@ public class ShippingModel {
         this.noticeYesNo = noticeYesNo;
     }
 
-    public int getPackNumber() {
+    public long getPackNumber() {
         return packNumber;
     }
 
-    public void setPackNumber(int packNumber) {
+    public void setPackNumber(long packNumber) {
         this.packNumber = packNumber;
     }
 
@@ -318,11 +318,11 @@ public class ShippingModel {
         this.sendTel = sendTel;
     }
 
-    public int getSendTotal() {
+    public long getSendTotal() {
         return sendTotal;
     }
 
-    public void setSendTotal(int sendTotal) {
+    public void setSendTotal(long sendTotal) {
         this.sendTotal = sendTotal;
     }
 
@@ -334,11 +334,11 @@ public class ShippingModel {
         this.sendType = sendType;
     }
 
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(long size) {
         this.size = size;
     }
 
@@ -374,11 +374,11 @@ public class ShippingModel {
         this.transShopRecNo = transShopRecNo;
     }
 
-    public int getTransTotal() {
+    public long getTransTotal() {
         return transTotal;
     }
 
-    public void setTransTotal(int transTotal) {
+    public void setTransTotal(long transTotal) {
         this.transTotal = transTotal;
     }
 
@@ -398,11 +398,11 @@ public class ShippingModel {
         this.updateDate = updateDate;
     }
 
-    public int getWeight() {
+    public long getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(long weight) {
         this.weight = weight;
     }
 }
