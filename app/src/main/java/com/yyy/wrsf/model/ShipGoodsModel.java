@@ -2,12 +2,14 @@ package com.yyy.wrsf.model;
 
 import android.text.TextUtils;
 
+import com.yyy.wrsf.utils.StringUtil;
+
 public class ShipGoodsModel {
     private int goodsId;
     private String goodsName;
-    private int weight;
-    private int volume;
-    private int num;
+    private long weight;
+    private long volume;
+    private long num;
     private int deliveryId;
     private String deliveryName;
     private int sendId;
@@ -24,34 +26,34 @@ public class ShipGoodsModel {
     }
 
     public String getGoodsName() {
-        return TextUtils.isEmpty(goodsName)?"":goodsName;
+        return TextUtils.isEmpty(goodsName) ? "" : goodsName;
     }
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
     }
 
-    public int getWeight() {
+    public long getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(long weight) {
         this.weight = weight;
     }
 
-    public int getVolume() {
+    public long getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(long volume) {
         this.volume = volume;
     }
 
-    public int getNum() {
+    public long getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(long num) {
         this.num = num;
     }
 
@@ -64,7 +66,7 @@ public class ShipGoodsModel {
     }
 
     public String getDeliveryName() {
-        return TextUtils.isEmpty(deliveryName)?"":deliveryName;
+        return TextUtils.isEmpty(deliveryName) ? "" : deliveryName;
     }
 
     public void setDeliveryName(String deliveryName) {
@@ -80,7 +82,7 @@ public class ShipGoodsModel {
     }
 
     public String getSendName() {
-        return TextUtils.isEmpty(sendName)?"":sendName;
+        return TextUtils.isEmpty(sendName) ? "" : sendName;
     }
 
     public void setSendName(String sendName) {
@@ -96,7 +98,7 @@ public class ShipGoodsModel {
     }
 
     public String getTransName() {
-        return TextUtils.isEmpty(transName)?"":transName;
+        return TextUtils.isEmpty(transName) ? "" : transName;
     }
 
     public void setTransName(String transName) {
@@ -105,8 +107,26 @@ public class ShipGoodsModel {
 
     public boolean isEmpty() {
         if (goodsId == 0 || weight == 0 || volume == 0 || num == 0 || deliveryId == 0 || sendId == 0 || transId == 0) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    public String getData() {
+        String s = "";
+        if (StringUtil.isNotEmpty(goodsName)) {
+            s = s + goodsName;
+        }
+        if (weight > 0) {
+            s = TextUtils.isEmpty(s) ? s + weight + "KG" : s + "\\" + weight + "KG";
+        }
+        if (volume > 0) {
+            s = TextUtils.isEmpty(s) ? s + volume + "m³" : s + "\\" + volume + "m³";
+        }
+        if (num > 0) {
+            s = TextUtils.isEmpty(s) ? s + num + "件" : s + "\\" + num + "件";
+        }
+        return s;
+
     }
 }

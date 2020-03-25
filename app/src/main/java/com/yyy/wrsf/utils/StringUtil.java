@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,10 +28,12 @@ public class StringUtil {
         nf.setGroupingUsed(false);
         return (nf.format(d));
     }
+
     public boolean checkPlateNumberFormat(String content) {
         String pattern = "([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼]{1}(([A-HJ-Z]{1}[A-HJ-NP-Z0-9]{5})|([A-HJ-Z]{1}(([DF]{1}[A-HJ-NP-Z0-9]{1}[0-9]{4})|([0-9]{5}[DF]{1})))|([A-HJ-Z]{1}[A-D0-9]{1}[0-9]{3}警)))|([0-9]{6}使)|((([沪粤川云桂鄂陕蒙藏黑辽渝]{1}A)|鲁B|闽D|蒙E|蒙H)[0-9]{4}领)|(WJ[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼·•]{1}[0-9]{4}[TDSHBXJ0-9]{1})|([VKHBSLJNGCE]{1}[A-DJ-PR-TVY]{1}[0-9]{5})";
         return Pattern.matches(pattern, content);
     }
+
     /**
      * 判断字符串是否为整型
      *
@@ -316,7 +319,21 @@ public class StringUtil {
         return b1.multiply(b2).doubleValue();
     }
 
+    public static double divide(int v1, int v2) {
+        BigDecimal b1 = new BigDecimal(v1 + "");
+
+        BigDecimal b2 = new BigDecimal(v2 + "");
+
+        return (b1.divide(b2).doubleValue());
+    }
+
     public static String formatString(String s) {
         return TextUtils.isEmpty(s) ? "" : s;
+    }
+
+    public static double format(double format) {
+        BigDecimal bg = new BigDecimal(format);
+        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return f1;
     }
 }

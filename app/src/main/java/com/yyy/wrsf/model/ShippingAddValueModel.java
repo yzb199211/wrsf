@@ -2,11 +2,11 @@ package com.yyy.wrsf.model;
 
 public class ShippingAddValueModel {
     private int insureValue;
-    private int insureFee;
+    private double insureFee;
     private int colletionValue;
-    private int colletionFee;
+    private double colletionFee;
     private int signType;
-    private int signFee;
+    private double signFee;
     private int receiveType;
 
     public int getInsureValue() {
@@ -17,11 +17,11 @@ public class ShippingAddValueModel {
         this.insureValue = insureValue;
     }
 
-    public int getInsureFee() {
+    public double getInsureFee() {
         return insureFee;
     }
 
-    public void setInsureFee(int insureFee) {
+    public void setInsureFee(double insureFee) {
         this.insureFee = insureFee;
     }
 
@@ -42,19 +42,19 @@ public class ShippingAddValueModel {
         this.colletionValue = colletionValue;
     }
 
-    public int getColletionFee() {
+    public double getColletionFee() {
         return colletionFee;
     }
 
-    public void setColletionFee(int colletionFee) {
+    public void setColletionFee(double colletionFee) {
         this.colletionFee = colletionFee;
     }
 
-    public int getSignFee() {
+    public double getSignFee() {
         return signFee;
     }
 
-    public void setSignFee(int signFee) {
+    public void setSignFee(double signFee) {
         this.signFee = signFee;
     }
 

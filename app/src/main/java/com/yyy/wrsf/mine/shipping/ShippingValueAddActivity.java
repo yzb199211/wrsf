@@ -2,7 +2,10 @@ package com.yyy.wrsf.mine.shipping;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -13,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.model.ShippingAddValueModel;
+import com.yyy.wrsf.model.SignModel;
 import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.EditInputFilter;
+import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -70,6 +76,70 @@ public class ShippingValueAddActivity extends AppCompatActivity {
     private void init() {
         initTop();
         initData();
+        initInsure();
+        initCollection();
+    }
+
+    private void initCollection() {
+        InputFilter[] filters = {new EditInputFilter(100000000)};
+        etCollection.setFilters(filters);
+        etCollection.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!TextUtils.isEmpty(s.toString())) {
+                    int value = Integer.parseInt(s.toString());
+                    double fee = ShipUtil.getFee(value);
+                    tvPriceCollection.setText(rmb + fee);
+                    shippingAddValue.setColletionValue(value);
+                    shippingAddValue.setColletionFee(fee);
+                } else {
+                    tvPriceCollection.setText(rmb + 0);
+                    shippingAddValue.setColletionValue(0);
+                    shippingAddValue.setColletionFee(0);
+                }
+            }
+        });
+    }
+
+    private void initInsure() {
+        InputFilter[] filters = {new EditInputFilter()};
+        etInsured.setFilters(filters);
+        etInsured.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!TextUtils.isEmpty(s.toString())) {
+                    int value = Integer.parseInt(s.toString());
+                    double fee = ShipUtil.getFee(value);
+                    tvPriceInsured.setText(rmb + fee);
+                    shippingAddValue.setInsureFee(fee);
+                    shippingAddValue.setInsureValue(value);
+                } else {
+                    tvPriceInsured.setText(rmb + 0);
+                    shippingAddValue.setInsureFee(0);
+                    shippingAddValue.setInsureValue(0);
+                }
+            }
+        });
     }
 
     private void initData() {
@@ -82,9 +152,9 @@ public class ShippingValueAddActivity extends AppCompatActivity {
 
     private void setAddValueView() {
         tvPriceInsured.setText(rmb + shippingAddValue.getInsureFee());
-        etInsured.setText(shippingAddValue.getInsureValue());
+        etInsured.setText(shippingAddValue.getInsureValue() == 0 ? "" : shippingAddValue.getInsureValue() + "");
         tvPriceCollection.setText(rmb + shippingAddValue.getColletionFee());
-        etCollection.setText(shippingAddValue.getColletionValue());
+        etCollection.setText(shippingAddValue.getColletionValue() == 0 ? "" : shippingAddValue.getColletionValue() + "");
         tvPriceSignback.setText(rmb + shippingAddValue.getSignFee());
         initSign();
         initNotice();
@@ -93,7 +163,7 @@ public class ShippingValueAddActivity extends AppCompatActivity {
     private void initSign() {
         switch (shippingAddValue.getSignType()) {
             case 1:
-                currentSign = rbNo;
+                currentSign = rbNone;
                 break;
             case 2:
                 currentSign = rbPaper;
@@ -102,11 +172,12 @@ public class ShippingValueAddActivity extends AppCompatActivity {
                 currentSign = rbElectronic;
                 break;
             default:
-                currentSign = rbNo;
+                currentSign = rbNone;
                 shippingAddValue.setSignType(1);
                 break;
         }
         currentSign.setChecked(true);
+        currentSign.setTextColor(getColor(R.color.white));
     }
 
     private void initNotice() {
@@ -116,6 +187,7 @@ public class ShippingValueAddActivity extends AppCompatActivity {
             currentNotice = rbNo;
         }
         currentNotice.setChecked(true);
+        currentNotice.setTextColor(getColor(R.color.white));
     }
 
     private void initTop() {
@@ -131,13 +203,13 @@ public class ShippingValueAddActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rb_none:
-                switchSign(view, 1);
+                switchSign(view, SignModel.NONE);
                 break;
             case R.id.rb_paper:
-                switchSign(view, 2);
+                switchSign(view, SignModel.PAPER);
                 break;
             case R.id.rb_electronic:
-                switchSign(view, 3);
+                switchSign(view, SignModel.ELECTRONIC);
                 break;
             case R.id.rb_yes:
                 switchNotice(view, 1);
@@ -153,14 +225,16 @@ public class ShippingValueAddActivity extends AppCompatActivity {
         }
     }
 
-    private void switchSign(View view, int i) {
+    private void switchSign(View view, SignModel sign) {
         if (view.getId() != currentSign.getId()) {
             currentSign.setChecked(false);
             currentSign.setTextColor(getColor(R.color.text_gray));
             currentSign = (RadioButton) view;
             currentSign.setTextColor(getColor(R.color.white));
             currentSign.setChecked(true);
-            shippingAddValue.setSignType(i);
+            shippingAddValue.setSignType(sign.getType());
+            shippingAddValue.setSignFee(sign.getPrice());
+            tvSignBack.setText(rmb + sign.getPrice());
         } else {
             currentSign.setChecked(true);
         }

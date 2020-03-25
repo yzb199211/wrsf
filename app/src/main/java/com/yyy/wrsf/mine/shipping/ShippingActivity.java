@@ -212,9 +212,20 @@ public class ShippingActivity extends AppCompatActivity {
                 addressReceive = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
                 setReceive();
                 break;
+            case CodeUtil.ShipGoods:
+                goods = new Gson().fromJson(data.getStringExtra("data"), ShipGoodsModel.class);
+                setGoods();
+                break;
+            case CodeUtil.ShipAddValue:
+                addValue = new Gson().fromJson(data.getStringExtra("data"), ShippingAddValueModel.class);
+                break;
             default:
                 break;
         }
+    }
+
+    private void setGoods() {
+        tmiGoods.setText(goods.getData());
     }
 
     private void setSend() {

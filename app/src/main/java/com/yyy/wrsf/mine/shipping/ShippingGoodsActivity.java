@@ -2,8 +2,8 @@ package com.yyy.wrsf.mine.shipping;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.PublicArray;
 import com.yyy.wrsf.model.PublicModel;
 import com.yyy.wrsf.model.ShipGoodsModel;
@@ -106,17 +105,23 @@ public class ShippingGoodsActivity extends AppCompatActivity {
 
 
     private void setWeightListener() {
-        ecvWeight.setOnTextChangeAfter(() -> {
-            if (ecvWeight.getText().length() > 0 && Integer.parseInt(ecvWeight.getText()) > 0 & TextUtils.isEmpty(ecvVolume.getText()) && Integer.parseInt(ecvVolume.getText()) > 0) {
-                ecvDensity.setText(Integer.parseInt(ecvWeight.getText()) / (1000 * Integer.parseInt(ecvVolume.getText())) + "");
+        ecvWeight.setOnTextChangeAfter((Editable s) -> {
+            String s1 = s.toString();
+            if (s1.length() > 0 && Long.parseLong(s1) > 0 && StringUtil.isNotEmpty(ecvVolume.getText()) && Long.parseLong(ecvVolume.getText()) > 0) {
+                ecvDensity.setText(ShipUtil.getDensity(Long.parseLong(s1), Long.parseLong(ecvVolume.getText())) + "");
+            } else {
+                ecvDensity.setText("0");
             }
         });
     }
 
     private void setVolumeListener() {
-        ecvVolume.setOnTextChangeAfter(() -> {
-            if (ecvWeight.getText().length() > 0 && Integer.parseInt(ecvWeight.getText()) > 0 & TextUtils.isEmpty(ecvVolume.getText()) && Integer.parseInt(ecvVolume.getText()) > 0) {
-                ecvDensity.setText(Integer.parseInt(ecvWeight.getText()) / (1000 * Integer.parseInt(ecvVolume.getText())) + "");
+        ecvVolume.setOnTextChangeAfter((Editable s) -> {
+            String s1 = s.toString();
+            if (s1.length() > 0 && Long.parseLong(s1) > 0 && StringUtil.isNotEmpty(ecvWeight.getText()) && Long.parseLong(ecvWeight.getText()) > 0) {
+                ecvDensity.setText(ShipUtil.getDensity(Long.parseLong(ecvWeight.getText()), Long.parseLong(s1)) + "");
+            } else {
+                ecvDensity.setText("0");
             }
         });
     }
@@ -229,7 +234,7 @@ public class ShippingGoodsActivity extends AppCompatActivity {
             LoadingFinish(getString(R.string.send_goods_empty));
             return;
         }
-        setResult(CodeUtil.ShipGoods,new Intent().putExtra("data",new Gson().toJson(goodsModel)));
+        setResult(CodeUtil.ShipGoods, new Intent().putExtra("data", new Gson().toJson(goodsModel)));
         finish();
     }
 

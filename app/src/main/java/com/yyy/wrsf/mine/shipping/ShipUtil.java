@@ -1,0 +1,19 @@
+package com.yyy.wrsf.mine.shipping;
+
+import com.yyy.wrsf.utils.StringUtil;
+
+import java.math.BigDecimal;
+
+public class ShipUtil {
+    public static double getFee(int value) {
+        double f = StringUtil.format(StringUtil.multiply(value, 0.005));
+        return f > 10.00 ? f : 10.00;
+    }
+
+    public static double getDensity(Long weight, Long volume) {
+        BigDecimal b1 = new BigDecimal(weight + "");
+        BigDecimal b2 = new BigDecimal(volume + "");
+        BigDecimal b3 = new BigDecimal(1000 + "");
+        return b1.divide(b2).divide(b3).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+}

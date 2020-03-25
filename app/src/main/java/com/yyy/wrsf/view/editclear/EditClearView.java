@@ -211,7 +211,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
             @Override
             public void afterTextChanged(Editable s) {
                 if (onTextChangeAfter != null)
-                    onTextChangeAfter.onText();
+                    onTextChangeAfter.onText(s);
             }
         });
     }
