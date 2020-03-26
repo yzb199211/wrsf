@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.AreaModel;
+import com.yyy.wrsf.model.address.AreaModel;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.yyy.wrsf.model;
+package com.yyy.wrsf.model.ship;
 
 public enum SignModel {
     NONE(1, 0), PAPER(2, 5.00), ELECTRONIC(3, 3.00);

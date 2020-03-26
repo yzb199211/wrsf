@@ -10,14 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.model.CompanyModel;
+import com.yyy.wrsf.interfaces.OnItemClickListener;
+import com.yyy.wrsf.model.company.CompanyModel;
 
 import java.util.List;
 
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
     private Context context;
     private List<CompanyModel> list;
-    private OnCompanySelectListener onCompanySelectListener;
+    private OnItemClickListener onItemClickListener;
+
+    public CompanyAdapter(Context context, List<CompanyModel> list) {
+        this.context = context;
+        this.list = list;
+    }
 
     @NonNull
     @Override
@@ -30,8 +36,8 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
     public void onBindViewHolder(@NonNull VH holder, int position) {
         ((TextView) holder.itemView).setText(list.get(position).getCompanyName());
         holder.itemView.setOnClickListener((View view) -> {
-            if (onCompanySelectListener != null) {
-                onCompanySelectListener.onSelect(position);
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(position);
             }
         });
     }
@@ -47,7 +53,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
         }
     }
 
-    public void setOnCompanySelectListener(OnCompanySelectListener onCompanySelectListener) {
-        this.onCompanySelectListener = onCompanySelectListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

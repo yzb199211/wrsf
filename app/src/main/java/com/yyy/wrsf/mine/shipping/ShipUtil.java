@@ -11,9 +11,13 @@ public class ShipUtil {
     }
 
     public static double getDensity(Long weight, Long volume) {
-        BigDecimal b1 = new BigDecimal(weight + "");
-        BigDecimal b2 = new BigDecimal(volume + "");
-        BigDecimal b3 = new BigDecimal(1000 + "");
-        return b1.divide(b2).divide(b3).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+        try {
+            BigDecimal b1 = new BigDecimal(weight + "");
+            BigDecimal b2 = new BigDecimal(volume + "");
+            BigDecimal b3 = new BigDecimal(1000 + "");
+            return b1.divide(b2).divide(b3).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+        } catch (ArithmeticException e) {
+            return 0;
+        }
     }
 }

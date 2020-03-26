@@ -1,4 +1,4 @@
-package com.yyy.wrsf.model;
+package com.yyy.wrsf.model.ship;
 
 import android.text.TextUtils;
 

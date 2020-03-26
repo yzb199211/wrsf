@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.model.CompanyModel;
+import com.yyy.wrsf.model.company.CompanyModel;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.view.topview.TopView;
 

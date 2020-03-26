@@ -2,7 +2,7 @@ package com.yyy.wrsf.common.company;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.PopupWindow;
@@ -11,24 +11,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.CompanyModel;
+import com.yyy.wrsf.model.company.CompanyModel;
 import com.yyy.wrsf.model.filter.ShipCompany;
 import com.yyy.wrsf.utils.PxUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.NetConfig;
-import com.yyy.wrsf.utils.net.NetParams;
-import com.yyy.wrsf.utils.net.NetUtil;
-import com.yyy.wrsf.utils.net.RequstType;
-import com.yyy.wrsf.utils.net.ResponseListener;
+import com.yyy.wrsf.utils.net.net.NetConfig;
+import com.yyy.wrsf.utils.net.net.NetParams;
+import com.yyy.wrsf.utils.net.net.NetUtil;
+import com.yyy.wrsf.utils.net.net.RequstType;
+import com.yyy.wrsf.utils.net.net.ResponseListener;
+import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.bill.BillUrl;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,13 +83,15 @@ public class CompanySelect extends PopupWindow {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refresh(ShipCompany companyFilter) {
         this.companyFilter = companyFilter;
-        Log.e("hi", "hi");
+        if (companys.size() > 0) {
+            companys.clear();
+            refreshList();
+        }
         getData();
     }
 
     @Override
     public void dismiss() {
-        Log.e("hi", "hi2");
         EventBus.getDefault().unregister(this);
         super.dismiss();
     }
@@ -96,10 +101,26 @@ public class CompanySelect extends PopupWindow {
         new NetUtil(getParams(), NetConfig.address + BillUrl.getTransCompanyList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
-                Log.e("data", string);
-                LoadingFinish(null);
-                if (onLoadingListener != null) {
-                    onLoadingListener.onLoading(true);
+                try {
+                    LoadingFinish(null);
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        if (onLoadingListener != null) {
+                            onLoadingListener.onLoading(true);
+                        }
+                        String data = result.getData();
+                        if (!TextUtils.isEmpty(data)) {
+                            List<CompanyModel> list = new Gson().fromJson(data, new TypeToken<List<CompanyModel>>() {
+                            }.getType());
+                            companys.addAll(list);
+                            refreshList();
+                        }
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
                 }
             }
 
@@ -110,6 +131,29 @@ public class CompanySelect extends PopupWindow {
             }
         });
     }
+
+    private OnCompanySelectListener onCompanySelectListener;
+
+    private void refreshList() {
+        ((Activity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (adapter == null) {
+                    adapter = new CompanyAdapter(context, companys);
+                    adapter.setOnItemClickListener((int pos) -> {
+                        if (onCompanySelectListener != null) {
+                            onCompanySelectListener.onSelect(companys.get(pos));
+                            dismiss();
+                        }
+                    });
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
 
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
@@ -137,4 +181,7 @@ public class CompanySelect extends PopupWindow {
         this.onLoadingListener = onLoadingListener;
     }
 
+    public void setOnCompanySelectListener(OnCompanySelectListener onCompanySelectListener) {
+        this.onCompanySelectListener = onCompanySelectListener;
+    }
 }

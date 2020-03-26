@@ -1,6 +1,8 @@
-package com.yyy.wrsf.model;
+package com.yyy.wrsf.model.company;
 
-public class MonthModel {
+import java.io.Serializable;
+
+public class CompanyRegister implements Serializable {
 
     /**
      * companyName : string
@@ -8,28 +10,25 @@ public class MonthModel {
      * contractPersonPics : string
      * contractTel : string
      * detailAdd : string
-     * firstAdd : string
+     * fristAdd : string
      * person : string
      * secondAdd : string
      * thirdAdd : string
-     * transCompanyRecNo : 0
      * zhiZhao : string
      * zhiZhaoPics : string
      */
 
     private String companyName;
+    private String contractPerson;
     private String contractPersonPics;
+    private String contractTel;
     private String detailAdd;
-    private String firstAdd;
+    private String fristAdd;
     private String person;
     private String secondAdd;
     private String thirdAdd;
-    private int transCompanyRecNo;
     private String zhiZhao;
     private String zhiZhaoPics;
-    private int firstId;
-    private int secondId;
-    private int thirdId;
 
     public String getCompanyName() {
         return companyName;
@@ -37,6 +36,14 @@ public class MonthModel {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getContractPerson() {
+        return contractPerson;
+    }
+
+    public void setContractPerson(String contractPerson) {
+        this.contractPerson = contractPerson;
     }
 
     public String getContractPersonPics() {
@@ -47,6 +54,13 @@ public class MonthModel {
         this.contractPersonPics = contractPersonPics;
     }
 
+    public String getContractTel() {
+        return contractTel;
+    }
+
+    public void setContractTel(String contractTel) {
+        this.contractTel = contractTel;
+    }
 
     public String getDetailAdd() {
         return detailAdd;
@@ -56,12 +70,12 @@ public class MonthModel {
         this.detailAdd = detailAdd;
     }
 
-    public String getFirstAdd() {
-        return firstAdd;
+    public String getFristAdd() {
+        return fristAdd;
     }
 
-    public void setFirstAdd(String firstAdd) {
-        this.firstAdd = firstAdd;
+    public void setFristAdd(String fristAdd) {
+        this.fristAdd = fristAdd;
     }
 
     public String getPerson() {
@@ -71,7 +85,6 @@ public class MonthModel {
     public void setPerson(String person) {
         this.person = person;
     }
-
 
     public String getSecondAdd() {
         return secondAdd;
@@ -89,15 +102,6 @@ public class MonthModel {
         this.thirdAdd = thirdAdd;
     }
 
-    public int getTransCompanyRecNo() {
-        return transCompanyRecNo;
-    }
-
-    public void setTransCompanyRecNo(int transCompanyRecNo) {
-        this.transCompanyRecNo = transCompanyRecNo;
-    }
-
-
     public String getZhiZhao() {
         return zhiZhao;
     }
@@ -112,29 +116,5 @@ public class MonthModel {
 
     public void setZhiZhaoPics(String zhiZhaoPics) {
         this.zhiZhaoPics = zhiZhaoPics;
-    }
-
-    public int getFirstId() {
-        return firstId;
-    }
-
-    public void setFirstId(int firstId) {
-        this.firstId = firstId;
-    }
-
-    public int getSecondId() {
-        return secondId;
-    }
-
-    public void setSecondId(int secondId) {
-        this.secondId = secondId;
-    }
-
-    public int getThirdId() {
-        return thirdId;
-    }
-
-    public void setThirdId(int thirdId) {
-        this.thirdId = thirdId;
     }
 }

@@ -1,8 +1,5 @@
-package com.yyy.wrsf.utils.net;
+package com.yyy.wrsf.utils.net.net;
 
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;

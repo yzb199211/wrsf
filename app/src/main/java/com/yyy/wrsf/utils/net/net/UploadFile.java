@@ -1,6 +1,4 @@
-package com.yyy.wrsf.utils.net;
-
-import android.util.Log;
+package com.yyy.wrsf.utils.net.net;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
@@ -9,7 +7,6 @@ import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Callback;
 import okhttp3.MediaType;

@@ -16,20 +16,17 @@ import com.yyy.wrsf.model.LoginModel;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.NetConfig;
-import com.yyy.wrsf.utils.net.NetLogin;
-import com.yyy.wrsf.utils.net.NetParams;
-import com.yyy.wrsf.utils.net.NetUtil;
-import com.yyy.wrsf.utils.net.RequstType;
-import com.yyy.wrsf.utils.net.ResponseListener;
-import com.yyy.wrsf.utils.net.Result;
+import com.yyy.wrsf.utils.net.net.NetConfig;
+import com.yyy.wrsf.utils.net.net.NetLogin;
+import com.yyy.wrsf.utils.net.net.NetParams;
+import com.yyy.wrsf.utils.net.net.RequstType;
+import com.yyy.wrsf.utils.net.net.ResponseListener;
+import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.view.editclear.EditClearView;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -14,12 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.common.company.CompanySelect;
-import com.yyy.wrsf.common.company.OnLoadingListener;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
-import com.yyy.wrsf.model.AddressModel;
-import com.yyy.wrsf.model.ShipGoodsModel;
-import com.yyy.wrsf.model.ShippingAddValueModel;
+import com.yyy.wrsf.model.address.AddressModel;
+import com.yyy.wrsf.model.company.CompanyModel;
+import com.yyy.wrsf.model.price.PriceBackM;
+import com.yyy.wrsf.model.ship.ShipGoodsModel;
+import com.yyy.wrsf.model.ship.ShippingAddValueModel;
 import com.yyy.wrsf.model.filter.ShipCompany;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -81,8 +82,10 @@ public class ShippingActivity extends AppCompatActivity {
     private AddressModel addressSend;
     private AddressModel addressReceive;
     private ShipGoodsModel goods;
+    private CompanyModel company;
     private ShipCompany companyFilter;
     private ShippingAddValueModel addValue;
+    private PriceBackM priceBackM;
 
     private int payType;
     private boolean refreshCompany = true;
@@ -131,12 +134,16 @@ public class ShippingActivity extends AppCompatActivity {
                 break;
             case R.id.tmi_company:
                 if (addressSend == null || addressReceive == null) {
-                    Toast(getString(R.string.send_empty_address));
+                    Toast(getString(R.string.send_empty_company));
                     return;
                 }
                 selectCompany(view);
                 break;
             case R.id.tmi_goods:
+                if (company == null) {
+                    Toast(getString(R.string.send_empty_company));
+                    return;
+                }
                 go2Goods();
                 break;
             case R.id.tmi_value_add:
@@ -169,11 +176,12 @@ public class ShippingActivity extends AppCompatActivity {
     private void selectCompany(View view) {
         if (companySelect == null) {
             companySelect = new CompanySelect(this);
-            companySelect.setOnLoadingListener(new OnLoadingListener() {
-                @Override
-                public void onLoading(boolean success) {
-                    refreshCompany = false;
-                }
+            companySelect.setOnLoadingListener((boolean success) -> {
+                refreshCompany = false;
+            });
+            companySelect.setOnCompanySelectListener((CompanyModel item) -> {
+                company = item;
+                tmiCompany.setText(company.getCompanyName());
             });
         }
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
@@ -219,6 +227,9 @@ public class ShippingActivity extends AppCompatActivity {
                 new Intent()
                         .setClass(this, ShippingGoodsActivity.class)
                         .putExtra("data", goods == null ? "" : new Gson().toJson(goods))
+                        .putExtra("sendRec", addressSend.getThirdId())
+                        .putExtra("receiveRec", addressReceive.getThirdId())
+                        .putExtra("company", company.getRecNo())
                 , CodeUtil.ShipGoods);
     }
 
@@ -258,6 +269,7 @@ public class ShippingActivity extends AppCompatActivity {
                 break;
             case CodeUtil.ShipGoods:
                 goods = new Gson().fromJson(data.getStringExtra("data"), ShipGoodsModel.class);
+                priceBackM = new Gson().fromJson(data.getStringExtra("price"), PriceBackM.class);
                 setGoods();
                 break;
             case CodeUtil.ShipAddValue:
@@ -284,11 +296,6 @@ public class ShippingActivity extends AppCompatActivity {
         tvAddressDetailReceive.setText(addressReceive.getFirstAdd() + addressReceive.getSecondAdd() + addressReceive.getThirdAdd() + addressReceive.getDetailAdd());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
 
     private void Toast(String msg) {
         Toasts.showShort(this, msg);

@@ -1,4 +1,4 @@
-package com.yyy.wrsf.utils.net;
+package com.yyy.wrsf.utils.net.net;
 
 public class NetParams {
     String Key;

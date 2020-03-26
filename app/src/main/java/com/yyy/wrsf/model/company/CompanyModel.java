@@ -1,4 +1,4 @@
-package com.yyy.wrsf.model;
+package com.yyy.wrsf.model.company;
 
 import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 

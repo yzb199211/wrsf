@@ -12,8 +12,9 @@ import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.common.address.AreaSelect;
 import com.yyy.wrsf.common.address.OnBackAreaListener;
-import com.yyy.wrsf.model.AddressModel;
-import com.yyy.wrsf.model.AreaModel;
+import com.yyy.wrsf.model.address.AddressModel;
+import com.yyy.wrsf.model.address.AreaModel;
+import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.Toasts;
@@ -50,6 +51,7 @@ public class ShippingPersonActivity extends AppCompatActivity {
 
     private int code;
     private int pos;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class ShippingPersonActivity extends AppCompatActivity {
     private void intiIntentData() {
         code = getIntent().getIntExtra("code", -1);
         pos = getIntent().getIntExtra("pos", -1);
+        title = code == CodeUtil.AddressSend ? getString(R.string.address_area_send) : getString(R.string.address_area);
         if (!TextUtils.isEmpty(getIntent().getStringExtra("data"))) {
             addressModel = new Gson().fromJson(getIntent().getStringExtra("data"), AddressModel.class);
             initAreaData();
@@ -122,6 +125,7 @@ public class ShippingPersonActivity extends AppCompatActivity {
     }
 
     private void initTop() {
+        topView.setTitle(title);
         topView.setOnLeftClickListener(new OnLeftClickListener() {
             @Override
             public void onLeft() {

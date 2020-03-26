@@ -2,14 +2,10 @@ package com.yyy.wrsf.mine.outlets;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,16 +18,15 @@ import com.yyy.wrsf.interfaces.OnDialListener;
 import com.yyy.wrsf.interfaces.PermissionListener;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.NetConfig;
-import com.yyy.wrsf.utils.net.NetParams;
-import com.yyy.wrsf.utils.net.NetUtil;
-import com.yyy.wrsf.utils.net.RequstType;
-import com.yyy.wrsf.utils.net.ResponseListener;
+import com.yyy.wrsf.utils.net.net.NetConfig;
+import com.yyy.wrsf.utils.net.net.NetParams;
+import com.yyy.wrsf.utils.net.net.NetUtil;
+import com.yyy.wrsf.utils.net.net.RequstType;
+import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.view.recycle.LoadingType;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

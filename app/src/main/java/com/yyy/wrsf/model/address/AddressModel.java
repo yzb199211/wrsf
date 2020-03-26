@@ -1,4 +1,4 @@
-package com.yyy.wrsf.model;
+package com.yyy.wrsf.model.address;
 
 import android.text.TextUtils;
 

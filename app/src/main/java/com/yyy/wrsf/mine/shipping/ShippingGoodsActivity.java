@@ -12,20 +12,22 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.PublicArray;
-import com.yyy.wrsf.model.PublicModel;
-import com.yyy.wrsf.model.ShipGoodsModel;
+import com.yyy.wrsf.model.price.PriceCalM;
+import com.yyy.wrsf.model.publicm.PublicArray;
+import com.yyy.wrsf.model.publicm.PublicModel;
+import com.yyy.wrsf.model.ship.ShipGoodsModel;
 import com.yyy.wrsf.model.filter.PublicFilterModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.NetConfig;
-import com.yyy.wrsf.utils.net.NetParams;
-import com.yyy.wrsf.utils.net.NetUtil;
-import com.yyy.wrsf.utils.net.RequstType;
-import com.yyy.wrsf.utils.net.ResponseListener;
-import com.yyy.wrsf.utils.net.Result;
+import com.yyy.wrsf.utils.net.bill.BillUrl;
+import com.yyy.wrsf.utils.net.net.NetConfig;
+import com.yyy.wrsf.utils.net.net.NetParams;
+import com.yyy.wrsf.utils.net.net.NetUtil;
+import com.yyy.wrsf.utils.net.net.RequstType;
+import com.yyy.wrsf.utils.net.net.ResponseListener;
+import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.publics.PublicUrl;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.popwin.Popwin;
@@ -73,7 +75,7 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     private Popwin popTrans;
     private Popwin popDelivery;
     private ShipGoodsModel goodsModel;
-
+    private PriceCalM priceCal;
     private boolean isEmpty;
 
     @Override
@@ -129,6 +131,7 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     private void initData() {
         initPublicFilter();
         initGoodsModel();
+        initPriceCal();
     }
 
     private void initGoodsModel() {
@@ -136,6 +139,13 @@ public class ShippingGoodsActivity extends AppCompatActivity {
         isEmpty = TextUtils.isEmpty(data);
         goodsModel = isEmpty ? new ShipGoodsModel() : new Gson().fromJson(data, ShipGoodsModel.class);
         setGoodsView();
+    }
+
+    private void initPriceCal() {
+        priceCal = new PriceCalM();
+        priceCal.setRecRegion(getIntent().getIntExtra("receiveRec", 0));
+        priceCal.setSendRegion(getIntent().getIntExtra("sendRec", 0));
+        priceCal.setTransCompanyRecNo(getIntent().getIntExtra("company", 0));
     }
 
     private void setGoodsView() {
@@ -226,6 +236,7 @@ public class ShippingGoodsActivity extends AppCompatActivity {
                 break;
             case R.id.btn_add:
                 setGoods();
+
                 save();
                 break;
             default:
@@ -233,21 +244,6 @@ public class ShippingGoodsActivity extends AppCompatActivity {
         }
     }
 
-    private void save() {
-        if (goodsModel.isEmpty()) {
-            LoadingFinish(getString(R.string.send_goods_empty));
-            return;
-        }
-        setResult(CodeUtil.ShipGoods, new Intent().putExtra("data", new Gson().toJson(goodsModel)));
-        finish();
-    }
-
-    private void setGoods() {
-        goodsModel.setWeight(TextUtils.isEmpty(ecvWeight.getText()) ? 0 : Integer.parseInt(ecvWeight.getText()));
-        goodsModel.setVolume(TextUtils.isEmpty(ecvVolume.getText()) ? 0 : Integer.parseInt(ecvVolume.getText()));
-        goodsModel.setNum(TextUtils.isEmpty(ecvNum.getText()) ? 0 : Integer.parseInt(ecvNum.getText()));
-        goodsModel.setDensity(TextUtils.isEmpty(ecvDensity.getText()) ? 0 : Double.parseDouble(ecvDensity.getText()));
-    }
 
     private void initGoods() {
         if (popGoods == null) {
@@ -307,6 +303,80 @@ public class ShippingGoodsActivity extends AppCompatActivity {
         } else {
             popTrans.showAsDropDown(tmiTrans.getTextView());
         }
+    }
+
+    private void save() {
+        if (goodsModel.isEmpty()) {
+            LoadingFinish(getString(R.string.send_goods_empty));
+            return;
+        }
+        setPriceCal();
+        getPrice();
+        setResult(CodeUtil.ShipGoods, new Intent().putExtra("data", new Gson().toJson(goodsModel)));
+        finish();
+    }
+
+    private void getPrice() {
+        LoadingDialog.showDialogForLoading(this);
+        new NetUtil(getPriceCalParams(), NetConfig.address + BillUrl.getPriceByContractInfo, RequstType.POST, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                try {
+                    LoadingFinish(null);
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        back(result.getData());
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                e.printStackTrace();
+                LoadingFinish(e.getMessage());
+            }
+        });
+    }
+
+    private List<NetParams> getPriceCalParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("params", new Gson().toJson(priceCal)));
+        return params;
+    }
+
+    private void setPriceCal() {
+        priceCal.setSize(goodsModel.getVolume());
+        priceCal.setWeight(goodsModel.getWeight());
+        priceCal.setSendType(goodsModel.getSendId());
+        priceCal.setDeliverType(goodsModel.getDeliveryId());
+        priceCal.setTransType(goodsModel.getTransId());
+    }
+
+
+    private void setGoods() {
+        goodsModel.setWeight(TextUtils.isEmpty(ecvWeight.getText()) ? 0 : Integer.parseInt(ecvWeight.getText()));
+        goodsModel.setVolume(TextUtils.isEmpty(ecvVolume.getText()) ? 0 : Integer.parseInt(ecvVolume.getText()));
+        goodsModel.setNum(TextUtils.isEmpty(ecvNum.getText()) ? 0 : Integer.parseInt(ecvNum.getText()));
+        goodsModel.setDensity(TextUtils.isEmpty(ecvDensity.getText()) ? 0 : Double.parseDouble(ecvDensity.getText()));
+    }
+
+    private void back(String price) {
+        setResult(CodeUtil.ShipGoods,
+                new Intent()
+                        .putExtra("price", price)
+                        .putExtra("data", new Gson().toJson(goodsModel)));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        });
+
     }
 
     private void LoadingFinish(String msg) {

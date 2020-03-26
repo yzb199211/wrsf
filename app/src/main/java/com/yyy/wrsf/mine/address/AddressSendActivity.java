@@ -17,19 +17,19 @@ import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.AddressModel;
+import com.yyy.wrsf.model.address.AddressModel;
 import com.yyy.wrsf.model.filter.AddressFilterModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.NetConfig;
-import com.yyy.wrsf.utils.net.NetParams;
-import com.yyy.wrsf.utils.net.NetUtil;
-import com.yyy.wrsf.utils.net.PagerRequestBean;
-import com.yyy.wrsf.utils.net.RequstType;
-import com.yyy.wrsf.utils.net.ResponseListener;
-import com.yyy.wrsf.utils.net.Result;
+import com.yyy.wrsf.utils.net.net.NetConfig;
+import com.yyy.wrsf.utils.net.net.NetParams;
+import com.yyy.wrsf.utils.net.net.NetUtil;
+import com.yyy.wrsf.utils.net.net.PagerRequestBean;
+import com.yyy.wrsf.utils.net.net.RequstType;
+import com.yyy.wrsf.utils.net.net.ResponseListener;
+import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.address.AddressUrl;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
@@ -235,6 +235,7 @@ public class AddressSendActivity extends AppCompatActivity {
 
 
     private void initTop() {
+        topView.setTitle(getString(R.string.address_area_send));
         topView.setOnLeftClickListener(new OnLeftClickListener() {
             @Override
             public void onLeft() {

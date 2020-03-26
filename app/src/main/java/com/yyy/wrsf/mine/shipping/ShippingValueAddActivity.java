@@ -15,11 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.model.ShippingAddValueModel;
-import com.yyy.wrsf.model.SignModel;
+import com.yyy.wrsf.model.ship.ShippingAddValueModel;
+import com.yyy.wrsf.model.ship.SignModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.EditInputFilter;
-import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
 

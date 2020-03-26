@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.CustomerMonthModel;
+import com.yyy.wrsf.model.month.CustomerMonthModel;
 import com.yyy.wrsf.view.cycle.util.ImageLoaderUtil;
 
 import java.util.List;

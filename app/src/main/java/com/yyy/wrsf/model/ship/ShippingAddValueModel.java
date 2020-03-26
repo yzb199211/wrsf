@@ -1,4 +1,4 @@
-package com.yyy.wrsf.model;
+package com.yyy.wrsf.model.ship;
 
 public class ShippingAddValueModel {
     private int insureValue;

@@ -1,7 +1,6 @@
 package com.yyy.wrsf.utils;
 
-import com.yyy.wrsf.model.Sex;
-import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
+import com.yyy.wrsf.model.publicm.Sex;
 
 import java.util.ArrayList;
 import java.util.List;
