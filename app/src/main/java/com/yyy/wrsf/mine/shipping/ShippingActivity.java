@@ -259,7 +259,6 @@ public class ShippingActivity extends AppCompatActivity {
                     companyFilter.setSendRegion(addressSend.getThirdId());
                 }
                 setSend();
-
                 break;
             case CodeUtil.AddressReceive:
                 addressReceive = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
@@ -273,13 +272,26 @@ public class ShippingActivity extends AppCompatActivity {
                 goods = new Gson().fromJson(data.getStringExtra("data"), ShipGoodsModel.class);
                 priceBackM = new Gson().fromJson(data.getStringExtra("price"), PriceBackM.class);
                 setGoods();
+                setTotal();
                 break;
             case CodeUtil.ShipAddValue:
                 addValue = new Gson().fromJson(data.getStringExtra("data"), ShippingAddValueModel.class);
+                setTotal();
                 break;
             default:
                 break;
         }
+    }
+
+    private void setTotal() {
+        double total = 0;
+        if (priceBackM != null) {
+            total = ShipUtil.getTotal(total, priceBackM.getContractTotal());
+        }
+        if (addValue != null) {
+            total = ShipUtil.getTotal(total, addValue.getTotal());
+        }
+        tvTotal.setText(total + "");
     }
 
     private void setGoods() {

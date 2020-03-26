@@ -1,5 +1,9 @@
 package com.yyy.wrsf.model.ship;
 
+import com.yyy.wrsf.mine.shipping.ShipUtil;
+
+import java.math.BigDecimal;
+
 public class ShippingAddValueModel {
     private int insureValue;
     private double insureFee;
@@ -64,5 +68,15 @@ public class ShippingAddValueModel {
 
     public void setReceiveType(int receiveType) {
         this.receiveType = receiveType;
+    }
+    public double getTotal(){
+        try {
+            BigDecimal b1 = new BigDecimal(insureFee + "");
+            BigDecimal b2 = new BigDecimal(colletionFee + "");
+            BigDecimal b3 = new BigDecimal(signFee + "");
+            return b1.add(b2).add(b3).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        } catch (ArithmeticException e) {
+            return 0;
+        }
     }
 }
