@@ -1,4 +1,4 @@
-package com.yyy.wrsf.common;
+package com.yyy.wrsf.common.address;
 
 import android.content.Context;
 import android.view.LayoutInflater;

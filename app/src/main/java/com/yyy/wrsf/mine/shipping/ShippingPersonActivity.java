@@ -5,37 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.common.AreaSelect;
-import com.yyy.wrsf.common.OnBackAreaListener;
-import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.common.address.AreaSelect;
+import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.model.AddressModel;
 import com.yyy.wrsf.model.AreaModel;
-import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
-import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.NetConfig;
-import com.yyy.wrsf.utils.net.NetParams;
-import com.yyy.wrsf.utils.net.NetUtil;
-import com.yyy.wrsf.utils.net.RequstType;
-import com.yyy.wrsf.utils.net.ResponseListener;
-import com.yyy.wrsf.utils.net.Result;
-import com.yyy.wrsf.utils.net.address.AddressUrl;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
-
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -236,5 +220,13 @@ public class ShippingPersonActivity extends AppCompatActivity {
 
     private void Toast(String msg) {
         Toasts.showShort(this, msg);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (areaSelect != null && areaSelect.isShowing()) {
+            areaSelect.dismiss();
+        } else
+            super.onBackPressed();
     }
 }

@@ -1,4 +1,4 @@
-package com.yyy.wrsf.common;
+package com.yyy.wrsf.common.address;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,11 +30,8 @@ import com.yyy.wrsf.utils.net.address.AddressUrl;
 
 import org.json.JSONException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.OnClick;
 
 public class AreaSelect extends PopupWindow implements View.OnClickListener {
     private View view;
@@ -58,7 +55,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
     private AreaAdapter areaAdapter;
 
     private SharedPreferencesHelper preferencesHelper;
-    OnBackAreaListener onBackAreaListener;
+    private OnBackAreaListener onBackAreaListener;
 
     public AreaSelect(Context context) {
         this(context, null, null, null);

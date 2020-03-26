@@ -183,12 +183,7 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refresh(String s) {
-
         getData();
-
-        //进行数据操作
-//        textResult.setText(doAddition(number1, number2));
-
     }
 
     private void LoadingFinish(String msg) {
@@ -206,4 +201,5 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
     private void Toast(String msg) {
         Toasts.showShort(getActivity(), msg);
     }
+
 }

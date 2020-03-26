@@ -2,7 +2,6 @@ package com.yyy.wrsf.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -13,17 +12,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.common.AreaSelect;
 import com.yyy.wrsf.company.CompanyRegisterActivity;
-import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
 import com.yyy.wrsf.mine.shipping.ShippingActivity;
-import com.yyy.wrsf.view.cycle.bean.DataBean;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

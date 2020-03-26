@@ -3,6 +3,7 @@ package com.yyy.wrsf.mine.shipping;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -12,14 +13,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.common.company.CompanySelect;
+import com.yyy.wrsf.common.company.OnLoadingListener;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
 import com.yyy.wrsf.model.AddressModel;
 import com.yyy.wrsf.model.ShipGoodsModel;
 import com.yyy.wrsf.model.ShippingAddValueModel;
+import com.yyy.wrsf.model.filter.ShipCompany;
 import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.TopView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,12 +75,17 @@ public class ShippingActivity extends AppCompatActivity {
     @BindView(R.id.tv_pay_month)
     RadioButton tvPayMonth;
 
+    private RadioButton currentPay;
+    private CompanySelect companySelect;
+
     private AddressModel addressSend;
     private AddressModel addressReceive;
     private ShipGoodsModel goods;
+    private ShipCompany companyFilter;
     private ShippingAddValueModel addValue;
-    private RadioButton currentPay;
+
     private int payType;
+    private boolean refreshCompany = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +97,11 @@ public class ShippingActivity extends AppCompatActivity {
 
     private void init() {
         initView();
+        initModel();
+    }
+
+    private void initModel() {
+        companyFilter = new ShipCompany();
     }
 
     private void initView() {
@@ -113,7 +130,11 @@ public class ShippingActivity extends AppCompatActivity {
                 go2AddressDetail(addressReceive, CodeUtil.AddressReceive);
                 break;
             case R.id.tmi_company:
-
+                if (addressSend == null || addressReceive == null) {
+                    Toast(getString(R.string.send_empty_address));
+                    return;
+                }
+                selectCompany(view);
                 break;
             case R.id.tmi_goods:
                 go2Goods();
@@ -143,6 +164,22 @@ public class ShippingActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+    private void selectCompany(View view) {
+        if (companySelect == null) {
+            companySelect = new CompanySelect(this);
+            companySelect.setOnLoadingListener(new OnLoadingListener() {
+                @Override
+                public void onLoading(boolean success) {
+                    refreshCompany = false;
+                }
+            });
+        }
+        companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        EventBus.getDefault().register(companySelect);
+        if (refreshCompany)
+            EventBus.getDefault().post(new ShipCompany());
     }
 
 
@@ -206,10 +243,17 @@ public class ShippingActivity extends AppCompatActivity {
         switch (requestCode) {
             case CodeUtil.AddressSend:
                 addressSend = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
+                if (addressSend.getThirdId() != companyFilter.getSendRegion()) {
+                    refreshCompany = true;
+                }
                 setSend();
+
                 break;
             case CodeUtil.AddressReceive:
                 addressReceive = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
+                if (addressReceive.getThirdId() != companyFilter.getRecRegion()) {
+                    refreshCompany = true;
+                }
                 setReceive();
                 break;
             case CodeUtil.ShipGoods:
@@ -238,5 +282,23 @@ public class ShippingActivity extends AppCompatActivity {
         tvNameReceive.setText(addressReceive.getContractPerson());
         tvTelReceive.setText(addressReceive.getContractTel());
         tvAddressDetailReceive.setText(addressReceive.getFirstAdd() + addressReceive.getSecondAdd() + addressReceive.getThirdAdd() + addressReceive.getDetailAdd());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    private void Toast(String msg) {
+        Toasts.showShort(this, msg);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (companySelect != null && companySelect.isShowing()) {
+            companySelect.dismiss();
+        } else
+            super.onBackPressed();
     }
 }

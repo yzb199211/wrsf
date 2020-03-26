@@ -123,6 +123,7 @@
     <string name="send_sumbit">提交订单</string>
     <string name="send_total">预估费用：</string>
     <string name="send_protocol">查看并同意《万瑞三富物流服务协议》</string>
+
     <string name="send_goods_name">货物名称</string>
     <string name="send_goods_weight">重量(KG)</string>
     <string name="send_goods_volume">体积/m³</string>
@@ -143,6 +144,8 @@
     <string name="sign_back_none">无需签收单</string>
     <string name="sign_back_paper">纸质签收单</string>
     <string name="sign_back_electronic">电子签收单</string>
+
+    <string name="send_empty_address">请先选择寄件人和发件人</string>
 
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>

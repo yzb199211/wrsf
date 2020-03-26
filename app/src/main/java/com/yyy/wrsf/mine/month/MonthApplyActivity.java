@@ -17,7 +17,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -26,15 +25,14 @@ import com.lxj.matisse.Matisse;
 import com.lxj.matisse.MimeType;
 import com.yyy.wrsf.BaseActivity;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.common.AreaSelect;
-import com.yyy.wrsf.common.OnBackAreaListener;
+import com.yyy.wrsf.common.address.AreaSelect;
+import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
 import com.yyy.wrsf.model.AreaModel;
 import com.yyy.wrsf.model.CompanyModel;
 import com.yyy.wrsf.model.ImageModel;
 import com.yyy.wrsf.model.MonthModel;
-import com.yyy.wrsf.model.filter.AddressFilterModel;
 import com.yyy.wrsf.model.filter.CompanyFilterModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -606,5 +604,13 @@ public class MonthApplyActivity extends BaseActivity {
 
     private void Toast(String msg) {
         Toasts.showShort(this, msg);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (areaSelect != null && areaSelect.isShowing()) {
+            areaSelect.dismiss();
+        } else
+            super.onBackPressed();
     }
 }

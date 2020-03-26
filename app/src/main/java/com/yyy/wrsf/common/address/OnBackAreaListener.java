@@ -1,4 +1,4 @@
-package com.yyy.wrsf.common;
+package com.yyy.wrsf.common.address;
 
 import com.yyy.wrsf.model.AreaModel;
 

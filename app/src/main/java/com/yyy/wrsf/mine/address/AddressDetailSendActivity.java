@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.common.AreaSelect;
-import com.yyy.wrsf.common.OnBackAreaListener;
+import com.yyy.wrsf.common.address.AreaSelect;
+import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.model.AddressModel;
 import com.yyy.wrsf.model.AreaModel;
@@ -178,7 +178,8 @@ public class AddressDetailSendActivity extends AppCompatActivity {
                                     LoadingFinish(result.getMsg());
                                 }
                             } catch (JSONException e) {
-                                e.printStackTrace(); LoadingFinish(e.getMessage());
+                                e.printStackTrace();
+                                LoadingFinish(e.getMessage());
                             }
 
                         }
@@ -288,4 +289,11 @@ public class AddressDetailSendActivity extends AppCompatActivity {
         Toasts.showShort(this, msg);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (areaSelect != null && areaSelect.isShowing()) {
+            areaSelect.dismiss();
+        }
+        super.onBackPressed();
+    }
 }

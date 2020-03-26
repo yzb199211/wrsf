@@ -20,11 +20,10 @@ import com.lxj.matisse.Matisse;
 import com.lxj.matisse.MimeType;
 import com.yyy.wrsf.BaseActivity;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.common.AreaSelect;
-import com.yyy.wrsf.common.OnBackAreaListener;
+import com.yyy.wrsf.common.address.AreaSelect;
+import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
-import com.yyy.wrsf.mine.address.AddressDetailActivity;
 import com.yyy.wrsf.model.AreaModel;
 import com.yyy.wrsf.model.CompanyRegister;
 import com.yyy.wrsf.model.ImageModel;
@@ -39,7 +38,6 @@ import com.yyy.wrsf.utils.net.RequstType;
 import com.yyy.wrsf.utils.net.ResponseListener;
 import com.yyy.wrsf.utils.net.Result;
 import com.yyy.wrsf.utils.net.UploadFile;
-import com.yyy.wrsf.utils.net.address.AddressUrl;
 import com.yyy.wrsf.utils.net.company.CompanyUrl;
 import com.yyy.wrsf.view.VerificationCode;
 import com.yyy.wrsf.view.editclear.EditClearView;
@@ -450,4 +448,11 @@ public class CompanyRegisterActivity extends BaseActivity {
         Toasts.showShort(this, msg);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (areaSelect != null && areaSelect.isShowing()) {
+            areaSelect.dismiss();
+        } else
+            super.onBackPressed();
+    }
 }
