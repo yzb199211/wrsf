@@ -187,7 +187,7 @@ public class ShippingActivity extends AppCompatActivity {
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         EventBus.getDefault().register(companySelect);
         if (refreshCompany)
-            EventBus.getDefault().post(new ShipCompany());
+            EventBus.getDefault().post(companyFilter);
     }
 
 
@@ -256,6 +256,7 @@ public class ShippingActivity extends AppCompatActivity {
                 addressSend = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
                 if (addressSend.getThirdId() != companyFilter.getSendRegion()) {
                     refreshCompany = true;
+                    companyFilter.setSendRegion(addressSend.getThirdId());
                 }
                 setSend();
 
@@ -264,6 +265,7 @@ public class ShippingActivity extends AppCompatActivity {
                 addressReceive = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
                 if (addressReceive.getThirdId() != companyFilter.getRecRegion()) {
                     refreshCompany = true;
+                    companyFilter.setRecRegion(addressReceive.getThirdId());
                 }
                 setReceive();
                 break;

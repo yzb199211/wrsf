@@ -29,6 +29,7 @@ import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.publics.PublicUrl;
+import com.yyy.wrsf.utils.net.ship.ShipUrl;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.popwin.Popwin;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
@@ -312,13 +313,13 @@ public class ShippingGoodsActivity extends AppCompatActivity {
         }
         setPriceCal();
         getPrice();
-        setResult(CodeUtil.ShipGoods, new Intent().putExtra("data", new Gson().toJson(goodsModel)));
-        finish();
+//        setResult(CodeUtil.ShipGoods, new Intent().putExtra("data", new Gson().toJson(goodsModel)));
+//        finish();
     }
 
     private void getPrice() {
         LoadingDialog.showDialogForLoading(this);
-        new NetUtil(getPriceCalParams(), NetConfig.address + BillUrl.getPriceByContractInfo, RequstType.POST, new ResponseListener() {
+        new NetUtil(getPriceCalParams(), NetConfig.address + ShipUrl.getPriceByContractInfo, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 try {

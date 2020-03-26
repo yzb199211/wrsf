@@ -13,6 +13,4 @@ public class PublicCode {
     public final static int SendType = 115;
     public final static int DeliveryType = 114;
     public final static int transType = 113;
-
-
 }

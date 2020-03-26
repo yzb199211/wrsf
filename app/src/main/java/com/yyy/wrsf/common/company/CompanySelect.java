@@ -3,6 +3,7 @@ package com.yyy.wrsf.common.company;
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.PopupWindow;
@@ -27,6 +28,7 @@ import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.bill.BillUrl;
+import com.yyy.wrsf.utils.net.ship.ShipUrl;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -98,25 +100,26 @@ public class CompanySelect extends PopupWindow {
 
     private void getData() {
         LoadingDialog.showDialogForLoading((Activity) context);
-        new NetUtil(getParams(), NetConfig.address + BillUrl.getTransCompanyList, RequstType.POST, new ResponseListener() {
+        new NetUtil(getParams(), NetConfig.address + ShipUrl.getTransCompanyList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 try {
                     LoadingFinish(null);
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        if (onLoadingListener != null) {
-                            onLoadingListener.onLoading(true);
-                        }
                         String data = result.getData();
                         if (!TextUtils.isEmpty(data)) {
                             List<CompanyModel> list = new Gson().fromJson(data, new TypeToken<List<CompanyModel>>() {
                             }.getType());
+                            if (list != null && list.size() > 0 && onLoadingListener != null) {
+                                onLoadingListener.onLoading(true);
+                            }
                             companys.addAll(list);
                             refreshList();
                         }
                     } else {
                         LoadingFinish(result.getMsg());
+                        Log.e("erroe", result.getMsg());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
