@@ -121,19 +121,5 @@ public class CompanyDetailActivity extends BaseActivity {
         });
     }
 
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
 
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
-    }
 }

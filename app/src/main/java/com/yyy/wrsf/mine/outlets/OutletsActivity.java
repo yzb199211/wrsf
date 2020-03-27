@@ -43,7 +43,6 @@ public class OutletsActivity extends BaseActivity implements XRecyclerView.Loadi
     private LinearLayoutManager manager;
     private LoadingType loadingType = LoadingType.NORMAL;
     private OutletsAdapter listAdapter;
-    private int pageNo;
     private List<OutleModel> list;
 
     @Override
@@ -150,22 +149,6 @@ public class OutletsActivity extends BaseActivity implements XRecyclerView.Loadi
             default:
                 break;
         }
-    }
-
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
-
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
     }
 
     /**

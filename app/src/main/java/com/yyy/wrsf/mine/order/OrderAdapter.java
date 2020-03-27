@@ -28,6 +28,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
     private OnCancleListener onCancleListener;
     private OnItemClickListener onItemClickListener;
 
+    public OrderAdapter(Context context, List<OrderModel> list) {
+        this.context = context;
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,10 +52,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         holder.tvReceivePerson.setText(list.get(position).getRecName());
         holder.tvOrderGoods.setText(list.get(position).getGoodsName());
         holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + list.get(position).getContractTotal());
-        if (list.get(position).getContractStatus() > 3) {
+        if (list.get(position).getContractStatus() > 3 || list.get(position).getContractStatus() == -1) {
             holder.tvOrderCancle.setVisibility(View.INVISIBLE);
         }
-        if (list.get(position).getPayStatus() == 1) {
+        if (list.get(position).getPayStatus() != 1) {
             holder.tvPay.setVisibility(View.INVISIBLE);
         }
         holder.tvOrderCancle.setOnClickListener(new View.OnClickListener() {
