@@ -439,6 +439,8 @@ public class ShippingModel implements Serializable {
         setTransTotal(price.getTransTotal());
         setSendTotal(price.getSendTotal());
         setTransCustomerMonthRecNo(price.getTransCustomerMonthRecNo());
+        setTransRecShopRecNo(price.getTransRecShopRecNo());
+        setTransShopRecNo(price.getTransShopRecNo());
     }
 
     public void setValueAdd(ShippingAddValueModel valueAdd) {

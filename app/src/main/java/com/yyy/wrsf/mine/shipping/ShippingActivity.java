@@ -16,8 +16,11 @@ import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.common.company.CompanySelect;
+import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.login.LoginActivity;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
+import com.yyy.wrsf.model.LoginModel;
 import com.yyy.wrsf.model.address.AddressModel;
 import com.yyy.wrsf.model.company.CompanyModel;
 import com.yyy.wrsf.model.price.PriceBackM;
@@ -30,6 +33,15 @@ import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.TimeUtil;
 import com.yyy.wrsf.utils.Toasts;
+import com.yyy.wrsf.utils.net.member.MemberURL;
+import com.yyy.wrsf.utils.net.net.NetConfig;
+import com.yyy.wrsf.utils.net.net.NetLogin;
+import com.yyy.wrsf.utils.net.net.NetParams;
+import com.yyy.wrsf.utils.net.net.NetUtil;
+import com.yyy.wrsf.utils.net.net.RequstType;
+import com.yyy.wrsf.utils.net.net.ResponseListener;
+import com.yyy.wrsf.utils.net.net.Result;
+import com.yyy.wrsf.utils.net.order.OrderUrl;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.TopView;
 import com.yyy.yyylibrary.pick.builder.TimePickerBuilder;
@@ -37,9 +49,12 @@ import com.yyy.yyylibrary.pick.listener.OnTimeSelectListener;
 import com.yyy.yyylibrary.pick.view.TimePickerView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -167,7 +182,7 @@ public class ShippingActivity extends BasePickActivity {
                 break;
             case R.id.tmi_company:
                 if (addressSend == null || addressReceive == null) {
-                    Toast(getString(R.string.send_empty_company));
+                    Toast(getString(R.string.send_empty_address));
                     return;
                 }
                 selectCompany(view);
@@ -202,6 +217,7 @@ public class ShippingActivity extends BasePickActivity {
             case R.id.tv_submit:
                 if (canSave()) {
                     Log.e("data", new Gson().toJson(shipping));
+                    save();
                 }
                 break;
             case R.id.tv_pay_now:
@@ -218,12 +234,6 @@ public class ShippingActivity extends BasePickActivity {
         }
     }
 
-    private boolean canSave() {
-        if (goods == null) {
-            Toast(getString(R.string.send_goods_empty));
-        }
-        return true;
-    }
 
     private void selectCompany(View view) {
         if (companySelect == null) {
@@ -234,6 +244,7 @@ public class ShippingActivity extends BasePickActivity {
             companySelect.setOnCompanySelectListener((CompanyModel item) -> {
                 company = item;
                 tmiCompany.setText(company.getCompanyName());
+                shipping.setTransCompanyRecNo(company.getRecNo());
             });
         }
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
@@ -390,6 +401,65 @@ public class ShippingActivity extends BasePickActivity {
         tvAddressDetailReceive.setText(addressReceive.getFirstAdd() + addressReceive.getSecondAdd() + addressReceive.getThirdAdd() + addressReceive.getDetailAdd());
     }
 
+    private boolean canSave() {
+        if (goods == null) {
+            Toast(getString(R.string.send_goods_empty));
+        }
+        return true;
+    }
+
+    private void save() {
+        LoadingDialog.showDialogForLoading(this);
+        new NetUtil(saveParams(), NetConfig.address + OrderUrl.insertContractInfo, RequstType.POST, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                LoadingFinish(null);
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(null);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        });
+                    } else {
+                        LoadingFinish(result.getMsg());
+                        Log.e(ShippingActivity.this.getClass().getName(), result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                e.printStackTrace();
+                LoadingFinish(e.getMessage());
+            }
+        });
+    }
+
+    private List<NetParams> saveParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("param", new Gson().toJson(shipping)));
+        return params;
+    }
+
+    private void LoadingFinish(String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (StringUtil.isNotEmpty(msg)) {
+                    Toast(msg);
+                }
+                LoadingDialog.cancelDialogForLoading();
+            }
+        });
+    }
 
     private void Toast(String msg) {
         Toasts.showShort(this, msg);
@@ -402,4 +472,5 @@ public class ShippingActivity extends BasePickActivity {
         } else
             super.onBackPressed();
     }
+
 }

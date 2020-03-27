@@ -23,6 +23,8 @@ public class PriceBackM {
     private double sendTotal;
     private int transCustomerMonthRecNo;
     private double transTotal;
+    private int transRecShopRecNo;
+    private int transShopRecNo;
 
     public double getContractTotal() {
         return contractTotal;
@@ -86,5 +88,21 @@ public class PriceBackM {
 
     public void setTransTotal(double transTotal) {
         this.transTotal = transTotal;
+    }
+
+    public int getTransRecShopRecNo() {
+        return transRecShopRecNo;
+    }
+
+    public void setTransRecShopRecNo(int transRecShopRecNo) {
+        this.transRecShopRecNo = transRecShopRecNo;
+    }
+
+    public int getTransShopRecNo() {
+        return transShopRecNo;
+    }
+
+    public void setTransShopRecNo(int transShopRecNo) {
+        this.transShopRecNo = transShopRecNo;
     }
 }
