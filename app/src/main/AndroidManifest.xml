@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".common.company.CompanyActivity"></activity>
+        <activity android:name=".company.order.OrderActivity"></activity>
+        <activity android:name=".common.company.CompanyActivity" />
         <activity android:name=".company.outlets.OutletDetailActivity" />
         <activity android:name=".company.outlets.OutletActivity" />
         <activity

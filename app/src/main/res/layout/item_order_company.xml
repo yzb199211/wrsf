@@ -35,7 +35,7 @@
         android:textSize="@dimen/text_common_min" />
 
     <TextView
-        android:id="@+id/tv_date_lasts"
+        android:id="@+id/tv_date_last"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_order_no"
@@ -50,7 +50,7 @@
         android:id="@+id/ll_middle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
-        android:layout_below="@+id/tv_date_lasts"
+        android:layout_below="@+id/tv_date_last"
         android:orientation="horizontal">
 
         <TextView
@@ -177,7 +177,7 @@
         android:background="@drawable/bg_order_btn_yellow"
         android:gravity="center"
         android:singleLine="true"
-        android:text="@string/common_pay"
+        android:text="@string/common_comfirm"
         android:textColor="@color/order_yellow"
         android:textSize="@dimen/text_common_min" />
 
