@@ -1,6 +1,11 @@
 package com.yyy.wrsf.model.ship;
 
-public class ShippingModel {
+import com.yyy.wrsf.model.address.AddressModel;
+import com.yyy.wrsf.model.price.PriceBackM;
+
+import java.io.Serializable;
+
+public class ShippingModel implements Serializable {
 
     /**
      * baoAsk : 0
@@ -43,28 +48,29 @@ public class ShippingModel {
      * transType : 0
      * updateDate : 2020-03-23T01:53:49.609Z
      * weight : 0
+     * payType:0
      */
 
     private int baoAsk;
-    private int baoPrice;//保价价格
+    private double baoPrice;//保价价格
     private String contractNo;
     private int contractStatus;
-    private long contractTotal;//总金额
+    private double contractTotal;//总金额
     private String createDate;
-    private int daiPrice;
+    private double daiPrice;
     private int daiTotal;//代收货款
     private int deliverType;
-    private long density;
+    private double density;
     private String goodsName;
     private int noticeYesNo;
     private long packNumber;//数量
-    private int picTotal;//提货价格
+    private double picTotal;//提货价格
     private String pickDate;
     private String platMemberName;
     private int platMemberRecNo;
     private String platMemberTel;
-    private int price;//单价
-    private int qianPrice;//签单费
+    private double price;//单价
+    private double qianPrice;//签单费
     private int qianType;
     private String recDetail;
     private String recName;
@@ -74,17 +80,18 @@ public class ShippingModel {
     private String sendName;
     private int sendRegion;
     private String sendTel;
-    private long sendTotal;//送货费
+    private double sendTotal;//送货费
     private int sendType;
     private long size;
     private int transCompanyRecNo;
     private int transCustomerMonthRecNo;
     private int transRecShopRecNo;
     private int transShopRecNo;
-    private long transTotal;//运费
+    private double transTotal;//运费
     private int transType;
     private String updateDate;
     private long weight;//重量
+    private int payType;
 
     public int getBaoAsk() {
         return baoAsk;
@@ -94,11 +101,11 @@ public class ShippingModel {
         this.baoAsk = baoAsk;
     }
 
-    public int getBaoPrice() {
+    public double getBaoPrice() {
         return baoPrice;
     }
 
-    public void setBaoPrice(int baoPrice) {
+    public void setBaoPrice(double baoPrice) {
         this.baoPrice = baoPrice;
     }
 
@@ -118,11 +125,11 @@ public class ShippingModel {
         this.contractStatus = contractStatus;
     }
 
-    public long getContractTotal() {
+    public double getContractTotal() {
         return contractTotal;
     }
 
-    public void setContractTotal(long contractTotal) {
+    public void setContractTotal(double contractTotal) {
         this.contractTotal = contractTotal;
     }
 
@@ -134,11 +141,11 @@ public class ShippingModel {
         this.createDate = createDate;
     }
 
-    public int getDaiPrice() {
+    public double getDaiPrice() {
         return daiPrice;
     }
 
-    public void setDaiPrice(int daiPrice) {
+    public void setDaiPrice(double daiPrice) {
         this.daiPrice = daiPrice;
     }
 
@@ -158,11 +165,11 @@ public class ShippingModel {
         this.deliverType = deliverType;
     }
 
-    public long getDensity() {
+    public double getDensity() {
         return density;
     }
 
-    public void setDensity(long density) {
+    public void setDensity(double density) {
         this.density = density;
     }
 
@@ -190,11 +197,11 @@ public class ShippingModel {
         this.packNumber = packNumber;
     }
 
-    public int getPicTotal() {
+    public double getPicTotal() {
         return picTotal;
     }
 
-    public void setPicTotal(int picTotal) {
+    public void setPicTotal(double picTotal) {
         this.picTotal = picTotal;
     }
 
@@ -230,19 +237,19 @@ public class ShippingModel {
         this.platMemberTel = platMemberTel;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getQianPrice() {
+    public double getQianPrice() {
         return qianPrice;
     }
 
-    public void setQianPrice(int qianPrice) {
+    public void setQianPrice(double qianPrice) {
         this.qianPrice = qianPrice;
     }
 
@@ -318,11 +325,11 @@ public class ShippingModel {
         this.sendTel = sendTel;
     }
 
-    public long getSendTotal() {
+    public double getSendTotal() {
         return sendTotal;
     }
 
-    public void setSendTotal(long sendTotal) {
+    public void setSendTotal(double sendTotal) {
         this.sendTotal = sendTotal;
     }
 
@@ -374,11 +381,11 @@ public class ShippingModel {
         this.transShopRecNo = transShopRecNo;
     }
 
-    public long getTransTotal() {
+    public double getTransTotal() {
         return transTotal;
     }
 
-    public void setTransTotal(long transTotal) {
+    public void setTransTotal(double transTotal) {
         this.transTotal = transTotal;
     }
 
@@ -405,4 +412,57 @@ public class ShippingModel {
     public void setWeight(long weight) {
         this.weight = weight;
     }
+
+    public int getPayType() {
+        return payType;
+    }
+
+    public void setPayType(int payType) {
+        this.payType = payType;
+    }
+
+    public void setGoods(ShipGoodsModel shipGoods) {
+        setWeight(shipGoods.getWeight());
+        setSize(shipGoods.getVolume());
+        setDensity(shipGoods.getDensity());
+        setPackNumber(shipGoods.getNum());
+        setDeliverType(shipGoods.getDeliveryId());
+        setSendType(shipGoods.getSendId());
+        setTransType(shipGoods.getTransId());
+        setGoodsName(shipGoods.getGoodsName());
+    }
+
+    public void setGoodsPrice(PriceBackM price) {
+        setPrice(price.getPrice());
+        setPicTotal(price.getPicTotal());
+        setContractTotal(price.getContractTotal());
+        setTransTotal(price.getTransTotal());
+        setSendTotal(price.getSendTotal());
+        setTransCustomerMonthRecNo(price.getTransCustomerMonthRecNo());
+    }
+
+    public void setValueAdd(ShippingAddValueModel valueAdd) {
+        setBaoAsk(valueAdd.getInsureValue());
+        setBaoPrice(valueAdd.getInsureFee());
+        setQianType(valueAdd.getSignType());
+        setQianPrice(valueAdd.getSignFee());
+        setDaiPrice(valueAdd.getColletionFee());
+        setDaiTotal(valueAdd.getColletionValue());
+        setNoticeYesNo(valueAdd.getReceiveType());
+    }
+
+    public void setSend(AddressModel send) {
+        setSendName(send.getContractPerson());
+        setSendTel(send.getContractTel());
+        setSendRegion(send.getThirdId());
+        setSendDetail(send.getWholeAddress());
+    }
+
+    public void setReceive(AddressModel receive) {
+        setRecDetail(receive.getWholeAddress());
+        setRecTel(receive.getContractTel());
+        setRecRegion(receive.getThirdId());
+        setRecName(receive.getContractPerson());
+    }
+
 }

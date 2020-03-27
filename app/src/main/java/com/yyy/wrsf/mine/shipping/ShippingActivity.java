@@ -24,6 +24,7 @@ import com.yyy.wrsf.model.price.PriceBackM;
 import com.yyy.wrsf.model.ship.ShipGoodsModel;
 import com.yyy.wrsf.model.ship.ShippingAddValueModel;
 import com.yyy.wrsf.model.filter.ShipCompany;
+import com.yyy.wrsf.model.ship.ShippingModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.StringUtil;
@@ -96,10 +97,10 @@ public class ShippingActivity extends BasePickActivity {
     private ShipGoodsModel goods;
     private CompanyModel company;
     private ShipCompany companyFilter;
+    private ShippingModel shipping;
     private ShippingAddValueModel addValue;
     private PriceBackM priceBackM;
 
-    private int payType;
     private boolean refreshCompany = true;
 
     @Override
@@ -111,12 +112,20 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void init() {
-        initView();
         initModel();
+        initView();
     }
 
     private void initModel() {
         companyFilter = new ShipCompany();
+        initShip();
+
+    }
+
+    private void initShip() {
+        shipping = new ShippingModel();
+        shipping.setPickDate(DateUtil.getCurrentDate());
+        shipping.setPayType(1);
     }
 
     private void initView() {
@@ -134,11 +143,10 @@ public class ShippingActivity extends BasePickActivity {
     private void initPay() {
         tvPayMonth.setVisibility(View.GONE);
         currentPay = tvPayNow;
-        payType = 1;
     }
 
     private void initDate() {
-        tmiPickDate.setText(DateUtil.getCurrentDate());
+        tmiPickDate.setText(shipping.getPickDate());
     }
 
     @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add,
@@ -192,6 +200,9 @@ public class ShippingActivity extends BasePickActivity {
             case R.id.tv_protocol:
                 break;
             case R.id.tv_submit:
+                if (canSave()) {
+                    Log.e("data", new Gson().toJson(shipping));
+                }
                 break;
             case R.id.tv_pay_now:
                 switchPay(view, 1);
@@ -205,6 +216,13 @@ public class ShippingActivity extends BasePickActivity {
             default:
                 break;
         }
+    }
+
+    private boolean canSave() {
+        if (goods == null) {
+            Toast(getString(R.string.send_goods_empty));
+        }
+        return true;
     }
 
     private void selectCompany(View view) {
@@ -242,7 +260,7 @@ public class ShippingActivity extends BasePickActivity {
             currentPay = (RadioButton) view;
             currentPay.setTextColor(getColor(R.color.white));
             currentPay.setChecked(true);
-            payType = i;
+            shipping.setPayType(i);
         } else {
             currentPay.setChecked(true);
         }
@@ -327,11 +345,13 @@ public class ShippingActivity extends BasePickActivity {
                 goods = new Gson().fromJson(data.getStringExtra("data"), ShipGoodsModel.class);
                 priceBackM = new Gson().fromJson(data.getStringExtra("price"), PriceBackM.class);
                 Log.e("price", data.getStringExtra("price"));
+                shipping.setGoodsPrice(priceBackM);
                 setGoods();
                 setTotal();
                 break;
             case CodeUtil.ShipAddValue:
                 addValue = new Gson().fromJson(data.getStringExtra("data"), ShippingAddValueModel.class);
+                shipping.setValueAdd(addValue);
                 setTotal();
                 break;
             default:
@@ -352,17 +372,19 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void setGoods() {
+        shipping.setGoods(goods);
         tmiGoods.setText(goods.getData());
     }
 
     private void setSend() {
-
+        shipping.setSend(addressSend);
         tvNameSend.setText(addressSend.getContractPerson());
         tvTelSend.setText(addressSend.getContractTel());
         tvAddressDetailSend.setText(addressSend.getFirstAdd() + addressSend.getSecondAdd() + addressSend.getThirdAdd() + addressSend.getDetailAdd());
     }
 
     private void setReceive() {
+        shipping.setReceive(addressReceive);
         tvNameReceive.setText(addressReceive.getContractPerson());
         tvTelReceive.setText(addressReceive.getContractTel());
         tvAddressDetailReceive.setText(addressReceive.getFirstAdd() + addressReceive.getSecondAdd() + addressReceive.getThirdAdd() + addressReceive.getDetailAdd());
@@ -380,6 +402,4 @@ public class ShippingActivity extends BasePickActivity {
         } else
             super.onBackPressed();
     }
-
-
 }
