@@ -356,6 +356,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void setSend() {
+
         tvNameSend.setText(addressSend.getContractPerson());
         tvTelSend.setText(addressSend.getContractTel());
         tvAddressDetailSend.setText(addressSend.getFirstAdd() + addressSend.getSecondAdd() + addressSend.getThirdAdd() + addressSend.getDetailAdd());
