@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
     android:orientation="vertical"
-    tools:context=".mine.order.list.OrderActivity">
+    tools:context=".mine.order.OrderActivity">
 
     <com.yyy.wrsf.view.topview.TopView
         android:id="@+id/top_view"
@@ -16,4 +17,10 @@
         app:topLeftSrc="@mipmap/icon_back"
         app:topTitle="@string/order_title"
         app:topTitleColor="@color/white" />
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1" />
 </LinearLayout>

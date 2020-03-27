@@ -1,4 +1,4 @@
-package com.yyy.wrsf.mine.order.detail;
+package com.yyy.wrsf.mine.order;
 
 import androidx.appcompat.app.AppCompatActivity;
 

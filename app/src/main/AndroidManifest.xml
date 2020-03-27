@@ -95,11 +95,11 @@
             android:name=".mine.address.AddressSendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".mine.order.detail.OrderDetailActivity"
+            android:name=".mine.order.OrderDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".mine.order.list.OrderActivity"
+            android:name=".mine.order.OrderActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mine.outlets.OutletsActivity"
