@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lxj.matisse.Matisse;
 import com.lxj.matisse.MimeType;
-import com.yyy.wrsf.BaseActivity;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.common.address.AreaSelect;
 import com.yyy.wrsf.common.address.OnBackAreaListener;

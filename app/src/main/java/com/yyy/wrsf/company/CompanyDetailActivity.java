@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.yyy.wrsf.BaseActivity;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.model.company.CompanyModel;

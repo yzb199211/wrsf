@@ -233,7 +233,7 @@ public class ShippingValueAddActivity extends AppCompatActivity {
             currentSign.setChecked(true);
             shippingAddValue.setSignType(sign.getType());
             shippingAddValue.setSignFee(sign.getPrice());
-            tvSignBack.setText(rmb + sign.getPrice());
+            tvPriceSignback.setText(rmb + sign.getPrice());
         } else {
             currentSign.setChecked(true);
         }

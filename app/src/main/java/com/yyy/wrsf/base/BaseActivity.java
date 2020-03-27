@@ -1,4 +1,4 @@
-package com.yyy.wrsf;
+package com.yyy.wrsf.base;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;

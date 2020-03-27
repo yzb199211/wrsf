@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.NoticeModel;
+import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.StringUtil;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class NoticeAdpter extends RecyclerView.Adapter<NoticeAdpter.VH> {
         holder.setIsRecyclable(false);
         holder.tvName.setText(list.get(position).getCreateName());
         holder.tvTitle.setText(list.get(position).getTitle());
-        holder.tvTime.setText(TextUtils.isEmpty(list.get(position).getCreateDate()) ? "" : StringUtil.isToday(list.get(position).getCreateDate()));
+        holder.tvTime.setText(TextUtils.isEmpty(list.get(position).getCreateDate()) ? "" : DateUtil.isToday(list.get(position).getCreateDate()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

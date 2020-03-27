@@ -20,6 +20,7 @@ import okhttp3.OkHttpClient;
 public class BaseApplication extends Application {
     private OkHttpClient okHttpClient;
     private static BaseApplication baseApplication;
+
     @Override
     public final void onCreate() {
         super.onCreate();

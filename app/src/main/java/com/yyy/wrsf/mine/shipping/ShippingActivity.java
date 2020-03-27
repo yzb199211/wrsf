@@ -2,6 +2,7 @@ package com.yyy.wrsf.mine.shipping;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.common.company.CompanySelect;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
@@ -23,17 +25,26 @@ import com.yyy.wrsf.model.ship.ShipGoodsModel;
 import com.yyy.wrsf.model.ship.ShippingAddValueModel;
 import com.yyy.wrsf.model.filter.ShipCompany;
 import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.DateUtil;
+import com.yyy.wrsf.utils.StringUtil;
+import com.yyy.wrsf.utils.TimeUtil;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.TopView;
+import com.yyy.yyylibrary.pick.builder.TimePickerBuilder;
+import com.yyy.yyylibrary.pick.listener.OnTimeSelectListener;
+import com.yyy.yyylibrary.pick.view.TimePickerView;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShippingActivity extends AppCompatActivity {
+public class ShippingActivity extends BasePickActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -78,6 +89,7 @@ public class ShippingActivity extends AppCompatActivity {
 
     private RadioButton currentPay;
     private CompanySelect companySelect;
+    private TimePickerView pvDate;
 
     private AddressModel addressSend;
     private AddressModel addressReceive;
@@ -108,12 +120,25 @@ public class ShippingActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        initTop();
         initPay();
+        initDate();
+    }
+
+    private void initTop() {
+        topView.setOnLeftClickListener(() -> {
+            finish();
+        });
     }
 
     private void initPay() {
+        tvPayMonth.setVisibility(View.GONE);
         currentPay = tvPayNow;
         payType = 1;
+    }
+
+    private void initDate() {
+        tmiPickDate.setText(DateUtil.getCurrentDate());
     }
 
     @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add,
@@ -150,6 +175,15 @@ public class ShippingActivity extends AppCompatActivity {
                 go2ValueAdd();
                 break;
             case R.id.tmi_pick_date:
+                try {
+                    if (pvDate == null)
+                        initPvDate();
+                    else {
+                        pvDate.show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.tmi_remark:
                 break;
@@ -241,6 +275,27 @@ public class ShippingActivity extends AppCompatActivity {
                 , CodeUtil.ShipAddValue);
     }
 
+    private void initPvDate() throws Exception {
+        Calendar calendar = Calendar.getInstance();
+        Calendar calendarLast = Calendar.getInstance();
+        calendarLast.add(Calendar.DATE, 2);
+        pvDate = new TimePickerBuilder(this, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {
+                tmiPickDate.setText(DateUtil.getDate(date));
+            }
+        }).setRangDate(calendar, calendarLast)
+                .setDate(calendar)
+                .setType(new boolean[]{true, true, true, false, false, false})
+                .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
+                .setContentTextSize(18)
+                .setBgColor(0xFFFFFFFF)
+                .build();
+        setDialog(pvDate);
+        initDialogWindow(pvDate.getDialog().getWindow());
+        pvDate.show();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -271,6 +326,7 @@ public class ShippingActivity extends AppCompatActivity {
             case CodeUtil.ShipGoods:
                 goods = new Gson().fromJson(data.getStringExtra("data"), ShipGoodsModel.class);
                 priceBackM = new Gson().fromJson(data.getStringExtra("price"), PriceBackM.class);
+                Log.e("price", data.getStringExtra("price"));
                 setGoods();
                 setTotal();
                 break;
@@ -291,7 +347,8 @@ public class ShippingActivity extends AppCompatActivity {
         if (addValue != null) {
             total = ShipUtil.getTotal(total, addValue.getTotal());
         }
-        tvTotal.setText(total + "");
+        String sTotal = getString(R.string.send_total) + getString(R.string.common_rmb) + total;
+        tvTotal.setText(StringUtil.getSpanStr(sTotal, 5, getColor(R.color.order_yellow)));
     }
 
     private void setGoods() {
@@ -322,4 +379,6 @@ public class ShippingActivity extends AppCompatActivity {
         } else
             super.onBackPressed();
     }
+
+
 }

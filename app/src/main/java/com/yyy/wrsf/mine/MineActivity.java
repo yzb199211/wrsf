@@ -20,6 +20,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.model.MemberModel;
 import com.yyy.wrsf.model.publicm.Sex;
 import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.SexUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
@@ -197,10 +198,10 @@ public class MineActivity extends AppCompatActivity {
         pvDate = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                tmiPersonBrithday.setText(StringUtil.getDate(date));
+                tmiPersonBrithday.setText(DateUtil.getDate(date));
             }
-        }).setRangDate(TimeUtil.str2calendar(getString(R.string.common_date_min)),calendar )
-                .setDate(TextUtils.isEmpty(memberModel.getBrithday()) ? calendar: TimeUtil.str2calendar(memberModel.getBrithday()))
+        }).setRangDate(TimeUtil.str2calendar(getString(R.string.common_date_min)), calendar)
+                .setDate(TextUtils.isEmpty(memberModel.getBrithday()) ? calendar : TimeUtil.str2calendar(memberModel.getBrithday()))
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .setContentTextSize(18)
