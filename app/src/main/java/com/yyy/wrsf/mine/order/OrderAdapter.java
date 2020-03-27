@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.enums.ContractStatusEnum;
+import com.yyy.wrsf.interfaces.OnCancleListener;
+import com.yyy.wrsf.interfaces.OnEditListener;
+import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.OrderModel;
 import com.yyy.wrsf.model.ship.ShippingModel;
 import com.yyy.wrsf.utils.DateUtil;
@@ -21,6 +24,9 @@ import java.util.List;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
     private Context context;
     private List<OrderModel> list;
+    private OnEditListener onEditListener;
+    private OnCancleListener onCancleListener;
+    private OnItemClickListener onItemClickListener;
 
     @NonNull
     @Override
@@ -40,7 +46,37 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         holder.tvReceiveArea.setText(list.get(position).getRecAdd());
         holder.tvReceivePerson.setText(list.get(position).getRecName());
         holder.tvOrderGoods.setText(list.get(position).getGoodsName());
-        holder.tvOrderCost.setText(context.getString(R.string.order_cost)+"：¥"+list.get(position).getContractTotal());
+        holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + list.get(position).getContractTotal());
+        if (list.get(position).getContractStatus() > 3) {
+            holder.tvOrderCancle.setVisibility(View.INVISIBLE);
+        }
+        if (list.get(position).getPayStatus() == 1) {
+            holder.tvPay.setVisibility(View.INVISIBLE);
+        }
+        holder.tvOrderCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onCancleListener != null) {
+                    onCancleListener.onCancle(position);
+                }
+            }
+        });
+        holder.tvPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onEditListener != null) {
+                    onEditListener.onEdit(position);
+                }
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -79,4 +115,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         }
     }
 
+    public void setOnEditListener(OnEditListener onEditListener) {
+        this.onEditListener = onEditListener;
+    }
+
+    public void setOnCancleListener(OnCancleListener onCancleListener) {
+        this.onCancleListener = onCancleListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 }
