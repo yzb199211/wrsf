@@ -8,14 +8,14 @@ package com.yyy.wrsf.enums;
  * @Date: 2020/3/23
  */
 public enum PayTypeEnum {
-    PAY_NOW(1,"现付"),
-    PAY_MONTH(2,"月结"),
-    PAY_ARRIVAL(3,"到付");
+    PAY_NOW(1, "现付"),
+    PAY_MONTH(2, "月结"),
+    PAY_ARRIVAL(3, "到付");
 
     private Integer payType;
     private String desc;
 
-    PayTypeEnum(Integer payType,String desc){
+    PayTypeEnum(Integer payType, String desc) {
         this.payType = payType;
         this.desc = desc;
     }
@@ -34,5 +34,13 @@ public enum PayTypeEnum {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public static String getName(Integer payType) {
+        for (PayTypeEnum payTypeEnum : PayTypeEnum.values()) {
+            if (payTypeEnum.getPayType().equals(payType))
+                return payTypeEnum.getDesc();
+        }
+        return "";
     }
 }

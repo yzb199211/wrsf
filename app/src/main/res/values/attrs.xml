@@ -42,6 +42,7 @@
             <enum name="noTitle" value="0"></enum>
         </attr>
         <attr name="ecEditable" format="boolean" />
+        <attr name="ecHasDetele" format="boolean" />
         <attr name="ecFormatTitle" format="boolean" />
         <attr name="ecTextGravity">
             <enum name="right" value="5"></enum>

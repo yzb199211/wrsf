@@ -55,6 +55,17 @@
                     android:singleLine="true"
                     android:text="更新日期2018-10-10 12:20:20"
                     android:textColor="@color/white"
+                    android:textSize="@dimen/text_common_min"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_order_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/white"
                     android:textSize="@dimen/text_common_min" />
 
                 <TextView
@@ -166,6 +177,8 @@
                 android:paddingRight="@dimen/dp_10"
                 app:ecEditable="false"
                 app:ecFormatTitle="false"
+                app:ecHasDetele="false"
+                app:ecTextGravity="right"
                 app:ecTitle="@string/send_goods_name"
                 app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
@@ -184,6 +197,8 @@
                 android:paddingRight="@dimen/dp_10"
                 app:ecEditable="false"
                 app:ecFormatTitle="false"
+                app:ecHasDetele="false"
+                app:ecTextGravity="right"
                 app:ecTitle="@string/send_goods_weight"
                 app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
@@ -202,6 +217,8 @@
                 android:paddingRight="@dimen/dp_10"
                 app:ecEditable="false"
                 app:ecFormatTitle="false"
+                app:ecHasDetele="false"
+                app:ecTextGravity="right"
                 app:ecTitle="@string/send_goods_volume"
                 app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
@@ -223,6 +240,132 @@
                 app:ecTitle="@string/order_fee_total"
                 app:ecTitleColor="@color/text_common"
                 app:ecType="tv" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/bg_order_gray"
+                android:orientation="vertical">
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_fee_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTitle="@string/order_fee_type"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecType="tv" />
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_fee_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTitle="@string/order_fee_user"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecType="tv" />
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_fee_base"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTextGravity="right"
+                    app:ecTitle="@string/order_fee_base"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecType="tv" />
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_fee_pick"
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTextGravity="right"
+                    app:ecTitle="@string/order_fee_pick"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecType="tv" />
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_fee_send"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTextGravity="right"
+                    app:ecTitle="@string/order_fee_send"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecType="tv" />
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_fee_insure"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTextGravity="right"
+                    app:ecTitle="@string/order_fee_insure"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecType="tv" />
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_fee_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTextGravity="right"
+                    app:ecTitle="@string/order_fee_collection"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecType="tv" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/default_bg_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="@string/send_goods"
+                android:textColor="@color/text_common"
+                android:textSize="@dimen/text_common" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

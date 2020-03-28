@@ -151,6 +151,13 @@
     <string name="send_empty_company">请选择物流公司</string>
     <!--order-->
     <string name="order_fee_total">费用信息</string>
+    <string name="order_fee_type">付款方式：</string>
+    <string name="order_fee_user">付款账号：</string>
+    <string name="order_fee_base">基础运费：</string>
+    <string name="order_fee_send">送货费：</string>
+    <string name="order_fee_pick">提货费：</string>
+    <string name="order_fee_insure">保价金额：</string>
+    <string name="order_fee_collection">代收货款：</string>
 
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>

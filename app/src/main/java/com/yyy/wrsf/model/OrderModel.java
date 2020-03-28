@@ -100,7 +100,7 @@ public class OrderModel {
     private int sendType;
     private String sendAdd;
     private String recAdd;
-    private int size;
+    private long size;
     private int transCompanyRecNo;
     private int transCustomerMonthRecNo;
     private int transRecShopRecNo;
@@ -109,7 +109,7 @@ public class OrderModel {
     private int transType;
     private double unpaid;
     private String updateDate;
-    private int weight;
+    private long weight;
 
     public String getCompanyName() {
         return companyName;
@@ -447,11 +447,11 @@ public class OrderModel {
         this.sendType = sendType;
     }
 
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(long size) {
         this.size = size;
     }
 
@@ -519,11 +519,11 @@ public class OrderModel {
         this.updateDate = updateDate;
     }
 
-    public int getWeight() {
+    public long getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(long weight) {
         this.weight = weight;
     }
 

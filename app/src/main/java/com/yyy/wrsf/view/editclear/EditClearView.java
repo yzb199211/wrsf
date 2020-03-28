@@ -54,6 +54,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private int lines;
 
     private boolean editable;
+    private boolean hasDelete = true;
     private boolean formatTitle = true;
     private OnTextChange onTextChange;
     private OnTextChangeAfter onTextChangeAfter;
@@ -91,6 +92,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         textType = array.getInteger(R.styleable.EditClear_ecTextType, 0);
         lines = array.getInteger(R.styleable.EditClear_ecTextLines, 1);
         formatTitle = array.getBoolean(R.styleable.EditClear_ecFormatTitle, true);
+        hasDelete = array.getBoolean(R.styleable.EditClear_ecHasDetele, true);
         array.recycle();
     }
 
@@ -108,7 +110,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         } else {
             initTvText();
         }
-        initDelete();
+        if (hasDelete)
+            initDelete();
     }
 
     private void initLeft() {
@@ -155,9 +158,9 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         tvText.setTextColor(textColor);
         tvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tvText.setLayoutParams(etParams());
-        if (textGravity == -1)
-            tvText.setGravity(Gravity.CENTER_VERTICAL);
-        else tvText.setGravity(Gravity.CENTER | textGravity);
+        if (textGravity == 5)
+            tvText.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+        else tvText.setGravity(Gravity.CENTER);
         tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         tvText.setSingleLine();
         tvText.setBackground(null);
