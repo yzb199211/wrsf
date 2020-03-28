@@ -45,6 +45,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private int textColor;
     private int textSize;
     private int textLength;
+    private int textGravity;
     private int hintColor;
     private int textType;
     private int leftSrc;
@@ -71,6 +72,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     private void initAttrs(AttributeSet attrs) {
         commonPadding = context.getResources().getDimensionPixelSize(R.dimen.padding_common);
+
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.EditClear);
         title = array.getString(R.styleable.EditClear_ecTitle);
         titleColor = array.getColor(R.styleable.EditClear_ecTitleColor, context.getResources().getColor(R.color.text_common));
@@ -79,6 +81,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         textColor = array.getColor(R.styleable.EditClear_ecTextColor, context.getResources().getColor(R.color.text_common));
         textSize = array.getDimensionPixelSize(R.styleable.EditClear_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
         textLength = array.getInteger(R.styleable.EditClear_ecTextLength, -1);
+        textGravity = array.getInteger(R.styleable.EditClear_ecTextGravity, -1);
         hint = array.getString(R.styleable.EditClear_ecHint);
         hintColor = array.getColor(R.styleable.EditClear_ecHintColor, 0);
         leftSrc = array.getResourceId(R.styleable.EditClear_ecSrc, -1);
@@ -152,7 +155,9 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         tvText.setTextColor(textColor);
         tvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tvText.setLayoutParams(etParams());
-        tvText.setGravity(Gravity.CENTER_VERTICAL);
+        if (textGravity == -1)
+            tvText.setGravity(Gravity.CENTER_VERTICAL);
+        else tvText.setGravity(Gravity.CENTER | textGravity);
         tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         tvText.setSingleLine();
         tvText.setBackground(null);

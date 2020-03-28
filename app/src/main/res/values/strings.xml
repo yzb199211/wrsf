@@ -149,6 +149,8 @@
 
     <string name="send_empty_address">请选择寄件人和发件人</string>
     <string name="send_empty_company">请选择物流公司</string>
+    <!--order-->
+    <string name="order_fee_total">费用信息</string>
 
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>

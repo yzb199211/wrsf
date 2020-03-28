@@ -59,32 +59,33 @@ public class OrderModel {
     private int baoAsk;
     private int baoPrice;
     private int contractConfirmYesno;
+    private String companyName;
     private String contractDate;
     private String contractNo;
     private int contractPerson;
     private int contractStatus;
     private double contractTotal;
     private String createDate;
-    private int daiPrice;
-    private int daiTotal;
+    private double daiPrice;
+    private double daiTotal;
     private int deliverType;
-    private int density;
-    private int fixTotal;
+    private double density;
+    private double fixTotal;
     private String goodsName;
-    private int mixTotal;
+    private double mixTotal;
     private int noticeYesNo;
-    private int otherTotal;
+    private double otherTotal;
     private int packNumber;
     private int paid;
     private int payStatus;
     private int payType;
-    private int picTotal;
+    private double picTotal;
     private String pickDate;
     private String plantMemberName;
     private int plantMemberRecNo;
     private String plantMemberTel;
-    private int price;
-    private int qianPrice;
+    private double price;
+    private double qianPrice;
     private int qianType;
     private String recDetail;
     private String recName;
@@ -95,7 +96,7 @@ public class OrderModel {
     private String sendName;
     private int sendRegion;
     private String sendTel;
-    private int sendTotal;
+    private double sendTotal;
     private int sendType;
     private String sendAdd;
     private String recAdd;
@@ -104,11 +105,19 @@ public class OrderModel {
     private int transCustomerMonthRecNo;
     private int transRecShopRecNo;
     private int transShopRecNo;
-    private int transTotal;
+    private double transTotal;
     private int transType;
-    private int unpaid;
+    private double unpaid;
     private String updateDate;
     private int weight;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     public int getBaoAsk() {
         return baoAsk;
@@ -182,19 +191,19 @@ public class OrderModel {
         this.createDate = createDate;
     }
 
-    public int getDaiPrice() {
+    public double getDaiPrice() {
         return daiPrice;
     }
 
-    public void setDaiPrice(int daiPrice) {
+    public void setDaiPrice(double daiPrice) {
         this.daiPrice = daiPrice;
     }
 
-    public int getDaiTotal() {
+    public double getDaiTotal() {
         return daiTotal;
     }
 
-    public void setDaiTotal(int daiTotal) {
+    public void setDaiTotal(double daiTotal) {
         this.daiTotal = daiTotal;
     }
 
@@ -206,19 +215,19 @@ public class OrderModel {
         this.deliverType = deliverType;
     }
 
-    public int getDensity() {
+    public double getDensity() {
         return density;
     }
 
-    public void setDensity(int density) {
+    public void setDensity(double density) {
         this.density = density;
     }
 
-    public int getFixTotal() {
+    public double getFixTotal() {
         return fixTotal;
     }
 
-    public void setFixTotal(int fixTotal) {
+    public void setFixTotal(double fixTotal) {
         this.fixTotal = fixTotal;
     }
 
@@ -230,11 +239,11 @@ public class OrderModel {
         this.goodsName = goodsName;
     }
 
-    public int getMixTotal() {
+    public double getMixTotal() {
         return mixTotal;
     }
 
-    public void setMixTotal(int mixTotal) {
+    public void setMixTotal(double mixTotal) {
         this.mixTotal = mixTotal;
     }
 
@@ -246,11 +255,11 @@ public class OrderModel {
         this.noticeYesNo = noticeYesNo;
     }
 
-    public int getOtherTotal() {
+    public double getOtherTotal() {
         return otherTotal;
     }
 
-    public void setOtherTotal(int otherTotal) {
+    public void setOtherTotal(double otherTotal) {
         this.otherTotal = otherTotal;
     }
 
@@ -286,11 +295,11 @@ public class OrderModel {
         this.payType = payType;
     }
 
-    public int getPicTotal() {
+    public double getPicTotal() {
         return picTotal;
     }
 
-    public void setPicTotal(int picTotal) {
+    public void setPicTotal(double picTotal) {
         this.picTotal = picTotal;
     }
 
@@ -326,19 +335,19 @@ public class OrderModel {
         this.plantMemberTel = plantMemberTel;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getQianPrice() {
+    public double getQianPrice() {
         return qianPrice;
     }
 
-    public void setQianPrice(int qianPrice) {
+    public void setQianPrice(double qianPrice) {
         this.qianPrice = qianPrice;
     }
 
@@ -422,11 +431,11 @@ public class OrderModel {
         this.sendTel = sendTel;
     }
 
-    public int getSendTotal() {
+    public double getSendTotal() {
         return sendTotal;
     }
 
-    public void setSendTotal(int sendTotal) {
+    public void setSendTotal(double sendTotal) {
         this.sendTotal = sendTotal;
     }
 
@@ -478,11 +487,11 @@ public class OrderModel {
         this.transShopRecNo = transShopRecNo;
     }
 
-    public int getTransTotal() {
+    public double getTransTotal() {
         return transTotal;
     }
 
-    public void setTransTotal(int transTotal) {
+    public void setTransTotal(double transTotal) {
         this.transTotal = transTotal;
     }
 
@@ -494,11 +503,11 @@ public class OrderModel {
         this.transType = transType;
     }
 
-    public int getUnpaid() {
+    public double getUnpaid() {
         return unpaid;
     }
 
-    public void setUnpaid(int unpaid) {
+    public void setUnpaid(double unpaid) {
         this.unpaid = unpaid;
     }
 

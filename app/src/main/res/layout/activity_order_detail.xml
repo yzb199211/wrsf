@@ -38,7 +38,6 @@
                 android:background="@drawable/bg_order_blue"
                 android:padding="@dimen/dp_10">
 
-
                 <TextView
                     android:id="@+id/tv_order_no"
                     android:layout_width="wrap_content"
@@ -141,6 +140,89 @@
                 android:layout_height="@dimen/dp_5"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/default_bg_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="@string/send_goods"
+                android:textColor="@color/text_common"
+                android:textSize="@dimen/text_common" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_goods_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecFormatTitle="false"
+                app:ecTitle="@string/send_goods_name"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_goods_weight"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecFormatTitle="false"
+                app:ecTitle="@string/send_goods_weight"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_goods_volume"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecFormatTitle="false"
+                app:ecTitle="@string/send_goods_volume"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_total"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecFormatTitle="false"
+                app:ecTitle="@string/order_fee_total"
+                app:ecTitleColor="@color/text_common"
+                app:ecType="tv" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

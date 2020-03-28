@@ -56,7 +56,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
             holder.tvOrderCancle.setVisibility(View.INVISIBLE);
         }
         if (list.get(position).getPayStatus() != 1) {
-            holder.tvPay.setVisibility(View.INVISIBLE);
+            holder.tvPay.setVisibility(View.GONE);
         }
         holder.tvOrderCancle.setOnClickListener(new View.OnClickListener() {
             @Override

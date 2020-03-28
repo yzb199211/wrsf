@@ -16,6 +16,7 @@ import com.yyy.wrsf.company.car.CarActivity;
 import com.yyy.wrsf.company.car.CarAdapter;
 import com.yyy.wrsf.company.driver.DriverActivity;
 import com.yyy.wrsf.company.month.MonthActivity;
+import com.yyy.wrsf.company.order.OrderActivity;
 import com.yyy.wrsf.company.outlets.OutletActivity;
 
 import butterknife.BindView;
@@ -49,6 +50,7 @@ public class CompanyFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.mi_order:
+                go2Order();
                 break;
             case R.id.mi_car:
                 go2Car();
@@ -70,6 +72,10 @@ public class CompanyFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    private void go2Order() {
+        startActivity(new Intent().setClass(getActivity(), OrderActivity.class));
     }
 
     private void go2Outlet() {

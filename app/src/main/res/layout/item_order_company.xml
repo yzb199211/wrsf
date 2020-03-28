@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
     android:background="@drawable/bg_order"
     android:padding="@dimen/dp_10">
 
@@ -167,32 +168,39 @@
         android:layout_marginTop="@dimen/dp_3"
         android:background="@drawable/bg_line_dotted" />
 
-    <TextView
-        android:id="@+id/tv_pay"
-        android:layout_width="@dimen/dp_60"
-        android:layout_height="@dimen/dp_18"
-        android:layout_below="@+id/line"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="@drawable/bg_order_btn_yellow"
-        android:gravity="center"
-        android:singleLine="true"
-        android:text="@string/common_comfirm"
-        android:textColor="@color/order_yellow"
-        android:textSize="@dimen/text_common_min" />
+        android:gravity="right"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_order_cancle"
-        android:layout_width="@dimen/dp_60"
-        android:layout_height="@dimen/dp_18"
-        android:layout_below="@+id/line"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_70"
-        android:background="@drawable/bg_order_btn_gray"
-        android:gravity="center"
-        android:singleLine="true"
-        android:text="@string/order_cancle"
-        android:textColor="@color/text_gray"
-        android:textSize="@dimen/text_common_min" />
+
+        <TextView
+            android:id="@+id/tv_order_cancle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_18"
+            android:layout_marginTop="@dimen/dp_10"
+
+            android:background="@drawable/bg_order_btn_gray"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/order_cancle"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_common_min" />
+
+        <TextView
+            android:id="@+id/tv_pay"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_18"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/bg_order_btn_yellow"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/common_pay"
+            android:textColor="@color/order_yellow"
+            android:textSize="@dimen/text_common_min" />
+    </LinearLayout>
 </RelativeLayout>

@@ -129,20 +129,26 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     }
 
     private void refrishList() {
-        if (adapter == null) {
-            adapter = new OrderAdapter(this, orders);
-            recyclerView.setAdapter(adapter);
-            adapter.setOnItemClickListener((int pos) -> {
-                go2Detail(pos);
-            });
-            adapter.setOnEditListener((int pos) -> {
-                go2Pay(pos);
-            });
-            adapter.setOnCancleListener((int pos) -> {
-                go2Cancle(pos);
-            });
-        } else {
-        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (adapter == null) {
+                    adapter = new OrderAdapter(OrderActivity.this, orders);
+                    recyclerView.setAdapter(adapter);
+                    adapter.setOnItemClickListener((int pos) -> {
+                        go2Detail(pos);
+                    });
+                    adapter.setOnEditListener((int pos) -> {
+                        go2Pay(pos);
+                    });
+                    adapter.setOnCancleListener((int pos) -> {
+                        go2Cancle(pos);
+                    });
+                } else {
+                }
+            }
+        });
+
     }
 
     private List<NetParams> getParams() {
@@ -161,7 +167,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
 
     private void go2Cancle(int pos) {
         LoadingDialog.showDialogForLoading(this);
-        new NetUtil(cancleParams(), NetConfig.address, RequstType.PUT, new ResponseListener() {
+        new NetUtil(cancleParams(), NetConfig.address + OrderUrl.cancelOrder, RequstType.DELETE, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 LoadingFinish(null);

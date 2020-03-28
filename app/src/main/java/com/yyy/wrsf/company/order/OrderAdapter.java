@@ -42,7 +42,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.tvOrderNo.setText(context.getString(R.string.order_no) + "：" + list.get(position).getContractNo());
         holder.tvOrderType.setText(ContractStatusEnum.getDescByStatus(list.get(position).getContractStatus()));
-//        holder.tvCompany.setText(list.get(position));
+        holder.tvCompany.setText(list.get(position).getCompanyName());
         holder.tvDateLast.setText(DateUtil.getDate(list.get(position).getUpdateDate(), 2));
         holder.tvSendArea.setText(list.get(position).getSendAdd());
         holder.tvSendPerson.setText(list.get(position).getSendName());
@@ -54,7 +54,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
             holder.tvOrderCancle.setVisibility(View.INVISIBLE);
         }
         if (list.get(position).getPayStatus() != 1) {
-            holder.tvPay.setVisibility(View.INVISIBLE);
+            holder.tvPay.setVisibility(View.GONE);
         }
         holder.itemView.setOnClickListener(view -> {
             if (onItemClickListener != null) onItemClickListener.onItemClick(position);
