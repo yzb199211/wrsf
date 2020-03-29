@@ -3,6 +3,8 @@
     <string name="preferenceCache">hnwrsf</string>
     <!--error-->
     <string name="error_net">请求错误：</string>
+    <string name="error_json">数据解析</string>
+    <string name="error_other">未知错误</string>
     <string name="error_permission">授权失败</string>
     <string name="error_verify_code">验证码长度错误</string>
     <string name="error_pwd_length">请输入6-20位密码</string>
