@@ -18,6 +18,7 @@ public class MemberBean implements IPickerViewData {
     private Integer recNo;
     private Integer roleType;
     private Integer stopYesno;
+    private String validate;
     private List<MemberAuthorityBean> roles;
     private MemberRoleBean memberRoleBo;
 
@@ -139,6 +140,14 @@ public class MemberBean implements IPickerViewData {
 
     public void setStopYesno(int stopYesno) {
         this.stopYesno = stopYesno;
+    }
+
+    public String getValidate() {
+        return validate;
+    }
+
+    public void setValidate(String validate) {
+        this.validate = validate;
     }
 
     @Override

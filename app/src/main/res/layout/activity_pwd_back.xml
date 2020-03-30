@@ -11,6 +11,7 @@
 
     <!--    <include layout="@layout/layout_top" />-->
     <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_size"
         android:background="@color/default_blue"
@@ -41,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_10"
+                app:ecEditable="false"
                 app:ecHint="@string/login_phone"
                 app:ecTextType="num"
                 app:ecTitle="@string/login_phone"
@@ -95,8 +97,6 @@
 
             <include layout="@layout/btn_login" />
         </LinearLayout>
-
-
     </ScrollView>
 
 

@@ -1,15 +1,22 @@
 package com.yyy.wrsf.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.login.View.IBackPwdV;
+import com.yyy.wrsf.login.persenter.BackPwdVP;
+import com.yyy.wrsf.login.persenter.VeridfyVP;
 import com.yyy.wrsf.utils.PhoneUtils;
+import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
@@ -35,7 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PwdBackActivity extends AppCompatActivity {
+public class PwdBackActivity extends BaseActivity implements IBackPwdV {
     @BindView(R.id.top_view)
     TopView topView;
     @BindView(R.id.ecv_phone)
@@ -48,12 +55,18 @@ public class PwdBackActivity extends AppCompatActivity {
     EditClearView ecvPwdConfirm;
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
+    private SharedPreferencesHelper preferencesHelper;
+    private VeridfyVP veridfyVP;
+    private BackPwdVP backPwdVP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pwd_back);
         ButterKnife.bind(this);
+        preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
+        veridfyVP = new VeridfyVP(this);
+        backPwdVP = new BackPwdVP(this);
         initView();
     }
 
@@ -61,6 +74,11 @@ public class PwdBackActivity extends AppCompatActivity {
         initTop();
         initConfirm();
         initCode();
+        initPhone();
+    }
+
+    private void initPhone() {
+        ecvPhone.setText((String) preferencesHelper.getSharedPreference("tel", ""));
     }
 
     private void initTop() {
@@ -80,91 +98,77 @@ public class PwdBackActivity extends AppCompatActivity {
         vcCode.getCountDownButton().setOnSendListener(new OnSendListener() {
             @Override
             public void onSend() {
-                if (!PhoneUtils.isNotValidChinesePhone(ecvPhone.getText()) && vcCode.getCountDownButton().isEnabled()) {
-                    vcCode.getCountDownButton().startCount();
-                    ecvPhone.forbidEdit();
-                    getVeridfy();
-                }
+                veridfyVP.veridfy();
             }
         });
     }
 
-    private void getVeridfy() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(verifyParams(), NetConfig.address + MemberURL.VERIFY, RequstType.GET, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                LoadingFinish(null);
-                Log.e(PwdBackActivity.this.getClass().getName(), "code:" + string);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        LoadingFinish(getString(R.string.common_code_success));
-//                        finish();
-                    } else {
-                        LoadingFinish(result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
-    }
-
-    private List<NetParams> verifyParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("memberTel", ecvPhone.getText()));
-        params.add(new NetParams("type", VerifyType.BACK.getCode()));
-        return params;
-    }
 
     @OnClick({R.id.btn_confirm})
     public void onViewClicked(View view) {
-        if (vcCode.getText().length() != 6) {
-            Toasts.showLong(PwdBackActivity.this, getString(R.string.error_verify_code));
-            return;
-        }
-        if (ecvPwd.getText().length() < 6) {
-            Toasts.showLong(PwdBackActivity.this, getString(R.string.error_pwd_length));
-            return;
-        }
-        if (!ecvPwd.getText().equals(ecvPwdConfirm.getText())) {
-            Toasts.showLong(PwdBackActivity.this, getString(R.string.error_pwd_confirm));
-            return;
-        }
-        backPwd();
+        backPwdVP.backPwd();
     }
 
-    private void backPwd() {
 
+    @Override
+    public String getCode() {
+        return vcCode.getText();
     }
 
-    private List<NetParams> backPwdParam() {
-        List<NetParams> params = new ArrayList<>();
-        return params;
+    @Override
+    public void backLogin() {
+        startActivity(new Intent().setClass(this, LoginActivity.class));
     }
 
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
+    @Override
+    public String getPwd() {
+        return ecvPwd.getText();
     }
 
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
+    @Override
+    public String getPwdComfir() {
+        return ecvPwdConfirm.getText();
     }
 
+    @Override
+    public String getTel() {
+        return ecvPhone.getText();
+    }
+
+    @Override
+    public String getVeridfyType() {
+        return VerifyType.BACK.getCode();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return vcCode.getCountDownButton().isEnabled();
+    }
+
+    @Override
+    public void startCount() {
+        vcCode.getCountDownButton().startCount();
+    }
+
+    @Override
+    public void startLoading() {
+        LoadingDialog.showDialogForLoading(this);
+    }
+
+    @Override
+    public void finishLoading(@Nullable String s) {
+        LoadingFinish(s);
+    }
+
+    @Override
+    public void toast(String s) {
+        Toast(s);
+    }
+
+    @Override
+    protected void onDestroy() {
+        veridfyVP.detachView();
+        backPwdVP.detachView();
+        super.onDestroy();
+    }
 }

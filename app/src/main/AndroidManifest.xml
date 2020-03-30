@@ -22,10 +22,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".company.order.OrderActivity"></activity>
-        <activity android:name=".common.company.CompanyActivity" />
-        <activity android:name=".company.outlets.OutletDetailActivity" />
-        <activity android:name=".company.outlets.OutletActivity" />
+        <activity
+            android:name=".company.order.OrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.company.CompanyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".company.outlets.OutletDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".company.outlets.OutletActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".mine.shipping.ShippingPersonActivity"
             android:screenOrientation="portrait"
@@ -138,6 +146,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.LoginActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
