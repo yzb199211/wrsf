@@ -8,5 +8,5 @@ import com.yyy.wrsf.utils.net.net.ResponseListener;
 import java.util.List;
 
 public interface ILogM {
-  public void getLog(List<NetParams> params, String url, RequstType requstType, OnResultListener onResultListener);
+   void getLog(List<NetParams> params, String url, RequstType requstType, OnResultListener onResultListener);
 }

@@ -7,10 +7,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.bean.MemberBean;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.login.Model.ILoginM;
+import com.yyy.wrsf.login.View.ILoginV;
+import com.yyy.wrsf.login.persenter.LoginVP;
 import com.yyy.wrsf.main.MainActivity;
 import com.yyy.wrsf.model.LoginModel;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -34,7 +40,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements ILoginV {
 
     @BindView(R.id.ecv_user)
     EditClearView ecvUser;
@@ -43,6 +49,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
     SharedPreferencesHelper preferencesHelper;
+    private LoginVP loginVP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
+        loginVP = new LoginVP(this);
         initView();
     }
 
@@ -68,62 +76,41 @@ public class LoginActivity extends BaseActivity {
                 go2Register();
                 break;
             case R.id.btn_confirm:
-                if (TextUtils.isEmpty(ecvUser.getText())) {
-                    Toasts.showLong(LoginActivity.this, getString(R.string.error_user));
-                    return;
-                }
-                if (ecvPwd.getText().length() < 6) {
-                    Toasts.showLong(LoginActivity.this, getString(R.string.error_pwd_length));
-                    return;
-                }
-                login();
+                loginVP.login();
                 break;
         }
     }
 
-    private void login() {
+    @Override
+    public String getUser() {
+        return ecvUser.getText();
+    }
+
+    @Override
+    public String getPwd() {
+        return ecvPwd.getText();
+    }
+
+    @Override
+    public void startLoading() {
         LoadingDialog.showDialogForLoading(this);
-        new NetLogin(loginParam(), NetConfig.address + MemberURL.Login, RequstType.GET, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                LoadingFinish(null);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        LoadingFinish(null);
-                        setPreference(result.getData(), new Gson().fromJson(result.getData(), LoginModel.class));
-                        go2Main();
-                    } else {
-                        LoadingFinish(result.getMsg());
-                        Log.e(LoginActivity.this.getClass().getName(), result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
     }
 
-    private void go2Main() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent().setClass(LoginActivity.this, MainActivity.class));
-                finish();
-            }
-        });
+    @Override
+    public void finishLoading(@NonNull String s) {
+        LoadingFinish(s);
     }
 
-    private void setPreference(String data, LoginModel model) {
-        preferencesHelper.put("member", data);
+    @Override
+    public void go2Main() {
+        btnConfirm.setClickable(false);
+        startActivity(new Intent().setClass(LoginActivity.this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    public void setPreference(MemberBean model) {
+        preferencesHelper.put("member", new Gson().toJson(model));
         preferencesHelper.put("recNo", model.getRecNo());
         preferencesHelper.put("tel", model.getMemberTel());
         preferencesHelper.put("sex", model.getMemberSex());
@@ -132,14 +119,14 @@ public class LoginActivity extends BaseActivity {
         preferencesHelper.put("companyName", model.getCompanyName());
         preferencesHelper.put("roleType", (int) model.getRoleType());
         preferencesHelper.put("token", model.getToken());
+        preferencesHelper.put("authority", model.getRoles().get(0).getName());
     }
 
-    private List<NetParams> loginParam() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("memberTel", ecvUser.getText()));
-        params.add(new NetParams("password", ecvPwd.getText()));
-        return params;
+    @Override
+    public void toast(String s) {
+        Toast(s);
     }
+
 
     private void go2Register() {
         startActivity(new Intent().setClass(this, RegisterActivity.class));
@@ -150,4 +137,9 @@ public class LoginActivity extends BaseActivity {
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        loginVP.detachView();
+        super.onDestroy();
+    }
 }
