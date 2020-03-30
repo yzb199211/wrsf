@@ -98,7 +98,7 @@ public class LoginCodeActivity extends BaseActivity implements ILoginCodeV {
                 go2Register();
                 break;
             case R.id.btn_confirm:
-
+                loginCodeVP.login();
                 break;
             default:
                 break;
@@ -127,13 +127,6 @@ public class LoginCodeActivity extends BaseActivity implements ILoginCodeV {
         preferencesHelper.put("authority", model.getRoles().get(0).getName());
     }
 
-
-    private List<NetParams> loginParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("memberTel", ecvPhone.getText()));
-        params.add(new NetParams("validate", vcCode.getText()));
-        return params;
-    }
 
     private void go2Register() {
         startActivity(new Intent().setClass(this, RegisterActivity.class));
@@ -187,6 +180,7 @@ public class LoginCodeActivity extends BaseActivity implements ILoginCodeV {
     @Override
     protected void onDestroy() {
         veridfyVP.detachView();
+        loginCodeVP.detachView();
         super.onDestroy();
     }
 }

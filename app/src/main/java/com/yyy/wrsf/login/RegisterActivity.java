@@ -52,6 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
 
+    private boolean isEditable = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSend() {
                 if (!PhoneUtils.isNotValidChinesePhone(ecvPhone.getText()) && vcCode.getCountDownButton().isEnabled()) {
-                    vcCode.getCountDownButton().startCount();
-                    ecvPhone.forbidEdit();
+
                     getVeridfy();
                 }
             }
@@ -99,7 +100,16 @@ public class RegisterActivity extends AppCompatActivity {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
                         LoadingFinish(getString(R.string.common_code_success));
-//                        finish();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                vcCode.getCountDownButton().startCount();
+                                if (isEditable) {
+                                    ecvPhone.forbidEdit();
+                                    isEditable = false;
+                                }
+                            }
+                        });
                     } else {
                         LoadingFinish(result.getMsg());
                     }

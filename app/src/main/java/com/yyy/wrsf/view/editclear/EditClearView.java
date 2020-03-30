@@ -160,7 +160,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         tvText.setLayoutParams(etParams());
         if (textGravity == 5)
             tvText.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
-        else tvText.setGravity(Gravity.CENTER);
+        else tvText.setGravity(Gravity.CENTER_VERTICAL);
         tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         tvText.setSingleLine();
         tvText.setBackground(null);
