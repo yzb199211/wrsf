@@ -101,7 +101,7 @@ public class LoginActivity extends BaseActivity implements ILoginV {
         LoadingFinish(s);
     }
 
-    @Override
+      @Override
     public void go2Main() {
         btnConfirm.setClickable(false);
         startActivity(new Intent().setClass(LoginActivity.this, MainActivity.class));

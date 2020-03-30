@@ -1,8 +1,11 @@
 package com.yyy.wrsf.base;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -82,6 +85,7 @@ public class BaseActivity extends FragmentActivity {
                 break;
         }
     }
+
     public void LoadingFinish(String msg) {
         runOnUiThread(new Runnable() {
             @Override
@@ -96,6 +100,13 @@ public class BaseActivity extends FragmentActivity {
 
     public void Toast(String msg) {
         Toasts.showShort(this, msg);
+    }
+
+    public void closeKeybord() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        }
     }
 
 }

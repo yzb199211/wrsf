@@ -11,7 +11,6 @@ import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.login.Model.ILoginM;
 import com.yyy.wrsf.login.Model.LoginM;
 import com.yyy.wrsf.login.View.ILoginV;
-import com.yyy.wrsf.utils.net.log.LogUrl;
 import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
@@ -41,7 +40,7 @@ public class LoginVP implements ILoginVP {
             iLoginV.toast(BaseApplication.getInstance().getString(R.string.error_pwd_length));
             return;
         }
-        iLoginV.stratLoding();
+        iLoginV.startLoading();
         iLoginM.login(getParams(), NetConfig.address + MemberURL.Login, RequstType.GET, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
@@ -51,7 +50,7 @@ public class LoginVP implements ILoginVP {
                         public void run() {
                             iLoginV.setPreference(new Gson().fromJson(string, MemberBean.class));
                             iLoginV.go2Main();
-                            iLoginV.finishLoding(null);
+                            iLoginV.finishLoading(null);
                         }
                     });
                 }
@@ -60,7 +59,7 @@ public class LoginVP implements ILoginVP {
             @Override
             public void onFail(String string) {
                 if (!destroyFlag) {
-                    iLoginV.finishLoding(string);
+                    iLoginV.finishLoading(string);
                 }
             }
         });

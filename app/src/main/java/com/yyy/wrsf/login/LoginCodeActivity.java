@@ -6,11 +6,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.bean.MemberBean;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.login.View.ILoginCodeV;
+import com.yyy.wrsf.login.View.IVeridfyV;
+import com.yyy.wrsf.login.persenter.LoginCodeVP;
+import com.yyy.wrsf.login.persenter.VeridfyVP;
 import com.yyy.wrsf.main.MainActivity;
 import com.yyy.wrsf.model.LoginModel;
 import com.yyy.wrsf.utils.PhoneUtils;
@@ -39,7 +46,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginCodeActivity extends AppCompatActivity {
+public class LoginCodeActivity extends BaseActivity implements ILoginCodeV {
 
     @BindView(R.id.ecv_phone)
     EditClearView ecvPhone;
@@ -47,7 +54,9 @@ public class LoginCodeActivity extends AppCompatActivity {
     VerificationCode vcCode;
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
-    SharedPreferencesHelper preferencesHelper;
+    private SharedPreferencesHelper preferencesHelper;
+    private VeridfyVP veridfyVP;
+    private LoginCodeVP loginCodeVP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,8 @@ public class LoginCodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_code);
         ButterKnife.bind(this);
         preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
+        veridfyVP = new VeridfyVP(this);
+        loginCodeVP = new LoginCodeVP(this);
         initView();
     }
 
@@ -71,49 +82,10 @@ public class LoginCodeActivity extends AppCompatActivity {
         vcCode.getCountDownButton().setOnSendListener(new OnSendListener() {
             @Override
             public void onSend() {
-                if (!PhoneUtils.isNotValidChinesePhone(ecvPhone.getText()) && vcCode.getCountDownButton().isEnabled()) {
-                    vcCode.getCountDownButton().startCount();
-//                    ecvPhone.forbidEdit();
-                    getVeridfy();
-                }
+                closeKeybord();
+                veridfyVP.veridfy();
             }
         });
-    }
-
-    private void getVeridfy() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(verifyParams(), NetConfig.address + MemberURL.VERIFY, RequstType.GET, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                LoadingFinish(null);
-                Log.e(LoginCodeActivity.this.getClass().getName(), "code:" + string);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        LoadingFinish(getString(R.string.common_code_success));
-//                        finish();
-                    } else {
-                        LoadingFinish(result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
-    }
-
-    private List<NetParams> verifyParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("memberTel", ecvPhone.getText()));
-        params.add(new NetParams("type", VerifyType.LOGIN.getCode()));
-        return params;
     }
 
     @OnClick({R.id.tv_pwd_switch, R.id.tv_register, R.id.btn_confirm})
@@ -126,63 +98,24 @@ public class LoginCodeActivity extends AppCompatActivity {
                 go2Register();
                 break;
             case R.id.btn_confirm:
-                if (PhoneUtils.isNotValidChinesePhone(ecvPhone.getText())) {
-                    Toasts.showLong(LoginCodeActivity.this, getString(R.string.error_phone));
-                    return;
-                }
-                if (vcCode.getText().length() != 6) {
-                    Toasts.showLong(LoginCodeActivity.this, getString(R.string.error_verify_code));
-                    return;
-                }
-                login();
+
                 break;
             default:
                 break;
         }
     }
 
-    private void login() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetLogin(loginParams(), NetConfig.address + MemberURL.fastLogin, RequstType.GET, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                LoadingFinish(null);
-//                Log.e(LoginCodeActivity.this.getClass().getName(), "data:" + string);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        LoadingFinish(null);
-                        setPreference(result.getData(), new Gson().fromJson(result.getData(), LoginModel.class));
-                        go2Main();
-                    } else {
-                        LoadingFinish(result.getMsg());
-                        Log.e(LoginCodeActivity.this.getClass().getName(), result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace(); LoadingFinish(e.getMessage());
-                }
-            }
 
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
+    @Override
+    public void go2Main() {
+        btnConfirm.setClickable(false);
+        startActivity(new Intent().setClass(this, MainActivity.class));
+        finish();
     }
 
-    private void go2Main() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent().setClass(LoginCodeActivity.this, MainActivity.class));
-                finish();
-            }
-        });
-    }
-
-    private void setPreference(String data, LoginModel model) {
-        preferencesHelper.put("member", data);
+    @Override
+    public void setPreference(MemberBean model) {
+        preferencesHelper.put("member", new Gson().toJson(model));
         preferencesHelper.put("recNo", model.getRecNo());
         preferencesHelper.put("tel", model.getMemberTel());
         preferencesHelper.put("sex", model.getMemberSex());
@@ -191,7 +124,9 @@ public class LoginCodeActivity extends AppCompatActivity {
         preferencesHelper.put("companyName", model.getCompanyName());
         preferencesHelper.put("roleType", (int) model.getRoleType());
         preferencesHelper.put("token", model.getToken());
+        preferencesHelper.put("authority", model.getRoles().get(0).getName());
     }
+
 
     private List<NetParams> loginParams() {
         List<NetParams> params = new ArrayList<>();
@@ -209,19 +144,49 @@ public class LoginCodeActivity extends AppCompatActivity {
         finish();
     }
 
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
+    @Override
+    public String getTel() {
+        return ecvPhone.getText();
     }
 
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
+    @Override
+    public String getVeridfyType() {
+        return VerifyType.LOGIN.getCode();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return vcCode.getCountDownButton().isEnabled();
+    }
+
+    @Override
+    public void startCount() {
+        vcCode.getCountDownButton().startCount();
+    }
+
+    @Override
+    public void startLoading() {
+        LoadingDialog.showDialogForLoading(this);
+    }
+
+    @Override
+    public void finishLoading(@Nullable String s) {
+        LoadingFinish(s);
+    }
+
+    @Override
+    public void toast(String s) {
+        Toast(s);
+    }
+
+    @Override
+    public String getCode() {
+        return vcCode.getText();
+    }
+
+    @Override
+    protected void onDestroy() {
+        veridfyVP.detachView();
+        super.onDestroy();
     }
 }

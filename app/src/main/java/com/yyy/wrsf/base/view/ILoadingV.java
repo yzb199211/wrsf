@@ -1,4 +1,4 @@
-package com.yyy.wrsf.base;
+package com.yyy.wrsf.base.view;
 
 import androidx.annotation.Nullable;
 
