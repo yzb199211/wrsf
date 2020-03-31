@@ -13,9 +13,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 
+import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
+import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
 
@@ -28,16 +30,18 @@ import java.util.List;
  */
 public class BaseActivity extends FragmentActivity {
 
-    BaseApplication baseApplication;
+    public BaseApplication baseApplication;
 
     private PermissionListener mListener;
     private static final int PERMISSION_REQUESTCODE = 100;
     public int text = 0;
+    public SharedPreferencesHelper preferencesHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         baseApplication = BaseApplication.getInstance();
+        preferencesHelper = new SharedPreferencesHelper(baseApplication.getApplicationContext(), getString(R.string.preferenceCache));
     }
 
 

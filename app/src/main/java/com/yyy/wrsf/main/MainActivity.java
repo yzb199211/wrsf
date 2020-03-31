@@ -12,9 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.company.CompanyRegisterActivity;
+import com.yyy.wrsf.main.persenter.MainP;
+import com.yyy.wrsf.main.view.IMainV;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
 import com.yyy.wrsf.mine.shipping.ShippingActivity;
+import com.yyy.wrsf.utils.SharedPreferencesHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -22,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements IMainV {
 
     @BindView(R.id.fl_content)
     FrameLayout flContent;
@@ -47,19 +51,27 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tv_mine)
     TextView tvMine;
 
-    MainFragment mainFragment;
-    MineFragment mineFragment;
-    NoticeFragment noticeFragment;
-    CompanyFragment companyFragment;
-    Fragment currentFragment;
+    private MainFragment mainFragment;
+    private MineFragment mineFragment;
+    private NoticeFragment noticeFragment;
+    private CompanyFragment companyFragment;
+    private Fragment currentFragment;
 
+    private String role;
+    private MainP mainP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mainP = new MainP(this);
+        initData();
         setDefaultFragment();
+    }
+
+    private void initData() {
+        role = (String) preferencesHelper.getSharedPreference("authority", "");
     }
 
     private void setDefaultFragment() {
@@ -107,11 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 EventBus.getDefault().post("");
                 break;
             case R.id.rl_company:
-//                go2Company();
-                if (companyFragment == null) {
-                    companyFragment = new CompanyFragment();
-                }
-                switchFragment(companyFragment);
+                mainP.judgeCompany();
                 break;
             case R.id.rl_mine:
                 if (mineFragment == null) {
@@ -131,7 +139,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent().setClass(this, ShippingActivity.class));
     }
 
-    private void go2Company() {
+    @Override
+    public void go2Company() {
+        if (companyFragment == null) {
+            companyFragment = new CompanyFragment();
+        }
+        switchFragment(companyFragment);
+    }
+
+    @Override
+    public void go2RegisterCompany() {
         startActivity(new Intent().setClass(this, CompanyRegisterActivity.class));
+    }
+
+    @Override
+    public String getAuthority() {
+        return role;
     }
 }

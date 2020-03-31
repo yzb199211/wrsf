@@ -11,6 +11,7 @@ import com.yyy.wrsf.utils.FileUtil;
 import com.yyy.wrsf.view.topview.TopView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class BackOrderActivity extends AppCompatActivity {
     @BindView(R.id.top_view)
@@ -22,6 +23,7 @@ public class BackOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_back_order);
+        ButterKnife.bind(this);
         initView();
     }
 
