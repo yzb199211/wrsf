@@ -38,10 +38,10 @@ public class BaseActivity extends FragmentActivity {
     public SharedPreferencesHelper preferencesHelper;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         baseApplication = BaseApplication.getInstance();
-        preferencesHelper = new SharedPreferencesHelper(baseApplication.getApplicationContext(), getString(R.string.preferenceCache));
+        preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
     }
 
 
