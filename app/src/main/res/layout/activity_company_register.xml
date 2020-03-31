@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
-                android:padding="@dimen/dp_8"
+                android:padding="@dimen/dp_5"
                 android:text="@string/company_upload_license"
                 android:textColor="@color/text_eidt_title"
                 android:textSize="@dimen/text_title_edit" />
@@ -143,9 +143,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dp_8"
-                android:paddingRight="@dimen/dp_8"
-                android:paddingBottom="@dimen/dp_8">
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_5">
 
                 <ImageView
                     android:id="@+id/iv_one"
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
-                android:padding="@dimen/dp_8"
+                android:padding="@dimen/dp_5"
                 android:text="@string/company_upload_IDCard"
                 android:textColor="@color/text_eidt_title"
                 android:textSize="@dimen/text_title_edit" />
@@ -184,15 +184,15 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dp_8"
-                android:paddingRight="@dimen/dp_8"
-                android:paddingBottom="@dimen/dp_8">
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_5">
 
                 <ImageView
                     android:id="@+id/iv_obverse"
                     android:layout_width="@dimen/dp_160"
                     android:layout_height="@dimen/dp_100"
-                    android:layout_marginRight="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_5"
                     android:src="@mipmap/bg_id_card" />
 
                 <TextView
@@ -208,7 +208,7 @@
                     android:layout_width="@dimen/dp_160"
                     android:layout_height="@dimen/dp_100"
                     android:layout_alignParentRight="true"
-                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginLeft="@dimen/dp_5"
                     android:layout_weight="1"
                     android:src="@mipmap/bg_id_card" />
 
