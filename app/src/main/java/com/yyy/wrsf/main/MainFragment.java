@@ -19,7 +19,10 @@ import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.main.persenter.CycleP;
 import com.yyy.wrsf.main.persenter.ICycleP;
 import com.yyy.wrsf.main.view.ICycleV;
+import com.yyy.wrsf.mine.addvalue.AddValueActivity;
+import com.yyy.wrsf.mine.backOrder.BackOrderActivity;
 import com.yyy.wrsf.mine.month.MonthApplyActivity;
+import com.yyy.wrsf.mine.order.OrderActivity;
 import com.yyy.wrsf.utils.ImageLoaderUtil;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.view.cycle.CircleBanner;
@@ -124,12 +127,14 @@ public class MainFragment extends Fragment implements ICycleV {
             case R.id.iv_scan:
                 break;
             case R.id.mi_receipt:
+                go2BackOrder();
                 break;
             case R.id.mi_send_notice:
                 break;
             case R.id.mi_pending_payment:
                 break;
             case R.id.mi_insured_tansportation:
+                go2AddValue();
                 break;
             case R.id.mi_statements:
                 break;
@@ -137,6 +142,7 @@ public class MainFragment extends Fragment implements ICycleV {
                 go2Month();
                 break;
             case R.id.btn_shipping:
+                go2Order();
                 break;
             case R.id.btn_receive:
                 break;
@@ -145,8 +151,20 @@ public class MainFragment extends Fragment implements ICycleV {
         }
     }
 
+    private void go2Order() {
+        startActivity(new Intent().setClass(getActivity(), OrderActivity.class));
+    }
+
     private void go2Month() {
         startActivity(new Intent().setClass(getActivity(), MonthApplyActivity.class));
+    }
+
+    private void go2AddValue() {
+        startActivity(new Intent().setClass(getActivity(), AddValueActivity.class));
+    }
+
+    private void go2BackOrder() {
+        startActivity(new Intent().setClass(getActivity(), BackOrderActivity.class));
     }
 
     @Override
@@ -173,15 +191,6 @@ public class MainFragment extends Fragment implements ICycleV {
                 return new DataViewHolder();
             }
         });
-        //  设置页面点击事件
-//        viewpager.setOnPageClickListener(new CircleBanner.OnPageClickListener() {
-//            @Override
-//            public void onPageClick(int position) {
-//                List<DataBean> list = viewpager.getList();
-//                String describe = list.get(position).getDescribe();
-//                Toasts.showShort(getActivity(), "点击了" + describe);
-//            }
-//        });
     }
 
     @Override

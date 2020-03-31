@@ -22,6 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".mine.backOrder.BackOrderActivity"></activity>
+        <activity android:name=".mine.addvalue.AddValueActivity" />
         <activity
             android:name=".company.order.OrderActivity"
             android:screenOrientation="portrait" />
