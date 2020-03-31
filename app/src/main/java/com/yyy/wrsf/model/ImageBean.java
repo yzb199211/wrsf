@@ -1,6 +1,6 @@
 package com.yyy.wrsf.model;
 
-public class ImageModel {
+public class ImageBean {
 
 
         /**

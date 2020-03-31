@@ -2,41 +2,24 @@ package com.yyy.wrsf.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.login.View.IBackPwdV;
+import com.yyy.wrsf.login.view.IBackPwdV;
 import com.yyy.wrsf.login.persenter.BackPwdVP;
 import com.yyy.wrsf.login.persenter.VeridfyVP;
-import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
-import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.net.NetConfig;
-import com.yyy.wrsf.utils.net.net.NetParams;
-import com.yyy.wrsf.utils.net.net.NetUtil;
-import com.yyy.wrsf.utils.net.net.RequstType;
-import com.yyy.wrsf.utils.net.net.ResponseListener;
-import com.yyy.wrsf.utils.net.net.Result;
-import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.utils.net.member.VerifyType;
 import com.yyy.wrsf.view.VerificationCode;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.timecount.OnSendListener;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
-
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

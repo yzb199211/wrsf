@@ -7,7 +7,7 @@ import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.base.model.BaseM;
 import com.yyy.wrsf.base.model.IBaseM;
 import com.yyy.wrsf.interfaces.OnResultListener;
-import com.yyy.wrsf.login.View.IVeridfyV;
+import com.yyy.wrsf.login.view.IVeridfyV;
 import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.utils.net.net.NetConfig;

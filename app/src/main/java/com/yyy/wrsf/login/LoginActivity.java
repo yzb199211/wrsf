@@ -2,8 +2,6 @@ package com.yyy.wrsf.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,27 +12,11 @@ import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.bean.MemberBean;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.login.Model.ILoginM;
-import com.yyy.wrsf.login.View.ILoginV;
+import com.yyy.wrsf.login.view.ILoginV;
 import com.yyy.wrsf.login.persenter.LoginVP;
 import com.yyy.wrsf.main.MainActivity;
-import com.yyy.wrsf.model.LoginModel;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
-import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.net.NetConfig;
-import com.yyy.wrsf.utils.net.net.NetLogin;
-import com.yyy.wrsf.utils.net.net.NetParams;
-import com.yyy.wrsf.utils.net.net.RequstType;
-import com.yyy.wrsf.utils.net.net.ResponseListener;
-import com.yyy.wrsf.utils.net.net.Result;
-import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.view.editclear.EditClearView;
-
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

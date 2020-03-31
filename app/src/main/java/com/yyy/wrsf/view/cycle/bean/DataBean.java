@@ -13,15 +13,17 @@ public class DataBean {
         return url;
     }
 
-    public void setUrl(String url) {
+    public DataBean setUrl(String url) {
         this.url = url;
+        return this;
     }
 
     public String getDescribe() {
         return describe;
     }
 
-    public void setDescribe(String describe) {
+    public DataBean setDescribe(String describe) {
         this.describe = describe;
+        return this;
     }
 }

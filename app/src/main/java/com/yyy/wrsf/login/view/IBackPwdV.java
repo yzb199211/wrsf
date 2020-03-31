@@ -1,4 +1,4 @@
-package com.yyy.wrsf.login.View;
+package com.yyy.wrsf.login.view;
 
 public interface IBackPwdV extends IVeridfyV {
     String getCode();

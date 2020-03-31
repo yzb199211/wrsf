@@ -31,13 +31,11 @@ import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
 import com.yyy.wrsf.model.address.AreaModel;
 import com.yyy.wrsf.model.company.CompanyModel;
-import com.yyy.wrsf.model.ImageModel;
+import com.yyy.wrsf.model.ImageBean;
 import com.yyy.wrsf.model.month.MonthModel;
 import com.yyy.wrsf.model.filter.CompanyFilterModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
-import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -508,10 +506,10 @@ public class MonthApplyActivity extends BaseActivity {
     }
 
     private String setPics(String data) {
-        List<ImageModel> imageModels = new Gson().fromJson(data, new TypeToken<List<ImageModel>>() {
+        List<ImageBean> imageModels = new Gson().fromJson(data, new TypeToken<List<ImageBean>>() {
         }.getType());
         String string = "";
-        for (ImageModel item : imageModels) {
+        for (ImageBean item : imageModels) {
             string = string + item.getId() + ",";
         }
         return string;

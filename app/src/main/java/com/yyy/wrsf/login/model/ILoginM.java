@@ -1,4 +1,4 @@
-package com.yyy.wrsf.login.Model;
+package com.yyy.wrsf.login.model;
 
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.utils.net.net.NetParams;

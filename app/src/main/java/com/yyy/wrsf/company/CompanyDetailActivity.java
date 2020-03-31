@@ -4,19 +4,17 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.model.company.CompanyModel;
-import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
+import com.yyy.wrsf.utils.net.company.CompanyUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
 import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
-import com.yyy.wrsf.utils.net.company.CompanyUrl;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
@@ -120,6 +118,5 @@ public class CompanyDetailActivity extends BaseActivity {
             }
         });
     }
-
 
 }
