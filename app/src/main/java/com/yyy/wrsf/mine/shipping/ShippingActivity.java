@@ -19,7 +19,7 @@ import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
 import com.yyy.wrsf.model.address.AddressModel;
 import com.yyy.wrsf.model.company.CompanyModel;
-import com.yyy.wrsf.model.filter.ShipCompany;
+import com.yyy.wrsf.model.filter.ShipCompanyB;
 import com.yyy.wrsf.model.price.PriceBackM;
 import com.yyy.wrsf.model.ship.ShipGoodsModel;
 import com.yyy.wrsf.model.ship.ShippingAddValueModel;
@@ -27,7 +27,6 @@ import com.yyy.wrsf.model.ship.ShippingModel;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -104,7 +103,7 @@ public class ShippingActivity extends BasePickActivity {
     private AddressModel addressReceive;
     private ShipGoodsModel goods;
     private CompanyModel company;
-    private ShipCompany companyFilter;
+    private ShipCompanyB companyFilter;
     private ShippingModel shipping;
     private ShippingAddValueModel addValue;
     private PriceBackM priceBackM;
@@ -125,7 +124,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void initModel() {
-        companyFilter = new ShipCompany();
+        companyFilter = new ShipCompanyB();
         initShip();
 
     }

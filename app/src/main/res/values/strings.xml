@@ -38,6 +38,7 @@
     <string name="common_save">保存</string>
     <string name="common_save_success">保存成功</string>
     <string name="common_cancel">取消</string>
+    <string name="common_cancel_success">取消成功</string>
     <string name="common_confirm">确认</string>
     <string name="common_info">提示</string>
     <string name="common_add_manully">手动添加</string>

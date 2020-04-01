@@ -2,7 +2,7 @@ package com.yyy.wrsf.model.filter;
 
 import java.io.Serializable;
 
-public class AddressFilterModel implements Serializable {
+public class AddressFilterB implements Serializable {
 
     /**
      * companyName : string

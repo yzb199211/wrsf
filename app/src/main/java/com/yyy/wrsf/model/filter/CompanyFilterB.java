@@ -2,7 +2,7 @@ package com.yyy.wrsf.model.filter;
 
 import java.io.Serializable;
 
-public class CompanyFilterModel implements Serializable {
+public class CompanyFilterB implements Serializable {
 
     /**
      * askDate : 2020-03-16T01:38:35.397Z

@@ -14,14 +14,13 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.model.price.PriceCalM;
 import com.yyy.wrsf.model.publicm.PublicArray;
-import com.yyy.wrsf.model.publicm.PublicModel;
+import com.yyy.wrsf.model.publicm.PublicBean;
 import com.yyy.wrsf.model.ship.ShipGoodsModel;
-import com.yyy.wrsf.model.filter.PublicFilterModel;
+import com.yyy.wrsf.model.filter.PublicFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
-import com.yyy.wrsf.utils.net.bill.BillUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -65,12 +64,12 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     @BindView(R.id.tmi_send)
     TextMenuItem tmiSend;
 
-    private List<PublicModel> goods = new ArrayList<>();
-    private List<PublicModel> send = new ArrayList<>();
-    private List<PublicModel> trans = new ArrayList<>();
-    private List<PublicModel> delivery = new ArrayList<>();
+    private List<PublicBean> goods = new ArrayList<>();
+    private List<PublicBean> send = new ArrayList<>();
+    private List<PublicBean> trans = new ArrayList<>();
+    private List<PublicBean> delivery = new ArrayList<>();
 
-    private PublicFilterModel publicFilter;
+    private PublicFilterB publicFilter;
     private Popwin popGoods;
     private Popwin popSend;
     private Popwin popTrans;
@@ -161,7 +160,7 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     }
 
     private void initPublicFilter() {
-        publicFilter = new PublicFilterModel();
+        publicFilter = new PublicFilterB();
         List<Integer> list = new ArrayList<>();
         list.add(PublicCode.GoodsType);
         list.add(PublicCode.SendType);

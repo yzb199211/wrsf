@@ -33,7 +33,7 @@ import com.yyy.wrsf.model.address.AreaModel;
 import com.yyy.wrsf.model.company.CompanyModel;
 import com.yyy.wrsf.model.ImageBean;
 import com.yyy.wrsf.model.month.MonthModel;
-import com.yyy.wrsf.model.filter.CompanyFilterModel;
+import com.yyy.wrsf.model.filter.CompanyFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.net.net.NetConfig;
@@ -112,7 +112,7 @@ public class MonthApplyActivity extends BaseActivity {
 
     private MonthModel monthModel;
     private List<CompanyModel> companys = new ArrayList<>();
-    private PagerRequestBean<CompanyFilterModel> pager;
+    private PagerRequestBean<CompanyFilterB> pager;
 
     private OptionsPickerView pvCompany;
 
@@ -152,7 +152,7 @@ public class MonthApplyActivity extends BaseActivity {
         pager = new PagerRequestBean();
         pager.setPageIndex(0);
         pager.setPageSize(500);
-        CompanyFilterModel filterModel = new CompanyFilterModel();
+        CompanyFilterB filterModel = new CompanyFilterB();
         filterModel.setCheckFinish(4);
         pager.setQueryParam(filterModel);
 

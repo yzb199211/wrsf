@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
@@ -12,11 +11,9 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.enums.ContractStatusEnum;
-import com.yyy.wrsf.model.OrderModel;
+import com.yyy.wrsf.model.OrderBean;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
@@ -44,7 +41,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
     private PagerRequestBean pager;
-    private List<OrderModel> orders = new ArrayList<>();
+    private List<OrderBean> orders = new ArrayList<>();
     private OrderAdapter adapter;
 
     @Override
@@ -106,7 +103,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<OrderModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<OrderModel>>() {
+                        List<OrderBean> list = new Gson().fromJson(result.getData(), new TypeToken<List<OrderBean>>() {
                         }.getType());
                         orders.addAll(list);
                         refrishList();
@@ -145,6 +142,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
                         go2Cancle(pos);
                     });
                 } else {
+                    adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -159,7 +157,12 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
 
 
     private void go2Detail(int pos) {
-        startActivityForResult(new Intent().setClass(this, OrderDetailActivity.class).putExtra("pos", pos), CodeUtil.MODIFY);
+        startActivityForResult(
+                new Intent()
+                        .setClass(this, OrderDetailActivity.class)
+                        .putExtra("pos", pos)
+                        .putExtra("data", new Gson().toJson(orders.get(pos)))
+                , CodeUtil.MODIFY);
     }
 
     private void go2Pay(int pos) {
@@ -167,7 +170,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
 
     private void go2Cancle(int pos) {
         LoadingDialog.showDialogForLoading(this);
-        new NetUtil(cancleParams(), NetConfig.address + OrderUrl.cancelOrder, RequstType.DELETE, new ResponseListener() {
+        new NetUtil(cancleParams(pos), NetConfig.address + OrderUrl.cancelOrder, RequstType.DELETE, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 LoadingFinish(null);
@@ -195,8 +198,9 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
 
     }
 
-    private List<NetParams> cancleParams() {
+    private List<NetParams> cancleParams(int pos) {
         List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("contractNo", orders.get(pos).getContractNo()));
         return params;
     }
 

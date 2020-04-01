@@ -109,4 +109,9 @@ public class BillP implements IBillP {
         List<NetParams> params = new ArrayList<>();
         return params;
     }
+
+    public void detachView() {
+        destroyFlag = true;
+        this.iBillV = null;
+    }
 }

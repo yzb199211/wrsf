@@ -21,7 +21,7 @@ import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.MemberModel;
 import com.yyy.wrsf.model.OutletModel;
 import com.yyy.wrsf.model.publicm.Sex;
-import com.yyy.wrsf.model.filter.MemberFilterModel;
+import com.yyy.wrsf.model.filter.MemberFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SexUtil;
 import com.yyy.wrsf.utils.StringUtil;
@@ -76,7 +76,7 @@ public class OutletDetailActivity extends AppCompatActivity {
     private OptionsPickerView pvStatus;
     private OptionsPickerView pvPerson;
     private int pos;
-    private MemberFilterModel memberFilter;
+    private MemberFilterB memberFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +127,7 @@ public class OutletDetailActivity extends AppCompatActivity {
     }
 
     private void initMemberFilter() {
-        memberFilter = new MemberFilterModel();
+        memberFilter = new MemberFilterB();
         memberFilter.setStopYesno(0);
     }
 

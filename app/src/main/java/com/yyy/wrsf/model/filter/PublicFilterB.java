@@ -3,7 +3,7 @@ package com.yyy.wrsf.model.filter;
 import java.io.Serializable;
 import java.util.List;
 
-public class PublicFilterModel implements Serializable {
+public class PublicFilterB implements Serializable {
 
     /**
      * detailCode : 0

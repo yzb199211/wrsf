@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.enums.PayTypeEnum;
-import com.yyy.wrsf.model.OrderModel;
+import com.yyy.wrsf.model.OrderBean;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -60,7 +60,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     EditClearView ecvFeeCollection;
 
 
-    private OrderModel order;
+    private OrderBean order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        order = new Gson().fromJson(getIntent().getStringExtra("data"), OrderModel.class);
+        order = new Gson().fromJson(getIntent().getStringExtra("data"), OrderBean.class);
     }
 
     private void initTop() {

@@ -16,7 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.model.company.CompanyModel;
-import com.yyy.wrsf.model.filter.ShipCompany;
+import com.yyy.wrsf.model.filter.ShipCompanyB;
 import com.yyy.wrsf.utils.PxUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
@@ -27,7 +27,6 @@ import com.yyy.wrsf.utils.net.net.NetUtil;
 import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
-import com.yyy.wrsf.utils.net.bill.BillUrl;
 import com.yyy.wrsf.utils.net.ship.ShipUrl;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,7 +52,7 @@ public class CompanySelect extends PopupWindow {
 
     private List<CompanyModel> companys = new ArrayList<>();
     private CompanyAdapter adapter;
-    private ShipCompany companyFilter;
+    private ShipCompanyB companyFilter;
     private OnLoadingListener onLoadingListener;
 
     public CompanySelect(Context context) {
@@ -83,7 +82,7 @@ public class CompanySelect extends PopupWindow {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void refresh(ShipCompany companyFilter) {
+    public void refresh(ShipCompanyB companyFilter) {
         this.companyFilter = companyFilter;
         if (companys.size() > 0) {
             companys.clear();

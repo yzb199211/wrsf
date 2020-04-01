@@ -18,9 +18,9 @@ import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.DriverModel;
 import com.yyy.wrsf.model.publicm.PublicArray;
-import com.yyy.wrsf.model.publicm.PublicModel;
+import com.yyy.wrsf.model.publicm.PublicBean;
 import com.yyy.wrsf.model.publicm.Sex;
-import com.yyy.wrsf.model.filter.PublicFilterModel;
+import com.yyy.wrsf.model.filter.PublicFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.PublicCode;
@@ -72,9 +72,9 @@ public class DriverDetailActivity extends AppCompatActivity {
     private OptionsPickerView pvStatus;
     private OptionsPickerView pvLicense;
     private List<Sex> sexes;
-    private List<PublicModel> status;
-    private List<PublicModel> licenses;
-    private PublicFilterModel publicFilter;
+    private List<PublicBean> status;
+    private List<PublicBean> licenses;
+    private PublicFilterB publicFilter;
     private DriverModel driver;
 
     private int code;
@@ -97,7 +97,7 @@ public class DriverDetailActivity extends AppCompatActivity {
     }
 
     private void initPublicFilter() {
-        publicFilter = new PublicFilterModel();
+        publicFilter = new PublicFilterB();
         List<Integer> list = new ArrayList<>();
         list.add(PublicCode.LicenseDriver);
         list.add(PublicCode.StatusDriver);
@@ -152,7 +152,7 @@ public class DriverDetailActivity extends AppCompatActivity {
             driver.setDriverTypeName(licenses.get(0).getDetailName());
         }
         if (driver.getDriverStatus() == null && status.size() > 0) {
-            for (PublicModel item : status) {
+            for (PublicBean item : status) {
                 if (item.getDetailCode() == 1) {
                     driver.setDriverStatus(item.getRecNo());
                     break;
@@ -162,7 +162,7 @@ public class DriverDetailActivity extends AppCompatActivity {
     }
 
     private String getStatusName() {
-        for (PublicModel item : status) {
+        for (PublicBean item : status) {
             if (item.getRecNo() == driver.getDriverStatus()) ;
             return item.getDetailName();
         }

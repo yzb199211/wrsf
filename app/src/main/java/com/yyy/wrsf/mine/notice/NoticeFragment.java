@@ -18,7 +18,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.model.NoticeModel;
-import com.yyy.wrsf.model.filter.NoticeFilterModel;
+import com.yyy.wrsf.model.filter.NoticeFilterB;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -52,7 +52,7 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
     SharedPreferencesHelper preferencesHelper;
     List<NoticeModel> notices = new ArrayList<>();
     NoticeAdpter noticeAdpter;
-    private PagerRequestBean<NoticeFilterModel> pager;
+    private PagerRequestBean<NoticeFilterB> pager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
         pager = new PagerRequestBean();
         pager.setPageIndex(0);
         pager.setPageSize(500);
-        NoticeFilterModel filterModel = new NoticeFilterModel();
+        NoticeFilterB filterModel = new NoticeFilterB();
         filterModel.setMemberId((Integer) preferencesHelper.getSharedPreference("recNo", 0));
         pager.setQueryParam(filterModel);
     }

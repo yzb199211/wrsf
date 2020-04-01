@@ -14,19 +14,19 @@ import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.interfaces.OnCancleListener;
 import com.yyy.wrsf.interfaces.OnConfirmListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.OrderModel;
+import com.yyy.wrsf.model.OrderBean;
 import com.yyy.wrsf.utils.DateUtil;
 
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
     private Context context;
-    private List<OrderModel> list;
+    private List<OrderBean> list;
     private OnItemClickListener onItemClickListener;
     private OnCancleListener onCancleListener;
     private OnConfirmListener onConfirmListener;
 
-    public OrderAdapter(Context context, List<OrderModel> list) {
+    public OrderAdapter(Context context, List<OrderBean> list) {
         this.context = context;
         this.list = list;
     }

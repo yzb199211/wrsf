@@ -18,7 +18,7 @@ import com.yyy.wrsf.interfaces.OnDeleteListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.address.AddressModel;
-import com.yyy.wrsf.model.filter.AddressFilterModel;
+import com.yyy.wrsf.model.filter.AddressFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
@@ -56,7 +56,7 @@ public class AddressActivity extends AppCompatActivity {
     private AddressAdapter addressAdapter;
 
     private boolean isSelect = false;
-    private PagerRequestBean<AddressFilterModel> pager;
+    private PagerRequestBean<AddressFilterB> pager;
     private int memberId;
 
     @Override
@@ -80,7 +80,7 @@ public class AddressActivity extends AppCompatActivity {
         pager = new PagerRequestBean();
         pager.setPageIndex(0);
         pager.setPageSize(500);
-        AddressFilterModel filterModel = new AddressFilterModel();
+        AddressFilterB filterModel = new AddressFilterB();
         filterModel.setRecNo(memberId);
         pager.setQueryParam(filterModel);
 

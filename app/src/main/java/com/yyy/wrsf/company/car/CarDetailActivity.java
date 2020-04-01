@@ -19,9 +19,9 @@ import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.model.CarModel;
 import com.yyy.wrsf.model.DriverModel;
 import com.yyy.wrsf.model.publicm.PublicArray;
-import com.yyy.wrsf.model.publicm.PublicModel;
-import com.yyy.wrsf.model.filter.DriverFilterModel;
-import com.yyy.wrsf.model.filter.PublicFilterModel;
+import com.yyy.wrsf.model.publicm.PublicBean;
+import com.yyy.wrsf.model.filter.DriverFilterB;
+import com.yyy.wrsf.model.filter.PublicFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.StringUtil;
@@ -77,11 +77,11 @@ public class CarDetailActivity extends AppCompatActivity {
     private OptionsPickerView pvCartype;
 
     private List<DriverModel> drivers = new ArrayList<>();
-    private List<PublicModel> status = new ArrayList<>();
-    private List<PublicModel> carTypes = new ArrayList<>();
+    private List<PublicBean> status = new ArrayList<>();
+    private List<PublicBean> carTypes = new ArrayList<>();
 
-    private PublicFilterModel publicFilter;
-    private DriverFilterModel driverFilter;
+    private PublicFilterB publicFilter;
+    private DriverFilterB driverFilter;
 
     private CarModel car;
 
@@ -128,12 +128,12 @@ public class CarDetailActivity extends AppCompatActivity {
     }
 
     private void initDriverFilter() {
-        driverFilter = new DriverFilterModel();
+        driverFilter = new DriverFilterB();
         driverFilter.setDriverStatus(1);
     }
 
     private void initPublicFilter() {
-        publicFilter = new PublicFilterModel();
+        publicFilter = new PublicFilterB();
         List<Integer> list = new ArrayList<>();
         list.add(PublicCode.CarType);
         list.add(PublicCode.CarStatus);
@@ -361,7 +361,7 @@ public class CarDetailActivity extends AppCompatActivity {
 
     private void setDefaultData() {
         if (car.getCarStatus() == 0 && status.size() > 0) {
-            for (PublicModel item : status) {
+            for (PublicBean item : status) {
                 if (item.getDetailCode() == 1) {
                     car.setCarStatus(item.getRecNo());
                     car.setCarStatusName(item.getDetailName());

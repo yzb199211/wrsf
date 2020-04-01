@@ -2,7 +2,7 @@ package com.yyy.wrsf.enums;
 
 import com.yyy.wrsf.enums.util.EnumEntity;
 import com.yyy.wrsf.enums.util.EnumUtils;
-import com.yyy.wrsf.model.publicm.PublicModel;
+import com.yyy.wrsf.model.publicm.PublicBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +43,11 @@ public enum BillTypeEnum {
         return "";
     }
 
-    public static List<PublicModel> getBillTypes() {
-        List<PublicModel> list = new ArrayList<>();
+    public static List<PublicBean> getBillTypes() {
+        List<PublicBean> list = new ArrayList<>();
         List<EnumEntity> enumEntityList = EnumUtils.getEnumList(BillTypeEnum.values(), BillTypeEnum::getType, BillTypeEnum::getName);
         for (EnumEntity item : enumEntityList) {
-            list.add(new PublicModel(item.getId(), item.getName()));
+            list.add(new PublicBean(item.getId(), item.getName()));
         }
         return list;
     }

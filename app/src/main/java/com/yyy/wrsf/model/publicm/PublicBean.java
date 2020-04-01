@@ -2,7 +2,7 @@ package com.yyy.wrsf.model.publicm;
 
 import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 
-public class PublicModel implements IPickerViewData {
+public class PublicBean implements IPickerViewData {
 
     /**
      * recNo : 1
@@ -18,10 +18,10 @@ public class PublicModel implements IPickerViewData {
     private int detailCode;
     private String detailName;
 
-    public PublicModel() {
+    public PublicBean() {
     }
 
-    public PublicModel(int detailCode, String detailName) {
+    public PublicBean(int detailCode, String detailName) {
         this.detailCode = detailCode;
         this.detailName = detailName;
     }

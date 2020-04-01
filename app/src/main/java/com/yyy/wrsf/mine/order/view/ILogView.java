@@ -1,4 +1,4 @@
-package com.yyy.wrsf.mine.order.View;
+package com.yyy.wrsf.mine.order.view;
 
 import java.util.List;
 

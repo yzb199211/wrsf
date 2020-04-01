@@ -1,6 +1,6 @@
 package com.yyy.wrsf.model;
 
-public class OrderModel {
+public class OrderBean {
 
     /**
      * baoAsk : 0

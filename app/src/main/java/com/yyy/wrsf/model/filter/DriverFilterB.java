@@ -1,6 +1,6 @@
 package com.yyy.wrsf.model.filter;
 
-public class DriverFilterModel {
+public class DriverFilterB {
 
     /**
      * driverName : string

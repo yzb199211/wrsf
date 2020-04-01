@@ -2,8 +2,6 @@ package com.yyy.wrsf.mine.bill;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,16 +12,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BasePickActivity;
-import com.yyy.wrsf.company.car.CarDetailActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.enums.BillTypeEnum;
 import com.yyy.wrsf.mine.bill.persenter.BillP;
 import com.yyy.wrsf.mine.bill.view.IBillV;
 import com.yyy.wrsf.model.BillBean;
 import com.yyy.wrsf.model.publicm.PublicArray;
-import com.yyy.wrsf.model.publicm.PublicModel;
-import com.yyy.wrsf.model.filter.PublicFilterModel;
-import com.yyy.wrsf.utils.PhoneUtils;
+import com.yyy.wrsf.model.publicm.PublicBean;
+import com.yyy.wrsf.model.filter.PublicFilterB;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
@@ -81,9 +77,9 @@ public class BillActivity extends BasePickActivity implements IBillV {
     private RequstType requstType;
     private String url;
 
-    private PublicFilterModel publicFilter;
+    private PublicFilterB publicFilter;
     private OptionsPickerView pvBilltype;
-    private List<PublicModel> billTypes;
+    private List<PublicBean> billTypes;
 
     private boolean editable = false;
     private BillP billP;
@@ -106,7 +102,7 @@ public class BillActivity extends BasePickActivity implements IBillV {
     }
 
     private void initPublicFilter() {
-        publicFilter = new PublicFilterModel();
+        publicFilter = new PublicFilterB();
         List<Integer> list = new ArrayList<>();
         list.add(PublicCode.BillType);
         publicFilter.setPublicCodes(list);
@@ -294,5 +290,11 @@ public class BillActivity extends BasePickActivity implements IBillV {
     @Override
     public void toast(String s) {
         Toast(s);
+    }
+
+    @Override
+    protected void onDestroy() {
+        billP.detachView();
+        super.onDestroy();
     }
 }

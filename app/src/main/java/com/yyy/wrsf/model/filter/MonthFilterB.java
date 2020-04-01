@@ -1,6 +1,6 @@
 package com.yyy.wrsf.model.filter;
 
-public class MonthFilterModel {
+public class MonthFilterB {
     /**
      * companyName : string
      * contractPerson : string

@@ -1,6 +1,6 @@
 package com.yyy.wrsf.model.filter;
 
-public class ShipCompany {
+public class ShipCompanyB {
 
     /**
      * companyRecNo : 0

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,20 +14,19 @@ import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.interfaces.OnCancleListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.OrderModel;
-import com.yyy.wrsf.model.ship.ShippingModel;
+import com.yyy.wrsf.model.OrderBean;
 import com.yyy.wrsf.utils.DateUtil;
 
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
     private Context context;
-    private List<OrderModel> list;
+    private List<OrderBean> list;
     private OnEditListener onEditListener;
     private OnCancleListener onCancleListener;
     private OnItemClickListener onItemClickListener;
 
-    public OrderAdapter(Context context, List<OrderModel> list) {
+    public OrderAdapter(Context context, List<OrderBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -42,6 +40,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
+        holder.setIsRecyclable(false);
         holder.tvOrderNo.setText(context.getString(R.string.order_no) + "：" + list.get(position).getContractNo());
         holder.tvOrderType.setText(ContractStatusEnum.getDescByStatus(list.get(position).getContractStatus()));
 //        holder.tvCompany.setText(list.get(position));

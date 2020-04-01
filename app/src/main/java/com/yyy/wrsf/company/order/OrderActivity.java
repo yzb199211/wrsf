@@ -15,7 +15,7 @@ import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
 
 import com.yyy.wrsf.mine.order.OrderDetailActivity;
-import com.yyy.wrsf.model.OrderModel;
+import com.yyy.wrsf.model.OrderBean;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
@@ -42,7 +42,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
     private PagerRequestBean pager;
-    private List<OrderModel> orders = new ArrayList<>();
+    private List<OrderBean> orders = new ArrayList<>();
     private OrderAdapter adapter;
 
     @Override
@@ -94,7 +94,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<OrderModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<OrderModel>>() {
+                        List<OrderBean> list = new Gson().fromJson(result.getData(), new TypeToken<List<OrderBean>>() {
                         }.getType());
                         orders.addAll(list);
                         refrishList();

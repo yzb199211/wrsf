@@ -8,7 +8,7 @@ public class PublicArray {
     private int recNo;
     private Integer publicCode;
     private String publicName;
-    private List<PublicModel> plantPublicDetails;
+    private List<PublicBean> plantPublicDetails;
 
     public int getRecNo() {
         return recNo;
@@ -34,11 +34,11 @@ public class PublicArray {
         this.publicName = publicName;
     }
 
-    public List<PublicModel> getPlantPublicDetails() {
+    public List<PublicBean> getPlantPublicDetails() {
         return plantPublicDetails;
     }
 
-    public void setPlantPublicDetails(List<PublicModel> plantPublicDetails) {
+    public void setPlantPublicDetails(List<PublicBean> plantPublicDetails) {
         this.plantPublicDetails = plantPublicDetails;
     }
 
