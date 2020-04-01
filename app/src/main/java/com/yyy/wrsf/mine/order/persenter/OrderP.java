@@ -13,7 +13,6 @@ import com.yyy.wrsf.mine.order.view.IOrderV;
 import com.yyy.wrsf.model.OrderBean;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
-import com.yyy.wrsf.utils.net.net.NetUtil;
 import com.yyy.wrsf.utils.net.net.PagerRequestBean;
 import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.order.OrderUrl;
@@ -82,6 +81,7 @@ public class OrderP implements IOrderP {
 
     private void initParams() {
         pager.setPageIndex(pageIndex);
+        pager.setQueryParam(iOrderM.getFilter(iOrderV.getOrderName(), iOrderV.getType()));
     }
 
     @Override
@@ -112,7 +112,6 @@ public class OrderP implements IOrderP {
 
     @Override
     public void pay(int pos) {
-
     }
 
     private List<NetParams> getParams() {

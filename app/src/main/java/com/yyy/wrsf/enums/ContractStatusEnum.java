@@ -30,7 +30,6 @@ public enum ContractStatusEnum {
 
     FINISH(6, "已完成");
 
-
     private Integer status;
     private String desc;
 

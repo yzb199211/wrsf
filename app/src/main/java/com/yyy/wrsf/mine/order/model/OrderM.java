@@ -6,6 +6,7 @@ import com.yyy.wrsf.base.model.BaseM;
 import com.yyy.wrsf.model.filter.OrderFilterB;
 
 public class OrderM extends BaseM implements IOrderM {
+    @Override
     public OrderFilterB getFilter(String orderNo, Integer orderType) {
         OrderFilterB orderFilterB = new OrderFilterB();
         if (TextUtils.isEmpty(orderNo) || orderType != null) {
