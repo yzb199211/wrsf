@@ -7,4 +7,5 @@ public interface IOrderP {
 
     void pay(int pos);
 
+    void getTabs();
 }

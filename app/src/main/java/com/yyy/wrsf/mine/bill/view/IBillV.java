@@ -3,7 +3,7 @@ package com.yyy.wrsf.mine.bill.view;
 import android.widget.LinearLayout;
 
 import com.yyy.wrsf.base.view.ILoadingV;
-import com.yyy.wrsf.model.BillBean;
+import com.yyy.wrsf.beans.BillBean;
 import com.yyy.wrsf.utils.net.net.RequstType;
 
 public interface IBillV extends ILoadingV {

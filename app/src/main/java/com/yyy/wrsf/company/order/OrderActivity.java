@@ -15,7 +15,7 @@ import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
 
 import com.yyy.wrsf.mine.order.OrderDetailActivity;
-import com.yyy.wrsf.model.OrderBean;
+import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;

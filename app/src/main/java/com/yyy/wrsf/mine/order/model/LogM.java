@@ -2,6 +2,10 @@ package com.yyy.wrsf.mine.order.model;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
+import com.yyy.wrsf.beans.TabB;
+import com.yyy.wrsf.enums.ContractStatusEnum;
+import com.yyy.wrsf.enums.util.EnumEntity;
+import com.yyy.wrsf.enums.util.EnumUtils;
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -11,6 +15,7 @@ import com.yyy.wrsf.utils.net.net.Result;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LogM implements ILogM {
@@ -22,14 +27,14 @@ public class LogM implements ILogM {
             public void onSuccess(String string) {
                 try {
                     Result result = new Result(string);
-                    if (result.isSuccess()){
+                    if (result.isSuccess()) {
                         onResultListener.onSuccess(result.getData());
-                    }else{
+                    } else {
                         onResultListener.onFail(result.getMsg());
                     }
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     onResultListener.onFail(BaseApplication.getInstance().getString(R.string.error_json));
-                }catch (Exception e){
+                } catch (Exception e) {
                     onResultListener.onFail(e.getMessage());
                     e.printStackTrace();
                 }
@@ -42,4 +47,6 @@ public class LogM implements ILogM {
             }
         });
     }
+
+
 }

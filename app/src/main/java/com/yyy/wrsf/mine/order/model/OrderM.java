@@ -2,8 +2,17 @@ package com.yyy.wrsf.mine.order.model;
 
 import android.text.TextUtils;
 
+import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.base.model.BaseM;
-import com.yyy.wrsf.model.filter.OrderFilterB;
+import com.yyy.wrsf.beans.TabB;
+import com.yyy.wrsf.beans.filter.OrderFilterB;
+import com.yyy.wrsf.enums.ContractStatusEnum;
+import com.yyy.wrsf.enums.util.EnumEntity;
+import com.yyy.wrsf.enums.util.EnumUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderM extends BaseM implements IOrderM {
     @Override
@@ -14,5 +23,18 @@ public class OrderM extends BaseM implements IOrderM {
             orderFilterB.setContractStatus(orderType);
         }
         return null;
+    }
+
+    @Override
+    public List<TabB> getTabs() {
+        List<TabB> tabs = new ArrayList<>();
+        tabs.add(new TabB(null, BaseApplication.getInstance().getString(R.string.common_all)));
+        List<EnumEntity> list = EnumUtils.getEnumList(ContractStatusEnum.values(), ContractStatusEnum::getStatus, ContractStatusEnum::getDesc);
+        list.remove(0);
+        list.remove(0);
+        for (EnumEntity enumEntity : list) {
+            tabs.add(new TabB(enumEntity.getId(), enumEntity.getName()));
+        }
+        return tabs;
     }
 }

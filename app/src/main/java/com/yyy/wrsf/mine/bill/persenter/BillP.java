@@ -6,17 +6,14 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
-import com.yyy.wrsf.base.model.BaseM;
-import com.yyy.wrsf.base.model.IBaseM;
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.mine.bill.model.BillM;
 import com.yyy.wrsf.mine.bill.view.IBillV;
-import com.yyy.wrsf.model.BillBean;
+import com.yyy.wrsf.beans.BillBean;
 import com.yyy.wrsf.utils.net.bill.BillUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.RequstType;
-import com.yyy.wrsf.utils.net.publics.PublicUrl;
 
 import java.util.ArrayList;
 import java.util.List;

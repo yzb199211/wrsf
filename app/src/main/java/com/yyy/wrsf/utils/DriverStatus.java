@@ -1,6 +1,6 @@
 package com.yyy.wrsf.utils;
 
-import com.yyy.wrsf.model.SelectB;
+import com.yyy.wrsf.beans.SelectB;
 
 import java.util.ArrayList;
 import java.util.List;

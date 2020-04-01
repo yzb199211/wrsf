@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.enums.PayTypeEnum;
-import com.yyy.wrsf.model.OrderBean;
+import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.topview.TopView;
 

@@ -13,7 +13,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.address.AddressB;
+import com.yyy.wrsf.beans.address.AddressB;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.view.button.ButtonWithImg;
 

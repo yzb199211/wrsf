@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.model.ship.ShippingAddValueB;
-import com.yyy.wrsf.model.ship.SignB;
+import com.yyy.wrsf.beans.ship.ShippingAddValueB;
+import com.yyy.wrsf.beans.ship.SignB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.EditInputFilter;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;

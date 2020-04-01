@@ -2,7 +2,7 @@ package com.yyy.wrsf.enums;
 
 import com.yyy.wrsf.enums.util.EnumEntity;
 import com.yyy.wrsf.enums.util.EnumUtils;
-import com.yyy.wrsf.model.publicm.PublicBean;
+import com.yyy.wrsf.beans.publicm.PublicBean;
 
 import java.util.ArrayList;
 import java.util.List;

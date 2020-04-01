@@ -10,7 +10,7 @@ import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.mine.order.model.IOrderM;
 import com.yyy.wrsf.mine.order.model.OrderM;
 import com.yyy.wrsf.mine.order.view.IOrderV;
-import com.yyy.wrsf.model.OrderBean;
+import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.PagerRequestBean;
@@ -112,6 +112,11 @@ public class OrderP implements IOrderP {
 
     @Override
     public void pay(int pos) {
+    }
+
+    @Override
+    public void getTabs() {
+        iOrderV.setTabs(iOrderM.getTabs());
     }
 
     private List<NetParams> getParams() {

@@ -16,7 +16,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
-import com.yyy.wrsf.model.DriverB;
+import com.yyy.wrsf.beans.DriverB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;

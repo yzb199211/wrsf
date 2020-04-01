@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.MemberB;
+import com.yyy.wrsf.beans.MemberB;
 import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;

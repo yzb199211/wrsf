@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.main.model.CycleM;
 import com.yyy.wrsf.main.view.ICycleV;
-import com.yyy.wrsf.model.ImageBean;
+import com.yyy.wrsf.beans.ImageBean;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.PagerRequestBean;

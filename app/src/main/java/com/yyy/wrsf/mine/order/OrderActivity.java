@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -13,7 +14,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.OrderBean;
+import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
@@ -40,6 +41,9 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     TopView topView;
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+
     private PagerRequestBean pager;
     private List<OrderBean> orders = new ArrayList<>();
     private OrderAdapter adapter;

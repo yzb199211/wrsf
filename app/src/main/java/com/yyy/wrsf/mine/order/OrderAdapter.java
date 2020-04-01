@@ -14,7 +14,7 @@ import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.interfaces.OnCancleListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.OrderBean;
+import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.utils.DateUtil;
 
 import java.util.List;

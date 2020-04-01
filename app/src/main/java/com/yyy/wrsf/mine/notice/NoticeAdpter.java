@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.NoticeB;
+import com.yyy.wrsf.beans.NoticeB;
 import com.yyy.wrsf.utils.DateUtil;
 
 import java.util.List;
