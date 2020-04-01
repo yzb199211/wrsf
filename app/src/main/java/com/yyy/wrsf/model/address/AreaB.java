@@ -2,7 +2,7 @@ package com.yyy.wrsf.model.address;
 
 import java.io.Serializable;
 
-public class AreaModel implements Serializable {
+public class AreaB implements Serializable {
 
     /**
      * id : 1

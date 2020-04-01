@@ -17,7 +17,7 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.NoticeModel;
+import com.yyy.wrsf.model.NoticeB;
 import com.yyy.wrsf.model.filter.NoticeFilterB;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
@@ -50,7 +50,7 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
     XRecyclerView recyclerView;
 
     SharedPreferencesHelper preferencesHelper;
-    List<NoticeModel> notices = new ArrayList<>();
+    List<NoticeB> notices = new ArrayList<>();
     NoticeAdpter noticeAdpter;
     private PagerRequestBean<NoticeFilterB> pager;
 
@@ -107,7 +107,7 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<NoticeModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<NoticeModel>>() {
+                        List<NoticeB> list = new Gson().fromJson(result.getData(), new TypeToken<List<NoticeB>>() {
                         }.getType());
                         if (list != null) {
                             notices.clear();

@@ -6,7 +6,7 @@ import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 
 import java.io.Serializable;
 
-public class DriverModel implements Serializable, IPickerViewData {
+public class DriverB implements Serializable, IPickerViewData {
 
     /**
      * driverName : string

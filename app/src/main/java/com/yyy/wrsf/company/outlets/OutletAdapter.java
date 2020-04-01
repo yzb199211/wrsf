@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.OutletModel;
+import com.yyy.wrsf.model.OutletB;
 
 import java.util.List;
 
 public class OutletAdapter extends RecyclerView.Adapter<OutletAdapter.VH> {
     private Context context;
-    private List<OutletModel> list;
+    private List<OutletB> list;
     OnItemClickListener onItemClickListener;
 
-    public OutletAdapter(Context context, List<OutletModel> list) {
+    public OutletAdapter(Context context, List<OutletB> list) {
         this.context = context;
         this.list = list;
     }

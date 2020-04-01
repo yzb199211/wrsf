@@ -1,12 +1,12 @@
 package com.yyy.wrsf.model.ship;
 
-public enum SignModel {
+public enum SignB {
     NONE(1, 0), PAPER(2, 5.00), ELECTRONIC(3, 3.00);
 
     private int type;
     private double price;
 
-    SignModel(int type, double price) {
+    SignB(int type, double price) {
         this.type = type;
         this.price = price;
     }

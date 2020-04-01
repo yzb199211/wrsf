@@ -2,7 +2,7 @@ package com.yyy.wrsf.model.price;
 
 import java.math.BigDecimal;
 
-public class PriceBackM {
+public class PriceBackB {
 
     /**
      * contractTotal : 0

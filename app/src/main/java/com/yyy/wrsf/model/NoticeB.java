@@ -1,6 +1,6 @@
 package com.yyy.wrsf.model;
 
-public class NoticeModel {
+public class NoticeB {
 
     /**
      * createDate : 2020-03-18T00:53:10.406Z

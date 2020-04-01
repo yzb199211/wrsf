@@ -14,7 +14,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
-import com.yyy.wrsf.model.month.CustomerMonthModel;
+import com.yyy.wrsf.model.month.CustomerMonthB;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
@@ -44,7 +44,7 @@ public class MonthActivity extends AppCompatActivity {
     XRecyclerView recyclerView;
 
     private PagerRequestBean pager;
-    private List<CustomerMonthModel> monthModels = new ArrayList<>();
+    private List<CustomerMonthB> monthModels = new ArrayList<>();
     private MonthAdapter monthAdapter;
 
     @Override
@@ -96,7 +96,7 @@ public class MonthActivity extends AppCompatActivity {
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<CustomerMonthModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<CustomerMonthModel>>() {
+                        List<CustomerMonthB> list = new Gson().fromJson(result.getData(), new TypeToken<List<CustomerMonthB>>() {
                         }.getType());
                         if (list != null) {
                             monthModels.clear();

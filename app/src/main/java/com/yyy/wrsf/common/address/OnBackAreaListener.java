@@ -1,7 +1,7 @@
 package com.yyy.wrsf.common.address;
 
-import com.yyy.wrsf.model.address.AreaModel;
+import com.yyy.wrsf.model.address.AreaB;
 
 public interface OnBackAreaListener {
-    void backArea(AreaModel province, AreaModel city, AreaModel district);
+    void backArea(AreaB province, AreaB city, AreaB district);
 }

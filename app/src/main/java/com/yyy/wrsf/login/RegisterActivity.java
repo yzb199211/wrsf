@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.MemberModel;
+import com.yyy.wrsf.model.MemberB;
 import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -193,7 +193,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private String getMember() {
-        MemberModel model = new MemberModel();
+        MemberB model = new MemberB();
         model.setMemberTel(ecvPhone.getText());
         model.setPassWord(ecvPwd.getText());
         model.setValidate(vcCode.getText());

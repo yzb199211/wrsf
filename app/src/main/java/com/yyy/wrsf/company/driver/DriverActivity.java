@@ -16,7 +16,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
-import com.yyy.wrsf.model.DriverModel;
+import com.yyy.wrsf.model.DriverB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -49,7 +49,7 @@ public class DriverActivity extends AppCompatActivity {
     XRecyclerView recyclerView;
 
     private PagerRequestBean pager;
-    private List<DriverModel> driverModels = new ArrayList<>();
+    private List<DriverB> driverModels = new ArrayList<>();
     private DriverAdapter driverAdapter;
 
     @Override
@@ -104,7 +104,7 @@ public class DriverActivity extends AppCompatActivity {
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<DriverModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<DriverModel>>() {
+                        List<DriverB> list = new Gson().fromJson(result.getData(), new TypeToken<List<DriverB>>() {
                         }.getType());
                         if (list != null) {
                             driverModels.clear();
@@ -183,7 +183,7 @@ public class DriverActivity extends AppCompatActivity {
             if (data != null) {
                 int pos = data.getIntExtra("pos", -1);
                 if (pos > -1 && pos < driverModels.size()) {
-                    driverModels.set(pos, new Gson().fromJson(data.getStringExtra("data"), DriverModel.class));
+                    driverModels.set(pos, new Gson().fromJson(data.getStringExtra("data"), DriverB.class));
 //                    addresses.get(pos) = ;
                     refrishList();
                 }

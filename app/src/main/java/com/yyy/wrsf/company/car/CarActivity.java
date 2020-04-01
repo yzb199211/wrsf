@@ -16,7 +16,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
-import com.yyy.wrsf.model.CarModel;
+import com.yyy.wrsf.model.CarB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -48,7 +48,7 @@ public class CarActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
     private PagerRequestBean pager;
-    private List<CarModel> cars = new ArrayList<>();
+    private List<CarB> cars = new ArrayList<>();
     private CarAdapter carAdapter;
 
     @Override
@@ -102,7 +102,7 @@ public class CarActivity extends AppCompatActivity {
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<CarModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<CarModel>>() {
+                        List<CarB> list = new Gson().fromJson(result.getData(), new TypeToken<List<CarB>>() {
                         }.getType());
                         if (list != null) {
                             cars.clear();
@@ -181,7 +181,7 @@ public class CarActivity extends AppCompatActivity {
             if (data != null) {
                 int pos = data.getIntExtra("pos", -1);
                 if (pos > -1 && pos < cars.size()) {
-                    cars.set(pos, new Gson().fromJson(data.getStringExtra("data"), CarModel.class));
+                    cars.set(pos, new Gson().fromJson(data.getStringExtra("data"), CarB.class));
 //                    addresses.get(pos) = ;
                     refrishList();
                 }

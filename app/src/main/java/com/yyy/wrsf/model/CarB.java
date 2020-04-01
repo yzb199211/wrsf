@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import java.io.Serializable;
 
-public class CarModel implements Serializable {
+public class CarB implements Serializable {
 
     /**
      * recNo : 1

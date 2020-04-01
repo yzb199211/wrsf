@@ -4,7 +4,7 @@ import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 
 import java.io.Serializable;
 
-public class CompanyModel implements Serializable, IPickerViewData {
+public class CompanyB implements Serializable, IPickerViewData {
 
     /**
      * recNo : 1

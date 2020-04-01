@@ -29,10 +29,10 @@ import com.yyy.wrsf.common.address.AreaSelect;
 import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
-import com.yyy.wrsf.model.address.AreaModel;
-import com.yyy.wrsf.model.company.CompanyModel;
+import com.yyy.wrsf.model.address.AreaB;
+import com.yyy.wrsf.model.company.CompanyB;
 import com.yyy.wrsf.model.ImageBean;
-import com.yyy.wrsf.model.month.MonthModel;
+import com.yyy.wrsf.model.month.MonthB;
 import com.yyy.wrsf.model.filter.CompanyFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -101,17 +101,17 @@ public class MonthApplyActivity extends BaseActivity {
     SharedPreferencesHelper preferencesHelper;
 
     private AreaSelect areaSelect;
-    private AreaModel province;
-    private AreaModel city;
-    private AreaModel district;
+    private AreaB province;
+    private AreaB city;
+    private AreaB district;
     private File fileObverse;
     private File fileReverse;
     private File fileOne;
     private File fileTwo;
     private File fileThree;
 
-    private MonthModel monthModel;
-    private List<CompanyModel> companys = new ArrayList<>();
+    private MonthB monthModel;
+    private List<CompanyB> companys = new ArrayList<>();
     private PagerRequestBean<CompanyFilterB> pager;
 
     private OptionsPickerView pvCompany;
@@ -126,7 +126,7 @@ public class MonthApplyActivity extends BaseActivity {
     }
 
     private void init() {
-        monthModel = new MonthModel();
+        monthModel = new MonthB();
         initPagerData();
         initArea();
         initCompany();
@@ -190,7 +190,7 @@ public class MonthApplyActivity extends BaseActivity {
         areaSelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         areaSelect.setOnBackAreaListener(new OnBackAreaListener() {
             @Override
-            public void backArea(AreaModel province, AreaModel city, AreaModel district) {
+            public void backArea(AreaB province, AreaB city, AreaB district) {
                 MonthApplyActivity.this.province = province;
                 MonthApplyActivity.this.city = city;
                 MonthApplyActivity.this.district = district;
@@ -224,7 +224,7 @@ public class MonthApplyActivity extends BaseActivity {
                     LoadingFinish(null);
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<CompanyModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<CompanyModel>>() {
+                        List<CompanyB> list = new Gson().fromJson(result.getData(), new TypeToken<List<CompanyB>>() {
                         }.getType());
                         if (list != null) {
                             companys.addAll(list);

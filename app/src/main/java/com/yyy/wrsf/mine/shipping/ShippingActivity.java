@@ -17,13 +17,13 @@ import com.yyy.wrsf.common.company.CompanySelect;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
-import com.yyy.wrsf.model.address.AddressModel;
-import com.yyy.wrsf.model.company.CompanyModel;
+import com.yyy.wrsf.model.address.AddressB;
+import com.yyy.wrsf.model.company.CompanyB;
 import com.yyy.wrsf.model.filter.ShipCompanyB;
-import com.yyy.wrsf.model.price.PriceBackM;
-import com.yyy.wrsf.model.ship.ShipGoodsModel;
-import com.yyy.wrsf.model.ship.ShippingAddValueModel;
-import com.yyy.wrsf.model.ship.ShippingModel;
+import com.yyy.wrsf.model.price.PriceBackB;
+import com.yyy.wrsf.model.ship.ShipGoodsB;
+import com.yyy.wrsf.model.ship.ShippingAddValueB;
+import com.yyy.wrsf.model.ship.ShippingB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.StringUtil;
@@ -99,14 +99,14 @@ public class ShippingActivity extends BasePickActivity {
     private CompanySelect companySelect;
     private TimePickerView pvDate;
 
-    private AddressModel addressSend;
-    private AddressModel addressReceive;
-    private ShipGoodsModel goods;
-    private CompanyModel company;
+    private AddressB addressSend;
+    private AddressB addressReceive;
+    private ShipGoodsB goods;
+    private CompanyB company;
     private ShipCompanyB companyFilter;
-    private ShippingModel shipping;
-    private ShippingAddValueModel addValue;
-    private PriceBackM priceBackM;
+    private ShippingB shipping;
+    private ShippingAddValueB addValue;
+    private PriceBackB priceBackM;
 
     private boolean refreshCompany = true;
 
@@ -130,7 +130,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void initShip() {
-        shipping = new ShippingModel();
+        shipping = new ShippingB();
         shipping.setPickDate(DateUtil.getCurrentDate());
         shipping.setPayType(1);
     }
@@ -233,7 +233,7 @@ public class ShippingActivity extends BasePickActivity {
             companySelect.setOnLoadingListener((boolean success) -> {
                 refreshCompany = false;
             });
-            companySelect.setOnCompanySelectListener((CompanyModel item) -> {
+            companySelect.setOnCompanySelectListener((CompanyB item) -> {
                 company = item;
                 tmiCompany.setText(company.getCompanyName());
                 shipping.setTransCompanyRecNo(company.getRecNo());
@@ -246,7 +246,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
 
-    private void go2AddressDetail(AddressModel address, int code) {
+    private void go2AddressDetail(AddressB address, int code) {
         Intent intent = new Intent();
         intent.setClass(this, ShippingPersonActivity.class);
         intent.putExtra("code", code);
@@ -329,7 +329,7 @@ public class ShippingActivity extends BasePickActivity {
         Log.e("data", data.getStringExtra("data"));
         switch (requestCode) {
             case CodeUtil.AddressSend:
-                addressSend = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
+                addressSend = new Gson().fromJson(data.getStringExtra("data"), AddressB.class);
                 if (addressSend.getThirdId() != companyFilter.getSendRegion()) {
                     refreshCompany = true;
                     companyFilter.setSendRegion(addressSend.getThirdId());
@@ -337,7 +337,7 @@ public class ShippingActivity extends BasePickActivity {
                 setSend();
                 break;
             case CodeUtil.AddressReceive:
-                addressReceive = new Gson().fromJson(data.getStringExtra("data"), AddressModel.class);
+                addressReceive = new Gson().fromJson(data.getStringExtra("data"), AddressB.class);
                 if (addressReceive.getThirdId() != companyFilter.getRecRegion()) {
                     refreshCompany = true;
                     companyFilter.setRecRegion(addressReceive.getThirdId());
@@ -345,15 +345,15 @@ public class ShippingActivity extends BasePickActivity {
                 setReceive();
                 break;
             case CodeUtil.ShipGoods:
-                goods = new Gson().fromJson(data.getStringExtra("data"), ShipGoodsModel.class);
-                priceBackM = new Gson().fromJson(data.getStringExtra("price"), PriceBackM.class);
+                goods = new Gson().fromJson(data.getStringExtra("data"), ShipGoodsB.class);
+                priceBackM = new Gson().fromJson(data.getStringExtra("price"), PriceBackB.class);
                 Log.e("price", data.getStringExtra("price"));
                 shipping.setGoodsPrice(priceBackM);
                 setGoods();
                 setTotal();
                 break;
             case CodeUtil.ShipAddValue:
-                addValue = new Gson().fromJson(data.getStringExtra("data"), ShippingAddValueModel.class);
+                addValue = new Gson().fromJson(data.getStringExtra("data"), ShippingAddValueB.class);
                 shipping.setValueAdd(addValue);
                 setTotal();
                 break;

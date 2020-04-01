@@ -1,7 +1,7 @@
 package com.yyy.wrsf.common.company;
 
-import com.yyy.wrsf.model.company.CompanyModel;
+import com.yyy.wrsf.model.company.CompanyB;
 
 public interface OnCompanySelectListener {
-    void onSelect(CompanyModel item);
+    void onSelect(CompanyB item);
 }

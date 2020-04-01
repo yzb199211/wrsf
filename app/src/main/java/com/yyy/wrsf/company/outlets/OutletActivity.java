@@ -16,7 +16,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
-import com.yyy.wrsf.model.OutletModel;
+import com.yyy.wrsf.model.OutletB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -47,7 +47,7 @@ public class OutletActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
 
-    private List<OutletModel> outletModels = new ArrayList<>();
+    private List<OutletB> outletModels = new ArrayList<>();
     private OutletAdapter outletAdapter;
     private PagerRequestBean pager;
 
@@ -75,7 +75,7 @@ public class OutletActivity extends AppCompatActivity {
                     LoadingFinish(null);
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<OutletModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<OutletModel>>() {
+                        List<OutletB> list = new Gson().fromJson(result.getData(), new TypeToken<List<OutletB>>() {
                         }.getType());
                         if (list != null) {
                             outletModels.clear();
@@ -185,7 +185,7 @@ public class OutletActivity extends AppCompatActivity {
         if (data != null && requestCode == CodeUtil.MODIFY) {
             int pos = data.getIntExtra("pos", -1);
             if (pos > -1 && pos < outletModels.size()) {
-                outletModels.set(pos, new Gson().fromJson(data.getStringExtra("data"), OutletModel.class));
+                outletModels.set(pos, new Gson().fromJson(data.getStringExtra("data"), OutletB.class));
 //                    addresses.get(pos) = ;
                 refrishList();
             }

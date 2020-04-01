@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.month.CustomerMonthModel;
+import com.yyy.wrsf.model.month.CustomerMonthB;
 import com.yyy.wrsf.view.cycle.util.ImageLoaderUtil;
 
 import java.util.List;
 
 public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
     private Context context;
-    private List<CustomerMonthModel> list;
+    private List<CustomerMonthB> list;
     private OnItemClickListener onItemClickListener;
 
-    public MonthAdapter(Context context, List<CustomerMonthModel> list) {
+    public MonthAdapter(Context context, List<CustomerMonthB> list) {
         this.context = context;
         this.list = list;
     }

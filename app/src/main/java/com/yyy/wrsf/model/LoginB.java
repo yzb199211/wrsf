@@ -1,6 +1,6 @@
 package com.yyy.wrsf.model;
 
-public class LoginModel extends MemberModel {
+public class LoginB extends MemberB {
     private String token;
 
     public String getToken() {

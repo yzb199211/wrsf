@@ -2,7 +2,7 @@ package com.yyy.wrsf.model;
 
 import android.text.TextUtils;
 
-public class OutletModel {
+public class OutletB {
 
     /**
      * recNo : 2

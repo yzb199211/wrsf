@@ -5,26 +5,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BasePickActivity;
-import com.yyy.wrsf.model.MemberModel;
+import com.yyy.wrsf.model.MemberB;
 import com.yyy.wrsf.model.publicm.Sex;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.SexUtil;
-import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.TimeUtil;
 import com.yyy.wrsf.utils.net.net.NetConfig;
@@ -40,7 +33,6 @@ import com.yyy.yyylibrary.pick.builder.OptionsPickerBuilder;
 import com.yyy.yyylibrary.pick.builder.TimePickerBuilder;
 import com.yyy.yyylibrary.pick.listener.OnOptionsSelectListener;
 import com.yyy.yyylibrary.pick.listener.OnTimeSelectListener;
-import com.yyy.yyylibrary.pick.view.BasePickerView;
 import com.yyy.yyylibrary.pick.view.OptionsPickerView;
 import com.yyy.yyylibrary.pick.view.TimePickerView;
 
@@ -72,7 +64,7 @@ public class MineActivity extends BasePickActivity {
     @BindView(R.id.btn_add)
     TextView btnAdd;
 
-    private MemberModel memberModel;
+    private MemberB memberModel;
     private TimePickerView pvDate;
     private OptionsPickerView pvSex;
     List<Sex> sexes;
@@ -89,7 +81,7 @@ public class MineActivity extends BasePickActivity {
     private void init() {
         btnAdd.setText(getString(R.string.common_save));
         sexes = new SexUtil().getSexs();
-        memberModel = new Gson().fromJson((String) preferencesHelper.getSharedPreference("member", ""), MemberModel.class);
+        memberModel = new Gson().fromJson((String) preferencesHelper.getSharedPreference("member", ""), MemberB.class);
         tmiPersonName.setText(memberModel.getMemberName());
         tmiPersonNickname.setText(memberModel.getMemberPetname());
         tmiPersonBrithday.setText(StringUtil.getBrithDay(memberModel.getBrithday()));
@@ -167,7 +159,7 @@ public class MineActivity extends BasePickActivity {
     }
 
     private String getMember() {
-        MemberModel member = new MemberModel();
+        MemberB member = new MemberB();
         member.setMail(tmiPersonEmail.getText());
         member.setMemberPetname(tmiPersonNickname.getText());
         member.setMemberSex(tmiPersonSex.getText());

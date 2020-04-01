@@ -1,6 +1,6 @@
 package com.yyy.wrsf.model.price;
 
-public class PriceCalM {
+public class PriceCalB {
 
     /**
      * deliverType : 0

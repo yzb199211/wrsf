@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.company.CompanyModel;
+import com.yyy.wrsf.model.company.CompanyB;
 import com.yyy.wrsf.utils.net.company.CompanyUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
@@ -43,7 +43,7 @@ public class CompanyDetailActivity extends BaseActivity {
     TextMenuItem tmiCompanyContract;
     @BindView(R.id.tmi_company_tel)
     TextMenuItem tmiCompanyTel;
-    private CompanyModel companyModel;
+    private CompanyB companyModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class CompanyDetailActivity extends BaseActivity {
                         try {
                             Result result = new Result(string);
                             if (result.isSuccess()) {
-                                companyModel = new Gson().fromJson(result.getData(), CompanyModel.class);
+                                companyModel = new Gson().fromJson(result.getData(), CompanyB.class);
                                 initData();
                             } else {
                                 LoadingFinish(result.getMsg());

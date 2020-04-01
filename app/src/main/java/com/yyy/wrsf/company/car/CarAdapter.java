@@ -10,18 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.company.driver.DriverAdapter;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.CarModel;
+import com.yyy.wrsf.model.CarB;
 
 import java.util.List;
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.VH> {
     Context context;
-    List<CarModel> list;
+    List<CarB> list;
     OnItemClickListener onItemClickListener;
 
-    public CarAdapter(Context context, List<CarModel> list) {
+    public CarAdapter(Context context, List<CarB> list) {
         this.context = context;
         this.list = list;
     }

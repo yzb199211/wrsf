@@ -13,18 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.NoticeModel;
+import com.yyy.wrsf.model.NoticeB;
 import com.yyy.wrsf.utils.DateUtil;
-import com.yyy.wrsf.utils.StringUtil;
 
 import java.util.List;
 
 public class NoticeAdpter extends RecyclerView.Adapter<NoticeAdpter.VH> {
     Context context;
-    List<NoticeModel> list;
+    List<NoticeB> list;
     OnItemClickListener onItemClickListener;
 
-    public NoticeAdpter(Context context, List<NoticeModel> list) {
+    public NoticeAdpter(Context context, List<NoticeB> list) {
         this.context = context;
         this.list = list;
     }

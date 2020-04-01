@@ -1,32 +1,32 @@
-package com.yyy.wrsf.model.month;
+package com.yyy.wrsf.model.address;
 
-public class MonthModel {
+import android.text.TextUtils;
+
+import java.io.Serializable;
+
+public class AddressB implements Serializable {
 
     /**
      * companyName : string
      * contractPerson : string
-     * contractPersonPics : string
      * contractTel : string
      * detailAdd : string
      * firstAdd : string
-     * person : string
+     * platMemberRecNo : 0
+     * recNo : 0
      * secondAdd : string
      * thirdAdd : string
-     * transCompanyRecNo : 0
-     * zhiZhao : string
-     * zhiZhaoPics : string
      */
 
     private String companyName;
-    private String contractPersonPics;
+    private String contractPerson;
+    private String contractTel;
     private String detailAdd;
     private String firstAdd;
-    private String person;
+    private int platMemberRecNo;
+    private int recNo;
     private String secondAdd;
     private String thirdAdd;
-    private int transCompanyRecNo;
-    private String zhiZhao;
-    private String zhiZhaoPics;
     private int firstId;
     private int secondId;
     private int thirdId;
@@ -39,14 +39,21 @@ public class MonthModel {
         this.companyName = companyName;
     }
 
-    public String getContractPersonPics() {
-        return contractPersonPics;
+    public String getContractPerson() {
+        return contractPerson;
     }
 
-    public void setContractPersonPics(String contractPersonPics) {
-        this.contractPersonPics = contractPersonPics;
+    public void setContractPerson(String contractPerson) {
+        this.contractPerson = contractPerson;
     }
 
+    public String getContractTel() {
+        return contractTel;
+    }
+
+    public void setContractTel(String contractTel) {
+        this.contractTel = contractTel;
+    }
 
     public String getDetailAdd() {
         return detailAdd;
@@ -64,14 +71,21 @@ public class MonthModel {
         this.firstAdd = firstAdd;
     }
 
-    public String getPerson() {
-        return person;
+    public int getPlatMemberRecNo() {
+        return platMemberRecNo;
     }
 
-    public void setPerson(String person) {
-        this.person = person;
+    public void setPlatMemberRecNo(int platMemberRecNo) {
+        this.platMemberRecNo = platMemberRecNo;
     }
 
+    public int getRecNo() {
+        return recNo;
+    }
+
+    public void setRecNo(int recNo) {
+        this.recNo = recNo;
+    }
 
     public String getSecondAdd() {
         return secondAdd;
@@ -89,30 +103,6 @@ public class MonthModel {
         this.thirdAdd = thirdAdd;
     }
 
-    public int getTransCompanyRecNo() {
-        return transCompanyRecNo;
-    }
-
-    public void setTransCompanyRecNo(int transCompanyRecNo) {
-        this.transCompanyRecNo = transCompanyRecNo;
-    }
-
-
-    public String getZhiZhao() {
-        return zhiZhao;
-    }
-
-    public void setZhiZhao(String zhiZhao) {
-        this.zhiZhao = zhiZhao;
-    }
-
-    public String getZhiZhaoPics() {
-        return zhiZhaoPics;
-    }
-
-    public void setZhiZhaoPics(String zhiZhaoPics) {
-        this.zhiZhaoPics = zhiZhaoPics;
-    }
 
     public int getFirstId() {
         return firstId;
@@ -136,5 +126,12 @@ public class MonthModel {
 
     public void setThirdId(int thirdId) {
         this.thirdId = thirdId;
+    }
+
+    public String getWholeAddress() {
+        return (TextUtils.isEmpty(getFirstAdd()) ? "" : getFirstAdd() + "\u3000")
+                + (TextUtils.isEmpty(getSecondAdd()) ? "" : getSecondAdd() + "\u3000")
+                + (TextUtils.isEmpty(getThirdAdd()) ? "" : getThirdAdd() + "\u3000")
+                + (TextUtils.isEmpty(getDetailAdd()) ? "" : getDetailAdd());
     }
 }

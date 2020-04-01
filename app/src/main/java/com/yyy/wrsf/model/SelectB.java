@@ -1,10 +1,10 @@
 package com.yyy.wrsf.model;
 
-public class SelectModel {
+public class SelectB {
     private int id;
     private String name;
 
-    public SelectModel(int id, String name) {
+    public SelectB(int id, String name) {
         this.id = id;
         this.name = name;
     }

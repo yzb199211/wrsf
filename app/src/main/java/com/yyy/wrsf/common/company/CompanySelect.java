@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.company.CompanyModel;
+import com.yyy.wrsf.model.company.CompanyB;
 import com.yyy.wrsf.model.filter.ShipCompanyB;
 import com.yyy.wrsf.utils.PxUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -50,7 +50,7 @@ public class CompanySelect extends PopupWindow {
     private SharedPreferencesHelper preferencesHelper;
     private View view;
 
-    private List<CompanyModel> companys = new ArrayList<>();
+    private List<CompanyB> companys = new ArrayList<>();
     private CompanyAdapter adapter;
     private ShipCompanyB companyFilter;
     private OnLoadingListener onLoadingListener;
@@ -108,7 +108,7 @@ public class CompanySelect extends PopupWindow {
                     if (result.isSuccess()) {
                         String data = result.getData();
                         if (!TextUtils.isEmpty(data)) {
-                            List<CompanyModel> list = new Gson().fromJson(data, new TypeToken<List<CompanyModel>>() {
+                            List<CompanyB> list = new Gson().fromJson(data, new TypeToken<List<CompanyB>>() {
                             }.getType());
                             if (list != null && list.size() > 0 && onLoadingListener != null) {
                                 onLoadingListener.onLoading(true);

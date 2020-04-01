@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.address.AreaModel;
+import com.yyy.wrsf.model.address.AreaB;
 
 import java.util.List;
 
 public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.VH> {
     Context context;
-    List<AreaModel> list;
+    List<AreaB> list;
     OnItemClickListener onItemClickListener;
 
-    public AreaAdapter(Context context, List<AreaModel> list) {
+    public AreaAdapter(Context context, List<AreaB> list) {
         this.context = context;
         this.list = list;
     }

@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.DriverModel;
+import com.yyy.wrsf.model.DriverB;
 
 import java.util.List;
 
 public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VH> {
     Context context;
-    List<DriverModel> list;
+    List<DriverB> list;
     OnItemClickListener onItemClickListener;
 
-    public DriverAdapter(Context context, List<DriverModel> list) {
+    public DriverAdapter(Context context, List<DriverB> list) {
         this.context = context;
         this.list = list;
     }

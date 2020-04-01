@@ -4,7 +4,7 @@ import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 
 import java.io.Serializable;
 
-public class MemberModel implements Serializable, IPickerViewData {
+public class MemberB implements Serializable, IPickerViewData {
     private Integer accountType;
     private String brithday;
     private String companyName;

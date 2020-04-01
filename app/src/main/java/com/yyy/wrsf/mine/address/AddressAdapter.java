@@ -13,7 +13,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.address.AddressModel;
+import com.yyy.wrsf.model.address.AddressB;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.view.button.ButtonWithImg;
 
@@ -21,12 +21,12 @@ import java.util.List;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
     private Context context;
-    private List<AddressModel> list;
+    private List<AddressB> list;
     private OnDeleteListener onDeleteListener;
     private OnEditListener onEditListener;
     private OnItemClickListener onItemClickListener;
 
-    public AddressAdapter(Context context, List<AddressModel> list) {
+    public AddressAdapter(Context context, List<AddressB> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,7 +41,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
 //        holder.setIsRecyclable(false);
-        AddressModel item = list.get(position);
+        AddressB item = list.get(position);
         holder.tvName.setText(StringUtil.formatString(item.getContractPerson()));
         holder.tvPhone.setText(StringUtil.formatString(item.getContractTel()));
         holder.tvAddress.setText(item.getWholeAddress());

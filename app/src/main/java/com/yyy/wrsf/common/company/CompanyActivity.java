@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.model.company.CompanyModel;
+import com.yyy.wrsf.model.company.CompanyB;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -25,7 +25,7 @@ public class CompanyActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     private SharedPreferencesHelper preferencesHelper;
 
-    private List<CompanyModel> companys = new ArrayList<>();
+    private List<CompanyB> companys = new ArrayList<>();
     private CompanyAdapter adapter;
 
     private int sendRec;

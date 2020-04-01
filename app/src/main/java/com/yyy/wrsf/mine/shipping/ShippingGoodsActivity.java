@@ -12,10 +12,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.price.PriceCalM;
+import com.yyy.wrsf.model.price.PriceCalB;
 import com.yyy.wrsf.model.publicm.PublicArray;
 import com.yyy.wrsf.model.publicm.PublicBean;
-import com.yyy.wrsf.model.ship.ShipGoodsModel;
+import com.yyy.wrsf.model.ship.ShipGoodsB;
 import com.yyy.wrsf.model.filter.PublicFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PublicCode;
@@ -74,8 +74,8 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     private Popwin popSend;
     private Popwin popTrans;
     private Popwin popDelivery;
-    private ShipGoodsModel goodsModel;
-    private PriceCalM priceCal;
+    private ShipGoodsB goodsModel;
+    private PriceCalB priceCal;
     private boolean isEmpty;
 
     @Override
@@ -137,12 +137,12 @@ public class ShippingGoodsActivity extends AppCompatActivity {
     private void initGoodsModel() {
         String data = getIntent().getStringExtra("data");
         isEmpty = TextUtils.isEmpty(data);
-        goodsModel = isEmpty ? new ShipGoodsModel() : new Gson().fromJson(data, ShipGoodsModel.class);
+        goodsModel = isEmpty ? new ShipGoodsB() : new Gson().fromJson(data, ShipGoodsB.class);
         setGoodsView();
     }
 
     private void initPriceCal() {
-        priceCal = new PriceCalM();
+        priceCal = new PriceCalB();
         priceCal.setRecRegion(getIntent().getIntExtra("receiveRec", 0));
         priceCal.setSendRegion(getIntent().getIntExtra("sendRec", 0));
         priceCal.setTransCompanyRecNo(getIntent().getIntExtra("company", 0));

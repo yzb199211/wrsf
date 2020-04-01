@@ -1,11 +1,11 @@
 package com.yyy.wrsf.model.ship;
 
-import com.yyy.wrsf.model.address.AddressModel;
-import com.yyy.wrsf.model.price.PriceBackM;
+import com.yyy.wrsf.model.address.AddressB;
+import com.yyy.wrsf.model.price.PriceBackB;
 
 import java.io.Serializable;
 
-public class ShippingModel implements Serializable {
+public class ShippingB implements Serializable {
 
     /**
      * baoAsk : 0
@@ -421,7 +421,7 @@ public class ShippingModel implements Serializable {
         this.payType = payType;
     }
 
-    public void setGoods(ShipGoodsModel shipGoods) {
+    public void setGoods(ShipGoodsB shipGoods) {
         setWeight(shipGoods.getWeight());
         setSize(shipGoods.getVolume());
         setDensity(shipGoods.getDensity());
@@ -432,7 +432,7 @@ public class ShippingModel implements Serializable {
         setGoodsName(shipGoods.getGoodsName());
     }
 
-    public void setGoodsPrice(PriceBackM price) {
+    public void setGoodsPrice(PriceBackB price) {
         setPrice(price.getPrice());
         setPicTotal(price.getPicTotal());
         setContractTotal(price.getContractTotal());
@@ -443,7 +443,7 @@ public class ShippingModel implements Serializable {
         setTransShopRecNo(price.getTransShopRecNo());
     }
 
-    public void setValueAdd(ShippingAddValueModel valueAdd) {
+    public void setValueAdd(ShippingAddValueB valueAdd) {
         setBaoAsk(valueAdd.getInsureValue());
         setBaoPrice(valueAdd.getInsureFee());
         setQianType(valueAdd.getSignType());
@@ -453,14 +453,14 @@ public class ShippingModel implements Serializable {
         setNoticeYesNo(valueAdd.getReceiveType());
     }
 
-    public void setSend(AddressModel send) {
+    public void setSend(AddressB send) {
         setSendName(send.getContractPerson());
         setSendTel(send.getContractTel());
         setSendRegion(send.getThirdId());
         setSendDetail(send.getWholeAddress());
     }
 
-    public void setReceive(AddressModel receive) {
+    public void setReceive(AddressB receive) {
         setRecDetail(receive.getWholeAddress());
         setRecTel(receive.getContractTel());
         setRecRegion(receive.getThirdId());

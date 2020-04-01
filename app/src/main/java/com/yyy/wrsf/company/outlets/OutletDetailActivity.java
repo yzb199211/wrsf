@@ -18,8 +18,8 @@ import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.MemberModel;
-import com.yyy.wrsf.model.OutletModel;
+import com.yyy.wrsf.model.MemberB;
+import com.yyy.wrsf.model.OutletB;
 import com.yyy.wrsf.model.publicm.Sex;
 import com.yyy.wrsf.model.filter.MemberFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
@@ -70,9 +70,9 @@ public class OutletDetailActivity extends AppCompatActivity {
     EditClearView ecvStatus;
     @BindView(R.id.ecv_remark)
     EditClearView ecvRemark;
-    private OutletModel outletModel;
+    private OutletB outletModel;
     private List<Sex> status = SexUtil.getShopStatus();
-    private List<MemberModel> member;
+    private List<MemberB> member;
     private OptionsPickerView pvStatus;
     private OptionsPickerView pvPerson;
     private int pos;
@@ -121,7 +121,7 @@ public class OutletDetailActivity extends AppCompatActivity {
     private void initData() {
         String data = getIntent().getStringExtra("data");
         pos = getIntent().getIntExtra("pos", -1);
-        outletModel = TextUtils.isEmpty(data) ? new OutletModel() : new Gson().fromJson(data, OutletModel.class);
+        outletModel = TextUtils.isEmpty(data) ? new OutletB() : new Gson().fromJson(data, OutletB.class);
         initMemberFilter();
         setOutletView();
     }
@@ -214,7 +214,7 @@ public class OutletDetailActivity extends AppCompatActivity {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
                         if (StringUtil.isNotEmpty(result.getData())) {
-                            member = new Gson().fromJson(result.getData(), new TypeToken<List<MemberModel>>() {
+                            member = new Gson().fromJson(result.getData(), new TypeToken<List<MemberB>>() {
                             }.getType());
                             initPvPerson();
                         }

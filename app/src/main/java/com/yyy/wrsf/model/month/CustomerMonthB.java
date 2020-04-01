@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @Author: cyq
  * @Date: 2020/3/12
  */
-public class CustomerMonthModel {
+public class CustomerMonthB {
 
     private Integer recNo;
 

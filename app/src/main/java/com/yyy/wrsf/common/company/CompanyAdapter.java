@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.company.CompanyModel;
+import com.yyy.wrsf.model.company.CompanyB;
 
 import java.util.List;
 
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
     private Context context;
-    private List<CompanyModel> list;
+    private List<CompanyB> list;
     private OnItemClickListener onItemClickListener;
 
-    public CompanyAdapter(Context context, List<CompanyModel> list) {
+    public CompanyAdapter(Context context, List<CompanyB> list) {
         this.context = context;
         this.list = list;
     }

@@ -2,7 +2,7 @@ package com.yyy.wrsf.model.company;
 
 import java.io.Serializable;
 
-public class CompanyRegister implements Serializable {
+public class CompanyRegisterB implements Serializable {
 
     /**
      * companyName : string

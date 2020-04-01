@@ -16,8 +16,8 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.DialogUtil;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.CarModel;
-import com.yyy.wrsf.model.DriverModel;
+import com.yyy.wrsf.model.CarB;
+import com.yyy.wrsf.model.DriverB;
 import com.yyy.wrsf.model.publicm.PublicArray;
 import com.yyy.wrsf.model.publicm.PublicBean;
 import com.yyy.wrsf.model.filter.DriverFilterB;
@@ -76,14 +76,14 @@ public class CarDetailActivity extends AppCompatActivity {
     private OptionsPickerView pvStatus;
     private OptionsPickerView pvCartype;
 
-    private List<DriverModel> drivers = new ArrayList<>();
+    private List<DriverB> drivers = new ArrayList<>();
     private List<PublicBean> status = new ArrayList<>();
     private List<PublicBean> carTypes = new ArrayList<>();
 
     private PublicFilterB publicFilter;
     private DriverFilterB driverFilter;
 
-    private CarModel car;
+    private CarB car;
 
     private int code;
     private int pos;
@@ -121,9 +121,9 @@ public class CarDetailActivity extends AppCompatActivity {
 
     private void initCar() {
         if (code == CodeUtil.MODIFY) {
-            car = new Gson().fromJson(getIntent().getStringExtra("data"), CarModel.class);
+            car = new Gson().fromJson(getIntent().getStringExtra("data"), CarB.class);
         } else {
-            car = new CarModel();
+            car = new CarB();
         }
     }
 
@@ -282,7 +282,7 @@ public class CarDetailActivity extends AppCompatActivity {
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<DriverModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<DriverModel>>() {
+                        List<DriverB> list = new Gson().fromJson(result.getData(), new TypeToken<List<DriverB>>() {
                         }.getType());
                         if (list != null && list.size() > 0) {
                             drivers.addAll(list);

@@ -14,8 +14,8 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.common.address.AreaSelect;
 import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.address.AddressModel;
-import com.yyy.wrsf.model.address.AreaModel;
+import com.yyy.wrsf.model.address.AddressB;
+import com.yyy.wrsf.model.address.AreaB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -57,11 +57,11 @@ public class AddressDetailActivity extends AppCompatActivity {
     EditClearView ecvAddressDetail;
 
     private AreaSelect areaSelect;
-    private AreaModel province;
-    private AreaModel city;
-    private AreaModel district;
+    private AreaB province;
+    private AreaB city;
+    private AreaB district;
 
-    private AddressModel addressModel;
+    private AddressB addressModel;
     private int memberId;
     private SharedPreferencesHelper preferencesHelper;
 
@@ -91,7 +91,7 @@ public class AddressDetailActivity extends AppCompatActivity {
         code = getIntent().getIntExtra("code", -1);
         pos = getIntent().getIntExtra("pos", -1);
         if (code == CodeUtil.MODIFY) {
-            addressModel = new Gson().fromJson(getIntent().getStringExtra("data"), AddressModel.class);
+            addressModel = new Gson().fromJson(getIntent().getStringExtra("data"), AddressB.class);
             initAreaData();
             setArea();
             setDetail();
@@ -101,17 +101,17 @@ public class AddressDetailActivity extends AppCompatActivity {
     private void initAreaData() {
         if (TextUtils.isEmpty(addressModel.getFirstAdd()))
             return;
-        province = new AreaModel();
+        province = new AreaB();
         province.setId(addressModel.getFirstId());
         province.setAreaName(addressModel.getFirstAdd());
         if (TextUtils.isEmpty(addressModel.getSecondAdd()))
             return;
-        city = new AreaModel();
+        city = new AreaB();
         city.setId(addressModel.getSecondId());
         city.setAreaName(addressModel.getSecondAdd());
         if (TextUtils.isEmpty(addressModel.getThirdAdd()))
             return;
-        district = new AreaModel();
+        district = new AreaB();
         district.setId(addressModel.getThirdId());
         district.setAreaName(addressModel.getThirdAdd());
     }
@@ -202,7 +202,7 @@ public class AddressDetailActivity extends AppCompatActivity {
 
     private void getAddress() {
         if (addressModel == null) {
-            addressModel = new AddressModel();
+            addressModel = new AddressB();
         }
         addressModel.setCompanyName(ecvCompany.getText());
         addressModel.setContractPerson(ecvContract.getText());
@@ -254,7 +254,7 @@ public class AddressDetailActivity extends AppCompatActivity {
         areaSelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         areaSelect.setOnBackAreaListener(new OnBackAreaListener() {
             @Override
-            public void backArea(AreaModel province, AreaModel city, AreaModel district) {
+            public void backArea(AreaB province, AreaB city, AreaB district) {
                 AddressDetailActivity.this.province = province;
                 AddressDetailActivity.this.city = city;
                 AddressDetailActivity.this.district = district;

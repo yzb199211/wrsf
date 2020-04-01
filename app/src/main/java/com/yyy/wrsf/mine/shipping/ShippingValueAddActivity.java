@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.model.ship.ShippingAddValueModel;
-import com.yyy.wrsf.model.ship.SignModel;
+import com.yyy.wrsf.model.ship.ShippingAddValueB;
+import com.yyy.wrsf.model.ship.SignB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.EditInputFilter;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
@@ -57,7 +57,7 @@ public class ShippingValueAddActivity extends AppCompatActivity {
     @BindView(R.id.et_collection)
     EditText etCollection;
 
-    private ShippingAddValueModel shippingAddValue;
+    private ShippingAddValueB shippingAddValue;
     private String rmb;
 
     private RadioButton currentSign;
@@ -145,7 +145,7 @@ public class ShippingValueAddActivity extends AppCompatActivity {
         rmb = getString(R.string.common_rmb);
         String data = getIntent().getStringExtra("data");
 //        isEmpty = TextUtils.isEmpty(data);
-        shippingAddValue = TextUtils.isEmpty(data) ? new ShippingAddValueModel() : new Gson().fromJson(data, ShippingAddValueModel.class);
+        shippingAddValue = TextUtils.isEmpty(data) ? new ShippingAddValueB() : new Gson().fromJson(data, ShippingAddValueB.class);
         setAddValueView();
     }
 
@@ -202,13 +202,13 @@ public class ShippingValueAddActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rb_none:
-                switchSign(view, SignModel.NONE);
+                switchSign(view, SignB.NONE);
                 break;
             case R.id.rb_paper:
-                switchSign(view, SignModel.PAPER);
+                switchSign(view, SignB.PAPER);
                 break;
             case R.id.rb_electronic:
-                switchSign(view, SignModel.ELECTRONIC);
+                switchSign(view, SignB.ELECTRONIC);
                 break;
             case R.id.rb_yes:
                 switchNotice(view, 1);
@@ -224,7 +224,7 @@ public class ShippingValueAddActivity extends AppCompatActivity {
         }
     }
 
-    private void switchSign(View view, SignModel sign) {
+    private void switchSign(View view, SignB sign) {
         if (view.getId() != currentSign.getId()) {
             currentSign.setChecked(false);
             currentSign.setTextColor(getColor(R.color.text_gray));

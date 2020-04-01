@@ -17,7 +17,7 @@ import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.address.AddressModel;
+import com.yyy.wrsf.model.address.AddressB;
 import com.yyy.wrsf.model.filter.AddressFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -52,7 +52,7 @@ public class AddressActivity extends AppCompatActivity {
 
     SharedPreferencesHelper preferencesHelper;
 
-    private List<AddressModel> addresses = new ArrayList<>();
+    private List<AddressB> addresses = new ArrayList<>();
     private AddressAdapter addressAdapter;
 
     private boolean isSelect = false;
@@ -96,7 +96,7 @@ public class AddressActivity extends AppCompatActivity {
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        List<AddressModel> list = new Gson().fromJson(result.getData(), new TypeToken<List<AddressModel>>() {
+                        List<AddressB> list = new Gson().fromJson(result.getData(), new TypeToken<List<AddressB>>() {
                         }.getType());
                         if (list != null) {
                             addresses.clear();
@@ -262,7 +262,7 @@ public class AddressActivity extends AppCompatActivity {
             if (data != null) {
                 int pos = data.getIntExtra("pos", -1);
                 if (pos > -1 && pos < addresses.size()) {
-                    addresses.set(pos, new Gson().fromJson(data.getStringExtra("data"), AddressModel.class));
+                    addresses.set(pos, new Gson().fromJson(data.getStringExtra("data"), AddressB.class));
 //                    addresses.get(pos) = ;
                     refrishList();
                 }

@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.yyy.wrsf.utils.StringUtil;
 
-public class ShipGoodsModel {
+public class ShipGoodsB {
     private int goodsId;
     private String goodsName;
     private long weight;

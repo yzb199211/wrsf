@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.address.AreaModel;
+import com.yyy.wrsf.model.address.AreaB;
 import com.yyy.wrsf.utils.PxUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.net.net.NetConfig;
@@ -44,14 +44,14 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
     private AreaLevel areaLevel;
 
     private Context context;
-    private AreaModel province;
-    private AreaModel city;
-    private AreaModel district;
+    private AreaB province;
+    private AreaB city;
+    private AreaB district;
 
-    private List<AreaModel> provinces = new ArrayList<>();
-    private List<AreaModel> citys = new ArrayList<>();
-    private List<AreaModel> districts = new ArrayList<>();
-    private List<AreaModel> showList = new ArrayList<>();
+    private List<AreaB> provinces = new ArrayList<>();
+    private List<AreaB> citys = new ArrayList<>();
+    private List<AreaB> districts = new ArrayList<>();
+    private List<AreaB> showList = new ArrayList<>();
     private AreaAdapter areaAdapter;
 
     private SharedPreferencesHelper preferencesHelper;
@@ -61,7 +61,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
         this(context, null, null, null);
     }
 
-    public AreaSelect(Context context, AreaModel province, AreaModel city, AreaModel district) {
+    public AreaSelect(Context context, AreaB province, AreaB city, AreaB district) {
         super(context);
         this.context = context;
         this.province = province;
@@ -189,7 +189,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
                     if (result.isSuccess()) {
                         String data = result.getData();
                         if (!TextUtils.isEmpty(data)) {
-                            List<AreaModel> list = new Gson().fromJson(data, new TypeToken<List<AreaModel>>() {
+                            List<AreaB> list = new Gson().fromJson(data, new TypeToken<List<AreaB>>() {
                             }.getType());
                             setList(list);
                         }
@@ -209,7 +209,7 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
         });
     }
 
-    private void setList(List<AreaModel> list) {
+    private void setList(List<AreaB> list) {
         switch (areaLevel) {
             case PROVINCE:
 //                clearProvince();

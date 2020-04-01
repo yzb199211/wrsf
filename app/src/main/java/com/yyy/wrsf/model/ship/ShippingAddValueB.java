@@ -4,7 +4,7 @@ import com.yyy.wrsf.mine.shipping.ShipUtil;
 
 import java.math.BigDecimal;
 
-public class ShippingAddValueModel {
+public class ShippingAddValueB {
     private int insureValue;
     private double insureFee;
     private int colletionValue;

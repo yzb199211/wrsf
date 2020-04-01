@@ -24,8 +24,8 @@ import com.yyy.wrsf.common.address.AreaSelect;
 import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
-import com.yyy.wrsf.model.address.AreaModel;
-import com.yyy.wrsf.model.company.CompanyRegister;
+import com.yyy.wrsf.model.address.AreaB;
+import com.yyy.wrsf.model.company.CompanyRegisterB;
 import com.yyy.wrsf.model.ImageBean;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -88,15 +88,15 @@ public class CompanyRegisterActivity extends BaseActivity {
     SharedPreferencesHelper preferencesHelper;
 
     private AreaSelect areaSelect;
-    private AreaModel province;
-    private AreaModel city;
-    private AreaModel district;
+    private AreaB province;
+    private AreaB city;
+    private AreaB district;
     private File fileObverse;
     private File fileReverse;
     private File fileOne;
     private File fileTwo;
     private File fileThree;
-    private CompanyRegister companyRegister;
+    private CompanyRegisterB companyRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +108,7 @@ public class CompanyRegisterActivity extends BaseActivity {
     }
 
     private void init() {
-        companyRegister = new CompanyRegister();
+        companyRegister = new CompanyRegisterB();
         initArea();
         initSubmit();
         initTop();
@@ -145,7 +145,7 @@ public class CompanyRegisterActivity extends BaseActivity {
         areaSelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         areaSelect.setOnBackAreaListener(new OnBackAreaListener() {
             @Override
-            public void backArea(AreaModel province, AreaModel city, AreaModel district) {
+            public void backArea(AreaB province, AreaB city, AreaB district) {
                 CompanyRegisterActivity.this.province = province;
                 CompanyRegisterActivity.this.city = city;
                 CompanyRegisterActivity.this.district = district;

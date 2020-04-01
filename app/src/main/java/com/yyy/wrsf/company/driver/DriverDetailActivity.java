@@ -16,7 +16,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.DialogUtil;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.model.DriverModel;
+import com.yyy.wrsf.model.DriverB;
 import com.yyy.wrsf.model.publicm.PublicArray;
 import com.yyy.wrsf.model.publicm.PublicBean;
 import com.yyy.wrsf.model.publicm.Sex;
@@ -75,7 +75,7 @@ public class DriverDetailActivity extends AppCompatActivity {
     private List<PublicBean> status;
     private List<PublicBean> licenses;
     private PublicFilterB publicFilter;
-    private DriverModel driver;
+    private DriverB driver;
 
     private int code;
     private int pos;
@@ -125,10 +125,10 @@ public class DriverDetailActivity extends AppCompatActivity {
 
     private void initDriver() {
         if (code == CodeUtil.MODIFY) {
-            driver = new Gson().fromJson(getIntent().getStringExtra("data"), DriverModel.class);
+            driver = new Gson().fromJson(getIntent().getStringExtra("data"), DriverB.class);
 
         } else {
-            driver = new DriverModel();
+            driver = new DriverB();
         }
     }
 
