@@ -25,7 +25,7 @@ public class OrderP implements IOrderP {
     private IOrderV iOrderV;
     private IOrderM iOrderM;
     private Handler handler = new Handler();
-    private boolean destroy;
+    private boolean destroyFlag;
     private PagerRequestBean pager;
     private int pageSize = 30;
     private int pageIndex = 0;
@@ -50,7 +50,7 @@ public class OrderP implements IOrderP {
         iOrderM.Requset(getParams(), NetConfig.address + OrderUrl.getPageList, RequstType.POST, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
-                if (!destroy) {
+                if (!destroyFlag) {
                     handler.post(() -> {
                         iOrderV.finishLoading(null);
                         List<OrderBean> list = new Gson().fromJson(string, new TypeToken<List<OrderBean>>() {
@@ -71,7 +71,7 @@ public class OrderP implements IOrderP {
 
             @Override
             public void onFail(String string) {
-                if (!destroy) {
+                if (!destroyFlag) {
                     handler.post(() -> {
                         iOrderV.finishLoading(string);
                     });
@@ -90,7 +90,7 @@ public class OrderP implements IOrderP {
         iOrderM.Requset(cancelParams(id), NetConfig.address + OrderUrl.cancelOrder, RequstType.DELETE, new OnResultListener() {
             @Override
             public void onSuccess(String data) {
-                if (!destroy) {
+                if (!destroyFlag) {
                     handler.post(() -> {
                         iOrderV.finishLoading(BaseApplication.getInstance().getString(R.string.common_cancel_success));
                         iOrderV.setItemType(-1);
@@ -101,7 +101,7 @@ public class OrderP implements IOrderP {
 
             @Override
             public void onFail(String error) {
-                if (!destroy) {
+                if (!destroyFlag) {
                     handler.post(() -> {
                         iOrderV.finishLoading(error);
                     });
@@ -125,5 +125,10 @@ public class OrderP implements IOrderP {
         List<NetParams> list = new ArrayList<>();
         list.add(new NetParams("contractNo", id));
         return list;
+    }
+
+    public void detachView() {
+        destroyFlag = true;
+        this.iOrderV = null;
     }
 }
