@@ -1,6 +1,6 @@
 package com.yyy.wrsf.mine.outlets;
 
-public class OutleModel implements OutletItemListener {
+public class OutleBean implements OutletItemListener {
 
     /**
      * detailAdd : 丁桥

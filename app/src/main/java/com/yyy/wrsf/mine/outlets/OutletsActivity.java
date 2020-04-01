@@ -16,8 +16,6 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnDialListener;
 import com.yyy.wrsf.interfaces.PermissionListener;
-import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -43,7 +41,7 @@ public class OutletsActivity extends BaseActivity implements XRecyclerView.Loadi
     private LinearLayoutManager manager;
     private LoadingType loadingType = LoadingType.NORMAL;
     private OutletsAdapter listAdapter;
-    private List<OutleModel> list;
+    private List<OutleBean> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +79,7 @@ public class OutletsActivity extends BaseActivity implements XRecyclerView.Loadi
         refreshList.setArrowImageView(R.mipmap.iconfont_downgrey);
         refreshList.getDefaultRefreshHeaderView()
                 .setRefreshTimeVisible(true);
-
+        refreshList.setPullRefreshEnabled(false);
         refreshList.setLoadingMoreEnabled(true);
         refreshList.setLoadingListener(this);
     }

@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.model.MemberModel;
 import com.yyy.wrsf.model.publicm.Sex;
 import com.yyy.wrsf.utils.CodeUtil;
@@ -51,7 +53,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MineActivity extends AppCompatActivity {
+public class MineActivity extends BasePickActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -67,10 +69,10 @@ public class MineActivity extends AppCompatActivity {
     TextMenuItem tmiPersonSex;
     @BindView(R.id.tmi_person_email)
     TextMenuItem tmiPersonEmail;
+    @BindView(R.id.btn_add)
+    TextView btnAdd;
 
-    SharedPreferencesHelper preferencesHelper;
     private MemberModel memberModel;
-
     private TimePickerView pvDate;
     private OptionsPickerView pvSex;
     List<Sex> sexes;
@@ -80,11 +82,12 @@ public class MineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine);
         ButterKnife.bind(this);
-        preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
+
         init();
     }
 
     private void init() {
+        btnAdd.setText(getString(R.string.common_save));
         sexes = new SexUtil().getSexs();
         memberModel = new Gson().fromJson((String) preferencesHelper.getSharedPreference("member", ""), MemberModel.class);
         tmiPersonName.setText(memberModel.getMemberName());
@@ -249,31 +252,4 @@ public class MineActivity extends AppCompatActivity {
         }
     }
 
-    private void setDialog(BasePickerView pickview) {
-        getDialogLayoutParams();
-        pickview.getDialogContainerLayout().setLayoutParams(getDialogLayoutParams());
-        initDialogWindow(pickview.getDialog().getWindow());
-    }
-
-    private void initDialogWindow(Window window) {
-        window.setWindowAnimations(R.style.picker_view_slide_anim);//修改动画样式
-        window.setGravity(Gravity.BOTTOM);//改成Bottom,底部显示
-        window.setDimAmount(0.1f);
-        window.setAttributes(getDialogWindowLayoutParams(window));
-    }
-
-    private WindowManager.LayoutParams getDialogWindowLayoutParams(Window window) {
-        WindowManager.LayoutParams winParams;
-        winParams = window.getAttributes();
-        winParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        return winParams;
-    }
-
-    private FrameLayout.LayoutParams getDialogLayoutParams() {
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                Gravity.BOTTOM);
-        return params;
-    }
 }
