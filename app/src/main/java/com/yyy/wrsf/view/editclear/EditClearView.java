@@ -59,6 +59,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private OnTextChange onTextChange;
     private OnTextChangeAfter onTextChangeAfter;
     private OnItemClickListener onItemClickListener;
+    private boolean onItemAble = true;
 
     public EditClearView(Context context) {
         this(context, null);
@@ -73,7 +74,6 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     private void initAttrs(AttributeSet attrs) {
         commonPadding = context.getResources().getDimensionPixelSize(R.dimen.padding_common);
-
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.EditClear);
         title = array.getString(R.styleable.EditClear_ecTitle);
         titleColor = array.getColor(R.styleable.EditClear_ecTitleColor, context.getResources().getColor(R.color.text_common));
@@ -148,7 +148,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         addTextListener();
         if (hintColor != 0)
             editText.setHintTextColor(hintColor);
-        addView(editText);
+        addView(editText, type == 0 ? 0 : 1);
     }
 
     private void initTvText() {
@@ -167,7 +167,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         tvText.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onItemClickListener != null) {
+                if (onItemClickListener != null && onItemAble) {
                     onItemClickListener.onItemClick(0);
                 }
             }
@@ -193,7 +193,6 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
             //手动设置maxLength为20
             InputFilter[] filters = {new InputFilter.LengthFilter(textLength)};
             editText.setFilters(filters);
-
         }
     }
 
@@ -281,11 +280,37 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     }
 
     public void forbidEdit() {
+        if (!editable) return;
+        editable = false;
         if (editText != null && ivDelete != null) {
-            text = getText();
             editText.setVisibility(GONE);
             ivDelete.setVisibility(GONE);
+            text = editText.getText().toString();
+        }
+        if (tvText == null)
             initTvText();
+        else {
+            tvText.setText(text);
+            tvText.setVisibility(VISIBLE);
+        }
+    }
+
+    public void setEditable() {
+        if (editable) return;
+        editable = true;
+        if (tvText != null) {
+            tvText.setVisibility(GONE);
+            text = tvText.getText().toString();
+        }
+        if (editText == null) {
+            initText();
+        } else {
+            editText.setVisibility(VISIBLE);
+        }
+        if (ivDelete == null) {
+            initDelete();
+        } else {
+            ivDelete.setVisibility(text.length() == 0 ? INVISIBLE : VISIBLE);
         }
     }
 
@@ -328,5 +353,9 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     public void setOnTextChangeAfter(OnTextChangeAfter onTextChangeAfter) {
         this.onTextChangeAfter = onTextChangeAfter;
+    }
+
+    public void setOnItemAble(boolean onItemAble) {
+        this.onItemAble = onItemAble;
     }
 }

@@ -18,6 +18,13 @@ public class PublicModel implements IPickerViewData {
     private int detailCode;
     private String detailName;
 
+    public PublicModel() {
+    }
+
+    public PublicModel(int detailCode, String detailName) {
+        this.detailCode = detailCode;
+        this.detailName = detailName;
+    }
 
     public int getRecNo() {
         return recNo;

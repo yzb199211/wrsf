@@ -7,22 +7,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.company.car.CarDetailActivity;
-import com.yyy.wrsf.dialog.DialogUtil;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.model.BillModel;
+import com.yyy.wrsf.mine.bill.persenter.BillP;
+import com.yyy.wrsf.mine.bill.view.IBillV;
+import com.yyy.wrsf.model.BillBean;
 import com.yyy.wrsf.model.publicm.PublicArray;
 import com.yyy.wrsf.model.publicm.PublicModel;
 import com.yyy.wrsf.model.filter.PublicFilterModel;
 import com.yyy.wrsf.utils.PhoneUtils;
 import com.yyy.wrsf.utils.PublicCode;
-import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -46,7 +46,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BillActivity extends AppCompatActivity {
+public class BillActivity extends BasePickActivity implements IBillV {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -73,7 +73,7 @@ public class BillActivity extends AppCompatActivity {
     @BindView(R.id.ll_content)
     LinearLayout llContent;
 
-    private BillModel billModel;
+    private BillBean billModel;
     private RequstType requstType;
     private String url;
 
@@ -81,13 +81,17 @@ public class BillActivity extends AppCompatActivity {
     private OptionsPickerView pvBilltype;
     private List<PublicModel> billTypes = new ArrayList<>();
 
+    private boolean editable = false;
+    private BillP billP;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill);
         ButterKnife.bind(this);
+        billP = new BillP(this);
+        billP.getData();
         init();
-        getData();
     }
 
     private void init() {
@@ -124,60 +128,9 @@ public class BillActivity extends AppCompatActivity {
     private void initData() {
         requstType = RequstType.POST;
         url = BillUrl.insert;
-        billModel = new BillModel();
+        billModel = new BillBean();
     }
 
-    private void getData() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(getParams(), NetConfig.address + BillUrl.getBill, RequstType.GET, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                LoadingFinish(null);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        if (!TextUtils.isEmpty(result.getData())) {
-                            billModel = new Gson().fromJson(result.getData(), BillModel.class);
-                            requstType = RequstType.PUT;
-                            url = BillUrl.update;
-                            setBill();
-                        }
-                    } else {
-                        LoadingFinish(result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
-    }
-
-    private void setBill() {
-        runOnUiThread(() -> {
-            ecvCompany.setText(billModel.getInvoiceCompany());
-            ecvTax.setText(billModel.getInvoiceTax());
-            ecvBank.setText(billModel.getInvoiceBank());
-            ecvAccount.setText(billModel.getInvoiceBankNumber());
-            ecvType.setText(billModel.getInvoiceTypeName());
-            ecvCompanyTel.setText(billModel.getInvoiceTel());
-            ecvCompanyAddress.setText(billModel.getInvoiceAdd());
-            ecvContract.setText(billModel.getRecPerson());
-            ecvContractTel.setText(billModel.getRecTel());
-            ecvContractAddress.setText(billModel.getRecAdd());
-        });
-    }
-
-    private List<NetParams> getParams() {
-        List<NetParams> params = new ArrayList<>();
-        return params;
-    }
 
     private void getBillType() {
         LoadingDialog.showDialogForLoading(this);
@@ -196,7 +149,6 @@ public class BillActivity extends AppCompatActivity {
                             }
                         }
                         LoadingFinish(null);
-
                     } else {
                         LoadingFinish(result.getMsg());
                     }
@@ -235,9 +187,8 @@ public class BillActivity extends AppCompatActivity {
                     .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
                     .build();
             pvBilltype.setPicker(billTypes);//一级选择器
-            DialogUtil.setDialog(pvBilltype);
+            setDialog(pvBilltype);
             pvBilltype.show();
-
         });
 
     }
@@ -250,58 +201,64 @@ public class BillActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
-        if (canSave()) {
-            saveData();
+        if (editable) {
+            billP.save();
+        } else {
+            billP.setEdit(true);
+            setEditAble(true);
         }
     }
 
-    private void saveData() {
-        new NetUtil(sendParams(), NetConfig.address + url, requstType, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                Log.e(CarDetailActivity.class.getName(), "data:" + string);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        finish();
-                    } else {
-                        LoadingFinish(result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-            }
 
-            @Override
-            public void onFail(Exception e) {
-                LoadingFinish(e.getMessage());
-                e.printStackTrace();
-                Log.e("error", e.getMessage());
-            }
-        });
+    @Override
+    public void setEditAble(boolean b) {
+        editable = b;
     }
 
-    private List<NetParams> sendParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("params", new Gson().toJson(billModel)));
-        return params;
+    @Override
+    public void setBill(BillBean bill) {
+        billModel = bill;
+        ecvCompany.setText(billModel.getInvoiceCompany());
+        ecvTax.setText(billModel.getInvoiceTax());
+        ecvBank.setText(billModel.getInvoiceBank());
+        ecvAccount.setText(billModel.getInvoiceBankNumber());
+        ecvType.setText(billModel.getInvoiceTypeName());
+        ecvCompanyTel.setText(billModel.getInvoiceTel());
+        ecvCompanyAddress.setText(billModel.getInvoiceAdd());
+        ecvContract.setText(billModel.getRecPerson());
+        ecvContractTel.setText(billModel.getRecTel());
+        ecvContractAddress.setText(billModel.getRecAdd());
     }
 
-    private boolean canSave() {
-        llContent.getChildCount();
-        for (int i = 0; i < llContent.getChildCount(); i++) {
-            if (TextUtils.isEmpty(((EditClearView) llContent.getChildAt(i)).getText())) {
-                Toast(((EditClearView) llContent.getChildAt(i)).getHint());
-                return false;
-            }
-        }
-        if (PhoneUtils.isNotValidChinesePhone(ecvContractTel.getText()) || PhoneUtils.isNotValidChinesePhone(ecvCompanyTel.getText())) {
-            Toast(getString(R.string.error_phone));
-            return false;
-        }
+    @Override
+    public BillBean getBill() {
         initBill();
-        return true;
+        return billModel;
+    }
+
+    @Override
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String getUrl() {
+        return url;
+    }
+
+    @Override
+    public void setRequstType(RequstType requstType) {
+        this.requstType = requstType;
+    }
+
+    @Override
+    public RequstType getRequstType() {
+        return requstType;
+    }
+
+    @Override
+    public LinearLayout getContent() {
+        return llContent;
     }
 
     private void initBill() {
@@ -316,19 +273,18 @@ public class BillActivity extends AppCompatActivity {
         billModel.setRecTel(ecvContractTel.getText());
     }
 
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
+    @Override
+    public void startLoading() {
+        LoadingDialog.showDialogForLoading(this);
     }
 
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
+    @Override
+    public void finishLoading(@Nullable String s) {
+        LoadingFinish(s);
+    }
+
+    @Override
+    public void toast(String s) {
+        Toast(s);
     }
 }
