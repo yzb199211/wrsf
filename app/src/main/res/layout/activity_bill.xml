@@ -160,8 +160,6 @@
                 app:ecHint="@string/bill_contract_address"
                 app:ecTitle="@string/bill_contract_address"
                 app:ecType="tv" />
-
-
         </LinearLayout>
     </ScrollView>
 
@@ -171,7 +169,7 @@
         android:layout_height="@dimen/row_common"
         android:background="@drawable/btn_yellow"
         android:gravity="center"
-        android:text="@string/common_submit"
+        android:text="@string/common_edit"
         android:textColor="@color/white"
         android:textSize="@dimen/text_common" />
 </LinearLayout>

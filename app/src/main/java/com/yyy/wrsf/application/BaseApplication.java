@@ -25,6 +25,7 @@ public class BaseApplication extends Application {
     public final void onCreate() {
         super.onCreate();
 //        SDKInitializer.initialize(getApplicationContext());
+//        Thread.setDefaultUncaughtExceptionHandler(new MyUncaughtExceptionHandler());
         baseApplication = this;
         registerActivityLifecycleCallbacks(lifecycleCallbacks);
     }

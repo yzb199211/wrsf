@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -15,6 +16,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.company.car.CarDetailActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.enums.BillTypeEnum;
 import com.yyy.wrsf.mine.bill.persenter.BillP;
 import com.yyy.wrsf.mine.bill.view.IBillV;
 import com.yyy.wrsf.model.BillBean;
@@ -72,6 +74,8 @@ public class BillActivity extends BasePickActivity implements IBillV {
     EditClearView ecvContractAddress;
     @BindView(R.id.ll_content)
     LinearLayout llContent;
+    @BindView(R.id.btn_add)
+    TextView btnAdd;
 
     private BillBean billModel;
     private RequstType requstType;
@@ -79,7 +83,7 @@ public class BillActivity extends BasePickActivity implements IBillV {
 
     private PublicFilterModel publicFilter;
     private OptionsPickerView pvBilltype;
-    private List<PublicModel> billTypes = new ArrayList<>();
+    private List<PublicModel> billTypes;
 
     private boolean editable = false;
     private BillP billP;
@@ -109,9 +113,11 @@ public class BillActivity extends BasePickActivity implements IBillV {
     }
 
     private void initType() {
+        billTypes = BillTypeEnum.getBillTypes();
         ecvType.setOnItemClickListener((int pos) -> {
-            if (billTypes.size() == 0) {
-                getBillType();
+            if (pvBilltype == null) {
+//                getBillType();
+                initPvBillType();
             } else {
                 pvBilltype.show();
             }
@@ -172,7 +178,7 @@ public class BillActivity extends BasePickActivity implements IBillV {
                 @Override
                 public void onOptionsSelect(int options1, int options2, int options3, View v) {
                     ecvType.setText(billTypes.get(options1).getPickerViewText());
-                    billModel.setInvoiceType(billTypes.get(options1).getRecNo());
+                    billModel.setInvoiceType(billTypes.get(options1).getDetailCode());
                     billModel.setInvoiceTypeName(billTypes.get(options1).getPickerViewText());
 //                        car.setCarTypeName(drivers.get(options1).getPickerViewText());
                 }
@@ -206,6 +212,7 @@ public class BillActivity extends BasePickActivity implements IBillV {
         } else {
             billP.setEdit(true);
             setEditAble(true);
+
         }
     }
 
@@ -213,6 +220,7 @@ public class BillActivity extends BasePickActivity implements IBillV {
     @Override
     public void setEditAble(boolean b) {
         editable = b;
+        btnAdd.setText(b ? getString(R.string.common_save) : getString(R.string.common_edit));
     }
 
     @Override
