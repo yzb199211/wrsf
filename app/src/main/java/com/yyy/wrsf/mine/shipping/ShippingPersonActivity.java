@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.common.address.AreaSelect;
 import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.beans.address.AddressB;
@@ -26,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShippingPersonActivity extends AppCompatActivity {
+public class ShippingPersonActivity extends BaseActivity {
     @BindView(R.id.top_view)
     TopView topView;
     @BindView(R.id.ecv_company)
@@ -222,9 +223,6 @@ public class ShippingPersonActivity extends AppCompatActivity {
     }
 
 
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
-    }
 
     @Override
     public void onBackPressed() {

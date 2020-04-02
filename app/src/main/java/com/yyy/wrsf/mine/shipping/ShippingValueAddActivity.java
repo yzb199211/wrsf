@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.beans.ship.ShippingAddValueB;
 import com.yyy.wrsf.beans.ship.SignB;
 import com.yyy.wrsf.utils.CodeUtil;
@@ -26,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShippingValueAddActivity extends AppCompatActivity {
+public class ShippingValueAddActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;

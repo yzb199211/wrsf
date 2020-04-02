@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.beans.price.PriceCalB;
 import com.yyy.wrsf.beans.publicm.PublicArray;
@@ -43,7 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShippingGoodsActivity extends AppCompatActivity {
+public class ShippingGoodsActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -377,21 +378,5 @@ public class ShippingGoodsActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
-
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
     }
 }

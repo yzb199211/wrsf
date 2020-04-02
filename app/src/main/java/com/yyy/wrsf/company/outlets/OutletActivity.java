@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
@@ -40,7 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class OutletActivity extends AppCompatActivity {
+public class OutletActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -161,22 +162,6 @@ public class OutletActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
-
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
     }
 
     @Override

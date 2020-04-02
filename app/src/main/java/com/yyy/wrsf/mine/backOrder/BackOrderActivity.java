@@ -7,13 +7,14 @@ import android.text.Html;
 import android.widget.TextView;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.utils.FileUtil;
 import com.yyy.wrsf.view.topview.TopView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BackOrderActivity extends AppCompatActivity {
+public class BackOrderActivity extends BaseActivity {
     @BindView(R.id.top_view)
     TopView topView;
     @BindView(R.id.tv_content)
