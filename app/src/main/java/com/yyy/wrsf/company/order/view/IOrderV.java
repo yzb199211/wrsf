@@ -1,4 +1,4 @@
-package com.yyy.wrsf.mine.order.view;
+package com.yyy.wrsf.company.order.view;
 
 import com.yyy.wrsf.base.view.ILoadingV;
 import com.yyy.wrsf.beans.OrderBean;

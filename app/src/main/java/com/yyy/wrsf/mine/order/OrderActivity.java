@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -13,9 +14,13 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.TabB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.beans.OrderBean;
+import com.yyy.wrsf.mine.order.persenter.OrderP;
+import com.yyy.wrsf.mine.order.view.IOrderV;
 import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -35,7 +40,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class OrderActivity extends BaseActivity implements XRecyclerView.LoadingListener {
+public class OrderActivity extends BaseActivity implements XRecyclerView.LoadingListener, IOrderV {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -44,30 +49,29 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
-    private PagerRequestBean pager;
     private List<OrderBean> orders = new ArrayList<>();
     private OrderAdapter adapter;
+    private List<TabB> tabs;
+    private List<TabLayout.Tab> tabsV = new ArrayList<>();
+    private OrderP orderP;
+    private int currentTab = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         ButterKnife.bind(this);
+        orderP = new OrderP(this);
         init();
-        getData();
+        orderP.getData();
     }
 
     private void init() {
         initTop();
         initRecycle();
-        initPager();
+        orderP.getTabs();
     }
 
-    private void initPager() {
-        pager = new PagerRequestBean();
-        pager.setPageIndex(0);
-        pager.setPageSize(30);
-    }
 
     private void initTop() {
         topView.setOnLeftClickListener(() -> {
@@ -86,6 +90,22 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
         recyclerView.setLoadingMoreEnabled(true);
         recyclerView.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.VERTICAL));
         recyclerView.setLoadingListener(this);
+        recyclerView.setAdapter(initAdapter());
+    }
+
+    private OrderAdapter initAdapter() {
+        adapter = new OrderAdapter(OrderActivity.this, orders);
+        adapter.setOnItemClickListener((int pos) -> {
+            go2Detail(pos);
+        });
+        adapter.setOnEditListener((int pos) -> {
+            go2Pay(pos);
+        });
+        adapter.setOnCancleListener((int pos) -> {
+//                        go2Cancle(pos);
+            orderP.cancel(pos, orders.get(pos).getContractNo());
+        });
+        return adapter;
     }
 
     @Override
@@ -95,68 +115,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
 
     @Override
     public void onLoadMore() {
-
-    }
-
-    private void getData() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(getParams(), NetConfig.address + OrderUrl.getPageList, RequstType.POST, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                LoadingFinish(null);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        List<OrderBean> list = new Gson().fromJson(result.getData(), new TypeToken<List<OrderBean>>() {
-                        }.getType());
-                        orders.addAll(list);
-                        refrishList();
-                    } else {
-                        LoadingFinish(result.getMsg());
-                        Log.e(OrderActivity.class.getName(), result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
-    }
-
-    private void refrishList() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (adapter == null) {
-                    adapter = new OrderAdapter(OrderActivity.this, orders);
-                    recyclerView.setAdapter(adapter);
-                    adapter.setOnItemClickListener((int pos) -> {
-                        go2Detail(pos);
-                    });
-                    adapter.setOnEditListener((int pos) -> {
-                        go2Pay(pos);
-                    });
-                    adapter.setOnCancleListener((int pos) -> {
-                        go2Cancle(pos);
-                    });
-                } else {
-                    adapter.notifyDataSetChanged();
-                }
-            }
-        });
-
-    }
-
-    private List<NetParams> getParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("param", new Gson().toJson(pager)));
-        return params;
+        orderP.getData();
     }
 
 
@@ -172,45 +131,91 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     private void go2Pay(int pos) {
     }
 
-    private void go2Cancle(int pos) {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(cancleParams(pos), NetConfig.address + OrderUrl.cancelOrder, RequstType.DELETE, new ResponseListener() {
+    private void clear() {
+        orders.clear();
+        refreshList();
+    }
+
+    @Override
+    public void refreshList() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addDatas(List<OrderBean> list) {
+        orders.addAll(list);
+    }
+
+    @Override
+    public void cancelLoadMore() {
+        recyclerView.setLoadingMoreEnabled(false);
+    }
+
+    @Override
+    public void setItemType(int pos, int type) {
+        orders.get(pos).setContractStatus(type);
+    }
+
+    @Override
+    public Integer getType() {
+        return tabs.get(currentTab).getId();
+    }
+
+    @Override
+    public String getOrderName() {
+        return null;
+    }
+
+    @Override
+    public void setTabs(List<TabB> tabs) {
+        this.tabs = tabs;
+        initTabs();
+    }
+
+    private void initTabs() {
+        for (TabB tabB : tabs) {
+            TabLayout.Tab tab = tabLayout.newTab().setText(tabB.getName());
+            tabsV.add(tab);
+            tabLayout.addTab(tab);
+        }
+        tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
-            public void onSuccess(String string) {
-                LoadingFinish(null);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        orders.get(pos).setContractStatus(-1);
-                        refrishList();
-                    } else {
-                        LoadingFinish(result.getMsg());
-                        Log.e(OrderActivity.class.getName(), result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
+            public void onTabSelected(TabLayout.Tab tab) {
+                currentTab = tab.getPosition();
+                clear();
+                orderP.getData();
             }
 
             @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
-
     }
 
-    private List<NetParams> cancleParams(int pos) {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("contractNo", orders.get(pos).getContractNo()));
-        return params;
+    @Override
+    public void startLoading() {
+        LoadingDialog.showDialogForLoading(this);
     }
 
+    @Override
+    public void finishLoading(@Nullable String s) {
+        LoadingFinish(s);
+    }
+
+    @Override
+    public void toast(String s) {
+        Toast(s);
+    }
 
     @Override
     protected void onDestroy() {
+        orderP.detachView();
         super.onDestroy();
     }
 }

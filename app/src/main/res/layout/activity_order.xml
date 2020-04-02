@@ -22,7 +22,11 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"/>
+        android:background="@color/white"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/default_blue"
+        app:tabIndicatorFullWidth="false"
+        app:tabMode="scrollable" />
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recycler_view"
@@ -31,4 +35,5 @@
         android:layout_weight="1"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10" />
+
 </LinearLayout>

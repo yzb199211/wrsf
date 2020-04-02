@@ -1,4 +1,4 @@
-package com.yyy.wrsf.mine.order.model;
+package com.yyy.wrsf.company.order.model;
 
 import android.text.TextUtils;
 

@@ -1,4 +1,4 @@
-package com.yyy.wrsf.mine.order.persenter;
+package com.yyy.wrsf.company.order.persenter;
 
 import android.os.Handler;
 
@@ -6,12 +6,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
+import com.yyy.wrsf.beans.OrderBean;
+import com.yyy.wrsf.company.order.model.IOrderM;
+import com.yyy.wrsf.company.order.model.OrderM;
+import com.yyy.wrsf.company.order.view.IOrderV;
 import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.interfaces.OnResultListener;
-import com.yyy.wrsf.mine.order.model.IOrderM;
-import com.yyy.wrsf.mine.order.model.OrderM;
-import com.yyy.wrsf.mine.order.view.IOrderV;
-import com.yyy.wrsf.beans.OrderBean;
+
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.PagerRequestBean;
@@ -47,7 +48,7 @@ public class OrderP implements IOrderP {
     public void getData() {
         initParams();
         iOrderV.startLoading();
-        iOrderM.Requset(getParams(), NetConfig.address + OrderUrl.getPageList, RequstType.POST, new OnResultListener() {
+        iOrderM.Requset(getParams(), NetConfig.address + OrderUrl.getCompanyPageList, RequstType.POST, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
                 if (!destroyFlag) {
@@ -112,6 +113,32 @@ public class OrderP implements IOrderP {
     }
 
     @Override
+    public void confirmGet(int pos, String id) {
+        iOrderV.startLoading();
+        iOrderM.Requset(comfirmParams(id), NetConfig.address + OrderUrl.shopRecConfirm, RequstType.PUT, new OnResultListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iOrderV.finishLoading(BaseApplication.getInstance().getString(R.string.common_cancel_success));
+                        iOrderV.setItemType(pos, ContractStatusEnum.WAIT_REC.getStatus());
+                        iOrderV.refreshList();
+                    });
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iOrderV.finishLoading(error);
+                    });
+                }
+            }
+        });
+    }
+
+    @Override
     public void pay(int pos) {
     }
 
@@ -134,6 +161,15 @@ public class OrderP implements IOrderP {
     private List<NetParams> cancelParams(String id) {
         List<NetParams> list = new ArrayList<>();
         list.add(new NetParams("contractNo", id));
+        return list;
+    }
+
+    private List<NetParams> comfirmParams(String id) {
+        List<NetParams> list = new ArrayList<>();
+        list.add(new NetParams("contractNo", id));
+        list.add(new NetParams("remark", ""));
+        list.add(new NetParams("type", ""));
+        list.add(new NetParams("confirmStatus", "1"));
         return list;
     }
 

@@ -5,4 +5,5 @@ public class OrderUrl {
     public final static String getPageList = "/contractInfo/getPageList";
     public final static String getCompanyPageList = "/contractInfo/getCompanyPageList";
     public final static String cancelOrder = "/contractInfo/cancel";
+    public final static String shopRecConfirm = "/contractInfo/shopRecConfirm";
 }

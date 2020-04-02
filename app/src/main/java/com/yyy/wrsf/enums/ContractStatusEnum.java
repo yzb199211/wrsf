@@ -14,9 +14,8 @@ import java.util.List;
  * @Date: 2020/3/18
  */
 public enum ContractStatusEnum {
-    CANCEL(-1, "取消订单"),
 
-    WAIT_SUBMIT(0, "未下单"),
+    WAIT_SUBMIT(0, "未支付"),
 
     PLACE_ORDER(1, "待确认"),
 
@@ -28,7 +27,11 @@ public enum ContractStatusEnum {
 
     WAIT_REC(5, "待收货"),
 
-    FINISH(6, "已完成");
+    FINISH(6, "已完成"),
+
+    ERROR(11, "异常"),
+
+    CANCEL(12, "已取消");
 
     private Integer status;
     private String desc;
