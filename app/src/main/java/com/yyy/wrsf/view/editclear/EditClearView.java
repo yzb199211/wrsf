@@ -274,6 +274,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         return false;
     }
 
+
     public void closeKeybord() {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {

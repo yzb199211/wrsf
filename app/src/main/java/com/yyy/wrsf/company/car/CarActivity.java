@@ -2,6 +2,7 @@ package com.yyy.wrsf.company.car;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,8 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.filter.CarFilterB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
@@ -28,6 +31,7 @@ import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.car.CarUrl;
+import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
@@ -41,12 +45,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CarActivity extends AppCompatActivity {
+public class CarActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
+    @BindView(R.id.ecv_search)
+    EditClearView ecvSearch;
+
     private PagerRequestBean pager;
     private List<CarB> cars = new ArrayList<>();
     private CarAdapter carAdapter;
@@ -64,6 +71,15 @@ public class CarActivity extends AppCompatActivity {
         initTop();
         initRecycle();
         initPager();
+        initSearch();
+    }
+
+    private void initSearch() {
+        ecvSearch.setOnEnterListerner(() -> {
+            cars.clear();
+            refrishList();
+            getData();
+        });
     }
 
     private void initTop() {
@@ -94,7 +110,21 @@ public class CarActivity extends AppCompatActivity {
         pager.setPageSize(500);
     }
 
+    private void setPager() {
+        pager.setQueryParam(getFilter(ecvSearch.getText()));
+    }
+
+    public CarFilterB getFilter(String carCode) {
+        CarFilterB carFilterB = new CarFilterB();
+        if (!TextUtils.isEmpty(carCode)) {
+            carFilterB.setCarCode(carCode);
+            return carFilterB;
+        }
+        return null;
+    }
+
     private void getData() {
+        setPager();
         new NetUtil(getParams(), NetConfig.address + CarUrl.getCarList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
@@ -170,6 +200,7 @@ public class CarActivity extends AppCompatActivity {
         go2detail(CodeUtil.ADD, -1);
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -188,19 +219,5 @@ public class CarActivity extends AppCompatActivity {
             }
         }
     }
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
 
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
-    }
 }

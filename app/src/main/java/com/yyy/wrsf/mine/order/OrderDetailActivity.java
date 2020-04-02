@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.enums.PayTypeEnum;
 import com.yyy.wrsf.beans.OrderBean;
@@ -16,7 +17,7 @@ import com.yyy.wrsf.view.topview.TopView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class OrderDetailActivity extends AppCompatActivity {
+public class OrderDetailActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;

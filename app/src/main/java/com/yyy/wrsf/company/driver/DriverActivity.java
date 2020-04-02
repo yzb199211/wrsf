@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.beans.filter.DriverFilterB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
@@ -44,7 +45,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DriverActivity extends AppCompatActivity {
+public class DriverActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -111,6 +112,7 @@ public class DriverActivity extends AppCompatActivity {
     }
 
     private void getData() {
+        setPager();
         new NetUtil(getParams(), NetConfig.address + DriverUrl.getDriver, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
@@ -145,7 +147,6 @@ public class DriverActivity extends AppCompatActivity {
     }
 
     private void refrishList() {
-        setPager();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -219,19 +220,4 @@ public class DriverActivity extends AppCompatActivity {
         }
     }
 
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
-
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
-    }
 }

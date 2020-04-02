@@ -108,7 +108,12 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     }
 
     private void go2Detail(int pos) {
-        startActivityForResult(new Intent().setClass(this, OrderDetailActivity.class).putExtra("pos", pos), CodeUtil.MODIFY);
+        startActivityForResult(
+                new Intent()
+                        .setClass(this, OrderDetailActivity.class)
+                        .putExtra("pos", pos)
+                        .putExtra("data", new Gson().toJson(orders.get(pos)))
+                , CodeUtil.MODIFY);
     }
 
     @Override
