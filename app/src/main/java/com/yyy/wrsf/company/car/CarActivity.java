@@ -219,5 +219,4 @@ public class CarActivity extends BaseActivity {
             }
         }
     }
-
 }

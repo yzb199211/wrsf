@@ -18,6 +18,16 @@
         app:topTitle="@string/company_outlets"
         app:topTitleColor="@color/white" />
 
+    <com.yyy.wrsf.view.editclear.EditClearView
+        android:id="@+id/ecv_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:background="@color/white"
+        app:ecHint="@string/car_license_plate"
+        app:ecSrc="@mipmap/icon_search"
+        app:ecSrcPadding="@dimen/dp_10"
+        app:ecType="img" />
+
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

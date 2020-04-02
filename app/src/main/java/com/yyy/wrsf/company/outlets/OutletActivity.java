@@ -2,6 +2,7 @@ package com.yyy.wrsf.company.outlets;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,8 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.filter.CarFilterB;
+import com.yyy.wrsf.beans.filter.OutletFilterB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
@@ -29,6 +32,7 @@ import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.outlet.OutleUrl;
+import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
@@ -47,6 +51,8 @@ public class OutletActivity extends BaseActivity {
     TopView topView;
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
+    @BindView(R.id.ecv_search)
+    EditClearView ecvSearch;
 
     private List<OutletB> outletModels = new ArrayList<>();
     private OutletAdapter outletAdapter;
@@ -59,15 +65,39 @@ public class OutletActivity extends BaseActivity {
         ButterKnife.bind(this);
         init();
         getData();
+
     }
 
     private void init() {
         initTop();
         initRecycle();
         initPager();
+        initSearch();
+    }
+
+    private void initSearch() {
+        ecvSearch.setOnEnterListerner(() -> {
+            outletModels.clear();
+            refrishList();
+            getData();
+        });
+    }
+
+    private void setPager() {
+        pager.setQueryParam(getFilter(ecvSearch.getText()));
+    }
+
+    public OutletFilterB getFilter(String shopName) {
+        OutletFilterB outletFilterB = new OutletFilterB();
+        if (!TextUtils.isEmpty(shopName)) {
+            outletFilterB.setShopName(shopName);
+            return outletFilterB;
+        }
+        return null;
     }
 
     private void getData() {
+        setPager();
         LoadingDialog.showDialogForLoading(this);
         new NetUtil(getParams(), NetConfig.address + OutleUrl.getPageList, RequstType.POST, new ResponseListener() {
             @Override
@@ -125,7 +155,7 @@ public class OutletActivity extends BaseActivity {
         startActivityForResult(
                 new Intent()
                         .setClass(this, OutletDetailActivity.class)
-                        .putExtra("pos",pos)
+                        .putExtra("pos", pos)
                         .putExtra("data", new Gson().toJson(outletModels.get(pos)))
                 , CodeUtil.MODIFY);
 
