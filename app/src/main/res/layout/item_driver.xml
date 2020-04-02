@@ -4,6 +4,7 @@
     android:layout_height="@dimen/row_common"
     android:background="@color/white"
     android:gravity="center_vertical"
+    android:layout_marginTop="@dimen/dp_10"
     android:orientation="horizontal">
 
     <View

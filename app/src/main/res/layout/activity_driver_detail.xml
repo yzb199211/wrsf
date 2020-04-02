@@ -15,7 +15,7 @@
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitle="@string/company_titlte_register"
+        app:topTitle="@string/driver_modify"
         app:topTitleColor="@color/white" />
 
     <ScrollView

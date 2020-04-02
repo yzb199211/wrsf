@@ -2,6 +2,7 @@ package com.yyy.wrsf.company.driver;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.beans.filter.DriverFilterB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
@@ -28,6 +30,7 @@ import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.driver.DriverUrl;
+import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
@@ -47,6 +50,8 @@ public class DriverActivity extends AppCompatActivity {
     TopView topView;
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
+    @BindView(R.id.ecv_search)
+    EditClearView ecvSearch;
 
     private PagerRequestBean pager;
     private List<DriverB> driverModels = new ArrayList<>();
@@ -66,6 +71,15 @@ public class DriverActivity extends AppCompatActivity {
         initTop();
         initRecycle();
         initPager();
+        initSearch();
+    }
+
+    private void initSearch() {
+        ecvSearch.setOnEnterListerner(() -> {
+            driverModels.clear();
+            refrishList();
+            getData();
+        });
     }
 
     private void initRecycle() {
@@ -131,6 +145,7 @@ public class DriverActivity extends AppCompatActivity {
     }
 
     private void refrishList() {
+        setPager();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -148,6 +163,19 @@ public class DriverActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setPager() {
+        pager.setQueryParam(getFilter(ecvSearch.getText()));
+    }
+
+    public DriverFilterB getFilter(String tel) {
+        DriverFilterB driverFilterB = new DriverFilterB();
+        if (!TextUtils.isEmpty(tel)) {
+            driverFilterB.setDriverTel(tel);
+            return driverFilterB;
+        }
+        return null;
     }
 
     private List<NetParams> getParams() {

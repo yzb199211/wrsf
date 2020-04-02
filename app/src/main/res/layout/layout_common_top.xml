@@ -13,21 +13,20 @@
         android:id="@+id/iv_scan"
         android:layout_width="@dimen/dp_50"
         android:layout_height="match_parent"
-        android:src="@mipmap/icon_scan"
-        android:padding="@dimen/dp_13"/>
+        android:padding="@dimen/dp_13"
+        android:src="@mipmap/icon_scan" />
 
 
     <com.yyy.wrsf.view.editclear.EditClearView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_30"
         android:layout_toRightOf="@+id/iv_scan"
-        android:paddingRight="@dimen/dp_5"
-        android:paddingLeft="@dimen/dp_5"
+        android:background="@drawable/bg_commonttop_edit"
         app:ecHint="@string/common_select_order"
         app:ecHintColor="@color/white"
         app:ecSrc="@mipmap/icon_search"
+        app:ecSrcPadding="@dimen/dp_5"
         app:ecTextColor="@color/white"
-        app:ecType="img"
-        android:background="@drawable/bg_commonttop_edit"/>
+        app:ecType="img" />
 
 </LinearLayout>

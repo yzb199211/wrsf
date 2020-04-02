@@ -25,6 +25,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.interfaces.OnEnterListerner;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 
 public class EditClearView extends LinearLayout implements View.OnKeyListener {
@@ -59,6 +60,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private OnTextChange onTextChange;
     private OnTextChangeAfter onTextChangeAfter;
     private OnItemClickListener onItemClickListener;
+    private OnEnterListerner onEnterListerner;
     private boolean onItemAble = true;
 
     public EditClearView(Context context) {
@@ -74,25 +76,25 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     private void initAttrs(AttributeSet attrs) {
         commonPadding = context.getResources().getDimensionPixelSize(R.dimen.padding_common);
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.EditClear);
-        title = array.getString(R.styleable.EditClear_ecTitle);
-        titleColor = array.getColor(R.styleable.EditClear_ecTitleColor, context.getResources().getColor(R.color.text_common));
-        titleSize = array.getDimensionPixelSize(R.styleable.EditClear_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_title_edit));
-        text = array.getString(R.styleable.EditClear_ecText);
-        textColor = array.getColor(R.styleable.EditClear_ecTextColor, context.getResources().getColor(R.color.text_common));
-        textSize = array.getDimensionPixelSize(R.styleable.EditClear_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
-        textLength = array.getInteger(R.styleable.EditClear_ecTextLength, -1);
-        textGravity = array.getInteger(R.styleable.EditClear_ecTextGravity, -1);
-        hint = array.getString(R.styleable.EditClear_ecHint);
-        hintColor = array.getColor(R.styleable.EditClear_ecHintColor, 0);
-        leftSrc = array.getResourceId(R.styleable.EditClear_ecSrc, -1);
-        leftSrcPadding = array.getDimensionPixelSize(R.styleable.EditClear_ecSrcPadding, 0);
-        type = array.getInteger(R.styleable.EditClear_ecType, 2);
-        editable = array.getBoolean(R.styleable.EditClear_ecEditable, true);
-        textType = array.getInteger(R.styleable.EditClear_ecTextType, 0);
-        lines = array.getInteger(R.styleable.EditClear_ecTextLines, 1);
-        formatTitle = array.getBoolean(R.styleable.EditClear_ecFormatTitle, true);
-        hasDelete = array.getBoolean(R.styleable.EditClear_ecHasDetele, true);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.EditClearView);
+        title = array.getString(R.styleable.EditClearView_ecTitle);
+        titleColor = array.getColor(R.styleable.EditClearView_ecTitleColor, context.getResources().getColor(R.color.text_common));
+        titleSize = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_title_edit));
+        text = array.getString(R.styleable.EditClearView_ecText);
+        textColor = array.getColor(R.styleable.EditClearView_ecTextColor, context.getResources().getColor(R.color.text_common));
+        textSize = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
+        textLength = array.getInteger(R.styleable.EditClearView_ecTextLength, -1);
+        textGravity = array.getInteger(R.styleable.EditClearView_ecTextGravity, -1);
+        hint = array.getString(R.styleable.EditClearView_ecHint);
+        hintColor = array.getColor(R.styleable.EditClearView_ecHintColor, 0);
+        leftSrc = array.getResourceId(R.styleable.EditClearView_ecSrc, -1);
+        leftSrcPadding = array.getDimensionPixelSize(R.styleable.EditClearView_ecSrcPadding, 0);
+        type = array.getInteger(R.styleable.EditClearView_ecType, 2);
+        editable = array.getBoolean(R.styleable.EditClearView_ecEditable, true);
+        textType = array.getInteger(R.styleable.EditClearView_ecTextType, 0);
+        lines = array.getInteger(R.styleable.EditClearView_ecTextLines, 1);
+        formatTitle = array.getBoolean(R.styleable.EditClearView_ecFormatTitle, true);
+        hasDelete = array.getBoolean(R.styleable.EditClearView_ecHasDetele, true);
         array.recycle();
     }
 
@@ -229,7 +231,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         ivDelete.setImageResource(R.mipmap.icon_delete);
         ivDelete.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         ivDelete.setLayoutParams(deleteParams());
-        ivDelete.setVisibility(INVISIBLE);
+        if (text == null || text.length() == 0)
+            ivDelete.setVisibility(INVISIBLE);
         ivDelete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -240,7 +243,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     }
 
     private LayoutParams ivParams() {
-        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        LayoutParams params = new LayoutParams(context.getResources().getDimensionPixelSize(R.dimen.dp_40), ViewGroup.LayoutParams.MATCH_PARENT);
         return params;
     }
 
@@ -262,6 +265,9 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
             closeKeybord();
             if (editText != null) {
                 this.requestFocus();
+            }
+            if (onEnterListerner != null) {
+                onEnterListerner.onEnter();
             }
             return true;
         }
@@ -353,6 +359,10 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     public void setOnTextChangeAfter(OnTextChangeAfter onTextChangeAfter) {
         this.onTextChangeAfter = onTextChangeAfter;
+    }
+
+    public void setOnEnterListerner(OnEnterListerner onEnterListerner) {
+        this.onEnterListerner = onEnterListerner;
     }
 
     public void setOnItemAble(boolean onItemAble) {

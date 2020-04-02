@@ -19,6 +19,16 @@
         app:topTitle="@string/company_driver"
         app:topTitleColor="@color/white" />
 
+    <com.yyy.wrsf.view.editclear.EditClearView
+        android:id="@+id/ecv_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:background="@color/white"
+        app:ecHint="@string/address_contract_tel"
+        app:ecSrc="@mipmap/icon_search"
+        app:ecSrcPadding="@dimen/dp_10"
+        app:ecType="img" />
+
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

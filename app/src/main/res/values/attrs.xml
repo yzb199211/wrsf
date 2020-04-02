@@ -17,7 +17,7 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="EditClear">
+    <declare-styleable name="EditClearView">
         <attr name="ecTitle" format="string" />
         <attr name="ecTitleSize" format="dimension" />
         <attr name="ecTitleColor" format="color" />

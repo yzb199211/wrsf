@@ -18,7 +18,7 @@ public class OrderM extends BaseM implements IOrderM {
     @Override
     public OrderFilterB getFilter(String orderNo, Integer orderType) {
         OrderFilterB orderFilterB = new OrderFilterB();
-        if (TextUtils.isEmpty(orderNo) || orderType != null) {
+        if (!TextUtils.isEmpty(orderNo) || orderType != null) {
             orderFilterB.setContractNo(TextUtils.isEmpty(orderNo) ? null : orderNo);
             orderFilterB.setContractStatus(orderType);
             return orderFilterB;
