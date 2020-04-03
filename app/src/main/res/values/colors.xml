@@ -19,6 +19,7 @@
     <color name="text_gray">#999999</color>
     <color name="text_gray2">#666666</color>
     <color name="text_red">#F44336</color>
+    <color name="text_green">#4D9E4D</color>
 
     <!--login-->
     <color name="login_normal">#FE6F10</color>

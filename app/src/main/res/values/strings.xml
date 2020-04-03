@@ -51,6 +51,8 @@
     <string name="common_no">否</string>
     <string name="common_rmb">¥</string>
     <string name="common_all">全部</string>
+    <string name="common_normal">正常</string>
+    <string name="common_stop">停用</string>
     <!--hint-->
     <string name="hint_pwd">6-20位密码</string>
     <string name="hint_address_detail">街道、门牌号等信息</string>
@@ -186,6 +188,7 @@
     <string name="company_checkbill">对账</string>
     <string name="company_detail">公司资料</string>
     <string name="company_member">客户管理</string>
+    <string name="company_worker">员工管理</string>
     <string name="company_driver">驾驶员</string>
     <!--网点-->
     <string name="outlet_name">网点名称</string>
@@ -194,6 +197,9 @@
     <string name="outlet_person">负责人</string>
     <string name="outlet_send_tel">发货电话</string>
     <string name="outlet_receive_tel">收货电话</string>
+    <!--员工-->
+    <string name="worker_admin">管理员</string>
+    <string name="worker_normal">员工</string>
     <!--月结-->
     <string name="month_total">应收账款：</string>
     <!--驾驶员-->
