@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.beans.WorkerB;
+import com.yyy.wrsf.enums.RoleType;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 
 import java.util.List;
@@ -36,10 +37,18 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.VH> {
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.tvName.setText(list.get(position).getMemberName());
         holder.tvTel.setText(list.get(position).getMemberTel());
-        holder.tvAdmin.setText(list.get(position).isAdmin() ? context.getString(R.string.worker_admin) : context.getString(R.string.worker_normal));
-        holder.tvAdmin.setTextColor(list.get(position).isAdmin() ? context.getColor(R.color.order_yellow) : context.getColor(R.color.text_gray));
+        holder.tvAdmin.setText(RoleType.getRoleName(list.get(position).getRoleId()));
+        holder.tvAdmin.setTextColor(list.get(position).getRoleId().equals(RoleType.SHOP_STAFF.getType()) ? context.getColor(R.color.text_gray) : context.getColor(R.color.order_yellow));
         holder.tvType.setText(list.get(position).getStopYesno() == 0 ? context.getString(R.string.common_normal) : context.getString(R.string.common_stop));
         holder.tvType.setTextColor(list.get(position).getStopYesno() == 0 ? context.getColor(R.color.text_green) : context.getColor(R.color.text_red));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override

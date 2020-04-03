@@ -4,8 +4,6 @@ import android.os.Handler;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.yyy.wrsf.base.model.BaseM;
-import com.yyy.wrsf.base.model.IBaseM;
 import com.yyy.wrsf.beans.WorkerB;
 import com.yyy.wrsf.company.worker.model.WorkerM;
 import com.yyy.wrsf.company.worker.view.IWorkerV;
@@ -41,13 +39,12 @@ public class WorkerP implements IWorkerP {
     }
 
     private void initParams() {
-
-        pager.setQueryParam(workerM.getFilter(iWorkerV.getFilter(), iWorkerV.isShowStop(), iWorkerV.isShowAdmin()));
+        pager.setQueryParam(workerM.getFilter(iWorkerV.getFilter(), iWorkerV.isShowStop(), iWorkerV.getRoleType()));
     }
 
     @Override
     public void getWorker() {
-
+        initParams();
         iWorkerV.startLoading();
         workerM.Requset(getParams(), NetConfig.address + WorkerUrl.getPageList, RequstType.POST, new OnResultListener() {
             @Override
@@ -55,8 +52,9 @@ public class WorkerP implements IWorkerP {
                 if (!destroyFlag) {
                     handler.post(() -> {
                         iWorkerV.finishLoading(null);
-                        iWorkerV.refreshList(new Gson().fromJson(data, new TypeToken<List<WorkerB>>() {
+                        iWorkerV.addList(new Gson().fromJson(data, new TypeToken<List<WorkerB>>() {
                         }.getType()));
+                        iWorkerV.refreshList();
                     });
                 }
             }
@@ -74,7 +72,7 @@ public class WorkerP implements IWorkerP {
 
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("param", new Gson().toJson(params)));
+        params.add(new NetParams("param", new Gson().toJson(pager)));
         return params;
     }
 

@@ -6,11 +6,12 @@ import com.yyy.wrsf.beans.WorkerB;
 import java.util.List;
 
 public interface IWorkerV extends ILoadingV {
-    int isShowStop();
+    Integer isShowStop();
 
-    boolean isShowAdmin();
+    Integer getRoleType();
 
     String getFilter();
 
-    void refreshList(List<WorkerB> list);
+    void refreshList();
+    void addList(List<WorkerB> list);
 }

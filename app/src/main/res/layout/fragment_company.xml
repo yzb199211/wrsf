@@ -140,6 +140,17 @@
             app:tmiLeftSrc="@mipmap/company_driver"
             app:tmiTitle="@string/company_driver" />
 
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_company_worker"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_company_driver"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/company_worker"
+            app:tmiTitle="@string/company_worker" />
 
     </RelativeLayout>
 </FrameLayout>

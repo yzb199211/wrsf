@@ -18,6 +18,7 @@ import com.yyy.wrsf.company.driver.DriverActivity;
 import com.yyy.wrsf.company.month.MonthActivity;
 import com.yyy.wrsf.company.order.OrderActivity;
 import com.yyy.wrsf.company.outlets.OutletActivity;
+import com.yyy.wrsf.company.worker.WorkerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +47,8 @@ public class CompanyFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.mi_order, R.id.mi_car, R.id.mi_outlets, R.id.mi_check_bill, R.id.tmi_company_detail, R.id.tmi_company_member, R.id.tmi_company_driver})
+    @OnClick({R.id.mi_order, R.id.mi_car, R.id.mi_outlets, R.id.mi_check_bill, R.id.tmi_company_detail,
+            R.id.tmi_company_member, R.id.tmi_company_driver, R.id.tmi_company_worker})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.mi_order:
@@ -69,10 +71,14 @@ public class CompanyFragment extends Fragment {
             case R.id.tmi_company_driver:
                 go2Driver();
                 break;
+            case R.id.tmi_company_worker:
+                go2Worker();
+                break;
             default:
                 break;
         }
     }
+
 
     private void go2Order() {
         startActivity(new Intent().setClass(getActivity(), OrderActivity.class));
@@ -96,5 +102,9 @@ public class CompanyFragment extends Fragment {
 
     private void go2Detail() {
         startActivity(new Intent().setClass(getActivity(), CompanyDetailActivity.class));
+    }
+
+    private void go2Worker() {
+        startActivity(new Intent().setClass(getActivity(), WorkerActivity.class));
     }
 }

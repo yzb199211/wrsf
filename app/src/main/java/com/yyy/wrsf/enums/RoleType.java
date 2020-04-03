@@ -5,22 +5,22 @@ package com.yyy.wrsf.enums;
  */
 public enum RoleType {
 
-    PLAT_MEMBER(4,"普通会员"),
+    PLAT_MEMBER(4, "普通会员"),
 
-    TRANS_COMPANY(2,"物流网点"),
+    TRANS_COMPANY(2, "物流网点"),
 
-    SHOP(3,"网点负责人"),
+    SHOP(3, "网点负责人"),
 
-    SYSTEM(1,"系统用户"),
+    SYSTEM(1, "系统用户"),
 
-    SHOP_STAFF(5,"网点员工")
-    ;
+    SHOP_STAFF(5, "网点员工");
+
 
     private Integer type;
 
     private String desc;
 
-    RoleType(Integer type,String desc){
+    RoleType(Integer type, String desc) {
         this.type = type;
         this.desc = desc;
     }
@@ -39,5 +39,13 @@ public enum RoleType {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public static String getRoleName(Integer status) {
+        for (RoleType roleType : RoleType.values()) {
+            if ((roleType.getType()).equals(status))
+                return roleType.getDesc();
+        }
+        return "";
     }
 }

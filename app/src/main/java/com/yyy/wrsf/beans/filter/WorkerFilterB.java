@@ -35,9 +35,8 @@ public class WorkerFilterB {
     private Integer recNo;
     private Integer roleId;
     private Integer shopId;
-    private int stopYesno;
+    private Integer stopYesno;
     private String validate;
-    private boolean admin;
 
     public String getBirthday() {
         return birthday;
@@ -151,11 +150,11 @@ public class WorkerFilterB {
         this.shopId = shopId;
     }
 
-    public int getStopYesno() {
+    public Integer getStopYesno() {
         return stopYesno;
     }
 
-    public void setStopYesno(int stopYesno) {
+    public void setStopYesno(Integer stopYesno) {
         this.stopYesno = stopYesno;
     }
 
@@ -167,7 +166,5 @@ public class WorkerFilterB {
         this.validate = validate;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
+
 }

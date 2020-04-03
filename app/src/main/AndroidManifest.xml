@@ -22,21 +22,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".company.worker.WorkerActivity"></activity>
-        <activity android:name=".mine.backOrder.BackOrderActivity" />
-        <activity android:name=".mine.addvalue.AddValueActivity" />
+        <activity
+            android:name=".company.worker.WorkerDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".company.worker.WorkerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".mine.backOrder.BackOrderActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".mine.addvalue.AddValueActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".company.order.OrderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".common.company.CompanyActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".company.outlets.OutletDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".company.outlets.OutletActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"  android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".mine.shipping.ShippingPersonActivity"
             android:screenOrientation="portrait"
@@ -82,9 +95,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".mine.notice.NoticeFragment"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".mine.EditActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -98,27 +108,27 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".mine.address.AddressActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".mine.address.AddressDetailSendActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".mine.address.AddressSendActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"  android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".mine.order.OrderDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".mine.order.OrderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".mine.outlets.OutletsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"  android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".mine.MineActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".company.CompanyRegisterActivity"
             android:screenOrientation="portrait"

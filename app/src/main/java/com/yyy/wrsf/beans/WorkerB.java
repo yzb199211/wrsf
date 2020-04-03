@@ -28,7 +28,7 @@ public class WorkerB {
     private String companyName;
     private String username;
     private String password;
-
+    private Integer roleId;
 
     public int getRecNo() {
         return recNo;
@@ -118,4 +118,11 @@ public class WorkerB {
         this.password = password;
     }
 
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 }
