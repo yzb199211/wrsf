@@ -13,6 +13,7 @@
 	<dimen name="sp_7">11.5111sp</dimen>
 	<dimen name="sp_8">13.1556sp</dimen>
 	<dimen name="sp_9">14.8000sp</dimen>
+	<dimen name="sp_10">16.4444sp</dimen>
 	<dimen name="sp_16">26.3111sp</dimen>
 	<dimen name="row_common">65.7778dp</dimen>
 	<dimen name="row_common_add_one">67.4222dp</dimen>

@@ -42,6 +42,8 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
     private List<WorkerB> workerBS = new ArrayList<>();
     private IWorkerP workerP;
 
+    private Integer showStop;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,21 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
     private void initTop() {
         topView.setOnLeftClickListener(() -> {
             finish();
+        });
+        topView.setOnRightClickListener(() -> {
+            if (showStop == null) {
+                showStop = 0;
+                topView.setRightText(getString(R.string.common_stop_invisiable));
+                workerBS.clear();
+                refreshList();
+                workerP.getWorker();
+            } else {
+                showStop = null;
+                topView.setRightText(getString(R.string.common_stop_visiable));
+                workerBS.clear();
+                refreshList();
+                workerP.getWorker();
+            }
         });
     }
 
@@ -113,7 +130,7 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
 
     @Override
     public Integer isShowStop() {
-        return null;
+        return showStop;
     }
 
     @Override

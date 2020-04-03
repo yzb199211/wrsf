@@ -14,6 +14,7 @@
     <dimen name="sp_7">7sp</dimen>
     <dimen name="sp_8">8sp</dimen>
     <dimen name="sp_9">9sp</dimen>
+    <dimen name="sp_10">10sp</dimen>
     <dimen name="sp_16">16sp</dimen>
 
     <dimen name="row_common">40dp</dimen>

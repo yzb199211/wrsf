@@ -148,4 +148,8 @@ public class TopView extends RelativeLayout {
             tvTitle.setText(title);
         }
     }
+
+    public void setRightText(String s) {
+        tvRight.setText(s);
+    }
 }

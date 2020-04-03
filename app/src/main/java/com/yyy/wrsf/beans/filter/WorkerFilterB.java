@@ -166,5 +166,4 @@ public class WorkerFilterB {
         this.validate = validate;
     }
 
-
 }
