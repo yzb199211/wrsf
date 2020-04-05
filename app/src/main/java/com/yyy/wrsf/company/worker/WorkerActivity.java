@@ -123,9 +123,28 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
         startActivityForResult(
                 new Intent()
                         .setClass(this, WorkerDetailActivity.class)
-                        .putExtra("data", new Gson().toJson(workerBS.get(pos)))
+                        .putExtra("data", pos == -1 ? "" : new Gson().toJson(workerBS.get(pos)))
                         .putExtra("pos", pos)
                 , CodeUtil.MODIFY);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            if (requestCode == CodeUtil.REFRESH) {
+                workerBS.clear();
+                refreshList();
+                workerP.getWorker();
+            } else {
+                try {
+                    workerBS.set(data.getIntExtra("pos", -1), new Gson().fromJson(data.getStringExtra("data"), WorkerB.class));
+                    refreshList();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override

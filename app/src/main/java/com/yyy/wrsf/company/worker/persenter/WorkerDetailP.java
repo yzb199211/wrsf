@@ -2,6 +2,7 @@ package com.yyy.wrsf.company.worker.persenter;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.company.worker.model.WorkerDetailM;
@@ -30,6 +31,10 @@ public class WorkerDetailP implements IWorkDetailP {
 
     @Override
     public void insert() {
+        if (!TextUtils.isEmpty(workerDetailM.canSave(iWorkweDetailV.getContent()))) {
+            iWorkweDetailV.toast(workerDetailM.canSave(iWorkweDetailV.getContent()));
+            return;
+        }
         iWorkweDetailV.startLoading();
         workerDetailM.Requset(getParams(), NetConfig.address + WorkerUrl.insertMember, RequstType.POST, new OnResultListener() {
             @Override
@@ -54,6 +59,10 @@ public class WorkerDetailP implements IWorkDetailP {
 
     @Override
     public void modify() {
+        if (!TextUtils.isEmpty(workerDetailM.canSave(iWorkweDetailV.getContent()))) {
+            iWorkweDetailV.toast(workerDetailM.canSave(iWorkweDetailV.getContent()));
+            return;
+        }
         iWorkweDetailV.startLoading();
         workerDetailM.Requset(getParams(), NetConfig.address + MemberURL.updateMember, RequstType.PUT, new OnResultListener() {
             @Override
@@ -85,5 +94,10 @@ public class WorkerDetailP implements IWorkDetailP {
     @Override
     public void setEdit(boolean b) {
         workerDetailM.Editable(iWorkweDetailV.getContent(), b, iWorkweDetailV.getCode());
+    }
+
+    public void detachView() {
+        destroyFlag = true;
+        this.iWorkweDetailV = null;
     }
 }

@@ -133,41 +133,6 @@ public class BillActivity extends BasePickActivity implements IBillV {
         billModel = new BillBean();
     }
 
-
-    private void getBillType() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(getBillTypeParams(), NetConfig.address + PublicUrl.getPublic, RequstType.POST, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        List<PublicArray> list = new Gson().fromJson(result.getData(), new TypeToken<List<PublicArray>>() {
-                        }.getType());
-                        for (PublicArray array : list) {
-                            if (array.equals(PublicCode.BillType) && array.getPlantPublicDetails() != null) {
-                                billTypes.addAll(array.getPlantPublicDetails());
-                                initPvBillType();
-                            }
-                        }
-                        LoadingFinish(null);
-                    } else {
-                        LoadingFinish(result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
-    }
-
     private void initPvBillType() {
         runOnUiThread(() -> {
             pvBilltype = new OptionsPickerBuilder(BillActivity.this, new OnOptionsSelectListener() {

@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.model.BaseM;
 import com.yyy.wrsf.utils.CodeUtil;
-import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.view.editclear.EditClearView;
 
 public class WorkerDetailM extends BaseM {
