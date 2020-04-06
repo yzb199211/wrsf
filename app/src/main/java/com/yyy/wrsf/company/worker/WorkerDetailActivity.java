@@ -51,19 +51,15 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
     EditClearView ecvPetname;
     @BindView(R.id.ecv_sex)
     EditClearView ecvSex;
-    @BindView(R.id.ecv_status)
-    EditClearView ecvStatus;
     @BindView(R.id.ll_content)
     LinearLayout llContent;
     @BindView(R.id.btn_add)
     TextView btnAdd;
     private OptionsPickerView pvSex;
-    private OptionsPickerView pvStatus;
     private WorkerB workerB;
     private WorkerDetailP workerP;
     private int pos;
     private List<Sex> sexes;
-    private List<PublicBean> status;
     private boolean editable = false;
 
     @Override
@@ -82,7 +78,6 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
 
     private void initData() {
         sexes = SexUtil.getSexs();
-        status = StatusEnum.getStatus();
         pos = getIntent().getIntExtra("pos", -1);
         String data = getIntent().getStringExtra("data");
         workerB = TextUtils.isEmpty(data) ? new WorkerB() : new Gson().fromJson(data, WorkerB.class);
@@ -95,8 +90,6 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
         if (pos == -1) {
             workerP.setEdit(true);
             btnAdd.setText(getString(R.string.common_save));
-            ecvStatus.setText(status.get(0).getPickerViewText());
-            workerB.setStopYesno(status.get(0).getDetailCode());
             ecvSex.setText(sexes.get(0).getPickerViewText());
             workerB.setMemberSex(sexes.get(0).getSex());
         } else {
@@ -109,35 +102,23 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
         topView.setOnLeftClickListener(() -> {
             finish();
         });
+        initTopRight();
+    }
+
+    private void initTopRight() {
+        if (pos != -1) {
+            topView.setOnRightClickListener(() -> {
+                workerP.delete();
+            });
+        } else {
+            topView.setRightTvShow(false);
+        }
     }
 
     private void initStatus() {
-        initPvStatus();
-        ecvStatus.setOnItemClickListener(i -> {
-            pvStatus.show();
-        });
+
     }
 
-    private void initPvStatus() {
-        pvStatus = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                ecvStatus.setText(status.get(options1).getPickerViewText());
-                workerB.setStopYesno(status.get(options1).getDetailCode());
-            }
-        }).setContentTextSize(18)//设置滚轮文字大小
-                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
-                .setSelectOptions(0)//默认选中项
-                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setLabels("", "", "")
-                .isDialog(true)
-                .setTitleText(ecvStatus.getTitle())
-                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
-                .build();
-        pvStatus.setPicker(status);//一级选择器
-        setDialog(pvStatus);
-    }
 
     private void initSex() {
         initPvSex();
@@ -172,7 +153,6 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
         ecvTel.setText(workerB.getMemberTel());
         ecvPetname.setText(workerB.getMemberPetname());
         ecvSex.setText(workerB.getMemberSex());
-        ecvStatus.setText(StatusEnum.getName(workerB.getStopYesno()));
     }
 
     @OnClick(R.id.btn_add)
@@ -181,6 +161,7 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
         else if (!editable) {
             workerP.setEdit(true);
             editable = true;
+            btnAdd.setText(getString(R.string.common_save));
         } else {
             workerP.modify();
         }
@@ -223,6 +204,11 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
     @Override
     public void toast(String s) {
         Toast(s);
+    }
+
+    @Override
+    public int getPos() {
+        return pos;
     }
 
     @Override

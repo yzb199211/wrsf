@@ -16,7 +16,7 @@ public class WorkerDetailM extends BaseM {
             View view = llContent.getChildAt(i);
             if (view instanceof EditClearView) {
                 EditClearView v = (EditClearView) view;
-                if (v.getId() == R.id.ecv_type || v.getId() == R.id.ecv_sex) {
+                if (v.getId() == R.id.ecv_status || v.getId() == R.id.ecv_sex) {
                     v.setOnItemAble(b);
                 } else {
                     if (b) v.setEditable();

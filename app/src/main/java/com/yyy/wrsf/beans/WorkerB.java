@@ -24,7 +24,7 @@ public class WorkerB {
     private String memberPetname;
     private String passWord;
     private String mail;
-    private int stopYesno;
+    private Integer stopYesno;
     private String companyName;
     private String username;
     private String password;

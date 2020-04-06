@@ -132,13 +132,20 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            if (requestCode == CodeUtil.REFRESH) {
+            if (resultCode == CodeUtil.REFRESH) {
                 workerBS.clear();
                 refreshList();
                 workerP.getWorker();
-            } else {
+            } else if (requestCode == CodeUtil.MODIFY) {
                 try {
                     workerBS.set(data.getIntExtra("pos", -1), new Gson().fromJson(data.getStringExtra("data"), WorkerB.class));
+                    refreshList();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    workerBS.remove(data.getIntExtra("pos", -1));
                     refreshList();
                 } catch (Exception e) {
                     e.printStackTrace();

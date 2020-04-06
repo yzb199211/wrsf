@@ -28,20 +28,22 @@ public class LoadingDialog {
      * @param cancelable 对话框是否可以取消
      */
     public static Dialog showDialogForLoading(Context context, String msg, boolean cancelable) {
-        WeakReference<Context> wr=new WeakReference<>(context);
-        View view = LayoutInflater.from(wr.get()).inflate(R.layout.dialog_loading, null);
-        avi = view.findViewById(R.id.avi);
-        mLoadingDialog = new Dialog(wr.get(), R.style.LoadingDialogStyle);
-        mLoadingDialog.setCancelable(cancelable);
-        mLoadingDialog.setCanceledOnTouchOutside(false);
-        mLoadingDialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        mLoadingDialog.show();
-        avi.show();
+        WeakReference<Context> wr = new WeakReference<>(context);
+        if (mLoadingDialog == null) {
+            View view = LayoutInflater.from(wr.get()).inflate(R.layout.dialog_loading, null);
+            avi = view.findViewById(R.id.avi);
+            mLoadingDialog = new Dialog(wr.get(), R.style.LoadingDialogStyle);
+            mLoadingDialog.setCancelable(cancelable);
+            mLoadingDialog.setCanceledOnTouchOutside(false);
+            mLoadingDialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            mLoadingDialog.show();
+            avi.show();
+        }
         return mLoadingDialog;
     }
 
     public static Dialog showDialogForLoading(Context context) {
-        WeakReference<Context> wr=new WeakReference<>(context);
+        WeakReference<Context> wr = new WeakReference<>(context);
         View view = LayoutInflater.from(wr.get()).inflate(R.layout.dialog_loading, null);
         avi = view.findViewById(R.id.avi);
         mLoadingDialog = new Dialog(wr.get(), R.style.LoadingDialogStyle);

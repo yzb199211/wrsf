@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.company.worker.model.WorkerDetailM;
 import com.yyy.wrsf.company.worker.view.IWorkweDetailV;
 import com.yyy.wrsf.interfaces.OnResultListener;
@@ -41,7 +43,8 @@ public class WorkerDetailP implements IWorkDetailP {
             public void onSuccess(String data) {
                 if (!destroyFlag) {
                     handler.post(() -> {
-                        iWorkweDetailV.result(new Intent(), CodeUtil.REFRESH);
+                        iWorkweDetailV.finishLoading(BaseApplication.getInstance().getString(R.string.common_save_success));
+                        iWorkweDetailV.result(new Intent(), iWorkweDetailV.getCode());
                     });
                 }
             }
@@ -69,7 +72,36 @@ public class WorkerDetailP implements IWorkDetailP {
             public void onSuccess(String data) {
                 if (!destroyFlag) {
                     handler.post(() -> {
-                        iWorkweDetailV.result(new Intent().putExtra("data", new Gson().toJson(iWorkweDetailV.getWorker())), CodeUtil.MODIFY);
+                        iWorkweDetailV.finishLoading(BaseApplication.getInstance().getString(R.string.common_save_success));
+                        iWorkweDetailV.result(new Intent()
+                                        .putExtra("data", new Gson().toJson(iWorkweDetailV.getWorker()))
+                                        .putExtra("pos", iWorkweDetailV.getPos())
+                                , iWorkweDetailV.getCode());
+                    });
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iWorkweDetailV.finishLoading(error);
+                    });
+                }
+            }
+        });
+    }
+
+    @Override
+    public void delete() {
+        iWorkweDetailV.startLoading();
+        workerDetailM.Requset(deleteParams(), NetConfig.address + MemberURL.stopMember, RequstType.GET, new OnResultListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iWorkweDetailV.finishLoading(BaseApplication.getInstance().getString(R.string.common_stop_success));
+                        iWorkweDetailV.result(new Intent().putExtra("pos", iWorkweDetailV.getPos()), CodeUtil.DELETE);
                     });
                 }
             }
@@ -88,6 +120,12 @@ public class WorkerDetailP implements IWorkDetailP {
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("param", new Gson().toJson(iWorkweDetailV.getWorker())));
+        return params;
+    }
+
+    private List<NetParams> deleteParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("recNo", iWorkweDetailV.getWorker().getRecNo() + ""));
         return params;
     }
 

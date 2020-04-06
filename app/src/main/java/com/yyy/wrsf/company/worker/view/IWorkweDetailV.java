@@ -15,4 +15,6 @@ public interface IWorkweDetailV extends ILoadingV {
     LinearLayout getContent();
 
     void result(Intent intent, int resultCode);
+
+    int getPos();
 }

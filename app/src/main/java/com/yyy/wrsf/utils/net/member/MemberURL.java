@@ -6,5 +6,6 @@ public class MemberURL {
     public final static String fastLogin = "/member/fastLogin";
     public final static String Login = "/member/login";
     public final static String updateMember = "/member/updateMember";
+    public final static String stopMember = "/member/stopMember";
     public final static String getShopPersonList = "/shopPerson/getShopPersonList";
 }
