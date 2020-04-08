@@ -19,6 +19,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.beans.NoticeB;
 import com.yyy.wrsf.beans.filter.NoticeFilterB;
+import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -99,7 +100,6 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
     }
 
     private void getData() {
-
         new NetUtil(getParams(), NetConfig.address + NoticeUrl.getNotice, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
@@ -139,6 +139,11 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
             public void run() {
                 if (noticeAdpter == null) {
                     noticeAdpter = new NoticeAdpter(getActivity(), notices);
+                    noticeAdpter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int pos) {
+                        }
+                    });
                     recyclerView.setAdapter(noticeAdpter);
                 } else {
                     noticeAdpter.notifyDataSetChanged();
@@ -152,6 +157,8 @@ public class NoticeFragment extends Fragment implements XRecyclerView.LoadingLis
         params.add(new NetParams("param", new Gson().toJson(pager)));
         return params;
     }
+
+
 
     @Override
     public void onRefresh() {

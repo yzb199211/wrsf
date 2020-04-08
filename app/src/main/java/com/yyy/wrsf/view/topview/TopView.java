@@ -2,6 +2,7 @@ package com.yyy.wrsf.view.topview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,6 +16,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 
 import com.yyy.wrsf.R;
+
+import static com.yyy.wrsf.utils.PxUtil.getStatusBarHeight;
+
 
 public class TopView extends RelativeLayout {
     private Context context;
@@ -63,6 +67,7 @@ public class TopView extends RelativeLayout {
     }
 
     private void initView() {
+
         initTitle();
         if (leftIvShow)
             initLeft();
