@@ -2,6 +2,7 @@ package com.yyy.wrsf.company.worker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,7 +43,7 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
     private List<WorkerB> workerBS = new ArrayList<>();
     private IWorkerP workerP;
 
-    private Integer showStop;
+    private Integer showStop = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,17 +137,18 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
                 workerBS.clear();
                 refreshList();
                 workerP.getWorker();
-            } else if (requestCode == CodeUtil.MODIFY) {
+            } else if (resultCode == CodeUtil.MODIFY) {
                 try {
                     workerBS.set(data.getIntExtra("pos", -1), new Gson().fromJson(data.getStringExtra("data"), WorkerB.class));
                     refreshList();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else {
+            } else if (resultCode == CodeUtil.DELETE) {
                 try {
-                    workerBS.remove(data.getIntExtra("pos", -1));
-                    refreshList();
+                    remove(data.getIntExtra("pos", -1));
+//                    workerBS.remove(workerBS.get(data.getIntExtra("pos", -1)));
+//                    refreshList();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -172,6 +174,11 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
     @Override
     public void refreshList() {
         adapter.notifyDataSetChanged();
+    }
+
+    public void remove(int pos) {
+        workerBS.remove(pos);
+        refreshList();
     }
 
     @Override

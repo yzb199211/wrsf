@@ -2,6 +2,8 @@ package com.yyy.wrsf.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,6 +17,7 @@ import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.login.view.ILoginV;
 import com.yyy.wrsf.login.persenter.LoginVP;
 import com.yyy.wrsf.main.MainActivity;
+import com.yyy.wrsf.utils.AESUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.view.editclear.EditClearView;
 
@@ -41,6 +44,12 @@ public class LoginActivity extends BaseActivity implements ILoginV {
         preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
         loginVP = new LoginVP(this);
         initView();
+        try {
+            AESUtil.getCode("huanxin.wanruisf", "123456");
+            Log.e("pwd", AESUtil.getCode("huanxin.wanruisf", "123456"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initView() {
@@ -83,7 +92,7 @@ public class LoginActivity extends BaseActivity implements ILoginV {
         LoadingFinish(s);
     }
 
-      @Override
+    @Override
     public void go2Main() {
         btnConfirm.setClickable(false);
         startActivity(new Intent().setClass(LoginActivity.this, MainActivity.class));
