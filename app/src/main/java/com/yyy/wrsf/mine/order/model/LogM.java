@@ -1,5 +1,7 @@
 package com.yyy.wrsf.mine.order.model;
 
+import android.util.Log;
+
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.beans.TabB;
@@ -26,6 +28,7 @@ public class LogM implements ILogM {
             @Override
             public void onSuccess(String string) {
                 try {
+//                    Log.e("data", string);
                     Result result = new Result(string);
                     if (result.isSuccess()) {
                         onResultListener.onSuccess(result.getData());

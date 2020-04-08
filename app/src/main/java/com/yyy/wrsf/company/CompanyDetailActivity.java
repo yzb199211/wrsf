@@ -57,7 +57,7 @@ public class CompanyDetailActivity extends BaseActivity {
     private void getData() {
         LoadingDialog.showDialogForLoading(this);
         new NetUtil(getParams(),
-                NetConfig.address + CompanyUrl.getCompany,
+                NetConfig.address + CompanyUrl.getApplyCompany,
                 RequstType.GET,
                 new ResponseListener() {
                     @Override
@@ -75,6 +75,9 @@ public class CompanyDetailActivity extends BaseActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             LoadingFinish(e.getMessage());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            LoadingFinish(e.getMessage());
                         }
                     }
 
@@ -86,23 +89,28 @@ public class CompanyDetailActivity extends BaseActivity {
                 });
     }
 
-    private void initData() {
+    private void initData(){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tmiCompanyName.setText(companyModel.getCompanyName());
-                tmiCompanyAddress.setText(companyModel.getFristAdd() + "\u3000" + companyModel.getSecondAdd() + "\u3000" + companyModel.getThirdAdd());
-                tmiCompanyAddressDetail.setText(companyModel.getDetailAdd());
-                tmiCompanyLegal.setText(companyModel.getPerson());
-                tmiCompanyContract.setText(companyModel.getContractPerson());
-                tmiCompanyTel.setText(companyModel.getContractTel());
+                try {
+                    tmiCompanyName.setText(companyModel.getCompanyName());
+                    tmiCompanyAddress.setText(companyModel.getFristAdd() + "\u3000" + companyModel.getSecondAdd() + "\u3000" + companyModel.getThirdAdd());
+                    tmiCompanyAddressDetail.setText(companyModel.getDetailAdd());
+                    tmiCompanyLegal.setText(companyModel.getPerson());
+                    tmiCompanyContract.setText(companyModel.getContractPerson());
+                    tmiCompanyTel.setText(companyModel.getContractTel());
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+
             }
         });
     }
 
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("recNo", "2"));
+//        params.add(new NetParams("recNo", preferencesHelper.getSharedPreference("recNo", 0) + ""));
         return params;
     }
 

@@ -4,7 +4,8 @@ import com.yyy.wrsf.utils.net.net.PagerRequestBean;
 
 import java.util.List;
 
-public interface ILogPersenter{
-    void loadingLog(PagerRequestBean pager);
+public interface ILogPersenter {
+    void getLog();
+
     void showAll();
 }

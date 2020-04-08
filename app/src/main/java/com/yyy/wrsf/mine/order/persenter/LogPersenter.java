@@ -5,12 +5,12 @@ import android.os.Handler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.interfaces.OnResultListener;
-import com.yyy.wrsf.mine.order.view.ILogView;
 import com.yyy.wrsf.mine.order.model.ILogM;
 import com.yyy.wrsf.mine.order.model.LogM;
+import com.yyy.wrsf.mine.order.view.ILogView;
+import com.yyy.wrsf.utils.net.log.LogUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
-import com.yyy.wrsf.utils.net.net.PagerRequestBean;
 import com.yyy.wrsf.utils.net.net.RequstType;
 
 import java.util.ArrayList;
@@ -29,21 +29,24 @@ public class LogPersenter<T> implements ILogPersenter {
         this.iLogView = iLogView;
     }
 
+
     @Override
-    public void loadingLog(PagerRequestBean pager) {
+    public void getLog() {
         iLogView.startLoading();
-        iLogM.getLog(getParams(pager), NetConfig.address, RequstType.POST, new OnResultListener() {
+        iLogM.getLog(getParams(), NetConfig.address + LogUrl.orderLog, RequstType.GET, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
                 if (!destroyFlag)
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            iLogView.finishiLoading();
+                            iLogView.finishLoading(null);
                             list = new Gson().fromJson(string, new TypeToken<List<T>>() {
                             }.getType());
-                            if (list != null)
+                            if (list != null) {
                                 iLogView.addLog(list.size() > 3 ? list.subList(0, 3) : list);
+                                iLogView.refreshList();
+                            }
                         }
                     });
 
@@ -51,12 +54,11 @@ public class LogPersenter<T> implements ILogPersenter {
 
             @Override
             public void onFail(String string) {
-                if (destroyFlag)
+                if (!destroyFlag)
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            iLogView.logFail(string);
-                            iLogView.finishiLoading();
+                            iLogView.finishLoading(string);
                         }
                     });
             }
@@ -67,12 +69,13 @@ public class LogPersenter<T> implements ILogPersenter {
     public void showAll() {
         if (list != null && list.size() > 3) {
             iLogView.addLog(list.subList(3, list.size()));
+            iLogView.refreshList();
         }
     }
 
-    private List<NetParams> getParams(PagerRequestBean pager) {
+    private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("param", new Gson().toJson(pager)));
+        params.add(new NetParams("contractNo", iLogView.getContractNo()));
         return params;
     }
 

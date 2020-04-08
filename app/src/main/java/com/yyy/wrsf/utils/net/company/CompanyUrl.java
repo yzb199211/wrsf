@@ -4,4 +4,5 @@ public class CompanyUrl {
     public static String insert= "/company/insertCompany";
     public static String getPageList= "/company/getPageList";
     public static String getCompany= "/company/getCompany";
+    public static String getApplyCompany= "/company/getApplyCompany";
 }

@@ -27,8 +27,9 @@ public class NoScrollGvManager extends GridLayoutManager {
         super(context, spanCount, orientation, reverseLayout);
     }
 
-    public void setScrollEnabled(boolean flag) {
+    public NoScrollGvManager setScrollEnabled(boolean flag) {
         this.isScrollEnabled = flag;
+        return this;
     }
 
     @Override
@@ -64,7 +65,7 @@ public class NoScrollGvManager extends GridLayoutManager {
             } else {
                 super.onMeasure(recycler, state, widthSpec, heightSpec);
             }
-        }else {
+        } else {
             super.onMeasure(recycler, state, widthSpec, heightSpec);
         }
     }

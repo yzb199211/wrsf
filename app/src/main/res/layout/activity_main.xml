@@ -23,11 +23,12 @@
 
     <LinearLayout
         android:id="@+id/ll_send"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/row_common"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/dp_5"
+        android:background="@drawable/bg_round_ship"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -35,15 +36,16 @@
             android:id="@+id/iv_send"
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
-            android:src="@mipmap/menu_main" />
+
+            android:src="@mipmap/icon_shipping_white" />
 
         <TextView
             android:id="@+id/tv_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_1"
-            android:text="@string/main_menu"
-            android:textColor="@color/text_gray"
+            android:text="@string/main_menu_send"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_8" />
     </LinearLayout>
 

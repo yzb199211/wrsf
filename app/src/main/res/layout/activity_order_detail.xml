@@ -239,6 +239,8 @@
                 android:paddingRight="@dimen/dp_10"
                 app:ecEditable="false"
                 app:ecFormatTitle="false"
+                app:ecHasDetele="false"
+                app:ecTextGravity="right"
                 app:ecTitle="@string/order_fee_total"
                 app:ecTitleColor="@color/text_common"
                 app:ecType="tv" />
@@ -287,6 +289,7 @@
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
                     app:ecTextGravity="right"
+                    app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_base"
                     app:ecTitleColor="@color/text_common"
                     app:ecType="tv" />
@@ -301,6 +304,7 @@
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
                     app:ecTextGravity="right"
+                    app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_pick"
                     app:ecTitleColor="@color/text_common"
                     app:ecType="tv" />
@@ -315,6 +319,7 @@
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
                     app:ecTextGravity="right"
+                    app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_send"
                     app:ecTitleColor="@color/text_common"
                     app:ecType="tv" />
@@ -329,6 +334,7 @@
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
                     app:ecTextGravity="right"
+                    app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_insure"
                     app:ecTitleColor="@color/text_common"
                     app:ecType="tv" />
@@ -343,6 +349,7 @@
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
                     app:ecTextGravity="right"
+                    app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_collection"
                     app:ecTitleColor="@color/text_common"
                     app:ecType="tv" />
@@ -368,6 +375,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
                 android:background="@color/default_bg_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
