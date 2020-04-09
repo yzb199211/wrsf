@@ -159,6 +159,7 @@ public class AddressActivity extends AppCompatActivity {
                 startActivityForResult(new Intent()
                                 .setClass(AddressActivity.this, AddressDetailActivity.class)
                                 .putExtra("data", new Gson().toJson(addresses.get(pos)))
+                                .putExtra("pos", pos)
                                 .putExtra("code", CodeUtil.MODIFY)
                         , CodeUtil.MODIFY);
             }
