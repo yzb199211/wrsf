@@ -13,7 +13,7 @@ public class PriceCalB {
      * weight : 0
      */
 
-    private int deliverType;
+    private int deliveryType;
     private int recRegion;
     private int sendRegion;
     private int sendType;
@@ -23,11 +23,11 @@ public class PriceCalB {
     private Long weight;
 
     public int getDeliverType() {
-        return deliverType;
+        return deliveryType;
     }
 
     public void setDeliverType(int deliverType) {
-        this.deliverType = deliverType;
+        this.deliveryType = deliverType;
     }
 
     public int getRecRegion() {

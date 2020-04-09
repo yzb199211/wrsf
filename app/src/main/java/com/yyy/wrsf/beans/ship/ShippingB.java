@@ -59,7 +59,7 @@ public class ShippingB implements Serializable {
     private String createDate;
     private double daiPrice;
     private int daiTotal;//代收货款
-    private int deliverType;
+    private int deliveryType;
     private double density;
     private String goodsName;
     private int noticeYesNo;
@@ -158,11 +158,11 @@ public class ShippingB implements Serializable {
     }
 
     public int getDeliverType() {
-        return deliverType;
+        return deliveryType;
     }
 
     public void setDeliverType(int deliverType) {
-        this.deliverType = deliverType;
+        this.deliveryType = deliverType;
     }
 
     public double getDensity() {

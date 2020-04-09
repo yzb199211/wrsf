@@ -36,118 +36,112 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
+                app:tmiHint="@string/send_goods_name"
                 app:tmiSelected="true"
                 app:tmiTextColor="@color/text_common"
                 app:tmiTextGravity="left"
                 app:tmiTitle="@string/send_goods_name"
                 app:tmiTitleColor="@color/text_gray2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10">
 
-                <com.yyy.wrsf.view.editclear.EditClearView
-                    android:id="@+id/ecv_weight"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/row_common"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    app:ecFormatTitle="false"
-                    app:ecTextType="num"
-                    app:ecTitle="@string/send_goods_weight"
-                    app:ecTitleColor="@color/text_gray2"
-                    app:ecType="tv" />
-
-                <com.yyy.wrsf.view.editclear.EditClearView
-                    android:id="@+id/ecv_volume"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/row_common"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    app:ecFormatTitle="false"
-                    app:ecTextType="num"
-                    app:ecTitle="@string/send_goods_volume"
-                    app:ecTitleColor="@color/text_gray2"
-                    app:ecType="tv" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10">
-
-                <com.yyy.wrsf.view.editclear.EditClearView
-                    android:id="@+id/ecv_density"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/row_common"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    app:ecEditable="false"
-                    app:ecFormatTitle="false"
-                    app:ecTitle="@string/send_goods_density"
-                    app:ecTitleColor="@color/text_gray2"
-                    app:ecType="tv" />
-
-                <com.yyy.wrsf.view.editclear.EditClearView
-                    android:id="@+id/ecv_num"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/row_common"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    app:ecTextType="num"
-                    app:ecTitle="@string/send_goods_num"
-                    app:ecTitleColor="@color/text_gray2"
-                    app:ecType="tv" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10">
-
-                <com.yyy.wrsf.view.textselect.TextMenuItem
-                    android:id="@+id/tmi_delivery"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/row_common"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    app:tmiSelected="true"
-                    app:tmiTextColor="@color/text_common"
-                    app:tmiTextGravity="left"
-                    app:tmiTitle="@string/send_goods_delivery"
-                    app:tmiTitleColor="@color/text_gray2" />
-
-                <com.yyy.wrsf.view.textselect.TextMenuItem
-                    android:id="@+id/tmi_trans"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/row_common"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    app:tmiSelected="true"
-                    app:tmiTextColor="@color/text_common"
-                    app:tmiTextGravity="left"
-                    app:tmiTitle="@string/send_goods_trans"
-                    app:tmiTitleColor="@color/text_gray2" />
-            </LinearLayout>
-
-            <com.yyy.wrsf.view.textselect.TextMenuItem
-                android:id="@+id/tmi_send"
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_weight"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
+                app:ecFormatTitle="false"
+                app:ecHint="@string/send_goods_weight"
+                app:ecTextType="num"
+                app:ecTitle="@string/send_goods_weight"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_volume"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecFormatTitle="false"
+                app:ecHint="@string/send_goods_volume"
+                app:ecTextType="num"
+                app:ecTitle="@string/send_goods_volume"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_num"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecHint="@string/send_goods_num"
+                app:ecTextType="num"
+                app:ecTitle="@string/send_goods_num"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_density"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecFormatTitle="false"
+                app:ecTitle="@string/send_goods_density"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+
+            <com.yyy.wrsf.view.textselect.TextMenuItem
+                android:id="@+id/tmi_delivery"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:tmiHint="@string/send_goods_delivery"
+                app:tmiSelected="true"
+                app:tmiTextColor="@color/text_common"
+                app:tmiTextGravity="left"
+                app:tmiTitle="@string/send_goods_delivery"
+                app:tmiTitleColor="@color/text_gray2" />
+
+            <com.yyy.wrsf.view.textselect.TextMenuItem
+                android:id="@+id/tmi_trans"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:tmiHint="@string/send_goods_trans"
+                app:tmiSelected="true"
+                app:tmiTextColor="@color/text_common"
+                app:tmiTextGravity="left"
+                app:tmiTitle="@string/send_goods_trans"
+                app:tmiTitleColor="@color/text_gray2" />
+
+            <com.yyy.wrsf.view.textselect.TextMenuItem
+                android:id="@+id/tmi_send"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:tmiHint="@string/send_goods_delivery"
                 app:tmiSelected="true"
                 app:tmiTextColor="@color/text_common"
                 app:tmiTextGravity="left"

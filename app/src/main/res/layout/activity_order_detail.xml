@@ -156,10 +156,9 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_30"
+                android:layout_height="@dimen/row_common"
                 android:gravity="center_vertical"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10"
+                android:padding="@dimen/dp_10"
                 android:text="@string/send_goods"
                 android:textColor="@color/text_common"
                 android:textSize="@dimen/text_common" />
@@ -173,7 +172,7 @@
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_goods_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_30"
+                android:layout_height="@dimen/row_common"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
@@ -193,7 +192,7 @@
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_goods_weight"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_30"
+                android:layout_height="@dimen/row_common"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
@@ -213,7 +212,7 @@
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_goods_volume"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_30"
+                android:layout_height="@dimen/row_common"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"

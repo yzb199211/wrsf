@@ -87,10 +87,10 @@ public class ShippingAddValueB {
     public String getData() {
         String data = "";
         if (insureValue != 0) {
-            data = data + "保价：￥" + insureValue;
+            data = data + "保价:¥" + insureValue;
         }
         if (colletionValue != 0) {
-            data = data + (TextUtils.isEmpty(data) ? "" : "/") + "代收：￥" + colletionValue;
+            data = data + (TextUtils.isEmpty(data) ? "" : "/") + "代收:¥" + colletionValue;
         }
         if (signType == 2) {
             data = data + (TextUtils.isEmpty(data) ? "" : "/") + BaseApplication.getInstance().getString(R.string.sign_back_paper);

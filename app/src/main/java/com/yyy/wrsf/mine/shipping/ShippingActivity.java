@@ -240,9 +240,19 @@ public class ShippingActivity extends BasePickActivity {
             });
         }
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
-        EventBus.getDefault().register(companySelect);
-        if (refreshCompany)
-            EventBus.getDefault().post(companyFilter);
+        setEventBus();
+
+    }
+
+    private void setEventBus() {
+        try {
+            EventBus.getDefault().register(companySelect);
+            if (refreshCompany)
+                EventBus.getDefault().post(companyFilter);
+            setEventBus();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

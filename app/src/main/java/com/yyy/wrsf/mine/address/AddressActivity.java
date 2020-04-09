@@ -88,12 +88,13 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     private void getData() {
-
+        LoadingDialog.showDialogForLoading(this);
         new NetUtil(getParams(), NetConfig.address + AddressUrl.getAddressList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 Log.e(AddressActivity.this.getClass().getName(), "data:" + string);
                 try {
+                    LoadingFinish(null);
                     Result result = new Result(string);
                     if (result.isSuccess()) {
                         List<AddressB> list = new Gson().fromJson(result.getData(), new TypeToken<List<AddressB>>() {
@@ -191,6 +192,7 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     private void delete(int pos) {
+        LoadingDialog.showDialogForLoading(this);
         new NetUtil(deleteParams(pos), NetConfig.address + AddressUrl.deleteAddress, RequstType.DELETE, new ResponseListener() {
             @Override
             public void onSuccess(String string) {

@@ -79,7 +79,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.EditClearView);
         title = array.getString(R.styleable.EditClearView_ecTitle);
         titleColor = array.getColor(R.styleable.EditClearView_ecTitleColor, context.getResources().getColor(R.color.text_common));
-        titleSize = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_title_edit));
+        titleSize = array.getDimensionPixelSize(R.styleable.EditClearView_ecTitleSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
         text = array.getString(R.styleable.EditClearView_ecText);
         textColor = array.getColor(R.styleable.EditClearView_ecTextColor, context.getResources().getColor(R.color.text_gray2));
         textSize = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
@@ -139,7 +139,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         editText.setTextColor(textColor);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         editText.setLayoutParams(etParams());
-        editText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
+//        editText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
+        editText.setGravity(Gravity.CENTER_VERTICAL);
         editText.setSingleLine();
         editText.setBackground(null);
         editText.setOnKeyListener(this);
@@ -247,6 +248,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     private LayoutParams etParams() {
         LayoutParams params = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
+        params.leftMargin = context.getResources().getDimensionPixelSize(R.dimen.dp_10);
         return params;
     }
 

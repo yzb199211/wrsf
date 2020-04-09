@@ -3,9 +3,9 @@
 	<dimen name="text_title_edit">13.3333sp</dimen>
 	<dimen name="text_title_max">17.7778sp</dimen>
 	<dimen name="text_login_title">22.2222sp</dimen>
-	<dimen name="text_common">13.3333sp</dimen>
-	<dimen name="text_common_min">11.1111sp</dimen>
-	<dimen name="text_common_max">15.5556sp</dimen>
+	<dimen name="text_common">15.5556sp</dimen>
+	<dimen name="text_common_min">13.3333sp</dimen>
+	<dimen name="text_common_max">17.7778sp</dimen>
 	<dimen name="sp_3">3.3333sp</dimen>
 	<dimen name="sp_4">4.4444sp</dimen>
 	<dimen name="sp_5">5.5556sp</dimen>

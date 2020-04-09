@@ -48,9 +48,14 @@ public class LoginVP implements ILoginVP {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            iLoginV.setPreference(new Gson().fromJson(string, MemberBean.class));
-                            iLoginV.go2Main();
-                            iLoginV.finishLoading(null);
+                            try {
+                                iLoginV.setPreference(new Gson().fromJson(string, MemberBean.class));
+                                iLoginV.go2Main();
+                                iLoginV.finishLoading(null);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                iLoginV.finishLoading(BaseApplication.getInstance().getString(R.string.error_data));
+                            }
                         }
                     });
                 }

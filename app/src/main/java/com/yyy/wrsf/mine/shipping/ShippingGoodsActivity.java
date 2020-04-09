@@ -253,7 +253,7 @@ public class ShippingGoodsActivity extends BaseActivity {
             popGoods.setOnItemClickListener((int pos) -> {
                 String type = goods.get(pos).getPickerViewText();
                 tmiGoodsName.setText(type);
-                goodsModel.setGoodsId(goods.get(pos).getRecNo());
+                goodsModel.setGoodsId(goods.get(pos).getDetailCode());
                 goodsModel.setGoodsName(goods.get(pos).getPickerViewText());
             });
         } else {
@@ -268,7 +268,7 @@ public class ShippingGoodsActivity extends BaseActivity {
             popDelivery.setOnItemClickListener((int pos) -> {
                 String type = delivery.get(pos).getPickerViewText();
                 tmiDelivery.setText(type);
-                goodsModel.setDeliveryId(delivery.get(pos).getRecNo());
+                goodsModel.setDeliveryId(delivery.get(pos).getDetailCode());
                 goodsModel.setDeliveryName(delivery.get(pos).getPickerViewText());
             });
         } else {
@@ -283,7 +283,7 @@ public class ShippingGoodsActivity extends BaseActivity {
             popSend.setOnItemClickListener((int pos) -> {
                 String type = send.get(pos).getPickerViewText();
                 tmiSend.setText(type);
-                goodsModel.setSendId(send.get(pos).getRecNo());
+                goodsModel.setSendId(send.get(pos).getDetailCode());
                 goodsModel.setSendName(send.get(pos).getPickerViewText());
             });
         } else {
@@ -298,7 +298,7 @@ public class ShippingGoodsActivity extends BaseActivity {
             popTrans.setOnItemClickListener((int pos) -> {
                 String type = trans.get(pos).getPickerViewText();
                 tmiTrans.setText(type);
-                goodsModel.setTransId(trans.get(pos).getRecNo());
+                goodsModel.setTransId(trans.get(pos).getDetailCode());
                 goodsModel.setTransName(trans.get(pos).getPickerViewText());
             });
         } else {
