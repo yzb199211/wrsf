@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.beans.NoticeB;
+import com.yyy.wrsf.mine.notice.persenter.NoticeDetailP;
 import com.yyy.wrsf.mine.notice.view.INoticeDetailV;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -32,13 +33,16 @@ public class NoticeDetailActivity extends BaseActivity implements INoticeDetailV
     TextView tvDetail;
 
     private NoticeB noticeB;
+    private NoticeDetailP noticeDetailP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_detail);
         ButterKnife.bind(this);
+        noticeDetailP = new NoticeDetailP(this);
         initData();
+        noticeDetailP.deleteNotice();
     }
 
     private void initData() {
