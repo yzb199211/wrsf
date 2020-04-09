@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans;
 
+import com.yyy.wrsf.utils.StringUtil;
+
 public class OrderBean {
 
     /**
@@ -56,8 +58,8 @@ public class OrderBean {
      * weight : 0
      */
 
-    private int baoAsk;
-    private int baoPrice;
+    private double baoAsk;
+    private double baoPrice;
     private int contractConfirmYesno;
     private String companyName;
     private String contractDate;
@@ -119,19 +121,19 @@ public class OrderBean {
         this.companyName = companyName;
     }
 
-    public int getBaoAsk() {
+    public double getBaoAsk() {
         return baoAsk;
     }
 
-    public void setBaoAsk(int baoAsk) {
+    public void setBaoAsk(double baoAsk) {
         this.baoAsk = baoAsk;
     }
 
-    public int getBaoPrice() {
+    public double getBaoPrice() {
         return baoPrice;
     }
 
-    public void setBaoPrice(int baoPrice) {
+    public void setBaoPrice(double baoPrice) {
         this.baoPrice = baoPrice;
     }
 
@@ -541,5 +543,9 @@ public class OrderBean {
 
     public void setRecAdd(String recAdd) {
         this.recAdd = recAdd;
+    }
+
+    public double getValueAdd() {
+        return StringUtil.add(qianPrice, StringUtil.add(baoPrice, daiPrice));
     }
 }

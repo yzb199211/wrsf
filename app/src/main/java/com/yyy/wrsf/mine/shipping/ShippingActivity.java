@@ -13,10 +13,6 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BasePickActivity;
-import com.yyy.wrsf.common.company.CompanySelect;
-import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.mine.address.AddressActivity;
-import com.yyy.wrsf.mine.address.AddressSendActivity;
 import com.yyy.wrsf.beans.address.AddressB;
 import com.yyy.wrsf.beans.company.CompanyB;
 import com.yyy.wrsf.beans.filter.ShipCompanyB;
@@ -24,6 +20,10 @@ import com.yyy.wrsf.beans.price.PriceBackB;
 import com.yyy.wrsf.beans.ship.ShipGoodsB;
 import com.yyy.wrsf.beans.ship.ShippingAddValueB;
 import com.yyy.wrsf.beans.ship.ShippingB;
+import com.yyy.wrsf.common.company.CompanySelect;
+import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.mine.address.AddressActivity;
+import com.yyy.wrsf.mine.address.AddressSendActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.StringUtil;
@@ -43,6 +43,9 @@ import com.yyy.yyylibrary.pick.view.TimePickerView;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -94,6 +97,10 @@ public class ShippingActivity extends BasePickActivity {
     RadioButton tvPayReceive;
     @BindView(R.id.tv_pay_month)
     RadioButton tvPayMonth;
+    @BindView(R.id.tmi_base_fee)
+    TextMenuItem tmiBaseFee;
+    @BindView(R.id.tmi_value_add_fee)
+    TextMenuItem tmiValueAddFee;
 
     private RadioButton currentPay;
     private CompanySelect companySelect;
@@ -246,10 +253,10 @@ public class ShippingActivity extends BasePickActivity {
 
     private void setEventBus() {
         try {
-            EventBus.getDefault().register(companySelect);
+            if (!EventBus.getDefault().isRegistered(companySelect))
+                EventBus.getDefault().register(companySelect);
             if (refreshCompany)
                 EventBus.getDefault().post(companyFilter);
-            setEventBus();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -381,18 +388,21 @@ public class ShippingActivity extends BasePickActivity {
         if (addValue != null) {
             total = ShipUtil.getTotal(total, addValue.getTotal());
         }
-        String sTotal = getString(R.string.send_total) + getString(R.string.common_rmb) + total;
+        String sTotal = getString(R.string.send_total) + getString(R.string.common_rmb) + StringUtil.formatDouble(total);
         tvTotal.setText(StringUtil.getSpanStr(sTotal, 5, getColor(R.color.order_yellow)));
     }
 
     private void setGoods() {
+
         shipping.setGoods(goods);
         tmiGoods.setText(goods.getData());
+        tmiBaseFee.setText(getString(R.string.common_rmb) + StringUtil.formatDouble(priceBackM.getContractTotal()));
     }
 
     private void setAddValue() {
         shipping.setValueAdd(addValue);
         tmiValueAdd.setText(addValue.getData());
+        tmiValueAddFee.setText(getString(R.string.common_rmb) + StringUtil.formatDouble(addValue.getTotal()));
     }
 
     private void setSend() {
@@ -457,5 +467,9 @@ public class ShippingActivity extends BasePickActivity {
         return params;
     }
 
-
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

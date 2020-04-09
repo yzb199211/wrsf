@@ -155,7 +155,6 @@ public class StringUtil {
     }
 
 
-
     public static String getBrithDay(String date) {
         if (!StringUtil.isNotEmpty(date)) {
             return date;
@@ -166,9 +165,6 @@ public class StringUtil {
         } else
             return date;
     }
-
-
-
 
 
     /**
@@ -254,9 +250,22 @@ public class StringUtil {
         return f1;
     }
 
-    public static SpannableString getSpanStr(@NonNull String s, int start,  @ColorInt int color) {
+    public static SpannableString getSpanStr(@NonNull String s, int start, @ColorInt int color) {
         SpannableString spannableString = new SpannableString(s);
         spannableString.setSpan(new ForegroundColorSpan(color), start, s.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         return spannableString;
+    }
+
+    public static String formatDouble(Double d) {
+
+            BigDecimal d1 = new BigDecimal(Double.toString(d));
+            BigDecimal d2 = new BigDecimal(Integer.toString(1));
+            // 四舍五入,保留2位小数
+            return d1.divide(d2,0,BigDecimal.ROUND_HALF_UP).toString();
+
+//        DecimalFormat df = (DecimalFormat) NumberFormat.getInstance();
+////设置小数点后的位数
+//        df.setMaximumFractionDigits(1);
+//        return df.format(d);
     }
 }

@@ -36,11 +36,21 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
+        if (position == 0) {
+            holder.lineTop.setVisibility(View.INVISIBLE);
+        }
+        if (position == list.size() - 1) {
+            holder.line.setVisibility(View.INVISIBLE);
+        }else {
+            holder.line.setVisibility(View.VISIBLE);
+        }
+        holder.tvTitle.setText(list.get(position).getLogTitle());
+        holder.tvDate.setText(list.get(position).getCreateDate());
         holder.line.setLayoutParams(getParams((RelativeLayout.LayoutParams) holder.line.getLayoutParams(), false));
     }
 
     private RelativeLayout.LayoutParams getParams(RelativeLayout.LayoutParams params, boolean isShow) {
-        params.height = context.getResources().getDimensionPixelSize(isShow ? R.dimen.dp_70 : R.dimen.dp_40);
+        params.height = context.getResources().getDimensionPixelSize(isShow ? R.dimen.dp_80 : R.dimen.dp_50);
         return params;
     }
 

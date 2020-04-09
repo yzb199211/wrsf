@@ -179,6 +179,7 @@
                 app:ecEditable="false"
                 app:ecFormatTitle="false"
                 app:ecHasDetele="false"
+                app:ecTextColor="@color/text_common"
                 app:ecTextGravity="right"
                 app:ecTitle="@string/send_goods_name"
                 app:ecTitleColor="@color/text_gray2"
@@ -199,6 +200,7 @@
                 app:ecEditable="false"
                 app:ecFormatTitle="false"
                 app:ecHasDetele="false"
+                app:ecTextColor="@color/order_yellow"
                 app:ecTextGravity="right"
                 app:ecTitle="@string/send_goods_weight"
                 app:ecTitleColor="@color/text_gray2"
@@ -219,8 +221,105 @@
                 app:ecEditable="false"
                 app:ecFormatTitle="false"
                 app:ecHasDetele="false"
+                app:ecTextColor="@color/order_yellow"
                 app:ecTextGravity="right"
                 app:ecTitle="@string/send_goods_volume"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:background="@color/default_bg_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:gravity="center_vertical"
+                android:padding="@dimen/dp_10"
+                android:text="@string/order_msg"
+                android:textColor="@color/text_common"
+                android:textSize="@dimen/text_common" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_receive_tel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecHasDetele="false"
+                app:ecTextColor="@color/text_common"
+                app:ecTextGravity="right"
+                app:ecTitle="@string/order_send_tel"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_send_add"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecHasDetele="false"
+                app:ecSingleLine="false"
+                app:ecTextColor="@color/text_common"
+                app:ecTextGravity="right"
+                app:ecTitle="@string/order_send_add"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_send_tel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecHasDetele="false"
+                app:ecTextColor="@color/text_common"
+                app:ecTextGravity="right"
+                app:ecTitle="@string/order_receive_tel"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_receive_add"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecHasDetele="false"
+                app:ecSingleLine="false"
+                app:ecTextColor="@color/text_common"
+                app:ecTextGravity="right"
+                app:ecTitle="@string/order_receive_add"
                 app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
 
@@ -232,15 +331,16 @@
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_total"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_30"
+                android:layout_height="@dimen/row_common"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 app:ecEditable="false"
                 app:ecFormatTitle="false"
                 app:ecHasDetele="false"
+                app:ecTextColor="@color/order_yellow"
                 app:ecTextGravity="right"
-                app:ecTitle="@string/order_fee_total"
+                app:ecTitle="@string/send_logistics"
                 app:ecTitleColor="@color/text_common"
                 app:ecType="tv" />
 
@@ -261,8 +361,10 @@
                     app:ecEditable="false"
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
+                    app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_type"
                     app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
 
                 <com.yyy.wrsf.view.editclear.EditClearView
@@ -274,8 +376,10 @@
                     app:ecEditable="false"
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
+                    app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_user"
                     app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
 
                 <com.yyy.wrsf.view.editclear.EditClearView
@@ -291,6 +395,7 @@
                     app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_base"
                     app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
 
                 <com.yyy.wrsf.view.editclear.EditClearView
@@ -306,6 +411,7 @@
                     app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_pick"
                     app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
 
                 <com.yyy.wrsf.view.editclear.EditClearView
@@ -321,6 +427,23 @@
                     app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_send"
                     app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
+                    app:ecType="tv" />
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_value_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTextGravity="right"
+                    app:ecTextSize="@dimen/text_common_min"
+                    app:ecTitle="@string/order_value_add"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
 
                 <com.yyy.wrsf.view.editclear.EditClearView
@@ -336,6 +459,7 @@
                     app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_insure"
                     app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
 
                 <com.yyy.wrsf.view.editclear.EditClearView
@@ -347,10 +471,12 @@
                     app:ecEditable="false"
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
+                    app:ecTextColor="@color/order_yellow"
                     app:ecTextGravity="right"
                     app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_collection"
                     app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
             </LinearLayout>
 
@@ -384,6 +510,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <View
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:background="@color/default_bg_gray" />
+
+                <TextView
+                    android:id="@+id/tv_load_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/common_loadmore"
+                    android:textColor="@color/text_gray" />
+
+                <View
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:background="@color/default_bg_gray" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -21,7 +21,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -191,6 +192,19 @@
                 app:tmiTitleColor="@color/text_gray2" />
 
             <com.yyy.wrsf.view.textselect.TextMenuItem
+                android:id="@+id/tmi_base_fee"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:tmiSelected="false"
+                app:tmiTextColor="@color/order_yellow"
+                app:tmiTitle="@string/send_base_fee"
+                app:tmiTitleColor="@color/text_gray2" />
+
+            <com.yyy.wrsf.view.textselect.TextMenuItem
                 android:id="@+id/tmi_value_add"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
@@ -201,6 +215,19 @@
                 app:tmiSelected="true"
                 app:tmiTextColor="@color/text_common"
                 app:tmiTitle="@string/send_value_add"
+                app:tmiTitleColor="@color/text_gray2" />
+
+            <com.yyy.wrsf.view.textselect.TextMenuItem
+                android:id="@+id/tmi_value_add_fee"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:tmiSelected="false"
+                app:tmiTextColor="@color/order_yellow"
+                app:tmiTitle="@string/send_value_add_fee"
                 app:tmiTitleColor="@color/text_gray2" />
 
             <com.yyy.wrsf.view.textselect.TextMenuItem
@@ -234,7 +261,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
                 android:background="@color/white"
-                android:padding="@dimen/dp_10">
+                android:padding="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10">
 
                 <TextView
                     android:id="@+id/tv_type"

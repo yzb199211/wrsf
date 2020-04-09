@@ -10,12 +10,14 @@ public class ShipUtil {
         return f > 10.00 ? f : 10.00;
     }
 
-    public static double getDensity(Long weight, Long volume) {
+    public static double getDensity(Double weight, Double volume) {
         try {
-            BigDecimal b1 = new BigDecimal(weight + "");
-            BigDecimal b2 = new BigDecimal(volume + "");
-            BigDecimal b3 = new BigDecimal(1000 + "");
-            return b1.divide(b2).divide(b3).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+            BigDecimal bigDecimal = new BigDecimal(new Double( weight/volume/1000)+"");
+            return bigDecimal.setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+//            BigDecimal b1 = new BigDecimal(weight + "");
+//            BigDecimal b2 = new BigDecimal(volume + "");
+//            BigDecimal b3 = new BigDecimal(1000 + "");
+//            return b1.divide(b2).divide(b3).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
         } catch (ArithmeticException e) {
             return 0;
         }

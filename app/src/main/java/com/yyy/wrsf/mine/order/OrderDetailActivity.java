@@ -2,19 +2,21 @@ package com.yyy.wrsf.mine.order;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.enums.PayTypeEnum;
-import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.mine.order.bean.LogBean;
 import com.yyy.wrsf.mine.order.persenter.LogPersenter;
 import com.yyy.wrsf.mine.order.view.ILogView;
@@ -27,8 +29,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class OrderDetailActivity extends BaseActivity implements ILogView<LogBean> {
+public class OrderDetailActivity extends BaseActivity implements ILogView {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -72,9 +75,21 @@ public class OrderDetailActivity extends BaseActivity implements ILogView<LogBea
     EditClearView ecvFeeCollection;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.ecv_value_add)
+    EditClearView ecvValueAdd;
+    @BindView(R.id.ecv_receive_tel)
+    EditClearView ecvReceiveTel;
+    @BindView(R.id.ecv_send_add)
+    EditClearView ecvSendAdd;
+    @BindView(R.id.ecv_send_tel)
+    EditClearView ecvSendTel;
+    @BindView(R.id.ecv_receive_add)
+    EditClearView ecvReceiveAdd;
+    @BindView(R.id.ll_more)
+    LinearLayout llMore;
 
     private OrderBean order;
-    private LogPersenter<LogBean> logPersenter;
+    private LogPersenter logPersenter;
 
     private List<LogBean> logs = new ArrayList<>();
     private LogAdapter logAdapter;
@@ -84,7 +99,7 @@ public class OrderDetailActivity extends BaseActivity implements ILogView<LogBea
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         ButterKnife.bind(this);
-        logPersenter = new LogPersenter<>(this);
+        logPersenter = new LogPersenter(this);
         init();
         getLog();
     }
@@ -115,29 +130,48 @@ public class OrderDetailActivity extends BaseActivity implements ILogView<LogBea
 
     private void initOrder() {
         tvOrderNo.setText(getString(R.string.order_no) + "：" + order.getContractNo());
-        tvOrderCompany.setText(order.getCompanyName());
+        tvOrderCompany.setText(order.getCompanyName() + "");
         tvOrderType.setText(ContractStatusEnum.getDescByStatus(order.getContractStatus()));
-        tvSendArea.setText(order.getSendAdd());
-        tvSendPerson.setText(order.getSendName());
-        tvReceiveArea.setText(order.getRecAdd());
-        tvReceivePerson.setText(order.getRecName());
+        tvSendArea.setText(order.getSendAdd() + "");
+        tvSendPerson.setText(order.getSendName() + "");
+        tvReceiveArea.setText(order.getRecAdd() + "");
+        tvReceivePerson.setText(order.getRecName() + "");
+
+        ecvSendAdd.setText(order.getSendDetail());
+        ecvSendTel.setText(order.getSendTel());
+        ecvReceiveAdd.setText(order.getRecDetail());
+        ecvReceiveTel.setText(order.getRecTel());
     }
 
     private void initGoods() {
-        ecvGoodsName.setText(order.getGoodsName());
+        ecvGoodsName.setText(order.getGoodsName() + "");
         ecvGoodsWeight.setText(order.getWeight() + "");
         ecvGoodsVolume.setText(order.getSize() + "");
     }
 
     private void initFee() {
         ecvFeeType.setText(PayTypeEnum.getName(order.getPayType()));
-        ecvTotal.setText(order.getContractTotal() + "");
+        ecvTotal.setText(getString(R.string.common_rmb) + order.getContractTotal());
         ecvFeeUser.setText(order.getPlantMemberName());
         ecvFeeBase.setText(getString(R.string.common_rmb) + order.getTransTotal());
+        ecvFeePick.setText(getString(R.string.common_rmb) + order.getPicTotal());
+        ecvFeeSend.setText(getString(R.string.common_rmb) + order.getSendTotal());
+        ecvValueAdd.setText(getString(R.string.common_rmb) + order.getValueAdd());
+        ecvFeeInsure.setText(getString(R.string.common_rmb) + order.getBaoAsk());
+        ecvFeeCollection.setText(getString(R.string.common_rmb) + order.getDaiTotal());
     }
 
     private void initList() {
-        recyclerView.setLayoutManager(new NoScrollGvManager(this, 1).setScrollEnabled(false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setLayoutManager(new NoScrollGvManager(this, 1).setScrollEnabled(false));
         recyclerView.setAdapter(getAdapter());
     }
 
@@ -164,13 +198,6 @@ public class OrderDetailActivity extends BaseActivity implements ILogView<LogBea
     @Override
     public void addLog(List<LogBean> data) {
         logs.addAll(data);
-
-//        Log.e("logs", new Gson().toJson(data));
-    }
-
-    @Override
-    public void showAll(List<LogBean> data) {
-
     }
 
 
@@ -185,8 +212,19 @@ public class OrderDetailActivity extends BaseActivity implements ILogView<LogBea
     }
 
     @Override
+    public void hideLoad() {
+        llMore.setVisibility(View.GONE);
+    }
+
+    @Override
     protected void onDestroy() {
         logPersenter.detachView();
         super.onDestroy();
+    }
+
+    @OnClick(R.id.tv_load_more)
+    public void onViewClicked() {
+        hideLoad();
+        logPersenter.showAll();
     }
 }

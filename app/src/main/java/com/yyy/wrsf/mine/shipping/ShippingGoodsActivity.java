@@ -111,7 +111,7 @@ public class ShippingGoodsActivity extends BaseActivity {
         ecvWeight.setOnTextChangeAfter((Editable s) -> {
             String s1 = s.toString();
             if (s1.length() > 0 && Long.parseLong(s1) > 0 && StringUtil.isNotEmpty(ecvVolume.getText()) && Long.parseLong(ecvVolume.getText()) > 0) {
-                ecvDensity.setText(ShipUtil.getDensity(Long.parseLong(s1), Long.parseLong(ecvVolume.getText())) + "");
+                ecvDensity.setText(ShipUtil.getDensity(Double.parseDouble(s1), Double.parseDouble(ecvVolume.getText())) + "");
             } else {
                 ecvDensity.setText("0");
             }
@@ -122,7 +122,7 @@ public class ShippingGoodsActivity extends BaseActivity {
         ecvVolume.setOnTextChangeAfter((Editable s) -> {
             String s1 = s.toString();
             if (s1.length() > 0 && Long.parseLong(s1) > 0 && StringUtil.isNotEmpty(ecvWeight.getText()) && Long.parseLong(ecvWeight.getText()) > 0) {
-                ecvDensity.setText(ShipUtil.getDensity(Long.parseLong(ecvWeight.getText()), Long.parseLong(s1)) + "");
+                ecvDensity.setText(ShipUtil.getDensity(Double.parseDouble(ecvWeight.getText()), Double.parseDouble(s1)) + "");
             } else {
                 ecvDensity.setText("0");
             }

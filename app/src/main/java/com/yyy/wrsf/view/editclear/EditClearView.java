@@ -53,7 +53,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private int leftSrcPadding;
     private int commonPadding;
     private int lines;
-
+    private boolean singleLine;
     private boolean editable;
     private boolean hasDelete = true;
     private boolean formatTitle = true;
@@ -95,6 +95,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         lines = array.getInteger(R.styleable.EditClearView_ecTextLines, 1);
         formatTitle = array.getBoolean(R.styleable.EditClearView_ecFormatTitle, true);
         hasDelete = array.getBoolean(R.styleable.EditClearView_ecHasDetele, true);
+        singleLine = array.getBoolean(R.styleable.EditClearView_ecSingleLine, true);
         array.recycle();
     }
 
@@ -141,7 +142,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         editText.setLayoutParams(etParams());
 //        editText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         editText.setGravity(Gravity.CENTER_VERTICAL);
-        editText.setSingleLine();
+        if (singleLine)
+            editText.setSingleLine();
         editText.setBackground(null);
         editText.setOnKeyListener(this);
         editText.setInputType(getInputType());
@@ -162,7 +164,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         if (textGravity == 5)
             tvText.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
         else tvText.setGravity(Gravity.CENTER_VERTICAL);
-        tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
+//        tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         tvText.setSingleLine();
         tvText.setBackground(null);
         tvText.setOnClickListener(new OnClickListener() {

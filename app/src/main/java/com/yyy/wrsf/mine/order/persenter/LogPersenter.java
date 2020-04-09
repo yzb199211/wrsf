@@ -1,10 +1,12 @@
 package com.yyy.wrsf.mine.order.persenter;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.interfaces.OnResultListener;
+import com.yyy.wrsf.mine.order.bean.LogBean;
 import com.yyy.wrsf.mine.order.model.ILogM;
 import com.yyy.wrsf.mine.order.model.LogM;
 import com.yyy.wrsf.mine.order.view.ILogView;
@@ -17,12 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LogPersenter<T> implements ILogPersenter {
+public class LogPersenter implements ILogPersenter {
     private ILogM iLogM;
     private ILogView iLogView;
     private Handler handler = new Handler();
     private boolean destroyFlag;
-    private List<T> list;
+    private List<LogBean> list;
 
     public LogPersenter(ILogView iLogView) {
         this.iLogM = new LogM();
@@ -36,16 +38,20 @@ public class LogPersenter<T> implements ILogPersenter {
         iLogM.getLog(getParams(), NetConfig.address + LogUrl.orderLog, RequstType.GET, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
+                Log.e("log", string);
                 if (!destroyFlag)
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
                             iLogView.finishLoading(null);
-                            list = new Gson().fromJson(string, new TypeToken<List<T>>() {
+                            list = new Gson().fromJson(string, new TypeToken<List<LogBean>>() {
                             }.getType());
                             if (list != null) {
                                 iLogView.addLog(list.size() > 3 ? list.subList(0, 3) : list);
                                 iLogView.refreshList();
+                            }
+                            if (list != null && list.size() < 4) {
+                                iLogView.hideLoad();
                             }
                         }
                     });
