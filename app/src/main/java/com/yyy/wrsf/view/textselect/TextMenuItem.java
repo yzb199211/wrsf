@@ -61,7 +61,7 @@ public class TextMenuItem extends LinearLayout {
         titleColor = array.getColor(R.styleable.TextMenuItem_tmiTitleColor, context.getColor(R.color.text_common));
         titleSize = array.getDimensionPixelSize(R.styleable.TextMenuItem_tmiTitleSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
         text = array.getString(R.styleable.TextMenuItem_tmiText);
-        textColor = array.getColor(R.styleable.TextMenuItem_tmiTextColor, context.getColor(R.color.text_common));
+        textColor = array.getColor(R.styleable.TextMenuItem_tmiTextColor, context.getColor(R.color.text_gray2));
         textSize = array.getDimensionPixelSize(R.styleable.TextMenuItem_tmiTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
         leftSrc = array.getResourceId(R.styleable.TextMenuItem_tmiLeftSrc, -1);
         leftSize = array.getResourceId(R.styleable.TextMenuItem_tmiLeftSize, context.getResources().getDimensionPixelSize(R.dimen.dp_20));

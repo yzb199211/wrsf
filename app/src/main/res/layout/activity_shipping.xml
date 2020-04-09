@@ -167,7 +167,7 @@
             <com.yyy.wrsf.view.textselect.TextMenuItem
                 android:id="@+id/tmi_company"
                 android:layout_width="match_parent"
-                android:layout_height="49dp"
+                android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"

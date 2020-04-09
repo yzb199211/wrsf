@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -71,5 +70,11 @@ public class NoticeDetailActivity extends BaseActivity implements INoticeDetailV
     @Override
     public void toast(String s) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        noticeDetailP.detachView();
+        super.onDestroy();
     }
 }

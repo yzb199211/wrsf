@@ -1,5 +1,10 @@
 package com.yyy.wrsf.beans.ship;
 
+import android.text.TextUtils;
+
+import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
+
 import java.math.BigDecimal;
 
 public class ShippingAddValueB {
@@ -67,7 +72,8 @@ public class ShippingAddValueB {
     public void setReceiveType(int receiveType) {
         this.receiveType = receiveType;
     }
-    public double getTotal(){
+
+    public double getTotal() {
         try {
             BigDecimal b1 = new BigDecimal(insureFee + "");
             BigDecimal b2 = new BigDecimal(colletionFee + "");
@@ -76,5 +82,25 @@ public class ShippingAddValueB {
         } catch (ArithmeticException e) {
             return 0;
         }
+    }
+
+    public String getData() {
+        String data = "";
+        if (insureValue != 0) {
+            data = data + "保价：￥" + insureValue;
+        }
+        if (colletionValue != 0) {
+            data = data + (TextUtils.isEmpty(data) ? "" : "/") + "代收：￥" + colletionValue;
+        }
+        if (signType == 2) {
+            data = data + (TextUtils.isEmpty(data) ? "" : "/") + BaseApplication.getInstance().getString(R.string.sign_back_paper);
+        } else if (signType == 3) {
+            data = data + (TextUtils.isEmpty(data) ? "" : "/") + BaseApplication.getInstance().getString(R.string.sign_back_electronic);
+        }
+        if (receiveType == 1) {
+            data = data + (TextUtils.isEmpty(data) ? "" : "/") + BaseApplication.getInstance().getString(R.string.send_notice);
+
+        }
+        return data;
     }
 }

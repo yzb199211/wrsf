@@ -3,8 +3,10 @@ package com.yyy.wrsf.company.month;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -12,6 +14,9 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.month.MonthB;
+import com.yyy.wrsf.company.month.persenter.MonthP;
+import com.yyy.wrsf.company.month.view.IMonthV;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
@@ -26,6 +31,7 @@ import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.month.MonthUrl;
+import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -37,31 +43,42 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MonthActivity extends BaseActivity {
+public class MonthActivity extends BaseActivity implements IMonthV, XRecyclerView.LoadingListener {
 
     @BindView(R.id.top_view)
     TopView topView;
     @BindView(R.id.recycler_view)
     XRecyclerView recyclerView;
+    @BindView(R.id.ecv_search)
+    EditClearView ecvSearch;
 
-    private PagerRequestBean pager;
     private List<CustomerMonthB> monthModels = new ArrayList<>();
     private MonthAdapter monthAdapter;
+    private MonthP monthP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_month);
         ButterKnife.bind(this);
+        monthP = new MonthP(this);
         init();
-        getData();
+        monthP.getData();
     }
 
 
     private void init() {
         initTop();
         initRecycle();
-        initPager();
+        initsearch();
+    }
+
+    private void initsearch() {
+        ecvSearch.setOnEnterListerner(() -> {
+            monthModels.clear();
+            refreshList();
+            monthP.getData();
+        });
     }
 
     private void initTop() {
@@ -79,75 +96,73 @@ public class MonthActivity extends BaseActivity {
         recyclerView.getDefaultRefreshHeaderView()
                 .setRefreshTimeVisible(true);
         recyclerView.setPullRefreshEnabled(false);
-        recyclerView.setLoadingMoreEnabled(false);
+        recyclerView.setLoadingMoreEnabled(true);
         recyclerView.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(initAdapter());
+        recyclerView.setLoadingListener(this);
     }
 
-    private void initPager() {
-        pager = new PagerRequestBean();
-        pager.setPageIndex(0);
-        pager.setPageSize(500);
-    }
-
-    private void getData() {
-        new NetUtil(getParams(), NetConfig.address + MonthUrl.pageList, RequstType.POST, new ResponseListener() {
+    private MonthAdapter initAdapter() {
+        monthAdapter = new MonthAdapter(this, monthModels);
+        monthAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onSuccess(String string) {
-                Log.e(this.getClass().getName(), "data:" + string);
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        List<CustomerMonthB> list = new Gson().fromJson(result.getData(), new TypeToken<List<CustomerMonthB>>() {
-                        }.getType());
-                        if (list != null) {
-                            monthModels.clear();
-                            monthModels.addAll(list);
-                            refrishList();
-                        }
-                    } else {
-                        LoadingFinish(result.getMsg());
-                        Log.e(NoticeFragment.class.getName(), result.getMsg());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
+            public void onItemClick(int pos) {
 
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
             }
         });
-    }
+        return monthAdapter;
 
-    private List<NetParams> getParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("param", new Gson().toJson(pager)));
-        return params;
-    }
-
-    private void refrishList() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (monthAdapter == null) {
-                    monthAdapter = new MonthAdapter(MonthActivity.this, monthModels);
-                    recyclerView.setAdapter(monthAdapter);
-                    monthAdapter.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int pos) {
-
-                        }
-                    });
-                } else {
-                    monthAdapter.notifyDataSetChanged();
-                }
-            }
-        });
     }
 
 
+    @Override
+    public String getFilter() {
+        return ecvSearch.getText();
+    }
+
+    @Override
+    public void refreshList() {
+        monthAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addList(List<CustomerMonthB> list) {
+        monthModels.addAll(list);
+    }
+
+    @Override
+    public void stopLoadMore() {
+        recyclerView.setLoadingMoreEnabled(false);
+    }
+
+    @Override
+    public void startLoading() {
+        LoadingDialog.showDialogForLoading(this);
+    }
+
+    @Override
+    public void finishLoading(@Nullable String s) {
+        LoadingFinish(s);
+    }
+
+    @Override
+    public void toast(String s) {
+        Toast(s);
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+
+    @Override
+    public void onLoadMore() {
+        monthP.getData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        monthP.detachView();
+        super.onDestroy();
+    }
 }

@@ -81,7 +81,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         titleColor = array.getColor(R.styleable.EditClearView_ecTitleColor, context.getResources().getColor(R.color.text_common));
         titleSize = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_title_edit));
         text = array.getString(R.styleable.EditClearView_ecText);
-        textColor = array.getColor(R.styleable.EditClearView_ecTextColor, context.getResources().getColor(R.color.text_common));
+        textColor = array.getColor(R.styleable.EditClearView_ecTextColor, context.getResources().getColor(R.color.text_gray2));
         textSize = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
         textLength = array.getInteger(R.styleable.EditClearView_ecTextLength, -1);
         textGravity = array.getInteger(R.styleable.EditClearView_ecTextGravity, -1);
@@ -129,8 +129,6 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         tvTitle.setText(formatTitle ? StringUtil.formatTitle(title) : title);
         tvTitle.setTextColor(titleColor);
         tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
-//        tvTitle.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
-//        tvTitle.setGravity(Gravity.CENTER);
         addView(tvTitle);
     }
 

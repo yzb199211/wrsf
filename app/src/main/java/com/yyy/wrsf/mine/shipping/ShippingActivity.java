@@ -354,13 +354,14 @@ public class ShippingActivity extends BasePickActivity {
                 break;
             case CodeUtil.ShipAddValue:
                 addValue = new Gson().fromJson(data.getStringExtra("data"), ShippingAddValueB.class);
-                shipping.setValueAdd(addValue);
+                setAddValue();
                 setTotal();
                 break;
             default:
                 break;
         }
     }
+
 
     private void setTotal() {
         double total = 0;
@@ -377,6 +378,11 @@ public class ShippingActivity extends BasePickActivity {
     private void setGoods() {
         shipping.setGoods(goods);
         tmiGoods.setText(goods.getData());
+    }
+
+    private void setAddValue() {
+        shipping.setValueAdd(addValue);
+        tmiValueAdd.setText(addValue.getData());
     }
 
     private void setSend() {
