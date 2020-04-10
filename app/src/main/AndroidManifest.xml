@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".mine.notice.NoticeDetailActivity"></activity>
+        <activity android:name=".mine.shipping.ShippingRemarkActivity"></activity>
+        <activity android:name=".mine.notice.NoticeDetailActivity" />
         <activity
             android:name=".company.worker.WorkerDetailActivity"
             android:screenOrientation="portrait"

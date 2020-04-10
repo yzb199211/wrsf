@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -60,6 +61,10 @@ public class MainActivity extends BaseActivity implements IMainV {
     private String role;
     private MainP mainP;
 
+    private ImageView currentIv;
+    private TextView currentTv;
+    private int currentSrc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +80,7 @@ public class MainActivity extends BaseActivity implements IMainV {
     }
 
     private void setDefaultFragment() {
+        setCheck(ivMain, tvMain, R.mipmap.menu_main_checked, R.mipmap.menu_main);
         mainFragment = new MainFragment();
         currentFragment = mainFragment;
         FragmentTransaction transaction = getSupportFragmentManager()
@@ -106,12 +112,15 @@ public class MainActivity extends BaseActivity implements IMainV {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_main:
+                setNormal();
+                setCheck(ivMain, tvMain, R.mipmap.menu_main_checked, R.mipmap.menu_main);
                 switchFragment(mainFragment);
                 break;
             case R.id.rl_send:
-
                 break;
             case R.id.rl_notice:
+                setNormal();
+                setCheck(ivNotice, tvNotice, R.mipmap.menu_notice_checked, R.mipmap.menu_notice);
                 if (noticeFragment == null) {
                     noticeFragment = new NoticeFragment();
                 }
@@ -122,6 +131,8 @@ public class MainActivity extends BaseActivity implements IMainV {
                 mainP.judgeCompany();
                 break;
             case R.id.rl_mine:
+                setNormal();
+                setCheck(ivMine, tvMine, R.mipmap.menu_mine_check, R.mipmap.menu_mine);
                 if (mineFragment == null) {
                     mineFragment = new MineFragment();
                 }
@@ -139,12 +150,28 @@ public class MainActivity extends BaseActivity implements IMainV {
         startActivity(new Intent().setClass(this, ShippingActivity.class));
     }
 
+    private void setCheck(ImageView iv, TextView tv, int src, int currentSrc) {
+        currentTv = tv;
+        currentIv = iv;
+        this.currentSrc = currentSrc;
+        currentTv.setTextColor(getColor(R.color.default_blue));
+        currentIv.setImageResource(src);
+    }
+
+    private void setNormal() {
+        currentIv.setImageResource(currentSrc);
+        currentTv.setTextColor(getColor(R.color.text_gray));
+    }
+
     @Override
     public void go2Company() {
+        setNormal();
+        setCheck(ivCompany, tvCompany, R.mipmap.menu_company_checked, R.mipmap.menu_company);
         if (companyFragment == null) {
             companyFragment = new CompanyFragment();
         }
         switchFragment(companyFragment);
+
     }
 
     @Override

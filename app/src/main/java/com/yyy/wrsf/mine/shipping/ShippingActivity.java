@@ -208,6 +208,7 @@ public class ShippingActivity extends BasePickActivity {
                 }
                 break;
             case R.id.tmi_remark:
+                go2Remark();
                 break;
             case R.id.tv_total:
                 break;
@@ -232,7 +233,6 @@ public class ShippingActivity extends BasePickActivity {
                 break;
         }
     }
-
 
     private void selectCompany(View view) {
         if (companySelect == null) {
@@ -313,6 +313,14 @@ public class ShippingActivity extends BasePickActivity {
                 , CodeUtil.ShipAddValue);
     }
 
+    private void go2Remark() {
+        startActivityForResult(
+                new Intent()
+                        .setClass(this, ShippingRemarkActivity.class)
+                        .putExtra("data", tmiRemark.getText())
+                , CodeUtil.ADD);
+    }
+
     private void initPvDate() throws Exception {
         Calendar calendar = Calendar.getInstance();
         Calendar calendarLast = Calendar.getInstance();
@@ -373,6 +381,10 @@ public class ShippingActivity extends BasePickActivity {
                 addValue = new Gson().fromJson(data.getStringExtra("data"), ShippingAddValueB.class);
                 setAddValue();
                 setTotal();
+                break;
+            case CodeUtil.ADD:
+                tmiRemark.setText(data.getStringExtra("data"));
+//                shipping.set
                 break;
             default:
                 break;

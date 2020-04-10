@@ -140,7 +140,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         editText.setTextColor(textColor);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         editText.setLayoutParams(etParams());
-//        editText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
+        editText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         editText.setGravity(Gravity.CENTER_VERTICAL);
         if (singleLine)
             editText.setSingleLine();
@@ -164,7 +164,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         if (textGravity == 5)
             tvText.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
         else tvText.setGravity(Gravity.CENTER_VERTICAL);
-//        tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
+        tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
         tvText.setSingleLine();
         tvText.setBackground(null);
         tvText.setOnClickListener(new OnClickListener() {

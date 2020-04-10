@@ -131,6 +131,7 @@
     <!--寄件-->
     <string name="send_company">物流公司</string>
     <string name="send_goods">货物信息</string>
+    <string name="send_order_total">订单总价</string>
     <string name="send_logistics">物流信息</string>
     <string name="send_base_fee">基础运费</string>
     <string name="send_goods_empty">请完善货物信息</string>
@@ -144,6 +145,8 @@
     <string name="send_protocol">查看并同意《万瑞三富物流服务协议》</string>
 
     <string name="send_goods_name">货物名称</string>
+    <string name="send_good_remark">备注信息</string>
+    <string name="send_good_other">其他</string>
     <string name="send_goods_weight">重量(KG)</string>
     <string name="send_goods_volume">体积(m³) </string>
     <string name="send_goods_density">密度T/m³</string>
@@ -177,11 +180,13 @@
     <string name="order_fee_type">付款方式：</string>
     <string name="order_fee_user">付款账号：</string>
     <string name="order_fee_base">基础运费：</string>
+    <string name="order_fee_trans">运输费用：</string>
     <string name="order_fee_send">送货费用：</string>
     <string name="order_fee_pick">提货费用：</string>
     <string name="order_value_add">增值服务：</string>
     <string name="order_fee_insure">保价金额：</string>
     <string name="order_fee_collection">代收货款：</string>
+    <string name="order_wait_notice">等通知发货：</string>
 
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>

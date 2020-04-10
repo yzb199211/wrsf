@@ -340,7 +340,7 @@
                 app:ecHasDetele="false"
                 app:ecTextColor="@color/order_yellow"
                 app:ecTextGravity="right"
-                app:ecTitle="@string/send_logistics"
+                app:ecTitle="@string/send_order_total"
                 app:ecTitleColor="@color/text_common"
                 app:ecType="tv" />
 
@@ -385,7 +385,7 @@
                 <com.yyy.wrsf.view.editclear.EditClearView
                     android:id="@+id/ecv_fee_base"
                     android:layout_width="match_parent"
-                    android:layout_height="39dp"
+                    android:layout_height="@dimen/dp_30"
                     android:paddingLeft="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
                     app:ecEditable="false"
@@ -393,7 +393,7 @@
                     app:ecHasDetele="false"
                     app:ecTextGravity="right"
                     app:ecTextSize="@dimen/text_common_min"
-                    app:ecTitle="@string/order_fee_base"
+                    app:ecTitle="@string/order_fee_trans"
                     app:ecTitleColor="@color/text_common"
                     app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
@@ -401,7 +401,7 @@
                 <com.yyy.wrsf.view.editclear.EditClearView
                     android:id="@+id/ecv_fee_pick"
                     android:layout_width="match_parent"
-                    android:layout_height="41dp"
+                    android:layout_height="@dimen/dp_30"
                     android:paddingLeft="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
                     app:ecEditable="false"
@@ -478,6 +478,22 @@
                     app:ecTitleColor="@color/text_common"
                     app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_wait_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTextColor="@color/order_yellow"
+                    app:ecTextGravity="right"
+                    app:ecTextSize="@dimen/text_common_min"
+                    app:ecTitle="@string/order_wait_notice"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
+                    app:ecType="tv" />
             </LinearLayout>
 
             <View
@@ -492,7 +508,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
-                android:text="@string/send_goods"
+                android:text="@string/send_logistics"
                 android:textColor="@color/text_common"
                 android:textSize="@dimen/text_common" />
 

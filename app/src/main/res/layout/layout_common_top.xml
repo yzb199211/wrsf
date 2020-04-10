@@ -16,16 +16,39 @@
         android:padding="@dimen/dp_13"
         android:src="@mipmap/icon_scan" />
 
-
-    <com.yyy.wrsf.view.editclear.EditClearView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_30"
         android:layout_toRightOf="@+id/iv_scan"
+        android:background="@drawable/bg_commonttop_edit">
+        <ImageView
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="match_parent"
+            android:src="@mipmap/icon_search"
+            android:padding="@dimen/dp_8"/>
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:hint="@string/common_select_order"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+    </LinearLayout>
+
+    <com.yyy.wrsf.view.editclear.EditClearView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:layout_toRightOf="@+id/iv_scan"
         android:background="@drawable/bg_commonttop_edit"
+        android:visibility="gone"
+        app:ecHasDetele="false"
         app:ecHint="@string/common_select_order"
         app:ecHintColor="@color/white"
         app:ecSrc="@mipmap/icon_search"
-        app:ecSrcPadding="@dimen/dp_5"
+        app:ecSrcPadding="@dimen/dp_10"
         app:ecTextColor="@color/white"
         app:ecType="img" />
 

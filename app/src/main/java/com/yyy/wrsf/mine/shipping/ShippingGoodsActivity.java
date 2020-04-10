@@ -5,23 +5,21 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
-import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.beans.filter.PublicFilterB;
 import com.yyy.wrsf.beans.price.PriceCalB;
 import com.yyy.wrsf.beans.publicm.PublicArray;
 import com.yyy.wrsf.beans.publicm.PublicBean;
 import com.yyy.wrsf.beans.ship.ShipGoodsB;
-import com.yyy.wrsf.beans.filter.PublicFilterB;
+import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -64,6 +62,10 @@ public class ShippingGoodsActivity extends BaseActivity {
     TextMenuItem tmiTrans;
     @BindView(R.id.tmi_send)
     TextMenuItem tmiSend;
+    @BindView(R.id.ecv_goods_name)
+    EditClearView ecvGoodsName;
+    @BindView(R.id.btn_add)
+    TextView btnAdd;
 
     private List<PublicBean> goods = new ArrayList<>();
     private List<PublicBean> send = new ArrayList<>();
@@ -151,7 +153,7 @@ public class ShippingGoodsActivity extends BaseActivity {
 
     private void setGoodsView() {
         tmiGoodsName.setText(goodsModel.getGoodsName());
-        tmiTrans.setText(goodsModel.getSendName());
+        tmiTrans.setText(goodsModel.getTransName());
         tmiSend.setText(goodsModel.getSendName());
         tmiDelivery.setText(goodsModel.getDeliveryName());
         ecvWeight.setText(goodsModel.getWeight() == 0 ? "" : goodsModel.getWeight() + "");
@@ -237,7 +239,6 @@ public class ShippingGoodsActivity extends BaseActivity {
                 break;
             case R.id.btn_add:
                 setGoods();
-
                 save();
                 break;
             default:
@@ -255,6 +256,12 @@ public class ShippingGoodsActivity extends BaseActivity {
                 tmiGoodsName.setText(type);
                 goodsModel.setGoodsId(goods.get(pos).getDetailCode());
                 goodsModel.setGoodsName(goods.get(pos).getPickerViewText());
+                if (goods.get(pos).getPickerViewText().equals(getString(R.string.send_good_other))) {
+                    ecvGoodsName.setVisibility(View.VISIBLE);
+                } else {
+                    ecvGoodsName.setText("");
+                    ecvGoodsName.setVisibility(View.GONE);
+                }
             });
         } else {
             popGoods.showAsDropDown(tmiGoodsName.getTextView());
@@ -367,13 +374,16 @@ public class ShippingGoodsActivity extends BaseActivity {
     }
 
     private void back(String price) {
-        setResult(CodeUtil.ShipGoods,
-                new Intent()
-                        .putExtra("price", price)
-                        .putExtra("data", new Gson().toJson(goodsModel)));
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (StringUtil.isNotEmpty(ecvGoodsName.getText())) {
+                    goodsModel.setGoodsName(ecvGoodsName.getText());
+                }
+                setResult(CodeUtil.ShipGoods,
+                        new Intent()
+                                .putExtra("price", price)
+                                .putExtra("data", new Gson().toJson(goodsModel)));
                 finish();
             }
         });

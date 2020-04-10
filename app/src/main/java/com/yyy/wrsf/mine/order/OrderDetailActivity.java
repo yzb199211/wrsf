@@ -21,7 +21,6 @@ import com.yyy.wrsf.mine.order.bean.LogBean;
 import com.yyy.wrsf.mine.order.persenter.LogPersenter;
 import com.yyy.wrsf.mine.order.view.ILogView;
 import com.yyy.wrsf.view.editclear.EditClearView;
-import com.yyy.wrsf.view.recycle.NoScrollGvManager;
 import com.yyy.wrsf.view.topview.TopView;
 
 import java.util.ArrayList;
@@ -87,6 +86,8 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
     EditClearView ecvReceiveAdd;
     @BindView(R.id.ll_more)
     LinearLayout llMore;
+    @BindView(R.id.ecv_wait_notice)
+    EditClearView ecvWaitNotice;
 
     private OrderBean order;
     private LogPersenter logPersenter;
@@ -159,10 +160,11 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
         ecvValueAdd.setText(getString(R.string.common_rmb) + order.getValueAdd());
         ecvFeeInsure.setText(getString(R.string.common_rmb) + order.getBaoAsk());
         ecvFeeCollection.setText(getString(R.string.common_rmb) + order.getDaiTotal());
+        ecvWaitNotice.setText(order.getNoticeYesNo() == 0 ? getString(R.string.common_no) : getString(R.string.common_yes));
     }
 
     private void initList() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this){
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this) {
             @Override
             public boolean canScrollVertically() {
                 return false;
