@@ -478,6 +478,7 @@
                     app:ecTitleColor="@color/text_common"
                     app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
+
                 <com.yyy.wrsf.view.editclear.EditClearView
                     android:id="@+id/ecv_wait_notice"
                     android:layout_width="match_parent"

@@ -149,7 +149,7 @@
     <string name="send_good_other">其他</string>
     <string name="send_goods_weight">重量(KG)</string>
     <string name="send_goods_volume">体积(m³) </string>
-    <string name="send_goods_density">密度T/m³</string>
+    <string name="send_goods_density">重抛比T/m³</string>
     <string name="send_goods_num">件数</string>
     <string name="send_goods_send">寄件方式</string>
     <string name="send_goods_delivery">交货方式</string>

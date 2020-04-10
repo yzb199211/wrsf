@@ -432,7 +432,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private boolean canSave() {
-        if (goods == null) {
+        if (goods.isEmpty()) {
             Toast(getString(R.string.send_goods_empty));
         }
         return true;
