@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.tabs.TabLayout;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.beans.TabB;
 import com.yyy.wrsf.view.topview.TopView;
@@ -62,6 +63,19 @@ public class AddressActivity extends BaseActivity {
     }
 
     private void initTab() {
+        tabs = getTabs();
+        setTabLayout();
+    }
+
+
+    public List<TabB> getTabs() {
+        List<TabB> tabs = new ArrayList<>();
+        tabs.add(new TabB(0, BaseApplication.getInstance().getString(R.string.address_title_receive)));
+        tabs.add(new TabB(1, BaseApplication.getInstance().getString(R.string.address_title_send)));
+        return tabs;
+    }
+
+    private void setTabView() {
 
     }
 
