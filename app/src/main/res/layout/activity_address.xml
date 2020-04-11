@@ -22,7 +22,11 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
-        android:background="@color/white" />
+        android:background="@color/white"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/default_blue"
+        app:tabMaxWidth="@dimen/dp_0"
+        app:tabMode="fixed" />
 
     <FrameLayout
         android:id="@+id/frame_layout"

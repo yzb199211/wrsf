@@ -14,6 +14,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.login.LoginActivity;
 import com.yyy.wrsf.login.PwdBackActivity;
 import com.yyy.wrsf.mine.MineActivity;
+import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressReceiveActivity;
 import com.yyy.wrsf.mine.bill.BillActivity;
 import com.yyy.wrsf.mine.order.OrderActivity;
@@ -129,7 +130,7 @@ public class MineFragment extends Fragment {
     }
 
     private void go2Address() {
-        startActivity(new Intent().setClass(getActivity(), AddressReceiveActivity.class).putExtra("isSelect", false));
+        startActivity(new Intent().setClass(getActivity(), AddressActivity.class).putExtra("isSelect", false));
     }
 
     private void exit() {

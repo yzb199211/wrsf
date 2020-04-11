@@ -35,7 +35,7 @@ public class AddressActivity extends BaseActivity {
 
     private List<TabB> tabs;
     private List<TabLayout.Tab> tabsV = new ArrayList<>();
-    private List<Fragment> fragments;
+    private List<Fragment> fragments = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +60,14 @@ public class AddressActivity extends BaseActivity {
     private void initView() {
         initTop();
         initTab();
+        setDefaultFragment();
     }
 
     private void initTab() {
         tabs = getTabs();
         setTabLayout();
+//        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+//        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }
 
 
@@ -75,8 +78,13 @@ public class AddressActivity extends BaseActivity {
         return tabs;
     }
 
-    private void setTabView() {
-
+    private void setDefaultFragment() {
+        currentFragment = receiveFragment;
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        transaction
+                .add(R.id.frame_layout, receiveFragment)
+                .commit();
     }
 
     private void initTop() {
@@ -91,7 +99,7 @@ public class AddressActivity extends BaseActivity {
         if (!targetFragment.isAdded()) {
             transaction
                     .hide(currentFragment)
-                    .add(R.id.fl_content, targetFragment)
+                    .add(R.id.frame_layout, targetFragment)
                     .commit();
         } else {
             transaction
