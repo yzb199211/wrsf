@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".mine.shipping.ShippingRemarkActivity"></activity>
+        <activity android:name=".mine.address.AddressActivity"></activity>
+        <activity android:name=".mine.shipping.ShippingRemarkActivity" />
         <activity android:name=".mine.notice.NoticeDetailActivity" />
         <activity
             android:name=".company.worker.WorkerDetailActivity"
@@ -109,11 +110,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".mine.address.AddressDetailActivity"
+            android:name=".mine.address.AddressDetailReceiveActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".mine.address.AddressActivity"
+            android:name=".mine.address.AddressReceiveActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity

@@ -41,7 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddressDetailActivity extends AppCompatActivity {
+public class AddressDetailReceiveActivity extends AppCompatActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -168,7 +168,7 @@ public class AddressDetailActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(String string) {
                             LoadingFinish(null);
-                            Log.e(AddressDetailActivity.class.getName(), "data:" + string);
+                            Log.e(AddressDetailReceiveActivity.class.getName(), "data:" + string);
                             try {
                                 Result result = new Result(string);
                                 if (result.isSuccess()) {
@@ -247,7 +247,7 @@ public class AddressDetailActivity extends AppCompatActivity {
 
     private void selectArea(View view) {
         if (areaSelect == null && province == null)
-            areaSelect = new AreaSelect(AddressDetailActivity.this);
+            areaSelect = new AreaSelect(AddressDetailReceiveActivity.this);
         else if (areaSelect == null) {
             areaSelect = new AreaSelect(this, province, city, district);
         }
@@ -255,9 +255,9 @@ public class AddressDetailActivity extends AppCompatActivity {
         areaSelect.setOnBackAreaListener(new OnBackAreaListener() {
             @Override
             public void backArea(AreaB province, AreaB city, AreaB district) {
-                AddressDetailActivity.this.province = province;
-                AddressDetailActivity.this.city = city;
-                AddressDetailActivity.this.district = district;
+                AddressDetailReceiveActivity.this.province = province;
+                AddressDetailReceiveActivity.this.city = city;
+                AddressDetailReceiveActivity.this.district = district;
                 setArea();
             }
         });

@@ -12,17 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.beans.address.AddressB;
+import com.yyy.wrsf.beans.filter.AddressFilterB;
 import com.yyy.wrsf.dialog.JudgeDialog;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
 import com.yyy.wrsf.interfaces.OnEditListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
-import com.yyy.wrsf.beans.address.AddressB;
-import com.yyy.wrsf.beans.filter.AddressFilterB;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
+import com.yyy.wrsf.utils.net.address.AddressUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -30,7 +31,6 @@ import com.yyy.wrsf.utils.net.net.PagerRequestBean;
 import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
-import com.yyy.wrsf.utils.net.address.AddressUrl;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -43,7 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddressSendActivity extends AppCompatActivity {
+public class AddressReceiveActivity extends AppCompatActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -89,13 +89,13 @@ public class AddressSendActivity extends AppCompatActivity {
 
     private void getData() {
         LoadingDialog.showDialogForLoading(this);
-        new NetUtil(getParams(), NetConfig.address + AddressUrl.getAddressSendList, RequstType.POST, new ResponseListener() {
+        new NetUtil(getParams(), NetConfig.address + AddressUrl.getAddressList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
-                Log.e(AddressSendActivity.this.getClass().getName(), "data:" + string);
+                Log.e(AddressReceiveActivity.this.getClass().getName(), "data:" + string);
                 try {
-                    Result result = new Result(string);
                     LoadingFinish(null);
+                    Result result = new Result(string);
                     if (result.isSuccess()) {
                         List<AddressB> list = new Gson().fromJson(result.getData(), new TypeToken<List<AddressB>>() {
                         }.getType());
@@ -106,7 +106,7 @@ public class AddressSendActivity extends AppCompatActivity {
                         }
                     } else {
                         LoadingFinish(result.getMsg());
-                        Log.e(AddressSendActivity.class.getName(), result.getMsg());
+                        Log.e(AddressReceiveActivity.class.getName(), result.getMsg());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -158,7 +158,7 @@ public class AddressSendActivity extends AppCompatActivity {
             @Override
             public void onEdit(int pos) {
                 startActivityForResult(new Intent()
-                                .setClass(AddressSendActivity.this, AddressDetailReceiveActivity.class)
+                                .setClass(AddressReceiveActivity.this, AddressDetailReceiveActivity.class)
                                 .putExtra("data", new Gson().toJson(addresses.get(pos)))
                                 .putExtra("pos", pos)
                                 .putExtra("code", CodeUtil.MODIFY)
@@ -193,7 +193,7 @@ public class AddressSendActivity extends AppCompatActivity {
 
     private void delete(int pos) {
         LoadingDialog.showDialogForLoading(this);
-        new NetUtil(deleteParams(pos), NetConfig.address + AddressUrl.deleteAddressSend, RequstType.DELETE, new ResponseListener() {
+        new NetUtil(deleteParams(pos), NetConfig.address + AddressUrl.deleteAddress, RequstType.DELETE, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 Log.e("data", string);
@@ -238,19 +238,19 @@ public class AddressSendActivity extends AppCompatActivity {
 
 
     private void initTop() {
-        topView.setTitle(getString(R.string.address_area_send));
         topView.setOnLeftClickListener(new OnLeftClickListener() {
             @Override
             public void onLeft() {
                 finish();
             }
         });
+        topView.setTitle(getString(R.string.address_title_send));
     }
 
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
         startActivityForResult(new Intent()
-                        .setClass(this, AddressDetailSendActivity.class)
+                        .setClass(this, AddressDetailReceiveActivity.class)
                         .putExtra("code", CodeUtil.ADD)
                 , CodeUtil.ADD);
     }
@@ -298,4 +298,6 @@ public class AddressSendActivity extends AppCompatActivity {
             deleteDialog = null;
         }
     }
+
+
 }

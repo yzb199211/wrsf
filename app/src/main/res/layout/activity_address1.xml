@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/default_bg_gray"
     android:orientation="vertical"
-    tools:context=".mine.address.AddressActivity">
+    tools:context=".mine.address.AddressReceiveActivity">
 
     <com.yyy.wrsf.view.topview.TopView
         android:id="@+id/top_view"
@@ -18,15 +18,19 @@
         app:topTitle="@string/address_title_receive"
         app:topTitleColor="@color/white" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/row_common"
-        android:background="@color/white" />
-
-    <FrameLayout
-        android:id="@+id/frame_layout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
         android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:background="@drawable/btn_yellow"
+        android:gravity="center"
+        android:text="@string/common_add_manully"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_common" />
 </LinearLayout>

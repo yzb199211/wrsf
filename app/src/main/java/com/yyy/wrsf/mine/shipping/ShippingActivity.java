@@ -22,7 +22,7 @@ import com.yyy.wrsf.beans.ship.ShippingAddValueB;
 import com.yyy.wrsf.beans.ship.ShippingB;
 import com.yyy.wrsf.common.company.CompanySelect;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.mine.address.AddressActivity;
+import com.yyy.wrsf.mine.address.AddressReceiveActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
@@ -43,9 +43,6 @@ import com.yyy.yyylibrary.pick.view.TimePickerView;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -291,7 +288,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void go2addressReceive() {
-        startActivityForResult(new Intent().setClass(this, AddressActivity.class).putExtra("isSelect", true), CodeUtil.AddressReceive);
+        startActivityForResult(new Intent().setClass(this, AddressReceiveActivity.class).putExtra("isSelect", true), CodeUtil.AddressReceive);
     }
 
     private void go2Goods() {

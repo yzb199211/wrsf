@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/default_bg_gray"
     android:orientation="vertical"
-    tools:context=".mine.address.AddressDetailActivity">
+    tools:context=".mine.address.AddressDetailReceiveActivity">
 
     <com.yyy.wrsf.view.topview.TopView
         android:id="@+id/top_view"
