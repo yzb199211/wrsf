@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans.month;
 
+import android.text.TextUtils;
+
 import java.math.BigDecimal;
 
 /**
@@ -52,7 +54,7 @@ public class CustomerMonthB {
     }
 
     public Integer getTransCompanyRecNo() {
-        return transCompanyRecNo;
+        return transCompanyRecNo == null ? -1 : transCompanyRecNo;
     }
 
     public void setTransCompanyRecNo(Integer transCompanyRecNo) {
@@ -60,7 +62,7 @@ public class CustomerMonthB {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return TextUtils.isEmpty(companyName) ? "" : companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -68,7 +70,7 @@ public class CustomerMonthB {
     }
 
     public String getZhiZhao() {
-        return zhiZhao;
+        return TextUtils.isEmpty(zhiZhao) ? "" : zhiZhao;
     }
 
     public void setZhiZhao(String zhiZhao) {
@@ -76,7 +78,7 @@ public class CustomerMonthB {
     }
 
     public String getFirstAdd() {
-        return firstAdd;
+        return TextUtils.isEmpty(firstAdd) ? "" : firstAdd;
     }
 
     public void setFirstAdd(String firstAdd) {
@@ -84,7 +86,7 @@ public class CustomerMonthB {
     }
 
     public String getSecondAdd() {
-        return secondAdd;
+        return TextUtils.isEmpty(secondAdd) ? "" : secondAdd;
     }
 
     public void setSecondAdd(String secondAdd) {
@@ -92,7 +94,7 @@ public class CustomerMonthB {
     }
 
     public String getThirdAdd() {
-        return thirdAdd;
+        return TextUtils.isEmpty(thirdAdd) ? "" : thirdAdd;
     }
 
     public void setThirdAdd(String thirdAdd) {
@@ -100,7 +102,7 @@ public class CustomerMonthB {
     }
 
     public String getDetailAdd() {
-        return detailAdd;
+        return TextUtils.isEmpty(detailAdd) ? "" : detailAdd;
     }
 
     public void setDetailAdd(String detailAdd) {
@@ -108,7 +110,7 @@ public class CustomerMonthB {
     }
 
     public String getPerson() {
-        return person;
+        return TextUtils.isEmpty(person) ? "" : person;
     }
 
     public void setPerson(String person) {
@@ -116,7 +118,7 @@ public class CustomerMonthB {
     }
 
     public String getContractPerson() {
-        return contractPerson;
+        return TextUtils.isEmpty(contractPerson) ? "" : contractPerson;
     }
 
     public void setContractPerson(String contractPerson) {
@@ -124,7 +126,7 @@ public class CustomerMonthB {
     }
 
     public String getContractTel() {
-        return contractTel;
+        return TextUtils.isEmpty(contractTel) ? "" : contractTel;
     }
 
     public void setContractTel(String contractTel) {
@@ -132,7 +134,7 @@ public class CustomerMonthB {
     }
 
     public Integer getCustomerStatus() {
-        return customerStatus;
+        return customerStatus==null?0:customerStatus;
     }
 
     public void setCustomerStatus(Integer customerStatus) {

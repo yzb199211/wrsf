@@ -103,6 +103,6 @@ public class DriverB implements Serializable, IPickerViewData {
 
     @Override
     public String getPickerViewText() {
-        return driverName;
+        return TextUtils.isEmpty(driverName) ? "" : driverName;
     }
 }

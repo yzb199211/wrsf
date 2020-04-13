@@ -100,7 +100,6 @@ public class WorkerActivity extends BaseActivity implements IWorkerV {
         recyclerView.setPullRefreshEnabled(false);
         recyclerView.setLoadingMoreEnabled(false);
         recyclerView.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.VERTICAL));
-
         recyclerView.setAdapter(initAdapter());
     }
 

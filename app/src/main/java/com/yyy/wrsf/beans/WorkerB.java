@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans;
 
+import android.text.TextUtils;
+
 public class WorkerB {
 
     /**
@@ -39,7 +41,7 @@ public class WorkerB {
     }
 
     public String getMemberName() {
-        return memberName;
+        return TextUtils.isEmpty(memberName) ? "" : memberName;
     }
 
     public void setMemberName(String memberName) {
@@ -47,7 +49,7 @@ public class WorkerB {
     }
 
     public String getMemberTel() {
-        return memberTel;
+        return TextUtils.isEmpty(memberTel) ? "" : memberTel;
     }
 
     public void setMemberTel(String memberTel) {
@@ -55,7 +57,7 @@ public class WorkerB {
     }
 
     public String getMemberSex() {
-        return memberSex;
+        return TextUtils.isEmpty(memberSex) ? "" : memberSex;
     }
 
     public void setMemberSex(String memberSex) {
@@ -63,7 +65,7 @@ public class WorkerB {
     }
 
     public String getMemberPetname() {
-        return memberPetname;
+        return TextUtils.isEmpty(memberPetname) ? "" : memberPetname;
     }
 
     public void setMemberPetname(String memberPetname) {
@@ -71,7 +73,7 @@ public class WorkerB {
     }
 
     public String getPassWord() {
-        return passWord;
+        return TextUtils.isEmpty(passWord) ? "" : passWord;
     }
 
     public void setPassWord(String passWord) {
@@ -79,7 +81,7 @@ public class WorkerB {
     }
 
     public String getMail() {
-        return mail;
+        return TextUtils.isEmpty(mail) ? "" : mail;
     }
 
     public void setMail(String mail) {
@@ -95,7 +97,7 @@ public class WorkerB {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return TextUtils.isEmpty(companyName) ? "" : companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -103,7 +105,7 @@ public class WorkerB {
     }
 
     public String getUsername() {
-        return username;
+        return TextUtils.isEmpty(username)?"":username;
     }
 
     public void setUsername(String username) {
@@ -111,7 +113,7 @@ public class WorkerB {
     }
 
     public String getPassword() {
-        return password;
+        return TextUtils.isEmpty(password)?"":password;
     }
 
     public void setPassword(String password) {

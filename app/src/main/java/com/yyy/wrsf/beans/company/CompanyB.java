@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans.company;
 
+import android.text.TextUtils;
+
 import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 
 import java.io.Serializable;
@@ -47,7 +49,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return TextUtils.isEmpty(companyName)?"":companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -55,7 +57,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getFristAdd() {
-        return fristAdd;
+        return TextUtils.isEmpty(fristAdd)?"":fristAdd;
     }
 
     public void setFristAdd(String fristAdd) {
@@ -63,7 +65,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getSecondAdd() {
-        return secondAdd;
+        return TextUtils.isEmpty(secondAdd)?"":secondAdd;
     }
 
     public void setSecondAdd(String secondAdd) {
@@ -71,7 +73,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getThirdAdd() {
-        return thirdAdd;
+        return TextUtils.isEmpty(thirdAdd)?"":thirdAdd;
     }
 
     public void setThirdAdd(String thirdAdd) {
@@ -79,7 +81,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getDetailAdd() {
-        return detailAdd;
+        return TextUtils.isEmpty(detailAdd)?"":detailAdd;
     }
 
     public void setDetailAdd(String detailAdd) {
@@ -87,7 +89,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getPerson() {
-        return person;
+        return TextUtils.isEmpty(person)?"":person;
     }
 
     public void setPerson(String person) {
@@ -95,7 +97,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getContractPerson() {
-        return contractPerson;
+        return TextUtils.isEmpty(contractPerson)?"":contractPerson;
     }
 
     public void setContractPerson(String contractPerson) {
@@ -103,7 +105,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getContractTel() {
-        return contractTel;
+        return TextUtils.isEmpty(contractTel)?"":contractTel;
     }
 
     public void setContractTel(String contractTel) {
@@ -111,7 +113,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getZhiZhao() {
-        return zhiZhao;
+        return TextUtils.isEmpty(zhiZhao)?"":zhiZhao;
     }
 
     public void setZhiZhao(String zhiZhao) {
@@ -135,7 +137,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getPlantSystemName() {
-        return plantSystemName;
+        return TextUtils.isEmpty(plantSystemName)?"":plantSystemName;
     }
 
     public void setPlantSystemName(String plantSystemName) {
@@ -143,7 +145,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     }
 
     public String getCheckDate() {
-        return checkDate;
+        return TextUtils.isEmpty(checkDate)?"":checkDate;
     }
 
     public void setCheckDate(String checkDate) {

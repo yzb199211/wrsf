@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans.address;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 public class AreaB implements Serializable {
@@ -25,7 +27,7 @@ public class AreaB implements Serializable {
     }
 
     public String getAreaName() {
-        return areaName;
+        return TextUtils.isEmpty(areaName) ? "" : areaName;
     }
 
     public void setAreaName(String areaName) {
@@ -33,7 +35,7 @@ public class AreaB implements Serializable {
     }
 
     public String getDisplayName() {
-        return displayName;
+        return TextUtils.isEmpty(displayName) ? "" : displayName;
     }
 
     public void setDisplayName(String displayName) {

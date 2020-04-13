@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans;
 
+import android.text.TextUtils;
+
 public class NoticeB {
 
     /**
@@ -27,7 +29,7 @@ public class NoticeB {
     private String title;
 
     public String getCreateDate() {
-        return createDate;
+        return TextUtils.isEmpty(createDate) ? "" : createDate;
     }
 
     public void setCreateDate(String createDate) {
@@ -35,7 +37,7 @@ public class NoticeB {
     }
 
     public String getCreateName() {
-        return createName;
+        return TextUtils.isEmpty(createName) ? "" : createName;
     }
 
     public void setCreateName(String createName) {
@@ -67,7 +69,8 @@ public class NoticeB {
     }
 
     public String getModifyDate() {
-        return modifyDate;
+        return TextUtils.isEmpty(modifyDate) ? "" : modifyDate;
+
     }
 
     public void setModifyDate(String modifyDate) {
@@ -75,7 +78,7 @@ public class NoticeB {
     }
 
     public String getNoticeContent() {
-        return noticeContent;
+        return TextUtils.isEmpty(noticeContent) ? "" : noticeContent;
     }
 
     public void setNoticeContent(String noticeContent) {
@@ -99,7 +102,7 @@ public class NoticeB {
     }
 
     public String getTitle() {
-        return title;
+        return TextUtils.isEmpty(title) ? "" : title;
     }
 
     public void setTitle(String title) {

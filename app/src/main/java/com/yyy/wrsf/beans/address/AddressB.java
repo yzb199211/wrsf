@@ -32,7 +32,7 @@ public class AddressB implements Serializable {
     private int thirdId;
 
     public String getCompanyName() {
-        return companyName;
+        return TextUtils.isEmpty(companyName) ? "" : companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -40,7 +40,7 @@ public class AddressB implements Serializable {
     }
 
     public String getContractPerson() {
-        return contractPerson;
+        return TextUtils.isEmpty(contractPerson) ? "" : contractPerson;
     }
 
     public void setContractPerson(String contractPerson) {
@@ -48,7 +48,7 @@ public class AddressB implements Serializable {
     }
 
     public String getContractTel() {
-        return contractTel;
+        return TextUtils.isEmpty(contractTel) ? "" : contractTel;
     }
 
     public void setContractTel(String contractTel) {
@@ -56,7 +56,7 @@ public class AddressB implements Serializable {
     }
 
     public String getDetailAdd() {
-        return detailAdd;
+        return TextUtils.isEmpty(detailAdd) ? "" : detailAdd;
     }
 
     public void setDetailAdd(String detailAdd) {
@@ -64,7 +64,7 @@ public class AddressB implements Serializable {
     }
 
     public String getFirstAdd() {
-        return firstAdd;
+        return TextUtils.isEmpty(firstAdd) ? "" : firstAdd;
     }
 
     public void setFirstAdd(String firstAdd) {
@@ -88,7 +88,7 @@ public class AddressB implements Serializable {
     }
 
     public String getSecondAdd() {
-        return secondAdd;
+        return TextUtils.isEmpty(secondAdd) ? "" : secondAdd;
     }
 
     public void setSecondAdd(String secondAdd) {
@@ -96,7 +96,7 @@ public class AddressB implements Serializable {
     }
 
     public String getThirdAdd() {
-        return thirdAdd;
+        return TextUtils.isEmpty(thirdAdd) ? "" : thirdAdd;
     }
 
     public void setThirdAdd(String thirdAdd) {

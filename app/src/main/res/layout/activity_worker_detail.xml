@@ -14,10 +14,10 @@
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topRightTvShow="true"
         app:topRightText="@string/common_stop"
-        app:topRightTextSize="@dimen/text_common_min"
         app:topRightTextColor="@color/white"
+        app:topRightTextSize="@dimen/text_common_min"
+        app:topRightTvShow="true"
         app:topTitle="@string/company_worker"
         app:topTitleColor="@color/white" />
 
@@ -59,31 +59,32 @@
                 app:ecTitle="@string/person_phone_num"
                 app:ecType="tv" />
 
-            <com.yyy.wrsf.view.editclear.EditClearView
-                android:id="@+id/ecv_petname"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
-                app:ecEditable="false"
-                app:ecHint="@string/person_nick_name"
-                app:ecTitle="@string/person_nick_name"
-                app:ecType="tv" />
+<!--            <com.yyy.wrsf.view.editclear.EditClearView-->
+<!--                android:id="@+id/ecv_petname"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/row_common"-->
+<!--                android:layout_marginTop="@dimen/dp_5"-->
+<!--                android:background="@color/white"-->
+<!--                android:paddingLeft="@dimen/dp_5"-->
+<!--                android:paddingRight="@dimen/dp_5"-->
+<!--                app:ecEditable="false"-->
+<!--                app:ecHint="@string/person_nick_name"-->
+<!--                app:ecTitle="@string/person_nick_name"-->
+<!--                app:ecType="tv" />-->
 
-            <com.yyy.wrsf.view.editclear.EditClearView
-                android:id="@+id/ecv_sex"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
-                app:ecEditable="false"
-                app:ecHint="@string/person_sex"
-                app:ecTitle="@string/person_sex"
-                app:ecType="tv" />
+<!--            <com.yyy.wrsf.view.editclear.EditClearView-->
+<!--                android:id="@+id/ecv_sex"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/row_common"-->
+<!--                android:layout_marginTop="@dimen/dp_5"-->
+<!--                android:background="@color/white"-->
+<!--                android:paddingLeft="@dimen/dp_5"-->
+<!--                android:paddingRight="@dimen/dp_5"-->
+<!--                android:visibility="gone"-->
+<!--                app:ecEditable="false"-->
+<!--                app:ecHint="@string/person_sex"-->
+<!--                app:ecTitle="@string/person_sex"-->
+<!--                app:ecType="tv" />-->
 
         </LinearLayout>
 

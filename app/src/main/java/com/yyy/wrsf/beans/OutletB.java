@@ -51,7 +51,7 @@ public class OutletB {
     }
 
     public String getShopCode() {
-        return shopCode;
+        return TextUtils.isEmpty(shopCode)?"":shopCode;
     }
 
     public void setShopCode(String shopCode) {

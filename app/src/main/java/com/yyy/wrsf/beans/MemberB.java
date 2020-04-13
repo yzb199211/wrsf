@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans;
 
+import android.text.TextUtils;
+
 import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 
 import java.io.Serializable;
@@ -28,7 +30,7 @@ public class MemberB implements Serializable, IPickerViewData {
     }
 
     public String getBrithday() {
-        return brithday;
+        return TextUtils.isEmpty(brithday) ? "" : brithday;
     }
 
     public void setBrithday(String brithday) {
@@ -36,7 +38,7 @@ public class MemberB implements Serializable, IPickerViewData {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return TextUtils.isEmpty(companyName) ? "" : companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -44,7 +46,7 @@ public class MemberB implements Serializable, IPickerViewData {
     }
 
     public String getMail() {
-        return mail;
+        return TextUtils.isEmpty(mail) ? "" : mail;
     }
 
     public void setMail(String mail) {
@@ -52,7 +54,7 @@ public class MemberB implements Serializable, IPickerViewData {
     }
 
     public String getMemberName() {
-        return memberName;
+        return TextUtils.isEmpty(memberName) ? "" : memberName;
     }
 
     public void setMemberName(String memberName) {
@@ -60,7 +62,7 @@ public class MemberB implements Serializable, IPickerViewData {
     }
 
     public String getMemberPetname() {
-        return memberPetname;
+        return TextUtils.isEmpty(memberPetname) ? "" : memberPetname;
     }
 
     public void setMemberPetname(String memberPetname) {
@@ -68,7 +70,7 @@ public class MemberB implements Serializable, IPickerViewData {
     }
 
     public String getMemberSex() {
-        return memberSex;
+        return TextUtils.isEmpty(memberSex) ? "" : memberSex;
     }
 
     public void setMemberSex(String memberSex) {
@@ -76,7 +78,7 @@ public class MemberB implements Serializable, IPickerViewData {
     }
 
     public String getMemberTel() {
-        return memberTel;
+        return TextUtils.isEmpty(memberTel) ? "" : memberTel;
     }
 
     public void setMemberTel(String memberTel) {
@@ -125,6 +127,6 @@ public class MemberB implements Serializable, IPickerViewData {
 
     @Override
     public String getPickerViewText() {
-        return memberName;
+        return TextUtils.isEmpty(memberName) ? "" : memberName;
     }
 }

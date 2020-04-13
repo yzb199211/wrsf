@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans.month;
 
+import android.text.TextUtils;
+
 public class MonthB {
 
     /**
@@ -32,7 +34,7 @@ public class MonthB {
     private int thirdId;
 
     public String getCompanyName() {
-        return companyName;
+        return TextUtils.isEmpty(companyName) ? "" : companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -40,7 +42,7 @@ public class MonthB {
     }
 
     public String getContractPersonPics() {
-        return contractPersonPics;
+        return TextUtils.isEmpty(contractPersonPics) ? "" : contractPersonPics;
     }
 
     public void setContractPersonPics(String contractPersonPics) {
@@ -49,7 +51,7 @@ public class MonthB {
 
 
     public String getDetailAdd() {
-        return detailAdd;
+        return TextUtils.isEmpty(detailAdd) ? "" : detailAdd;
     }
 
     public void setDetailAdd(String detailAdd) {
@@ -57,7 +59,7 @@ public class MonthB {
     }
 
     public String getFirstAdd() {
-        return firstAdd;
+        return TextUtils.isEmpty(firstAdd) ? "" : firstAdd;
     }
 
     public void setFirstAdd(String firstAdd) {
@@ -65,7 +67,7 @@ public class MonthB {
     }
 
     public String getPerson() {
-        return person;
+        return TextUtils.isEmpty(person) ? "" : person;
     }
 
     public void setPerson(String person) {
@@ -74,7 +76,7 @@ public class MonthB {
 
 
     public String getSecondAdd() {
-        return secondAdd;
+        return TextUtils.isEmpty(secondAdd) ? "" : secondAdd;
     }
 
     public void setSecondAdd(String secondAdd) {
@@ -82,7 +84,7 @@ public class MonthB {
     }
 
     public String getThirdAdd() {
-        return thirdAdd;
+        return TextUtils.isEmpty(thirdAdd) ? "" : thirdAdd;
     }
 
     public void setThirdAdd(String thirdAdd) {
@@ -99,7 +101,7 @@ public class MonthB {
 
 
     public String getZhiZhao() {
-        return zhiZhao;
+        return TextUtils.isEmpty(zhiZhao) ? "" : zhiZhao;
     }
 
     public void setZhiZhao(String zhiZhao) {
@@ -107,7 +109,7 @@ public class MonthB {
     }
 
     public String getZhiZhaoPics() {
-        return zhiZhaoPics;
+        return TextUtils.isEmpty(zhiZhaoPics) ? "" : zhiZhaoPics;
     }
 
     public void setZhiZhaoPics(String zhiZhaoPics) {

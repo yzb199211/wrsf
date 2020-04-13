@@ -1,5 +1,7 @@
 package com.yyy.wrsf.beans;
 
+import android.text.TextUtils;
+
 import com.yyy.wrsf.utils.StringUtil;
 
 public class OrderBean {
@@ -114,7 +116,7 @@ public class OrderBean {
     private long weight;
 
     public String getCompanyName() {
-        return companyName;
+        return TextUtils.isEmpty(companyName) ? "" : companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -146,7 +148,7 @@ public class OrderBean {
     }
 
     public String getContractDate() {
-        return contractDate;
+        return TextUtils.isEmpty(contractDate) ? "" : contractDate;
     }
 
     public void setContractDate(String contractDate) {
@@ -186,7 +188,7 @@ public class OrderBean {
     }
 
     public String getCreateDate() {
-        return createDate;
+        return TextUtils.isEmpty(createDate) ? "" : createDate;
     }
 
     public void setCreateDate(String createDate) {
@@ -234,7 +236,7 @@ public class OrderBean {
     }
 
     public String getGoodsName() {
-        return goodsName;
+        return TextUtils.isEmpty(goodsName) ? "" : goodsName;
     }
 
     public void setGoodsName(String goodsName) {
@@ -306,7 +308,7 @@ public class OrderBean {
     }
 
     public String getPickDate() {
-        return pickDate;
+        return TextUtils.isEmpty(pickDate) ? "" : pickDate;
     }
 
     public void setPickDate(String pickDate) {
@@ -314,7 +316,7 @@ public class OrderBean {
     }
 
     public String getPlantMemberName() {
-        return plantMemberName;
+        return TextUtils.isEmpty(plantMemberName) ? "" : plantMemberName;
     }
 
     public void setPlantMemberName(String plantMemberName) {
@@ -330,7 +332,7 @@ public class OrderBean {
     }
 
     public String getPlantMemberTel() {
-        return plantMemberTel;
+        return TextUtils.isEmpty(plantMemberTel) ? "" : plantMemberTel;
     }
 
     public void setPlantMemberTel(String plantMemberTel) {
@@ -362,7 +364,7 @@ public class OrderBean {
     }
 
     public String getRecDetail() {
-        return recDetail;
+        return TextUtils.isEmpty(recDetail) ? "" : recDetail;
     }
 
     public void setRecDetail(String recDetail) {
@@ -386,7 +388,7 @@ public class OrderBean {
     }
 
     public String getRecTel() {
-        return recTel;
+        return TextUtils.isEmpty(recTel) ? "" : recTel;
     }
 
     public void setRecTel(String recTel) {
@@ -394,7 +396,7 @@ public class OrderBean {
     }
 
     public String getRemark() {
-        return remark;
+        return TextUtils.isEmpty(remark) ? "" : recTel;
     }
 
     public void setRemark(String remark) {
@@ -410,7 +412,7 @@ public class OrderBean {
     }
 
     public String getSendName() {
-        return sendName;
+        return TextUtils.isEmpty(sendName) ? "" : sendName;
     }
 
     public void setSendName(String sendName) {
@@ -426,7 +428,7 @@ public class OrderBean {
     }
 
     public String getSendTel() {
-        return sendTel;
+        return TextUtils.isEmpty(sendTel) ? "" : sendTel;
     }
 
     public void setSendTel(String sendTel) {
@@ -530,7 +532,7 @@ public class OrderBean {
     }
 
     public String getSendAdd() {
-        return sendAdd;
+        return TextUtils.isEmpty(sendAdd) ? "" : sendAdd;
     }
 
     public void setSendAdd(String sendAdd) {
@@ -538,7 +540,7 @@ public class OrderBean {
     }
 
     public String getRecAdd() {
-        return recAdd;
+        return TextUtils.isEmpty(recAdd) ? "" : recAdd;
     }
 
     public void setRecAdd(String recAdd) {
