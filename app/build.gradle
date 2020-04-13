@@ -54,7 +54,8 @@ dependencies {
     /*网络请求*/
     implementation("com.squareup.okhttp3:okhttp:3.14.1")
     implementation('com.google.code.gson:gson:2.8.5')
-
+/*添加依赖,二维码库*/
+    implementation 'com.github.yuzhiqiang1993:zxing:2.2.7'
 //    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
     implementation 'com.lxj:matisse:1.0.8'
     implementation(name: 'yyylibrary-release', ext: 'aar')

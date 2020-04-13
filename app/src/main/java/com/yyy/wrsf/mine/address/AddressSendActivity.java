@@ -158,7 +158,7 @@ public class AddressSendActivity extends AppCompatActivity {
             @Override
             public void onEdit(int pos) {
                 startActivityForResult(new Intent()
-                                .setClass(AddressSendActivity.this, AddressDetailReceiveActivity.class)
+                                .setClass(AddressSendActivity.this, AddressDetailSendActivity.class)
                                 .putExtra("data", new Gson().toJson(addresses.get(pos)))
                                 .putExtra("pos", pos)
                                 .putExtra("code", CodeUtil.MODIFY)

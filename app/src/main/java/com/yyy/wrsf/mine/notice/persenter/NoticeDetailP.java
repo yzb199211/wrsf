@@ -43,6 +43,7 @@ public class NoticeDetailP implements INoticeDetailP {
         params.add(new NetParams("id", noticeDetailV.getId()));
         return params;
     }
+
     public void detachView() {
         this.noticeDetailV = null;
     }

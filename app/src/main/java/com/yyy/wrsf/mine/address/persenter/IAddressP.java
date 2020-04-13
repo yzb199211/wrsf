@@ -4,5 +4,9 @@ public interface IAddressP {
 
     void getData();
 
-    void delete();
+    /**
+     * @param id
+     * @param pos
+     */
+    void delete(int id, int pos);
 }

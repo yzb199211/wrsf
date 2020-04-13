@@ -3,6 +3,7 @@
     <string name="preferenceCache">hnwrsf</string>
     <!--error-->
     <string name="error_net">请求错误：</string>
+    <string name="error_scan">扫描失败</string>
     <string name="error_json">数据解析</string>
     <string name="error_other">未知错误</string>
     <string name="error_data">返回数据错误</string>

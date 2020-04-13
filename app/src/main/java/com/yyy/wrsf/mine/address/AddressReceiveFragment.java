@@ -1,5 +1,6 @@
 package com.yyy.wrsf.mine.address;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,19 +8,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseFragment;
 import com.yyy.wrsf.beans.address.AddressB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.mine.address.persenter.AddressP;
 import com.yyy.wrsf.mine.address.view.IAddressV;
+import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.net.address.AddressUrl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class AddressReceiveFragment extends BaseFragment implements IAddressV {
@@ -30,7 +37,7 @@ public class AddressReceiveFragment extends BaseFragment implements IAddressV {
     @BindView(R.id.btn_add)
     TextView btnAdd;
 
-    private List<AddressB> addressList;
+    private List<AddressB> addressList = new ArrayList<>();
     private AddressAdapter addressAdapter;
     private AddressP addressP;
 
@@ -55,17 +62,34 @@ public class AddressReceiveFragment extends BaseFragment implements IAddressV {
     }
 
     private void initList() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        initAdapter();
+    }
+
+    private void initAdapter() {
+        addressAdapter = new AddressAdapter(getActivity(), addressList);
+        addressAdapter.setOnEditListener(pos -> {
+            startActivityForResult(new Intent()
+                            .setClass(getContext(), AddressDetailReceiveActivity.class)
+                            .putExtra("data", new Gson().toJson(addressList.get(pos)))
+                            .putExtra("pos", pos)
+                            .putExtra("code", CodeUtil.MODIFY)
+                    , CodeUtil.MODIFY);
+        });
+        addressAdapter.setOnDeleteListener(pos -> {
+            addressP.delete(addressList.get(pos).getRecNo(), pos);
+        });
+        recyclerView.setAdapter(addressAdapter);
 
     }
 
     @Override
     public void getTabs() {
-
     }
 
     @Override
     public void refreshList() {
-
+        addressAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -75,7 +99,23 @@ public class AddressReceiveFragment extends BaseFragment implements IAddressV {
 
     @Override
     public void addList(List<AddressB> list) {
+        addressList.addAll(list);
+    }
 
+    @Override
+    public String getUrl() {
+        return AddressUrl.getAddressList;
+    }
+
+    @Override
+    public String deleteUrl() {
+        return AddressUrl.deleteAddress;
+    }
+
+    @Override
+    public void delete(int pos) {
+        addressList.remove(pos);
+        addressAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -85,7 +125,7 @@ public class AddressReceiveFragment extends BaseFragment implements IAddressV {
 
     @Override
     public void finishLoading(@Nullable String s) {
-        finishLoading(s);
+        LoadingFinish(s);
     }
 
     @Override
@@ -95,6 +135,32 @@ public class AddressReceiveFragment extends BaseFragment implements IAddressV {
 
     @Override
     public void onDestroy() {
+        addressP.detachView();
         super.onDestroy();
+    }
+
+    @OnClick(R.id.btn_add)
+    public void onViewClicked() {
+        startActivityForResult(new Intent()
+                        .setClass(getActivity(), AddressDetailReceiveActivity.class)
+                        .putExtra("code", CodeUtil.ADD)
+                , CodeUtil.ADD);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == CodeUtil.ADD) {
+            addressList.clear();
+            refreshList();
+            addressP.getData();
+        } else if (resultCode == CodeUtil.MODIFY) {
+            if (data != null) {
+                int pos = data.getIntExtra("pos", -1);
+                if (pos > -1 && pos < addressList.size()) {
+                    addressList.set(pos, new Gson().fromJson(data.getStringExtra("data"), AddressB.class));
+                    refreshList();
+                }
+            }
+        }
     }
 }

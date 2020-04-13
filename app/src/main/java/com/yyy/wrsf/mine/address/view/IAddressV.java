@@ -13,4 +13,11 @@ public interface IAddressV extends ILoadingV {
     void addItem(AddressB item);
 
     void addList(List<AddressB> list);
+
+    String getUrl();
+
+    String deleteUrl();
+
+    void delete(int pos);
+
 }
