@@ -36,6 +36,8 @@
         <attr name="ecHintColor" format="color" />
         <attr name="ecSrc" format="reference" />
         <attr name="ecSrcPadding" format="dimension" />
+        <attr name="ecTextPadding" format="dimension" />
+        <attr name="ecTextMarginLeft" format="dimension" />
         <attr name="ecType">
             <enum name="img" value="1"></enum>
             <enum name="tv" value="2"></enum>

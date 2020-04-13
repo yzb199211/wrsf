@@ -30,7 +30,9 @@
         app:ecHint="@string/person_name"
         app:ecSrc="@mipmap/icon_search"
         app:ecSrcPadding="@dimen/dp_10"
-        app:ecType="img" />
+        app:ecType="img"
+        app:ecTextPadding="@dimen/dp_0"
+        app:ecTextMarginLeft="@dimen/dp_0"/>
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recycler_view"

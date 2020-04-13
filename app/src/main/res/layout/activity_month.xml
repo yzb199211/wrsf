@@ -26,6 +26,8 @@
         app:ecHint="@string/person_name"
         app:ecSrc="@mipmap/icon_search"
         app:ecSrcPadding="@dimen/dp_10"
+        app:ecTextMarginLeft="@dimen/dp_0"
+        app:ecTextPadding="@dimen/dp_0"
         app:ecType="img" />
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView

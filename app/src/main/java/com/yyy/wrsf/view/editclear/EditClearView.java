@@ -52,6 +52,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private int leftSrc;
     private int leftSrcPadding;
     private int commonPadding;
+    private int textPadding;
+    private int textMarginLeft;
     private int lines;
     private boolean singleLine;
     private boolean editable;
@@ -96,6 +98,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         formatTitle = array.getBoolean(R.styleable.EditClearView_ecFormatTitle, true);
         hasDelete = array.getBoolean(R.styleable.EditClearView_ecHasDetele, true);
         singleLine = array.getBoolean(R.styleable.EditClearView_ecSingleLine, true);
+        textPadding = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextPadding, commonPadding);
+        textMarginLeft = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextMarginLeft, context.getResources().getDimensionPixelSize(R.dimen.dp_10));
         array.recycle();
     }
 
@@ -140,7 +144,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         editText.setTextColor(textColor);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         editText.setLayoutParams(etParams());
-        editText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
+        editText.setPadding(textPadding, textPadding, textPadding, textPadding);
         editText.setGravity(Gravity.CENTER_VERTICAL);
         if (singleLine)
             editText.setSingleLine();
@@ -250,7 +254,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
 
     private LayoutParams etParams() {
         LayoutParams params = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
-        params.leftMargin = context.getResources().getDimensionPixelSize(R.dimen.dp_10);
+        params.leftMargin = textMarginLeft;
         return params;
     }
 
