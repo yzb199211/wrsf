@@ -111,6 +111,7 @@ public class DriverActivity extends BaseActivity {
         pager.setPageSize(500);
     }
 
+
     private void getData() {
         setPager();
         new NetUtil(getParams(), NetConfig.address + DriverUrl.getDriver, RequstType.POST, new ResponseListener() {
@@ -174,9 +175,9 @@ public class DriverActivity extends BaseActivity {
         DriverFilterB driverFilterB = new DriverFilterB();
         if (!TextUtils.isEmpty(tel)) {
             driverFilterB.setDriverTel(tel);
-            return driverFilterB;
         }
-        return null;
+        driverFilterB.setDriverStatus(1);
+        return driverFilterB;
     }
 
     private List<NetParams> getParams() {
@@ -217,7 +218,16 @@ public class DriverActivity extends BaseActivity {
                     refrishList();
                 }
             }
+        } else if (resultCode == CodeUtil.DELETE) {
+            if (data != null) {
+                int pos = data.getIntExtra("pos", -1);
+                if (pos > -1 && pos < driverModels.size()) {
+                    driverModels.remove(pos);
+//                    addresses.get(pos) = ;
+                    refrishList();
+                }
+            }
         }
-    }
 
+    }
 }

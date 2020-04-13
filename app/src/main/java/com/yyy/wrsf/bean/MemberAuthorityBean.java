@@ -1,5 +1,7 @@
 package com.yyy.wrsf.bean;
 
+import android.text.TextUtils;
+
 public class MemberAuthorityBean {
 
     /**
@@ -25,7 +27,7 @@ public class MemberAuthorityBean {
     }
 
     public String getName() {
-        return name;
+        return TextUtils.isEmpty(name) ? "" : name;
     }
 
     public void setName(String name) {
@@ -33,7 +35,7 @@ public class MemberAuthorityBean {
     }
 
     public String getDescription() {
-        return description;
+        return TextUtils.isEmpty(description) ? "" : description;
     }
 
     public void setDescription(String description) {

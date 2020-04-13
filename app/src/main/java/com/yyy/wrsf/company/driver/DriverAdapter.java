@@ -36,7 +36,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VH> {
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.tvName.setText(list.get(position).getDriverName());
         holder.tvTel.setText(list.get(position).getDriverTel());
-        holder.tvLisence.setText(list.get(position).getDriverTypeName());
+//        holder.tvLisence.setText(list.get(position).getDriverTypeName());
         holder.tvEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VH> {
             super(v);
             tvName = v.findViewById(R.id.tv_name);
             tvTel = v.findViewById(R.id.tv_tel);
-            tvLisence = v.findViewById(R.id.tv_lisence);
+//            tvLisence = v.findViewById(R.id.tv_lisence);
             tvEdit = v.findViewById(R.id.tv_edit);
         }
     }

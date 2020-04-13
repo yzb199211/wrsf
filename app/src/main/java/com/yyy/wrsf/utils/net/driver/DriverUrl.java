@@ -5,4 +5,5 @@ public class DriverUrl {
     public final static String getList = "/shopDriver/getList";
     public final static String insert = "/shopDriver/insertDriver";
     public final static String update = "/shopDriver/updateDriver";
+    public final static String delete = "/shopDriver/deleteDriver";
 }

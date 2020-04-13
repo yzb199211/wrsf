@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.DialogUtil;
+import com.yyy.wrsf.dialog.JudgeDialog;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.beans.DriverB;
@@ -60,12 +61,12 @@ public class DriverDetailActivity extends BaseActivity {
     EditClearView ecvName;
     @BindView(R.id.ecv_tel)
     EditClearView ecvTel;
-    @BindView(R.id.ecv_license)
-    EditClearView ecvLicense;
-    @BindView(R.id.ecv_sex)
-    EditClearView ecvSex;
-    @BindView(R.id.ecv_status)
-    EditClearView ecvStatus;
+    //    @BindView(R.id.ecv_license)
+//    EditClearView ecvLicense;
+//    @BindView(R.id.ecv_sex)
+//    EditClearView ecvSex;
+//    @BindView(R.id.ecv_status)
+//    EditClearView ecvStatus;
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
 
@@ -80,6 +81,7 @@ public class DriverDetailActivity extends BaseActivity {
 
     private int code;
     private int pos;
+    private JudgeDialog judgeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,14 +89,14 @@ public class DriverDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_driver_detail);
         ButterKnife.bind(this);
         init();
-        getData();
+//        getData();
     }
 
     private void init() {
         initList();
         initPublicFilter();
-        initView();
         initData();
+        initView();
     }
 
     private void initPublicFilter() {
@@ -111,11 +113,30 @@ public class DriverDetailActivity extends BaseActivity {
         licenses = new ArrayList<>();
     }
 
+    private void deleteDialog() {
+        if (judgeDialog == null) {
+            initDialog();
+        }
+        judgeDialog.show();
+
+    }
+
+    private void initDialog() {
+        judgeDialog = new JudgeDialog(this);
+        judgeDialog.setContent(getString(R.string.common_dialog_delete));
+        judgeDialog.setOnCloseListener(confirm -> {
+            if (confirm) {
+                delete(driver.getRecNo());
+            }
+        });
+    }
+
     private void initView() {
         initTop();
-        initSex();
-        initLicense();
-        initStatus();
+        setDriver();
+//        initSex();
+//        initLicense();
+//        initStatus();
     }
 
     private void initData() {
@@ -129,6 +150,7 @@ public class DriverDetailActivity extends BaseActivity {
             driver = new Gson().fromJson(getIntent().getStringExtra("data"), DriverB.class);
         } else {
             driver = new DriverB();
+            topView.setRightTvShow(false);
         }
     }
 
@@ -138,10 +160,10 @@ public class DriverDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 ecvName.setText(TextUtils.isEmpty(driver.getDriverName()) ? "" : driver.getDriverName());
-                ecvLicense.setText(TextUtils.isEmpty(driver.getDriverTypeName()) ? "" : driver.getDriverTypeName());
-                ecvSex.setText(driver.getSex() == 1 ? "男" : "女");
+//                ecvLicense.setText(TextUtils.isEmpty(driver.getDriverTypeName()) ? "" : driver.getDriverTypeName());
+//                ecvSex.setText(driver.getSex() == 1 ? "男" : "女");
                 ecvTel.setText(TextUtils.isEmpty(driver.getDriverTel()) ? "" : driver.getDriverTel());
-                ecvStatus.setText(getStatusName());
+//                ecvStatus.setText(getStatusName());
             }
         });
     }
@@ -176,49 +198,52 @@ public class DriverDetailActivity extends BaseActivity {
                 finish();
             }
         });
-    }
-
-
-    private void initSex() {
-        ecvSex.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-                if (pvSex == null) {
-                    initPvSex();
-                } else {
-                    pvSex.show();
-                }
-            }
+        topView.setOnRightClickListener(() -> {
+            deleteDialog();
         });
     }
 
 
-    private void initLicense() {
-        ecvLicense.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-                if (pvLicense == null) {
-                    initPvLicense();
-                } else {
-                    pvLicense.show();
-                }
-            }
-        });
-
-    }
-
-    private void initStatus() {
-        ecvStatus.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-                if (pvStatus == null) {
-                    initPvStatus();
-                } else {
-                    pvStatus.show();
-                }
-            }
-        });
-    }
+//    private void initSex() {
+//        ecvSex.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int pos) {
+//                if (pvSex == null) {
+//                    initPvSex();
+//                } else {
+//                    pvSex.show();
+//                }
+//            }
+//        });
+//    }
+//
+//
+//    private void initLicense() {
+//        ecvLicense.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int pos) {
+//                if (pvLicense == null) {
+//                    initPvLicense();
+//                } else {
+//                    pvLicense.show();
+//                }
+//            }
+//        });
+//
+//    }
+//
+//    private void initStatus() {
+//        ecvStatus.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int pos) {
+//                if (pvStatus == null) {
+//                    initPvStatus();
+//                } else {
+//                    pvStatus.show();
+//                }
+//            }
+//        });
+//    }
 
     private void getData() {
         LoadingDialog.showDialogForLoading(this);
@@ -242,7 +267,7 @@ public class DriverDetailActivity extends BaseActivity {
                     } else {
                         LoadingFinish(result.getMsg());
                     }
-                    setDriver();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     LoadingFinish(e.getMessage());
@@ -263,73 +288,73 @@ public class DriverDetailActivity extends BaseActivity {
         return params;
     }
 
-    private void initPvSex() {
-        pvSex = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                ecvSex.setText(sexes.get(options1).getPickerViewText());
-                driver.setSex(sexes.get(options1).getId());
-            }
-        }).setContentTextSize(18)//设置滚轮文字大小
-                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
-                .setSelectOptions(0)//默认选中项
-                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setLabels("", "", "")
-                .setTitleText(ecvSex.getTitle())
-                .isDialog(true)
-                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
-                .build();
-        pvSex.setPicker(sexes);//一级选择器
-        DialogUtil.setDialog(pvSex);
-        pvSex.show();
-    }
-
-    private void initPvStatus() {
-        Log.e("status", new Gson().toJson(status));
-        pvStatus = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                ecvStatus.setText(status.get(options1).getPickerViewText());
-                driver.setDriverStatus(status.get(options1).getRecNo());
-            }
-        }).setContentTextSize(18)//设置滚轮文字大小
-                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
-                .setSelectOptions(0)//默认选中项
-                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setLabels("", "", "")
-                .isDialog(true)
-                .setTitleText(ecvStatus.getTitle())
-                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
-                .build();
-        pvStatus.setPicker(status);//一级选择器
-        DialogUtil.setDialog(pvStatus);
-        pvStatus.show();
-    }
-
-    private void initPvLicense() {
-        pvLicense = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                ecvLicense.setText(licenses.get(options1).getPickerViewText());
-                driver.setDriverType(licenses.get(options1).getRecNo());
-                driver.setDriverTypeName(licenses.get(options1).getPickerViewText());
-            }
-        }).setContentTextSize(18)//设置滚轮文字大小
-                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
-                .setSelectOptions(0)//默认选中项
-                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setLabels("", "", "")
-                .isDialog(true)
-                .setTitleText(ecvLicense.getTitle())
-                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
-                .build();
-        pvLicense.setPicker(licenses);//一级选择器
-        DialogUtil.setDialog(pvLicense);
-        pvLicense.show();
-    }
+//    private void initPvSex() {
+//        pvSex = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                ecvSex.setText(sexes.get(options1).getPickerViewText());
+//                driver.setSex(sexes.get(options1).getId());
+//            }
+//        }).setContentTextSize(18)//设置滚轮文字大小
+//                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+//                .setSelectOptions(0)//默认选中项
+//                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+//                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+//                .setLabels("", "", "")
+//                .setTitleText(ecvSex.getTitle())
+//                .isDialog(true)
+//                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
+//                .build();
+//        pvSex.setPicker(sexes);//一级选择器
+//        DialogUtil.setDialog(pvSex);
+//        pvSex.show();
+//    }
+//
+//    private void initPvStatus() {
+//        Log.e("status", new Gson().toJson(status));
+//        pvStatus = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                ecvStatus.setText(status.get(options1).getPickerViewText());
+//                driver.setDriverStatus(status.get(options1).getRecNo());
+//            }
+//        }).setContentTextSize(18)//设置滚轮文字大小
+//                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+//                .setSelectOptions(0)//默认选中项
+//                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+//                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+//                .setLabels("", "", "")
+//                .isDialog(true)
+//                .setTitleText(ecvStatus.getTitle())
+//                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
+//                .build();
+//        pvStatus.setPicker(status);//一级选择器
+//        DialogUtil.setDialog(pvStatus);
+//        pvStatus.show();
+//    }
+//
+//    private void initPvLicense() {
+//        pvLicense = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                ecvLicense.setText(licenses.get(options1).getPickerViewText());
+//                driver.setDriverType(licenses.get(options1).getRecNo());
+//                driver.setDriverTypeName(licenses.get(options1).getPickerViewText());
+//            }
+//        }).setContentTextSize(18)//设置滚轮文字大小
+//                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+//                .setSelectOptions(0)//默认选中项
+//                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+//                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+//                .setLabels("", "", "")
+//                .isDialog(true)
+//                .setTitleText(ecvLicense.getTitle())
+//                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
+//                .build();
+//        pvLicense.setPicker(licenses);//一级选择器
+//        DialogUtil.setDialog(pvLicense);
+//        pvLicense.show();
+//    }
 
 
     @OnClick(R.id.btn_confirm)
@@ -352,16 +377,17 @@ public class DriverDetailActivity extends BaseActivity {
             Toast(getString(R.string.error_phone));
             return false;
         }
-        if (TextUtils.isEmpty(ecvLicense.getText())) {
-            Toast(ecvLicense.getHint());
-            return false;
-        }
+//        if (TextUtils.isEmpty(ecvLicense.getText())) {
+//            Toast(ecvLicense.getHint());
+//            return false;
+//        }
         driver.setDriverName(ecvName.getText());
         driver.setDriverTel(ecvTel.getText());
         return true;
     }
 
     private void saveData() {
+        LoadingDialog.showDialogForLoading(this);
         new NetUtil(sendParams(), NetConfig.address + (code == CodeUtil.MODIFY ? DriverUrl.update : DriverUrl.insert), code == CodeUtil.MODIFY ? RequstType.PUT : RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
@@ -369,7 +395,37 @@ public class DriverDetailActivity extends BaseActivity {
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
+                        LoadingFinish(getString(R.string.common_save_success));
                         setResult(code, new Intent().putExtra("data", new Gson().toJson(driver)).putExtra("pos", pos));
+                        finish();
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                LoadingFinish(e.getMessage());
+                Log.e("error", e.getMessage());
+            }
+        });
+    }
+
+    private void delete(int recNo) {
+        LoadingDialog.showDialogForLoading(this);
+        new NetUtil(deleteParams(recNo), NetConfig.address + DriverUrl.delete, RequstType.DELETE, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                try {
+
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(getString(R.string.common_delete_success));
+                        setResult(CodeUtil.DELETE, new Intent().putExtra("pos", pos));
                         finish();
                     } else {
                         LoadingFinish(result.getMsg());
@@ -391,6 +447,12 @@ public class DriverDetailActivity extends BaseActivity {
     private List<NetParams> sendParams() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("params", new Gson().toJson(driver)));
+        return params;
+    }
+
+    private List<NetParams> deleteParams(int recNo) {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("recNo", recNo + ""));
         return params;
     }
 

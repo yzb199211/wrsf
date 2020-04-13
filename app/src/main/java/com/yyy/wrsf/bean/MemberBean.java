@@ -1,5 +1,7 @@
 package com.yyy.wrsf.bean;
 
+import android.text.TextUtils;
+
 import com.yyy.yyylibrary.wheel.interfaces.IPickerViewData;
 
 import java.util.List;
@@ -23,7 +25,7 @@ public class MemberBean implements IPickerViewData {
     private MemberRoleBean memberRoleBo;
 
     public String getUsername() {
-        return username;
+        return TextUtils.isEmpty(username) ? "" : username;
     }
 
     public void setUsername(String username) {
@@ -31,7 +33,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getToken() {
-        return token;
+        return TextUtils.isEmpty(token) ? "" : token;
     }
 
     public List<MemberAuthorityBean> getRoles() {
@@ -55,7 +57,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getBrithday() {
-        return brithday;
+        return TextUtils.isEmpty(brithday) ? "" : brithday;
     }
 
     public void setBrithday(String brithday) {
@@ -63,7 +65,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return TextUtils.isEmpty(companyName) ? "" : companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -71,7 +73,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getMail() {
-        return mail;
+        return TextUtils.isEmpty(mail) ? "" : mail;
     }
 
     public void setMail(String mail) {
@@ -79,7 +81,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getMemberName() {
-        return memberName;
+        return TextUtils.isEmpty(memberName) ? "" : memberName;
     }
 
     public void setMemberName(String memberName) {
@@ -87,7 +89,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getMemberPetname() {
-        return memberPetname;
+        return TextUtils.isEmpty(memberPetname) ? "" : memberPetname;
     }
 
     public void setMemberPetname(String memberPetname) {
@@ -95,7 +97,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getMemberSex() {
-        return memberSex;
+        return TextUtils.isEmpty(memberSex) ? "" : memberSex;
     }
 
     public void setMemberSex(String memberSex) {
@@ -103,7 +105,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getMemberTel() {
-        return memberTel;
+        return TextUtils.isEmpty(memberTel) ? "" : memberTel;
     }
 
     public void setMemberTel(String memberTel) {
@@ -111,7 +113,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getPassWord() {
-        return passWord;
+        return TextUtils.isEmpty(passWord) ? "" : passWord;
     }
 
     public void setPassWord(String passWord) {
@@ -143,7 +145,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public String getValidate() {
-        return validate;
+        return TextUtils.isEmpty(validate) ? "" : validate;
     }
 
     public void setValidate(String validate) {
