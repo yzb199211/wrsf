@@ -245,13 +245,16 @@
             <com.yyy.wrsf.view.textselect.TextMenuItem
                 android:id="@+id/tmi_remark"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
                 android:background="@color/white"
+                android:minHeight="@dimen/row_common"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 app:tmiSelected="true"
+                app:tmiSingleLine="false"
                 app:tmiTextColor="@color/text_common"
+                app:tmiTextGravity="left"
                 app:tmiTitle="@string/send_remark"
                 app:tmiTitleColor="@color/text_gray2" />
 

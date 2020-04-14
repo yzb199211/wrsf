@@ -89,7 +89,8 @@
                 android:paddingRight="@dimen/dp_5"
                 app:ecHint="@string/address_detail"
                 app:ecTitle="@string/address_detail"
-                app:ecType="tv" />
+                app:ecType="tv"
+                app:ecSingleLine="false"/>
         </LinearLayout>
     </ScrollView>
 

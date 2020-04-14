@@ -140,17 +140,22 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private void initText() {
         editText = new EditText(context);
         editText.setHint(TextUtils.isEmpty(hint) ? "" : context.getString(R.string.common_input) + hint);
-        editText.setText(text);
         editText.setTextColor(textColor);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         editText.setLayoutParams(etParams());
         editText.setPadding(textPadding, textPadding, textPadding, textPadding);
         editText.setGravity(Gravity.CENTER_VERTICAL);
-        if (singleLine)
+        if (singleLine) {
             editText.setSingleLine();
+            editText.setInputType(getInputType());
+        } else {
+            editText.setHorizontallyScrolling(false);
+            editText.setSingleLine(false);
+            editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        }
+        editText.setText(text);
         editText.setBackground(null);
         editText.setOnKeyListener(this);
-        editText.setInputType(getInputType());
         setTextLength();
         addTextListener();
         if (hintColor != 0)
@@ -169,7 +174,8 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
             tvText.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
         else tvText.setGravity(Gravity.CENTER_VERTICAL);
         tvText.setPadding(commonPadding, commonPadding, commonPadding, commonPadding);
-        tvText.setSingleLine();
+        if (singleLine)
+            tvText.setSingleLine();
         tvText.setBackground(null);
         tvText.setOnClickListener(new OnClickListener() {
             @Override
@@ -253,7 +259,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     }
 
     private LayoutParams etParams() {
-        LayoutParams params = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
+        LayoutParams params = new LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
         params.leftMargin = textMarginLeft;
         return params;
     }

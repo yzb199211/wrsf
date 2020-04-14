@@ -43,6 +43,7 @@
     <string name="common_save_success">保存成功</string>
     <string name="common_cancel">取消</string>
     <string name="common_cancel_success">取消成功</string>
+    <string name="common_noticce_success">通知成功</string>
     <string name="common_confirm">确认</string>
     <string name="common_info">提示</string>
     <string name="common_add_manully">手动添加</string>
@@ -170,7 +171,6 @@
     <string name="sign_back_none">无需签收单</string>
     <string name="sign_back_paper">纸质签收单</string>
     <string name="sign_back_electronic">电子签收单</string>
-
     <string name="send_empty_address">请选择寄件人和发件人</string>
     <string name="send_empty_company">请选择物流公司</string>
     <!--order-->
@@ -190,7 +190,8 @@
     <string name="order_value_add">增值服务：</string>
     <string name="order_fee_insure">保价金额：</string>
     <string name="order_fee_collection">代收货款：</string>
-    <string name="order_wait_notice">等通知发货：</string>
+    <string name="order_wait_notice_yes">放货</string>
+    <string name="order_wait_notice">等通知放货：</string>
 
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>

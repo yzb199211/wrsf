@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IOrderM extends IBaseM {
     OrderFilterB getFilter(String orderNo, Integer orderType);
+    OrderFilterB getFilterNotice(String orderNo, Integer orderType);
     List<TabB> getTabs();
 
 }

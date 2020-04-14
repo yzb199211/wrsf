@@ -10,7 +10,7 @@ public class PhoneUtils {
     /**
      * 中国手机号码
      */
-    private static Pattern CHINESE_PHONE_PATTERN = Pattern.compile("((13|15|17|18)\\d{9})|(14[57]\\d{8})");
+    private static Pattern CHINESE_PHONE_PATTERN = Pattern.compile("((13|14|15|16|17|18|19)\\d{9})");
 
 
     /**

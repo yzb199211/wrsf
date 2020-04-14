@@ -33,7 +33,7 @@ public class TextMenuItem extends LinearLayout {
     private String hint;
     private int leftSrc;
     private int leftSize;
-
+    private boolean singleLine;
 
     private boolean isSelected;
 
@@ -68,6 +68,7 @@ public class TextMenuItem extends LinearLayout {
         isSelected = array.getBoolean(R.styleable.TextMenuItem_tmiSelected, false);
         textGravity = array.getInteger(R.styleable.TextMenuItem_tmiTextGravity, Gravity.RIGHT);
         hint = array.getString(R.styleable.TextMenuItem_tmiHint);
+        singleLine = array.getBoolean(R.styleable.TextMenuItem_tmiSingleLine, true);
         array.recycle();
     }
 
@@ -105,7 +106,8 @@ public class TextMenuItem extends LinearLayout {
         tvDetail.setTextColor(textColor);
         tvDetail.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tvDetail.setLayoutParams(textParams());
-        tvDetail.setSingleLine();
+        if (singleLine)
+            tvDetail.setSingleLine();
         tvDetail.setGravity(textGravity);
         tvDetail.setHint(TextUtils.isEmpty(hint) ? "" : context.getString(R.string.common_input) + hint);
         addView(tvDetail);

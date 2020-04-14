@@ -100,6 +100,7 @@
         <attr name="tmiTextColor" format="color" />
         <attr name="tmiTextSize" format="dimension" />
         <attr name="tmiSelected" format="boolean" />
+        <attr name="tmiSingleLine" format="boolean" />
     </declare-styleable>
     <declare-styleable name="MenuItem">
         <attr name="miSrc" format="reference" />

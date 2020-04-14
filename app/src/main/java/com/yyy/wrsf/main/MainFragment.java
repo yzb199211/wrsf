@@ -27,6 +27,7 @@ import com.yyy.wrsf.mine.addvalue.AddValueActivity;
 import com.yyy.wrsf.mine.backOrder.BackOrderActivity;
 import com.yyy.wrsf.mine.month.MonthApplyActivity;
 import com.yyy.wrsf.mine.order.OrderActivity;
+import com.yyy.wrsf.mine.order.OrderNoticeActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.ImageLoaderUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -98,6 +99,7 @@ public class MainFragment extends BaseFragment implements ICycleV {
                 go2BackOrder();
                 break;
             case R.id.mi_send_notice:
+                go2Notice();
                 break;
             case R.id.mi_pending_payment:
                 break;
@@ -117,6 +119,10 @@ public class MainFragment extends BaseFragment implements ICycleV {
             default:
                 break;
         }
+    }
+
+    private void go2Notice() {
+        startActivity(new Intent().setClass(getActivity(), OrderNoticeActivity.class));
     }
 
     private void go2Order() {
@@ -232,6 +238,6 @@ public class MainFragment extends BaseFragment implements ICycleV {
     }
 
     private void go2Search(String content) {
-        
+
     }
 }

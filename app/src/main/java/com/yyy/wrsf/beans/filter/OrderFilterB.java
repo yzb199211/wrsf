@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class OrderFilterB implements Serializable {
     private String contractNo;
     private Integer contractStatus;
+    private Integer noticeYesNo;
 
     public String getContractNo() {
         return contractNo;
@@ -20,5 +21,13 @@ public class OrderFilterB implements Serializable {
 
     public void setContractStatus(Integer contractStatus) {
         this.contractStatus = contractStatus;
+    }
+
+    public Integer getNoticeYesNo() {
+        return noticeYesNo;
+    }
+
+    public void setNoticeYesNo(Integer noticeYesNo) {
+        this.noticeYesNo = noticeYesNo;
     }
 }

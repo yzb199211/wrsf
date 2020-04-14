@@ -14,7 +14,7 @@
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitle="@string/address_title_receive"
+        app:topTitle="@string/person_invoice"
         app:topTitleColor="@color/white" />
 
     <ScrollView
@@ -111,13 +111,15 @@
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_company_address"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
+                android:minHeight="@dimen/row_common"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
                 app:ecEditable="false"
                 app:ecHint="@string/bill_company_address"
+                app:ecSingleLine="false"
                 app:ecTitle="@string/bill_company_address"
                 app:ecType="tv" />
 
@@ -151,13 +153,15 @@
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_contract_address"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
                 app:ecEditable="false"
+                android:minHeight="@dimen/row_common"
                 app:ecHint="@string/bill_contract_address"
+                app:ecSingleLine="false"
                 app:ecTitle="@string/bill_contract_address"
                 app:ecType="tv" />
         </LinearLayout>

@@ -75,6 +75,7 @@ public class AddressP implements IAddressP {
 
     @Override
     public void delete(int id, int pos) {
+        iAddressV.startLoading();
         addressM.Requset(deleteParams(id), NetConfig.address + iAddressV.deleteUrl(), RequstType.DELETE, new OnResultListener() {
             @Override
             public void onSuccess(String data) {
