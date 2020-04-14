@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
@@ -15,14 +14,13 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.CarB;
 import com.yyy.wrsf.beans.filter.CarFilterB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.mine.notice.NoticeFragment;
-import com.yyy.wrsf.beans.CarB;
 import com.yyy.wrsf.utils.CodeUtil;
-import com.yyy.wrsf.utils.StringUtil;
-import com.yyy.wrsf.utils.Toasts;
+import com.yyy.wrsf.utils.net.car.CarUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -30,7 +28,6 @@ import com.yyy.wrsf.utils.net.net.PagerRequestBean;
 import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
-import com.yyy.wrsf.utils.net.car.CarUrl;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.OnLeftClickListener;
@@ -118,20 +115,22 @@ public class CarActivity extends BaseActivity {
         CarFilterB carFilterB = new CarFilterB();
         if (!TextUtils.isEmpty(carCode)) {
             carFilterB.setCarCode(carCode);
-            return carFilterB;
         }
-        return null;
+        carFilterB.setCarStatus(1);
+        return carFilterB;
     }
 
     private void getData() {
         setPager();
+        LoadingDialog.showDialogForLoading(this);
         new NetUtil(getParams(), NetConfig.address + CarUrl.getCarList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
-                Log.e(this.getClass().getName(), "data:" + string);
+//                Log.e(this.getClass().getName(), "data:" + string);
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
+                        LoadingFinish(null);
                         List<CarB> list = new Gson().fromJson(result.getData(), new TypeToken<List<CarB>>() {
                         }.getType());
                         if (list != null) {
@@ -198,7 +197,6 @@ public class CarActivity extends BaseActivity {
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
         go2detail(CodeUtil.ADD, -1);
-
     }
 
     @Override
@@ -213,6 +211,15 @@ public class CarActivity extends BaseActivity {
                 int pos = data.getIntExtra("pos", -1);
                 if (pos > -1 && pos < cars.size()) {
                     cars.set(pos, new Gson().fromJson(data.getStringExtra("data"), CarB.class));
+//                    addresses.get(pos) = ;
+                    refrishList();
+                }
+            }
+        } else if (resultCode == CodeUtil.DELETE) {
+            if (data != null) {
+                int pos = data.getIntExtra("pos", -1);
+                if (pos > -1 && pos < cars.size()) {
+                    cars.remove(pos);
 //                    addresses.get(pos) = ;
                     refrishList();
                 }

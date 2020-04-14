@@ -34,10 +34,10 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        holder.tvName.setText(list.get(position).getCarName());
+//        holder.tvName.setText(list.get(position).getCarName());
         holder.tvLisence.setText(list.get(position).getCarCode());
-        holder.tvStatus.setText(list.get(position).getCarStatusName());
-        holder.tvType.setText(list.get(position).getCarTypeName());
+//        holder.tvStatus.setText(list.get(position).getCarStatusName());
+//        holder.tvType.setText(list.get(position).getCarTypeName());
         holder.tvEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,10 +62,10 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.VH> {
 
         public VH(View v) {
             super(v);
-            tvName = v.findViewById(R.id.tv_name);
-            tvType = v.findViewById(R.id.tv_type);
+//            tvName = v.findViewById(R.id.tv_name);
+//            tvType = v.findViewById(R.id.tv_type);
             tvLisence = v.findViewById(R.id.tv_lisence);
-            tvStatus = v.findViewById(R.id.tv_status);
+//            tvStatus = v.findViewById(R.id.tv_status);
             tvEdit = v.findViewById(R.id.tv_edit);
         }
     }

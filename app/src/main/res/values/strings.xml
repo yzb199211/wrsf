@@ -11,7 +11,8 @@
     <string name="error_verify_code">验证码长度错误</string>
     <string name="error_pwd_length">请输入6-20位密码</string>
     <string name="error_pwd_confirm">请确认密码是否正确</string>
-    <string name="error_phone">请输入正确手机号码</string>
+    <string name="error_phone">请输入正确的手机号码</string>
+    <string name="error_plate">请输入正确的车牌号</string>
     <string name="error_user">用户名不能为空</string>
     <string name="error_license">营业执照错误</string>
     <!--net-->
@@ -36,7 +37,7 @@
     <string name="common_default">默认</string>
     <string name="common_edit">编辑</string>
     <string name="common_delete">删除</string>
-    <string name="common_delete_success">保存成功</string>
+    <string name="common_delete_success">删除成功</string>
     <string name="common_submit">提交</string>
     <string name="common_save">保存</string>
     <string name="common_save_success">保存成功</string>

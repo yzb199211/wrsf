@@ -35,7 +35,7 @@ public class StringUtil {
         return (nf.format(d));
     }
 
-    public boolean checkPlateNumberFormat(String content) {
+    public static boolean checkPlateNumberFormat(String content) {
         String pattern = "([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼]{1}(([A-HJ-Z]{1}[A-HJ-NP-Z0-9]{5})|([A-HJ-Z]{1}(([DF]{1}[A-HJ-NP-Z0-9]{1}[0-9]{4})|([0-9]{5}[DF]{1})))|([A-HJ-Z]{1}[A-D0-9]{1}[0-9]{3}警)))|([0-9]{6}使)|((([沪粤川云桂鄂陕蒙藏黑辽渝]{1}A)|鲁B|闽D|蒙E|蒙H)[0-9]{4}领)|(WJ[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼·•]{1}[0-9]{4}[TDSHBXJ0-9]{1})|([VKHBSLJNGCE]{1}[A-DJ-PR-TVY]{1}[0-9]{5})";
         return Pattern.matches(pattern, content);
     }
@@ -258,10 +258,10 @@ public class StringUtil {
 
     public static String formatDouble(Double d) {
 
-            BigDecimal d1 = new BigDecimal(Double.toString(d));
-            BigDecimal d2 = new BigDecimal(Integer.toString(1));
-            // 四舍五入,保留2位小数
-            return d1.divide(d2,0,BigDecimal.ROUND_HALF_UP).toString();
+        BigDecimal d1 = new BigDecimal(Double.toString(d));
+        BigDecimal d2 = new BigDecimal(Integer.toString(1));
+        // 四舍五入,保留2位小数
+        return d1.divide(d2, 0, BigDecimal.ROUND_HALF_UP).toString();
 
 //        DecimalFormat df = (DecimalFormat) NumberFormat.getInstance();
 ////设置小数点后的位数

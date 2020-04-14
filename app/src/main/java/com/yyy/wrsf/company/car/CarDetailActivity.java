@@ -56,33 +56,33 @@ public class CarDetailActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
-    @BindView(R.id.ecv_name)
-    EditClearView ecvName;
+    //    @BindView(R.id.ecv_name)
+//    EditClearView ecvName;
     @BindView(R.id.ecv_license_plate)
     EditClearView ecvLicensePlate;
-    @BindView(R.id.ecv_license_driving)
-    EditClearView ecvLicenseDriving;
-    @BindView(R.id.ecv_type)
-    EditClearView ecvType;
-    @BindView(R.id.ecv_company)
-    EditClearView ecvCompany;
-    @BindView(R.id.ecv_driver)
-    EditClearView ecvDriver;
-    @BindView(R.id.ecv_status)
-    EditClearView ecvStatus;
+    //    @BindView(R.id.ecv_license_driving)
+//    EditClearView ecvLicenseDriving;
+//    @BindView(R.id.ecv_type)
+//    EditClearView ecvType;
+//    @BindView(R.id.ecv_company)
+//    EditClearView ecvCompany;
+//    @BindView(R.id.ecv_driver)
+//    EditClearView ecvDriver;
+//    @BindView(R.id.ecv_status)
+//    EditClearView ecvStatus;
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
 
-    private OptionsPickerView pvDriver;
-    private OptionsPickerView pvStatus;
-    private OptionsPickerView pvCartype;
-
-    private List<DriverB> drivers = new ArrayList<>();
-    private List<PublicBean> status = new ArrayList<>();
-    private List<PublicBean> carTypes = new ArrayList<>();
-
-    private PublicFilterB publicFilter;
-    private DriverFilterB driverFilter;
+//    private OptionsPickerView pvDriver;
+//    private OptionsPickerView pvStatus;
+//    private OptionsPickerView pvCartype;
+//
+//    private List<DriverB> drivers = new ArrayList<>();
+//    private List<PublicBean> status = new ArrayList<>();
+//    private List<PublicBean> carTypes = new ArrayList<>();
+//
+//    private PublicFilterB publicFilter;
+//    private DriverFilterB driverFilter;
 
     private CarB car;
 
@@ -95,23 +95,25 @@ public class CarDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_car_detail);
         ButterKnife.bind(this);
         init();
-        getData();
+//        getData();
     }
 
 
     private void init() {
-        initPublicFilter();
-        initDriverFilter();
-        initView();
+//        initPublicFilter();
+//        initDriverFilter();
         initData();
+        initView();
+
     }
 
 
     private void initView() {
         initTop();
-        initDriver();
-        initcarTypes();
-        initStatus();
+        setCar();
+//        initDriver();
+//        initcarTypes();
+//        initStatus();
     }
 
     private void initData() {
@@ -123,23 +125,24 @@ public class CarDetailActivity extends BaseActivity {
     private void initCar() {
         if (code == CodeUtil.MODIFY) {
             car = new Gson().fromJson(getIntent().getStringExtra("data"), CarB.class);
+            topView.setRightTvShow(true);
         } else {
             car = new CarB();
         }
     }
 
-    private void initDriverFilter() {
-        driverFilter = new DriverFilterB();
-        driverFilter.setDriverStatus(1);
-    }
-
-    private void initPublicFilter() {
-        publicFilter = new PublicFilterB();
-        List<Integer> list = new ArrayList<>();
-        list.add(PublicCode.CarType);
-        list.add(PublicCode.CarStatus);
-        publicFilter.setPublicCodes(list);
-    }
+//    private void initDriverFilter() {
+//        driverFilter = new DriverFilterB();
+//        driverFilter.setDriverStatus(1);
+//    }
+//
+//    private void initPublicFilter() {
+//        publicFilter = new PublicFilterB();
+//        List<Integer> list = new ArrayList<>();
+//        list.add(PublicCode.CarType);
+//        list.add(PublicCode.CarStatus);
+//        publicFilter.setPublicCodes(list);
+//    }
 
     private void initTop() {
         topView.setOnLeftClickListener(new OnLeftClickListener() {
@@ -148,239 +151,242 @@ public class CarDetailActivity extends BaseActivity {
                 finish();
             }
         });
-    }
-
-    private void initDriver() {
-        ecvDriver.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-                if (drivers.size() == 0)
-                    getDriverData();
-                else {
-                    pvDriver.show();
-                }
-            }
+        topView.setOnRightClickListener(() -> {
+            delete(car.getRecNo());
         });
     }
 
-    private void initcarTypes() {
-        ecvType.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-                if (pvCartype == null) {
-                    initPvCartype();
-                } else {
-                    pvCartype.show();
-                }
-            }
-        });
+//    private void initDriver() {
+//        ecvDriver.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int pos) {
+//                if (drivers.size() == 0)
+//                    getDriverData();
+//                else {
+//                    pvDriver.show();
+//                }
+//            }
+//        });
+//    }
+//
+//    private void initcarTypes() {
+//        ecvType.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int pos) {
+//                if (pvCartype == null) {
+//                    initPvCartype();
+//                } else {
+//                    pvCartype.show();
+//                }
+//            }
+//        });
+//
+//    }
+//
+//
+//    private void initStatus() {
+//        ecvStatus.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int pos) {
+//                if (pvStatus == null) {
+//                    initPvStatus();
+//                } else {
+//                    pvStatus.show();
+//                }
+//            }
+//        });
+//    }
+//
+//    private void initPvCartype() {
+//        pvCartype = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                ecvType.setText(carTypes.get(options1).getPickerViewText());
+//                car.setCarType(carTypes.get(options1).getRecNo());
+//                car.setCarTypeName(carTypes.get(options1).getPickerViewText());
+//            }
+//        }).setContentTextSize(18)//设置滚轮文字大小
+//                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+//                .setSelectOptions(0)//默认选中项
+//                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+//                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+//                .setLabels("", "", "")
+//                .isDialog(true)
+//                .setTitleText(ecvType.getTitle())
+//                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
+//                .build();
+//        pvCartype.setPicker(carTypes);//一级选择器
+//        DialogUtil.setDialog(pvCartype);
+//        pvCartype.show();
+//    }
+//
+//    private void initPvStatus() {
+//
+//        pvStatus = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                ecvStatus.setText(status.get(options1).getPickerViewText());
+//                car.setCarStatus(status.get(options1).getRecNo());
+//                car.setCarStatusName(status.get(options1).getPickerViewText());
+//            }
+//        }).setContentTextSize(18)//设置滚轮文字大小
+//                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+//                .setSelectOptions(0)//默认选中项
+//                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+//                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+//                .setLabels("", "", "")
+//                .isDialog(true)
+//                .setTitleText(ecvStatus.getTitle())
+//                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
+//                .build();
+//        pvStatus.setPicker(status);//一级选择器
+//        DialogUtil.setDialog(pvStatus);
+//        pvStatus.show();
+//    }
+//
+//    private void getData() {
+//        LoadingDialog.showDialogForLoading(this);
+//        new NetUtil(getParams(), NetConfig.address + PublicUrl.getPublic, RequstType.POST, new ResponseListener() {
+//            @Override
+//            public void onSuccess(String string) {
+//                try {
+//                    Result result = new Result(string);
+//                    if (result.isSuccess()) {
+//                        List<PublicArray> list = new Gson().fromJson(result.getData(), new TypeToken<List<PublicArray>>() {
+//                        }.getType());
+//                        for (PublicArray array : list) {
+//                            if (array.equals(PublicCode.CarType) && array.getPlantPublicDetails() != null) {
+//                                carTypes.addAll(array.getPlantPublicDetails());
+//                            } else if (array.equals(PublicCode.CarStatus) && array.getPlantPublicDetails() != null) {
+//                                status.addAll(array.getPlantPublicDetails());
+//                            }
+//                        }
+//                        LoadingFinish(null);
+//
+//                    } else {
+//                        LoadingFinish(result.getMsg());
+//                    }
+//                    setCar();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    LoadingFinish(e.getMessage());
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(Exception e) {
+//                e.printStackTrace();
+//                LoadingFinish(e.getMessage());
+//            }
+//        });
+//    }
 
-    }
-
-
-    private void initStatus() {
-        ecvStatus.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-                if (pvStatus == null) {
-                    initPvStatus();
-                } else {
-                    pvStatus.show();
-                }
-            }
-        });
-    }
-
-    private void initPvCartype() {
-        pvCartype = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                ecvType.setText(carTypes.get(options1).getPickerViewText());
-                car.setCarType(carTypes.get(options1).getRecNo());
-                car.setCarTypeName(carTypes.get(options1).getPickerViewText());
-            }
-        }).setContentTextSize(18)//设置滚轮文字大小
-                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
-                .setSelectOptions(0)//默认选中项
-                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setLabels("", "", "")
-                .isDialog(true)
-                .setTitleText(ecvType.getTitle())
-                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
-                .build();
-        pvCartype.setPicker(carTypes);//一级选择器
-        DialogUtil.setDialog(pvCartype);
-        pvCartype.show();
-    }
-
-    private void initPvStatus() {
-
-        pvStatus = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                ecvStatus.setText(status.get(options1).getPickerViewText());
-                car.setCarStatus(status.get(options1).getRecNo());
-                car.setCarStatusName(status.get(options1).getPickerViewText());
-            }
-        }).setContentTextSize(18)//设置滚轮文字大小
-                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
-                .setSelectOptions(0)//默认选中项
-                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setLabels("", "", "")
-                .isDialog(true)
-                .setTitleText(ecvStatus.getTitle())
-                .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
-                .build();
-        pvStatus.setPicker(status);//一级选择器
-        DialogUtil.setDialog(pvStatus);
-        pvStatus.show();
-    }
-
-    private void getData() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(getParams(), NetConfig.address + PublicUrl.getPublic, RequstType.POST, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        List<PublicArray> list = new Gson().fromJson(result.getData(), new TypeToken<List<PublicArray>>() {
-                        }.getType());
-                        for (PublicArray array : list) {
-                            if (array.equals(PublicCode.CarType) && array.getPlantPublicDetails() != null) {
-                                carTypes.addAll(array.getPlantPublicDetails());
-                            } else if (array.equals(PublicCode.CarStatus) && array.getPlantPublicDetails() != null) {
-                                status.addAll(array.getPlantPublicDetails());
-                            }
-                        }
-                        LoadingFinish(null);
-
-                    } else {
-                        LoadingFinish(result.getMsg());
-                    }
-                    setCar();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
-    }
-
-    private void getDriverData() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(driverParams(), NetConfig.address + DriverUrl.getList, RequstType.POST, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        List<DriverB> list = new Gson().fromJson(result.getData(), new TypeToken<List<DriverB>>() {
-                        }.getType());
-                        if (list != null && list.size() > 0) {
-                            drivers.addAll(list);
-                            initPvDriver();
-                        }
-                        LoadingFinish(null);
-                    } else {
-                        LoadingFinish(result.getMsg());
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    LoadingFinish(e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                e.printStackTrace();
-                LoadingFinish(e.getMessage());
-            }
-        });
-
-    }
-
-    private void initPvDriver() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                pvDriver = new OptionsPickerBuilder(CarDetailActivity.this, new OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                        ecvDriver.setText(drivers.get(options1).getPickerViewText());
-                        car.setDriverRecNo(drivers.get(options1).getRecNo());
-                        car.setDriverName(drivers.get(options1).getDriverName());
-//                        car.setCarTypeName(drivers.get(options1).getPickerViewText());
-                    }
-                }).setContentTextSize(18)//设置滚轮文字大小
-                        .setDividerColor(Color.LTGRAY)//设置分割线的颜色
-                        .setSelectOptions(0)//默认选中项
-                        .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
-                        .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                        .setLabels("", "", "")
-                        .isDialog(true)
-                        .setTitleText(ecvType.getTitle())
-                        .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
-                        .build();
-                pvDriver.setPicker(drivers);//一级选择器
-                DialogUtil.setDialog(pvDriver);
-                pvDriver.show();
-            }
-        });
-    }
-
-    private List<NetParams> driverParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("param", new Gson().toJson(driverFilter)));
-        return params;
-    }
+//    private void getDriverData() {
+//        LoadingDialog.showDialogForLoading(this);
+//        new NetUtil(driverParams(), NetConfig.address + DriverUrl.getList, RequstType.POST, new ResponseListener() {
+//            @Override
+//            public void onSuccess(String string) {
+//                try {
+//                    Result result = new Result(string);
+//                    if (result.isSuccess()) {
+//                        List<DriverB> list = new Gson().fromJson(result.getData(), new TypeToken<List<DriverB>>() {
+//                        }.getType());
+//                        if (list != null && list.size() > 0) {
+//                            drivers.addAll(list);
+//                            initPvDriver();
+//                        }
+//                        LoadingFinish(null);
+//                    } else {
+//                        LoadingFinish(result.getMsg());
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    LoadingFinish(e.getMessage());
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(Exception e) {
+//                e.printStackTrace();
+//                LoadingFinish(e.getMessage());
+//            }
+//        });
+//
+//    }
+//
+//    private void initPvDriver() {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                pvDriver = new OptionsPickerBuilder(CarDetailActivity.this, new OnOptionsSelectListener() {
+//                    @Override
+//                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                        ecvDriver.setText(drivers.get(options1).getPickerViewText());
+//                        car.setDriverRecNo(drivers.get(options1).getRecNo());
+//                        car.setDriverName(drivers.get(options1).getDriverName());
+////                        car.setCarTypeName(drivers.get(options1).getPickerViewText());
+//                    }
+//                }).setContentTextSize(18)//设置滚轮文字大小
+//                        .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+//                        .setSelectOptions(0)//默认选中项
+//                        .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+//                        .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+//                        .setLabels("", "", "")
+//                        .isDialog(true)
+//                        .setTitleText(ecvType.getTitle())
+//                        .setBgColor(0xFFFFFFFF) //设置外部遮罩颜色
+//                        .build();
+//                pvDriver.setPicker(drivers);//一级选择器
+//                DialogUtil.setDialog(pvDriver);
+//                pvDriver.show();
+//            }
+//        });
+//    }
+//
+//    private List<NetParams> driverParams() {
+//        List<NetParams> params = new ArrayList<>();
+//        params.add(new NetParams("param", new Gson().toJson(driverFilter)));
+//        return params;
+//    }
 
     private void setCar() {
-        setDefaultData();
+//        setDefaultData();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ecvName.setText(car.getCarName());
                 ecvLicensePlate.setText(car.getCarCode());
-                ecvLicenseDriving.setText(car.getDriverCer());
-                ecvType.setText(car.getCarTypeName());
-                ecvDriver.setText(car.getDriverName());
-                ecvStatus.setText(car.getCarStatusName());
+//                ecvName.setText(car.getCarName());
+//                ecvLicenseDriving.setText(car.getDriverCer());
+//                ecvType.setText(car.getCarTypeName());
+//                ecvDriver.setText(car.getDriverName());
+//                ecvStatus.setText(car.getCarStatusName());
             }
         });
 
     }
 
-    private void setDefaultData() {
-        if (car.getCarStatus() == 0 && status.size() > 0) {
-            for (PublicBean item : status) {
-                if (item.getDetailCode() == 1) {
-                    car.setCarStatus(item.getRecNo());
-                    car.setCarStatusName(item.getDetailName());
-                    break;
-                }
-            }
-        }
-        if (car.getCarType() == 0 && carTypes.size() > 0) {
-            car.setCarType(carTypes.get(0).getRecNo());
-            car.setCarTypeName(carTypes.get(0).getDetailName());
-        }
-    }
-
-    private List<NetParams> getParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("params", new Gson().toJson(publicFilter)));
-        return params;
-    }
+//    private void setDefaultData() {
+//        if (car.getCarStatus() == 0 && status.size() > 0) {
+//            for (PublicBean item : status) {
+//                if (item.getDetailCode() == 1) {
+//                    car.setCarStatus(item.getRecNo());
+//                    car.setCarStatusName(item.getDetailName());
+//                    break;
+//                }
+//            }
+//        }
+//        if (car.getCarType() == 0 && carTypes.size() > 0) {
+//            car.setCarType(carTypes.get(0).getRecNo());
+//            car.setCarTypeName(carTypes.get(0).getDetailName());
+//        }
+//    }
+//
+//    private List<NetParams> getParams() {
+//        List<NetParams> params = new ArrayList<>();
+//        params.add(new NetParams("params", new Gson().toJson(publicFilter)));
+//        return params;
+//    }
 
     @OnClick(R.id.btn_confirm)
     public void onViewClicked() {
@@ -389,26 +395,30 @@ public class CarDetailActivity extends BaseActivity {
     }
 
     private boolean canSave() {
-        if (TextUtils.isEmpty(ecvName.getText())) {
-            Toast(ecvName.getHint());
-            return false;
-        }
+//        if (TextUtils.isEmpty(ecvName.getText())) {
+//            Toast(ecvName.getHint());
+//            return false;
+//        }
+        ecvLicensePlate.setText(ecvLicensePlate.getText().toUpperCase());
         if (TextUtils.isEmpty(ecvLicensePlate.getText())) {
             Toast(ecvLicensePlate.getHint());
             return false;
         }
-        if (TextUtils.isEmpty(ecvLicenseDriving.getText())) {
-            Toast(ecvLicenseDriving.getHint());
+        if (!StringUtil.checkPlateNumberFormat(ecvLicensePlate.getText())) {
+            Toast(getString(R.string.error_plate));
             return false;
         }
-        if (TextUtils.isEmpty(ecvDriver.getText())) {
-            Toast(ecvDriver.getHint());
-            return false;
-        }
-        car.setCarName(ecvName.getText());
+//        if (TextUtils.isEmpty(ecvLicenseDriving.getText())) {
+//            Toast(ecvLicenseDriving.getHint());
+//            return false;
+//        }
+//        if (TextUtils.isEmpty(ecvDriver.getText())) {
+//            Toast(ecvDriver.getHint());
+//            return false;
+//        }
+//        car.setCarName(ecvName.getText());
         car.setCarCode(ecvLicensePlate.getText());
-        car.setDriverCer(ecvLicenseDriving.getText());
-
+//        car.setDriverCer(ecvLicenseDriving.getText());
         return true;
     }
 
@@ -440,9 +450,43 @@ public class CarDetailActivity extends BaseActivity {
         });
     }
 
+    private void delete(int recNo) {
+        LoadingDialog.showDialogForLoading(this);
+        new NetUtil(deleteParams(recNo), NetConfig.address + CarUrl.delete, RequstType.DELETE, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(getString(R.string.common_delete_success));
+                        setResult(CodeUtil.DELETE, new Intent().putExtra("pos", pos));
+                        finish();
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                e.printStackTrace();
+                LoadingFinish(e.getMessage());
+            }
+        });
+    }
+
     private List<NetParams> sendParams() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("params", new Gson().toJson(car)));
+        return params;
+    }
+
+    private List<NetParams> deleteParams(int recNo) {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("recNo", recNo + ""));
         return params;
     }
 
