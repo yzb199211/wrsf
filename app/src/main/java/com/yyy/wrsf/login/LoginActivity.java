@@ -118,7 +118,6 @@ public class LoginActivity extends BaseActivity implements ILoginV {
         Toast(s);
     }
 
-
     private void go2Register() {
         startActivity(new Intent().setClass(this, RegisterActivity.class));
     }

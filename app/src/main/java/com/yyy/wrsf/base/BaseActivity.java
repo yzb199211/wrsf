@@ -3,11 +3,15 @@ package com.yyy.wrsf.base;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +34,8 @@ import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.Toasts;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +51,7 @@ public class BaseActivity extends FragmentActivity {
     private static final int PERMISSION_REQUESTCODE = 100;
     public int text = 0;
     public SharedPreferencesHelper preferencesHelper;
+    private int code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,7 @@ public class BaseActivity extends FragmentActivity {
         setTopColor();
         baseApplication = BaseApplication.getInstance();
         preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
+
     }
 
     private void setTopColor() {
@@ -208,5 +216,10 @@ public class BaseActivity extends FragmentActivity {
                 ((ViewGroup) childView).setClipToPadding(true);
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

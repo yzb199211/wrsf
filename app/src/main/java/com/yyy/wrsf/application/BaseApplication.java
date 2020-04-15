@@ -10,6 +10,8 @@ import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.yyy.wrsf.utils.net.net.TokenInterceptor;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
@@ -41,6 +43,7 @@ public class BaseApplication extends Application {
     public OkHttpClient getClient() {
         if (okHttpClient == null) {
             okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(new TokenInterceptor())
                     .connectTimeout(10, TimeUnit.SECONDS)//设置连接超时时间
                     .readTimeout(30, TimeUnit.SECONDS)//设置读取超时时间
                     .build();

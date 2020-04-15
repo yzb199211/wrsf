@@ -1,7 +1,11 @@
 package com.yyy.wrsf.utils.net.net;
 
+import android.content.Context;
+import android.os.Message;
+
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 
 import java.io.File;
