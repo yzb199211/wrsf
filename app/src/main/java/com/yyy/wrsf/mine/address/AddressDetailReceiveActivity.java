@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.common.address.AreaSelect;
 import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.dialog.LoadingDialog;
@@ -41,7 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddressDetailReceiveActivity extends AppCompatActivity {
+public class AddressDetailReceiveActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -273,21 +274,6 @@ public class AddressDetailReceiveActivity extends AppCompatActivity {
         }
     }
 
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
-
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
-    }
 
     @Override
     public void onBackPressed() {

@@ -7,4 +7,5 @@ public class OrderUrl {
     public final static String cancelOrder = "/contractInfo/cancel";
     public final static String shopRecConfirm = "/contractInfo/shopRecConfirm";
     public final static String SendNoticeByCustomer = "/contractInfo/SendNoticeByCustomer";
+    public final static String getMyRecPageList = "/contractInfo/getMyRecPageList";
 }

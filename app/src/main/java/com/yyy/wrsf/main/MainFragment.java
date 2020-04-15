@@ -28,6 +28,8 @@ import com.yyy.wrsf.mine.backOrder.BackOrderActivity;
 import com.yyy.wrsf.mine.month.MonthApplyActivity;
 import com.yyy.wrsf.mine.order.OrderActivity;
 import com.yyy.wrsf.mine.order.OrderNoticeActivity;
+import com.yyy.wrsf.mine.order.OrderReceiveActivity;
+import com.yyy.wrsf.mine.order.OrderSearchActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.ImageLoaderUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -115,10 +117,16 @@ public class MainFragment extends BaseFragment implements ICycleV {
                 go2Order();
                 break;
             case R.id.btn_receive:
+                fo2Receive();
                 break;
             default:
                 break;
         }
+    }
+
+    private void fo2Receive() {
+//        startActivity(new Intent().setClass(getActivity(), OrderReceiveActivity.class));
+        startActivity(new Intent().setClass(getActivity(), OrderSearchActivity.class));
     }
 
     private void go2Notice() {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.JudgeDialog;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnDeleteListener;
@@ -43,7 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddressSendActivity extends AppCompatActivity {
+public class AddressSendActivity extends BaseActivity {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -272,22 +273,6 @@ public class AddressSendActivity extends AppCompatActivity {
                 }
             }
         }
-    }
-
-    private void LoadingFinish(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (StringUtil.isNotEmpty(msg)) {
-                    Toast(msg);
-                }
-                LoadingDialog.cancelDialogForLoading();
-            }
-        });
-    }
-
-    private void Toast(String msg) {
-        Toasts.showShort(this, msg);
     }
 
     @Override
