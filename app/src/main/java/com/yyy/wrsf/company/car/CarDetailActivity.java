@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.dialog.DialogUtil;
+import com.yyy.wrsf.dialog.JudgeDialog;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.beans.CarB;
@@ -88,6 +89,7 @@ public class CarDetailActivity extends BaseActivity {
 
     private int code;
     private int pos;
+    private JudgeDialog judgeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,10 +154,26 @@ public class CarDetailActivity extends BaseActivity {
             }
         });
         topView.setOnRightClickListener(() -> {
-            delete(car.getRecNo());
+            confirmDelete();
         });
     }
 
+    private void confirmDelete() {
+        if (judgeDialog == null) {
+            judgeDialog = new JudgeDialog(this);
+            judgeDialog.setContent(getString(R.string.common_dialog_delete));
+        }
+        judgeDialog.setOnCloseListener(new JudgeDialog.OnCloseListener() {
+            @Override
+            public void onClick(boolean confirm) {
+                if (confirm) {
+                    delete(car.getRecNo());
+                }
+            }
+        });
+        judgeDialog.show();
+
+    }
 //    private void initDriver() {
 //        ecvDriver.setOnItemClickListener(new OnItemClickListener() {
 //            @Override

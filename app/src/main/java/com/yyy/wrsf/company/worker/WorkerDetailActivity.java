@@ -21,6 +21,7 @@ import com.yyy.wrsf.beans.publicm.Sex;
 import com.yyy.wrsf.company.worker.persenter.WorkerDetailP;
 import com.yyy.wrsf.company.worker.persenter.WorkerP;
 import com.yyy.wrsf.company.worker.view.IWorkweDetailV;
+import com.yyy.wrsf.dialog.JudgeDialog;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.enums.StatusEnum;
 import com.yyy.wrsf.mine.bill.BillActivity;
@@ -47,7 +48,7 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
     EditClearView ecvName;
     @BindView(R.id.ecv_tel)
     EditClearView ecvTel;
-//    @BindView(R.id.ecv_petname)
+    //    @BindView(R.id.ecv_petname)
 //    EditClearView ecvPetname;
 //    @BindView(R.id.ecv_sex)
 //    EditClearView ecvSex;
@@ -61,6 +62,7 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
     private int pos;
     private List<Sex> sexes;
     private boolean editable = false;
+    private JudgeDialog judgeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,11 +110,27 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
     private void initTopRight() {
         if (pos != -1) {
             topView.setOnRightClickListener(() -> {
-                workerP.delete();
+                confirmDelete();
             });
         } else {
             topView.setRightTvShow(false);
         }
+    }
+
+    private void confirmDelete() {
+        if (judgeDialog == null) {
+            judgeDialog = new JudgeDialog(this);
+            judgeDialog.setContent(getString(R.string.common_dialog_delete));
+        }
+        judgeDialog.setOnCloseListener(new JudgeDialog.OnCloseListener() {
+            @Override
+            public void onClick(boolean confirm) {
+                if (confirm) {
+                    workerP.delete();
+                }
+            }
+        });
+        judgeDialog.show();
     }
 
     private void initStatus() {

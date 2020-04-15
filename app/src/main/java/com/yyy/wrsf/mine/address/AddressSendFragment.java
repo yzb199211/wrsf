@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseFragment;
 import com.yyy.wrsf.beans.address.AddressB;
+import com.yyy.wrsf.dialog.JudgeDialog;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.mine.address.persenter.AddressP;
 import com.yyy.wrsf.mine.address.view.IAddressV;
@@ -40,6 +41,7 @@ public class AddressSendFragment extends BaseFragment implements IAddressV {
     private List<AddressB> addressList = new ArrayList<>();
     private AddressAdapter addressAdapter;
     private AddressP addressP;
+    private JudgeDialog judgeDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,9 +79,27 @@ public class AddressSendFragment extends BaseFragment implements IAddressV {
                     , CodeUtil.MODIFY);
         });
         addressAdapter.setOnDeleteListener(pos -> {
-            addressP.delete(addressList.get(pos).getRecNo(), pos);
+            confirmDelete(pos);
+//            addressP.delete(addressList.get(pos).getRecNo(), pos);
         });
         recyclerView.setAdapter(addressAdapter);
+    }
+
+    private void confirmDelete(int pos) {
+        if (judgeDialog == null) {
+            judgeDialog = new JudgeDialog(getActivity());
+            judgeDialog.setContent(getString(R.string.common_dialog_delete));
+        }
+        judgeDialog.setOnCloseListener(new JudgeDialog.OnCloseListener() {
+            @Override
+            public void onClick(boolean confirm) {
+                if (confirm) {
+                    addressP.delete(addressList.get(pos).getRecNo(), pos);
+                }
+            }
+        });
+        judgeDialog.show();
+
     }
 
     @Override
