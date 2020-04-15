@@ -1,7 +1,7 @@
 package com.yyy.wrsf.common.company;
 
-import com.yyy.wrsf.beans.company.CompanyB;
+import com.yyy.wrsf.beans.ship.ShipCompanyB;
 
 public interface OnCompanySelectListener {
-    void onSelect(CompanyB item);
+    void onSelect(ShipCompanyB item);
 }

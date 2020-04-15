@@ -14,9 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.beans.ship.ShipCompanyB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.beans.company.CompanyB;
-import com.yyy.wrsf.beans.filter.ShipCompanyB;
+import com.yyy.wrsf.beans.filter.ShipCompanyFilterB;
 import com.yyy.wrsf.utils.PxUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
@@ -50,9 +51,9 @@ public class CompanySelect extends PopupWindow {
     private SharedPreferencesHelper preferencesHelper;
     private View view;
 
-    private List<CompanyB> companys = new ArrayList<>();
+    private List<ShipCompanyB> companys = new ArrayList<>();
     private CompanyAdapter adapter;
-    private ShipCompanyB companyFilter;
+    private ShipCompanyFilterB companyFilter;
     private OnLoadingListener onLoadingListener;
 
     public CompanySelect(Context context) {
@@ -82,7 +83,7 @@ public class CompanySelect extends PopupWindow {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void refresh(ShipCompanyB companyFilter) {
+    public void refresh(ShipCompanyFilterB companyFilter) {
         this.companyFilter = companyFilter;
         if (companys.size() > 0) {
             companys.clear();
@@ -108,7 +109,7 @@ public class CompanySelect extends PopupWindow {
                     if (result.isSuccess()) {
                         String data = result.getData();
                         if (!TextUtils.isEmpty(data)) {
-                            List<CompanyB> list = new Gson().fromJson(data, new TypeToken<List<CompanyB>>() {
+                            List<ShipCompanyB> list = new Gson().fromJson(data, new TypeToken<List<ShipCompanyB>>() {
                             }.getType());
                             if (list != null && list.size() > 0 && onLoadingListener != null) {
                                 onLoadingListener.onLoading(true);

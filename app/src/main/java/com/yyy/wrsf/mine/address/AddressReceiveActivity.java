@@ -245,7 +245,7 @@ public class AddressReceiveActivity extends BaseActivity {
                 finish();
             }
         });
-        topView.setTitle(getString(R.string.address_title_send));
+        topView.setTitle(getString(R.string.address_title_receive));
     }
 
     @OnClick(R.id.btn_add)

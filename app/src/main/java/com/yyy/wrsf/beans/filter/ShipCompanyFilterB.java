@@ -1,6 +1,6 @@
 package com.yyy.wrsf.beans.filter;
 
-public class ShipCompanyB {
+public class ShipCompanyFilterB {
 
     /**
      * companyRecNo : 0

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.beans.ship.ShipCompanyB;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.beans.company.CompanyB;
 
@@ -17,10 +18,10 @@ import java.util.List;
 
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
     private Context context;
-    private List<CompanyB> list;
+    private List<ShipCompanyB> list;
     private OnItemClickListener onItemClickListener;
 
-    public CompanyAdapter(Context context, List<CompanyB> list) {
+    public CompanyAdapter(Context context, List<ShipCompanyB> list) {
         this.context = context;
         this.list = list;
     }
@@ -34,7 +35,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        ((TextView) holder.itemView).setText(list.get(position).getCompanyName());
+        ((TextView) holder.itemView).setText(list.get(position).getTransCompanyName());
         holder.itemView.setOnClickListener((View view) -> {
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(position);

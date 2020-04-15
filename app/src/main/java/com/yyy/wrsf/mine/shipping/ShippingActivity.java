@@ -15,8 +15,9 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.beans.address.AddressB;
 import com.yyy.wrsf.beans.company.CompanyB;
-import com.yyy.wrsf.beans.filter.ShipCompanyB;
+import com.yyy.wrsf.beans.filter.ShipCompanyFilterB;
 import com.yyy.wrsf.beans.price.PriceBackB;
+import com.yyy.wrsf.beans.ship.ShipCompanyB;
 import com.yyy.wrsf.beans.ship.ShipGoodsB;
 import com.yyy.wrsf.beans.ship.ShippingAddValueB;
 import com.yyy.wrsf.beans.ship.ShippingB;
@@ -106,8 +107,8 @@ public class ShippingActivity extends BasePickActivity {
     private AddressB addressSend;
     private AddressB addressReceive;
     private ShipGoodsB goods;
-    private CompanyB company;
-    private ShipCompanyB companyFilter;
+    private ShipCompanyB company;
+    private ShipCompanyFilterB companyFilter;
     private ShippingB shipping;
     private ShippingAddValueB addValue;
     private PriceBackB priceBackM;
@@ -128,7 +129,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void initModel() {
-        companyFilter = new ShipCompanyB();
+        companyFilter = new ShipCompanyFilterB();
         initShip();
 
     }
@@ -237,10 +238,10 @@ public class ShippingActivity extends BasePickActivity {
             companySelect.setOnLoadingListener((boolean success) -> {
                 refreshCompany = false;
             });
-            companySelect.setOnCompanySelectListener((CompanyB item) -> {
+            companySelect.setOnCompanySelectListener((ShipCompanyB item) -> {
                 company = item;
-                tmiCompany.setText(company.getCompanyName());
-                shipping.setTransCompanyRecNo(company.getRecNo());
+                tmiCompany.setText(company.getTransCompanyName());
+                shipping.setTransCompanyRecNo(company.getTransCompanyRecno());
             });
         }
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
@@ -298,7 +299,7 @@ public class ShippingActivity extends BasePickActivity {
                         .putExtra("data", goods == null ? "" : new Gson().toJson(goods))
                         .putExtra("sendRec", addressSend.getThirdId())
                         .putExtra("receiveRec", addressReceive.getThirdId())
-                        .putExtra("company", company.getRecNo())
+                        .putExtra("company", company.getTransCompanyName())
                 , CodeUtil.ShipGoods);
     }
 

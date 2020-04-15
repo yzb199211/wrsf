@@ -19,6 +19,7 @@ import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.mine.order.persenter.OrderP;
 import com.yyy.wrsf.mine.order.view.IOrderV;
 import com.yyy.wrsf.utils.CodeUtil;
+import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.TopView;
@@ -46,6 +47,7 @@ public class OrderSearchActivity extends BaseActivity implements XRecyclerView.L
     private List<TabLayout.Tab> tabsV = new ArrayList<>();
     private OrderP orderP;
     private int currentTab = 0;
+    private String filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +56,34 @@ public class OrderSearchActivity extends BaseActivity implements XRecyclerView.L
         ButterKnife.bind(this);
         orderP = new OrderP(this);
         init();
-        orderP.getData();
+
     }
 
     private void init() {
+        initData();
+        initView();
+        if (StringUtil.isNotEmpty(filter)) {
+            orderP.getData();
+        }
+    }
+
+    private void initView() {
         initTop();
         initRecycle();
+        initSearch();
         orderP.getTabs();
         tabLayout.setVisibility(View.GONE);
+    }
+
+    private void initSearch() {
+        ecvSearch.setVisibility(View.VISIBLE);
+        ecvSearch.setOnEnterListerner(() -> {
+            orderP.getData();
+        });
+    }
+
+    private void initData() {
+        filter = getIntent().getStringExtra("data");
     }
 
 
@@ -155,7 +177,7 @@ public class OrderSearchActivity extends BaseActivity implements XRecyclerView.L
 
     @Override
     public String getOrderName() {
-        return null;
+        return ecvSearch.getText();
     }
 
     @Override

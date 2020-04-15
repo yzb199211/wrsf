@@ -17,15 +17,17 @@
         android:src="@mipmap/icon_scan" />
 
     <LinearLayout
+        android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_30"
         android:layout_toRightOf="@+id/iv_scan"
         android:background="@drawable/bg_commonttop_edit">
+
         <ImageView
             android:layout_width="@dimen/dp_30"
             android:layout_height="match_parent"
-            android:src="@mipmap/icon_search"
-            android:padding="@dimen/dp_8"/>
+            android:padding="@dimen/dp_8"
+            android:src="@mipmap/icon_search" />
 
         <TextView
             android:layout_width="@dimen/dp_0"
@@ -39,6 +41,7 @@
     </LinearLayout>
 
     <com.yyy.wrsf.view.editclear.EditClearView
+        android:id="@+id/ecv_search"
         android:layout_width="match_parent"
         android:layout_height="@dimen/row_common"
         android:layout_toRightOf="@+id/iv_scan"

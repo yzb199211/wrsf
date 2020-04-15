@@ -37,6 +37,7 @@ import com.yyy.wrsf.view.cycle.CircleBanner;
 import com.yyy.wrsf.view.cycle.adapter.DataViewHolder;
 import com.yyy.wrsf.view.cycle.adapter.HolderCreator;
 import com.yyy.wrsf.view.cycle.bean.DataBean;
+import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yzq.zxinglibrary.android.CaptureActivity;
 import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.yzq.zxinglibrary.common.Constant;
@@ -64,6 +65,7 @@ public class MainFragment extends BaseFragment implements ICycleV {
     @BindView(R.id.rl_img)
     RelativeLayout rlImg;
 
+
     private CycleP cycleP;
 
     @Override
@@ -78,7 +80,12 @@ public class MainFragment extends BaseFragment implements ICycleV {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
+        intiView();
         return view;
+    }
+
+    private void intiView() {
+
     }
 
     @Override
@@ -91,9 +98,12 @@ public class MainFragment extends BaseFragment implements ICycleV {
         super.onDetach();
     }
 
-    @OnClick({R.id.iv_scan, R.id.mi_receipt, R.id.mi_send_notice, R.id.mi_pending_payment, R.id.mi_insured_tansportation, R.id.mi_statements, R.id.mi_apply_month, R.id.btn_shipping, R.id.btn_receive})
+    @OnClick({R.id.ll_search, R.id.iv_scan, R.id.mi_receipt, R.id.mi_send_notice, R.id.mi_pending_payment, R.id.mi_insured_tansportation, R.id.mi_statements, R.id.mi_apply_month, R.id.btn_shipping, R.id.btn_receive})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.ll_search:
+                go2Search(null);
+                break;
             case R.id.iv_scan:
                 permission();
                 break;
@@ -125,8 +135,7 @@ public class MainFragment extends BaseFragment implements ICycleV {
     }
 
     private void fo2Receive() {
-//        startActivity(new Intent().setClass(getActivity(), OrderReceiveActivity.class));
-        startActivity(new Intent().setClass(getActivity(), OrderSearchActivity.class));
+        startActivity(new Intent().setClass(getActivity(), OrderReceiveActivity.class));
     }
 
     private void go2Notice() {
@@ -246,6 +255,6 @@ public class MainFragment extends BaseFragment implements ICycleV {
     }
 
     private void go2Search(String content) {
-
+        startActivity(new Intent().setClass(getActivity(), OrderSearchActivity.class).putExtra("data", TextUtils.isEmpty(content) ? "" : content));
     }
 }
