@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/row_common"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center_vertical"
-    android:padding="@dimen/dp_10"
-    android:textColor="@color/text_common"
-    android:textSize="@dimen/text_common">
+    android:padding="@dimen/dp_10">
 
-</TextView>
+    <TextView
+        android:id="@+id/tv_company"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_region_send_tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_company"
+        android:singleLine="true"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_region_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_region_send_tel"
+        android:maxLines="2"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_region_receive_tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_region_send"
+        android:singleLine="true"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_region_receive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_region_receive"
+        android:maxLines="2"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common" />
+</RelativeLayout>

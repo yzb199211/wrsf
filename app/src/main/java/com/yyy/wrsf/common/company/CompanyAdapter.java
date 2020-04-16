@@ -49,6 +49,11 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
     }
 
     public class VH extends RecyclerView.ViewHolder {
+        private TextView tvCompany;
+        private TextView tvSend;
+        private TextView tvSendTv;
+        private TextView tvReceive;
+
         public VH(@NonNull View itemView) {
             super(itemView);
         }
