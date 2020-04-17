@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -55,6 +56,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private int textPadding;
     private int textMarginLeft;
     private int lines;
+    private int digit;
     private boolean singleLine;
     private boolean editable;
     private boolean hasDelete = true;
@@ -86,6 +88,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         textColor = array.getColor(R.styleable.EditClearView_ecTextColor, context.getResources().getColor(R.color.text_gray2));
         textSize = array.getDimensionPixelSize(R.styleable.EditClearView_ecTextSize, context.getResources().getDimensionPixelSize(R.dimen.text_common));
         textLength = array.getInteger(R.styleable.EditClearView_ecTextLength, -1);
+        digit = array.getInteger(R.styleable.EditClearView_ecTextDigit, 0);
         textGravity = array.getInteger(R.styleable.EditClearView_ecTextGravity, -1);
         hint = array.getString(R.styleable.EditClearView_ecHint);
         hintColor = array.getColor(R.styleable.EditClearView_ecHintColor, 0);
@@ -204,10 +207,36 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
     private void setTextLength() {
         if (textLength != -1) {
             //手动设置maxLength为20
-            InputFilter[] filters = {new InputFilter.LengthFilter(textLength)};
+            InputFilter[] filters = {getFilter()};
             editText.setFilters(filters);
         }
     }
+
+    private InputFilter getFilter() {
+        InputFilter lengthfilter;
+        if (digit == 0) {
+            lengthfilter = new InputFilter.LengthFilter(textLength);
+        } else {
+            lengthfilter = (source, start, end, dest, dstart, dend) -> {
+                // 删除等特殊字符，直接返回
+                if ("".equals(source.toString())) {
+                    return null;
+                }
+                String dValue = dest.toString();
+                String[] splitArray = dValue.split("\\.");
+                if (splitArray.length > 1) {
+                    String dotValue = splitArray[1];
+                    int diff = dotValue.length() + 1 - digit;
+                    if (diff > 0) {
+                        return source.subSequence(start, end - diff);
+                    }
+                }
+                return null;
+            };
+        }
+        return lengthfilter;
+    }
+
 
     private void addTextListener() {
         editText.addTextChangedListener(new TextWatcher() {

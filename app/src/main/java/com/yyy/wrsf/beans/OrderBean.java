@@ -104,7 +104,7 @@ public class OrderBean {
     private int sendType;
     private String sendAdd;
     private String recAdd;
-    private long size;
+    private double size;
     private int transCompanyRecNo;
     private int transCustomerMonthRecNo;
     private int transRecShopRecNo;
@@ -113,7 +113,7 @@ public class OrderBean {
     private int transType;
     private double unpaid;
     private String updateDate;
-    private long weight;
+    private int weight;
 
     public String getCompanyName() {
         return TextUtils.isEmpty(companyName) ? "" : companyName;
@@ -451,11 +451,11 @@ public class OrderBean {
         this.sendType = sendType;
     }
 
-    public long getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(long size) {
+    public void setSize(double size) {
         this.size = size;
     }
 
@@ -523,11 +523,11 @@ public class OrderBean {
         this.updateDate = updateDate;
     }
 
-    public long getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(long weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 

@@ -123,7 +123,7 @@ public class ShippingGoodsActivity extends BaseActivity {
     private void setVolumeListener() {
         ecvVolume.setOnTextChangeAfter((Editable s) -> {
             String s1 = s.toString();
-            if (s1.length() > 0 && Long.parseLong(s1) > 0 && StringUtil.isNotEmpty(ecvWeight.getText()) && Long.parseLong(ecvWeight.getText()) > 0) {
+            if (s1.length() > 0 && Double.parseDouble(s1) > 0 && StringUtil.isNotEmpty(ecvWeight.getText()) && Long.parseLong(ecvWeight.getText()) > 0) {
                 ecvDensity.setText(ShipUtil.getDensity(Double.parseDouble(ecvWeight.getText()), Double.parseDouble(s1)) + "");
             } else {
                 ecvDensity.setText("0");
@@ -368,7 +368,7 @@ public class ShippingGoodsActivity extends BaseActivity {
 
     private void setGoods() {
         goodsModel.setWeight(TextUtils.isEmpty(ecvWeight.getText()) ? 0 : Integer.parseInt(ecvWeight.getText()));
-        goodsModel.setVolume(TextUtils.isEmpty(ecvVolume.getText()) ? 0 : Integer.parseInt(ecvVolume.getText()));
+        goodsModel.setVolume(TextUtils.isEmpty(ecvVolume.getText()) ? 0 : Double.parseDouble(ecvVolume.getText()));
         goodsModel.setNum(TextUtils.isEmpty(ecvNum.getText()) ? 0 : Integer.parseInt(ecvNum.getText()));
         goodsModel.setDensity(TextUtils.isEmpty(ecvDensity.getText()) ? 0 : Double.parseDouble(ecvDensity.getText()));
     }

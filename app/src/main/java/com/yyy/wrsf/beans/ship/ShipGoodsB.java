@@ -7,8 +7,8 @@ import com.yyy.wrsf.utils.StringUtil;
 public class ShipGoodsB {
     private int goodsId;
     private String goodsName;
-    private long weight;
-    private long volume;
+    private int weight;
+    private double volume;
     private long num;
     private double density;
     private int deliveryId;
@@ -42,19 +42,19 @@ public class ShipGoodsB {
         this.goodsName = goodsName;
     }
 
-    public long getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(long weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public long getVolume() {
+    public double getVolume() {
         return volume;
     }
 
-    public void setVolume(long volume) {
+    public void setVolume(double volume) {
         this.volume = volume;
     }
 

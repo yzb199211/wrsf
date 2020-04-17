@@ -17,10 +17,10 @@ public class PriceCalB {
     private int recRegion;
     private int sendRegion;
     private int sendType;
-    private Long size;
+    private double size;
     private int transCompanyRecNo;
     private int transType;
-    private Long weight;
+    private int weight;
 
     public int getDeliverType() {
         return deliveryType;
@@ -54,11 +54,11 @@ public class PriceCalB {
         this.sendType = sendType;
     }
 
-    public Long getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(Long size) {
+    public void setSize(double size) {
         this.size = size;
     }
 
@@ -78,11 +78,11 @@ public class PriceCalB {
         this.transType = transType;
     }
 
-    public Long getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(Long weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 }

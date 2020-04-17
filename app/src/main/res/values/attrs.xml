@@ -25,6 +25,7 @@
         <attr name="ecTextSize" format="dimension" />
         <attr name="ecTextColor" format="color" />
         <attr name="ecTextLength" format="integer" />
+        <attr name="ecTextDigit" format="integer" />
         <attr name="ecTextLines" format="integer" />
         <attr name="ecTextType">
             <enum name="pwd" value="1"></enum>

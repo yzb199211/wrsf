@@ -82,7 +82,7 @@ public class ShippingB implements Serializable {
     private String sendTel;
     private double sendTotal;//送货费
     private int sendType;
-    private long size;
+    private double size;
     private int transCompanyRecNo;
     private int transCustomerMonthRecNo;
     private int transRecShopRecNo;
@@ -90,7 +90,7 @@ public class ShippingB implements Serializable {
     private double transTotal;//运费
     private int transType;
     private String updateDate;
-    private long weight;//重量
+    private int weight;//重量
     private int payType;
 
     public int getBaoAsk() {
@@ -341,11 +341,11 @@ public class ShippingB implements Serializable {
         this.sendType = sendType;
     }
 
-    public long getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(long size) {
+    public void setSize(double size) {
         this.size = size;
     }
 
@@ -405,11 +405,11 @@ public class ShippingB implements Serializable {
         this.updateDate = updateDate;
     }
 
-    public long getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(long weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
