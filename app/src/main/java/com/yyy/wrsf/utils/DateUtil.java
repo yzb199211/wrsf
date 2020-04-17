@@ -58,7 +58,13 @@ public class DateUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
     }
-
+    public static String getDateAndHour(@Nullable Date date) {//可根据需要自行截取数据显示
+//        Log.d("getTime()", "choice date millis: " + date.getTime());
+        if (date == null)
+            date = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH");
+        return format.format(date);
+    }
     /**
      * 判断给定字符串时间是否为今日
      *

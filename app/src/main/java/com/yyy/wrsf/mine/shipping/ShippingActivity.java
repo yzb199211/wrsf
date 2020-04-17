@@ -242,6 +242,8 @@ public class ShippingActivity extends BasePickActivity {
                 company = item;
                 tmiCompany.setText(company.getTransCompanyName());
                 shipping.setTransCompanyRecNo(company.getTransCompanyRecno());
+                shipping.setTransRecShopRecNo(company.getRecRegion().getRecNo());
+                shipping.setTransShopRecNo(company.getSendRegion().getRecNo());
             });
         }
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
@@ -299,7 +301,9 @@ public class ShippingActivity extends BasePickActivity {
                         .putExtra("data", goods == null ? "" : new Gson().toJson(goods))
                         .putExtra("sendRec", addressSend.getThirdId())
                         .putExtra("receiveRec", addressReceive.getThirdId())
-                        .putExtra("company", company.getTransCompanyName())
+                        .putExtra("company", company.getTransCompanyRecno())
+                        .putExtra("sendShop", company.getSendRegion().getRecNo())
+                        .putExtra("recShop", company.getRecRegion().getRecNo())
                 , CodeUtil.ShipGoods);
     }
 
@@ -326,11 +330,12 @@ public class ShippingActivity extends BasePickActivity {
         pvDate = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                tmiPickDate.setText(DateUtil.getDate(date));
+                tmiPickDate.setText(DateUtil.getDateAndHour(date));
+                shipping.setPickDate(DateUtil.getTime(date));
             }
         }).setRangDate(calendar, calendarLast)
                 .setDate(calendar)
-                .setType(new boolean[]{true, true, true, false, false, false})
+                .setType(new boolean[]{true, true, true, true, false, false})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .setContentTextSize(18)
                 .setBgColor(0xFFFFFFFF)
@@ -403,7 +408,6 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void setGoods() {
-
         shipping.setGoods(goods);
         tmiGoods.setText(goods.getData());
         tmiBaseFee.setText(getString(R.string.common_rmb) + StringUtil.formatDouble(priceBackM.getContractTotal()));
@@ -445,7 +449,7 @@ public class ShippingActivity extends BasePickActivity {
                 try {
                     Result result = new Result(string);
                     if (result.isSuccess()) {
-                        LoadingFinish(null);
+                        LoadingFinish(getString(R.string.common_order_success));
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

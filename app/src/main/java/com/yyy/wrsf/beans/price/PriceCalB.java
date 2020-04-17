@@ -21,6 +21,8 @@ public class PriceCalB {
     private int transCompanyRecNo;
     private int transType;
     private int weight;
+    private int transShopRecNo;
+    private int transRecShopRecNo;
 
     public int getDeliverType() {
         return deliveryType;
@@ -84,5 +86,21 @@ public class PriceCalB {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public int getTransShopRecNo() {
+        return transShopRecNo;
+    }
+
+    public void setTransShopRecNo(int transShopRecNo) {
+        this.transShopRecNo = transShopRecNo;
+    }
+
+    public int getTransRecShopRecNo() {
+        return transRecShopRecNo;
+    }
+
+    public void setTransRecShopRecNo(int transRecShopRecNo) {
+        this.transRecShopRecNo = transRecShopRecNo;
     }
 }
