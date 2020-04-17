@@ -63,7 +63,7 @@
                 app:ecTextType="pwd"
                 app:ecTitle="@string/login_pwd"
                 app:ecType="tv"
-                app:ecText="123456"/>
+                app:ecText="654321"/>
 
             <View
                 android:layout_width="match_parent"

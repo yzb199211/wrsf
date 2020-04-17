@@ -35,7 +35,12 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        ((TextView) holder.itemView).setText(list.get(position).getTransCompanyName());
+//        ((TextView) holder.itemView).setText(list.get(position).getTransCompanyName());
+        holder.tvCompany.setText(list.get(position).getTransCompanyName());
+        holder.tvSend.setText(list.get(position).getSendRegion().getDetailAdd());
+        holder.tvSendTel.setText(list.get(position).getSendRegion().getSendTel());
+        holder.tvReceiveTel.setText(list.get(position).getRecRegion().getRecTel());
+        holder.tvReceive.setText(list.get(position).getRecRegion().getDetailAdd());
         holder.itemView.setOnClickListener((View view) -> {
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(position);
@@ -51,11 +56,17 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
     public class VH extends RecyclerView.ViewHolder {
         private TextView tvCompany;
         private TextView tvSend;
-        private TextView tvSendTv;
+        private TextView tvSendTel;
         private TextView tvReceive;
+        private TextView tvReceiveTel;
 
         public VH(@NonNull View itemView) {
             super(itemView);
+            tvCompany = itemView.findViewById(R.id.tv_company);
+            tvSendTel = itemView.findViewById(R.id.tv_region_send_tel);
+            tvSend = itemView.findViewById(R.id.tv_region_send);
+            tvReceive = itemView.findViewById(R.id.tv_region_receive);
+            tvReceiveTel = itemView.findViewById(R.id.tv_region_receive_tel);
         }
     }
 
