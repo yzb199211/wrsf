@@ -20,6 +20,7 @@ public class LoadingDialog {
      */
     public static Dialog mLoadingDialog;
 
+
     /**
      * 显示加载对话框
      *
@@ -43,15 +44,17 @@ public class LoadingDialog {
     }
 
     public static Dialog showDialogForLoading(Context context) {
-        WeakReference<Context> wr = new WeakReference<>(context);
-        View view = LayoutInflater.from(wr.get()).inflate(R.layout.dialog_loading, null);
-        avi = view.findViewById(R.id.avi);
-        mLoadingDialog = new Dialog(wr.get(), R.style.LoadingDialogStyle);
-        mLoadingDialog.setCancelable(false);
-        mLoadingDialog.setCanceledOnTouchOutside(false);
-        mLoadingDialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        mLoadingDialog.show();
-        avi.show();
+        if (mLoadingDialog == null) {
+            WeakReference<Context> wr = new WeakReference<>(context);
+            View view = LayoutInflater.from(wr.get()).inflate(R.layout.dialog_loading, null);
+            avi = view.findViewById(R.id.avi);
+            mLoadingDialog = new Dialog(wr.get(), R.style.LoadingDialogStyle);
+            mLoadingDialog.setCancelable(false);
+            mLoadingDialog.setCanceledOnTouchOutside(false);
+            mLoadingDialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            mLoadingDialog.show();
+            avi.show();
+        }
         return mLoadingDialog;
     }
 

@@ -58,7 +58,13 @@ public class DateUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
     }
-
+    public static String getYearAndMonth(@Nullable Date date) {//可根据需要自行截取数据显示
+//        Log.d("getTime()", "choice date millis: " + date.getTime());
+        if (date == null)
+            date = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+        return format.format(date);
+    }
     public static String getDateAndHour(@Nullable Date date) {//可根据需要自行截取数据显示
 //        Log.d("getTime()", "choice date millis: " + date.getTime());
         if (date == null)
@@ -74,10 +80,10 @@ public class DateUtil {
             return "-01时";
         } else if (hour == 24) {
             return "-02时";
-        } else if (hour<8){
-            return "-0" + (hour + 2)+"时";
-        }else {
-            return "-" + (hour + 2)+"时";
+        } else if (hour < 8) {
+            return "-0" + (hour + 2) + "时";
+        } else {
+            return "-" + (hour + 2) + "时";
         }
     }
 

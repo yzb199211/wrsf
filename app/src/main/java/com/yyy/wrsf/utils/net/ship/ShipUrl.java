@@ -4,4 +4,5 @@ public class ShipUrl {
 
     public final static String getTransCompanyList = "/price/getTransCompanyList";
     public final static String getPriceByContractInfo = "/price/getPriceByContractInfo";
+    public final static String getFeeByCompany = "/transCompanyFee/getFeeByCompany";
 }

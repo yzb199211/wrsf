@@ -17,6 +17,7 @@ import com.yyy.wrsf.beans.address.AddressB;
 import com.yyy.wrsf.beans.company.CompanyB;
 import com.yyy.wrsf.beans.filter.ShipCompanyFilterB;
 import com.yyy.wrsf.beans.price.PriceBackB;
+import com.yyy.wrsf.beans.ship.ShipAddValueFeeB;
 import com.yyy.wrsf.beans.ship.ShipCompanyB;
 import com.yyy.wrsf.beans.ship.ShipGoodsB;
 import com.yyy.wrsf.beans.ship.ShippingAddValueB;
@@ -35,6 +36,7 @@ import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
 import com.yyy.wrsf.utils.net.order.OrderUrl;
+import com.yyy.wrsf.utils.net.ship.ShipUrl;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 import com.yyy.wrsf.view.topview.TopView;
 import com.yyy.yyylibrary.pick.builder.TimePickerBuilder;
@@ -111,6 +113,7 @@ public class ShippingActivity extends BasePickActivity {
     private ShipCompanyFilterB companyFilter;
     private ShippingB shipping;
     private ShippingAddValueB addValue;
+    private ShipAddValueFeeB addValueFeeB;
     private PriceBackB priceBackM;
 
     private boolean refreshCompany = true;
@@ -192,7 +195,15 @@ public class ShippingActivity extends BasePickActivity {
                 go2Goods();
                 break;
             case R.id.tmi_value_add:
-                go2ValueAdd();
+                if (company != null && company.getTransCompanyRecno() != 0) {
+                    if (addValueFeeB == null) {
+                        getAddValueFee();
+                    } else {
+                        go2ValueAdd();
+                    }
+                } else {
+                    Toast(getString(R.string.send_empty_company));
+                }
                 break;
             case R.id.tmi_pick_date:
                 try {
@@ -313,6 +324,7 @@ public class ShippingActivity extends BasePickActivity {
                 new Intent()
                         .setClass(this, ShippingValueAddActivity.class)
                         .putExtra("data", addValue == null ? "" : new Gson().toJson(addValue))
+                        .putExtra("fee", new Gson().toJson(addValue))
                 , CodeUtil.ShipAddValue);
     }
 
@@ -397,7 +409,6 @@ public class ShippingActivity extends BasePickActivity {
         }
     }
 
-
     private void setTotal() {
         double total = 0;
         if (priceBackM != null) {
@@ -444,6 +455,7 @@ public class ShippingActivity extends BasePickActivity {
 
     private void clearAddValue() {
         addValue = null;
+        addValueFeeB = null;
         shipping.clearValueAdd();
         tmiValueAdd.setText("");
         tmiValueAddFee.setText("");
@@ -462,6 +474,46 @@ public class ShippingActivity extends BasePickActivity {
         tvNameReceive.setText(addressReceive.getContractPerson());
         tvTelReceive.setText(addressReceive.getContractTel());
         tvAddressDetailReceive.setText(addressReceive.getFirstAdd() + addressReceive.getSecondAdd() + addressReceive.getThirdAdd() + addressReceive.getDetailAdd());
+    }
+
+    private void getAddValueFee() {
+        LoadingDialog.showDialogForLoading(this);
+        new NetUtil(AddValueFeeParams(), NetConfig.address + ShipUrl.getFeeByCompany, RequstType.GET, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(null);
+                        addValueFeeB = new Gson().fromJson(result.getData(), ShipAddValueFeeB.class);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                go2ValueAdd();
+                            }
+                        });
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (Exception e) {
+                    LoadingFinish(e.getMessage());
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                LoadingFinish(e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private List<NetParams> AddValueFeeParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("companyId", company.getTransCompanyRecno() + ""));
+        return params;
     }
 
     private boolean canSave() {

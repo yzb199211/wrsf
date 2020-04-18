@@ -17,6 +17,7 @@ import com.yyy.wrsf.mine.MineActivity;
 import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressReceiveActivity;
 import com.yyy.wrsf.mine.bill.BillActivity;
+import com.yyy.wrsf.mine.bill.BillMonthActivity;
 import com.yyy.wrsf.mine.order.OrderActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -97,7 +98,7 @@ public class MineFragment extends Fragment {
             case R.id.tmi_about:
                 break;
             case R.id.tmi_person_bill:
-
+                go2Bill();
                 break;
             case R.id.tmi_person_company:
                 break;
@@ -110,6 +111,10 @@ public class MineFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    private void go2Bill() {
+        startActivity(new Intent().setClass(getActivity(), BillMonthActivity.class));
     }
 
     private void go2Order() {

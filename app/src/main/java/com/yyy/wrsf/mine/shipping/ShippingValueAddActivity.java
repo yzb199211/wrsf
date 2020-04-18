@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.ship.ShipAddValueFeeB;
 import com.yyy.wrsf.beans.ship.ShippingAddValueB;
 import com.yyy.wrsf.beans.ship.SignB;
 import com.yyy.wrsf.utils.CodeUtil;
@@ -59,6 +60,7 @@ public class ShippingValueAddActivity extends BaseActivity {
     EditText etCollection;
 
     private ShippingAddValueB shippingAddValue;
+    private ShipAddValueFeeB shipAddValueFeeB;
     private String rmb;
 
     private RadioButton currentSign;

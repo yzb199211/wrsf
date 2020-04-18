@@ -33,6 +33,7 @@
     <string name="common_select">请选择</string>
     <string name="common_select_order">订单号查询</string>
     <string name="common_pay">付款</string>
+    <string name="common_bill_apply">申请开票</string>
     <string name="common_comfirm">确认</string>
     <string name="common_default">默认</string>
     <string name="common_edit">编辑</string>
@@ -56,6 +57,7 @@
     <string name="common_yes">是</string>
     <string name="common_no">否</string>
     <string name="common_rmb">¥</string>
+    <string name="common_select_img">\u3000▼</string>
     <string name="common_all">全部</string>
     <string name="common_normal">正常</string>
     <string name="common_stop">停用</string>
@@ -134,6 +136,11 @@
     <string name="bill_contract">收货人</string>
     <string name="bill_contract_tel">收货电话</string>
     <string name="bill_contract_address">收货地址</string>
+
+
+    <string name="bill_total">应付账款</string>
+    <string name="bill_paid">已付账款</string>
+    <string name="bill_unpay">未付账款</string>
     <!--寄件-->
     <string name="send_company">物流公司</string>
     <string name="send_goods">货物信息</string>

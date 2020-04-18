@@ -88,7 +88,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
                 .setRefreshTimeVisible(true);
         recyclerView.setPullRefreshEnabled(false);
         recyclerView.setLoadingMoreEnabled(true);
-        recyclerView.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.VERTICAL));
+//        recyclerView.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.VERTICAL));
         recyclerView.setLoadingListener(this);
         recyclerView.setAdapter(initAdapter());
     }

@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
-lintOptions{
-    checkReleaseBuilds false
-    abortOnError false
-}
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
     defaultConfig {
         applicationId "com.yyy.wrsf"
         minSdkVersion 23
@@ -29,7 +29,7 @@ lintOptions{
 allprojects {
     repositories {
         google()
-        jcenter{ url "http://jcenter.bintray.com/" }
+        jcenter { url "http://jcenter.bintray.com/" }
         maven { url 'https://jitpack.io' }
     }
 }
