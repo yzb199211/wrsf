@@ -158,7 +158,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private void initDate() {
-        tmiPickDate.setText(shipping.getPickDate());
+        tmiPickDate.setText(DateUtil.getDateAndHour(new Date(System.currentTimeMillis())));
     }
 
     @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add,
@@ -244,6 +244,7 @@ public class ShippingActivity extends BasePickActivity {
                 shipping.setTransCompanyRecNo(company.getTransCompanyRecno());
                 shipping.setTransRecShopRecNo(company.getRecRegion().getRecNo());
                 shipping.setTransShopRecNo(company.getSendRegion().getRecNo());
+                clearGoods();
             });
         }
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
@@ -362,6 +363,7 @@ public class ShippingActivity extends BasePickActivity {
                     refreshCompany = true;
                     companyFilter.setSendRegion(addressSend.getThirdId());
                 }
+                clearCompany();
                 setSend();
                 break;
             case CodeUtil.AddressReceive:
@@ -370,6 +372,7 @@ public class ShippingActivity extends BasePickActivity {
                     refreshCompany = true;
                     companyFilter.setRecRegion(addressReceive.getThirdId());
                 }
+                clearCompany();
                 setReceive();
                 break;
             case CodeUtil.ShipGoods:
@@ -413,11 +416,39 @@ public class ShippingActivity extends BasePickActivity {
         tmiBaseFee.setText(getString(R.string.common_rmb) + StringUtil.formatDouble(priceBackM.getContractTotal()));
     }
 
+
     private void setAddValue() {
         shipping.setValueAdd(addValue);
         tmiValueAdd.setText(addValue.getData());
         tmiValueAddFee.setText(getString(R.string.common_rmb) + StringUtil.formatDouble(addValue.getTotal()));
     }
+
+    private void clearCompany() {
+        clearGoods();
+        company = null;
+        shipping.setTransShopRecNo(0);
+        shipping.setTransRecShopRecNo(0);
+        shipping.setTransCompanyRecNo(0);
+        tmiCompany.setText("");
+    }
+
+    private void clearGoods() {
+        goods = null;
+        shipping.clear();
+        tmiGoods.setText("");
+        tmiBaseFee.setText("");
+        String sTotal = getString(R.string.send_total) + getString(R.string.common_rmb) + 0;
+        tvTotal.setText(StringUtil.getSpanStr(sTotal, 5, getColor(R.color.order_yellow)));
+        clearAddValue();
+    }
+
+    private void clearAddValue() {
+        addValue = null;
+        shipping.clearValueAdd();
+        tmiValueAdd.setText("");
+        tmiValueAddFee.setText("");
+    }
+
 
     private void setSend() {
         shipping.setSend(addressSend);
@@ -434,7 +465,7 @@ public class ShippingActivity extends BasePickActivity {
     }
 
     private boolean canSave() {
-        if (goods.isEmpty()) {
+        if (goods == null || goods.isEmpty()) {
             Toast(getString(R.string.send_goods_empty));
         }
         return true;

@@ -149,8 +149,8 @@ public class ShippingGoodsActivity extends BaseActivity {
         priceCal.setRecRegion(getIntent().getIntExtra("receiveRec", 0));
         priceCal.setSendRegion(getIntent().getIntExtra("sendRec", 0));
         priceCal.setTransCompanyRecNo(getIntent().getIntExtra("company", 0));
-        priceCal.setTransShopRecNo(getIntent().getIntExtra("sendShop", 0));
-        priceCal.setTransRecShopRecNo(getIntent().getIntExtra("recShop", 0));
+        priceCal.setTransShopRecNo(getIntent().getIntExtra("sendShop",0));
+        priceCal.setTransRecShopRecNo(getIntent().getIntExtra("recShop",0));
     }
 
     private void setGoodsView() {

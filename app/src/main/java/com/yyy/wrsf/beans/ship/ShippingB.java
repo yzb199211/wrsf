@@ -432,6 +432,18 @@ public class ShippingB implements Serializable {
         setGoodsName(shipGoods.getGoodsName());
     }
 
+    public void clear() {
+        ShipGoodsB shipGoods = new ShipGoodsB();
+        setWeight(shipGoods.getWeight());
+        setSize(shipGoods.getVolume());
+        setDensity(shipGoods.getDensity());
+        setPackNumber(shipGoods.getNum());
+        setDeliverType(shipGoods.getDeliveryId());
+        setSendType(shipGoods.getSendId());
+        setTransType(shipGoods.getTransId());
+        setGoodsName(shipGoods.getGoodsName());
+    }
+
     public void setGoodsPrice(PriceBackB price) {
         setPrice(price.getPrice());
         setPicTotal(price.getPicTotal());
@@ -444,6 +456,17 @@ public class ShippingB implements Serializable {
     }
 
     public void setValueAdd(ShippingAddValueB valueAdd) {
+        setBaoAsk(valueAdd.getInsureValue());
+        setBaoPrice(valueAdd.getInsureFee());
+        setQianType(valueAdd.getSignType());
+        setQianPrice(valueAdd.getSignFee());
+        setDaiPrice(valueAdd.getColletionFee());
+        setDaiTotal(valueAdd.getColletionValue());
+        setNoticeYesNo(valueAdd.getReceiveType());
+    }
+
+    public void clearValueAdd() {
+        ShippingAddValueB valueAdd = new ShippingAddValueB();
         setBaoAsk(valueAdd.getInsureValue());
         setBaoPrice(valueAdd.getInsureFee());
         setQianType(valueAdd.getSignType());
