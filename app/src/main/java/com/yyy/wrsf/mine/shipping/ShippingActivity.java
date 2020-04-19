@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -55,7 +56,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShippingActivity extends BasePickActivity {
+public class ShippingActivity extends BasePickActivity implements CompoundButton.OnCheckedChangeListener {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -147,6 +148,7 @@ public class ShippingActivity extends BasePickActivity {
         initTop();
         initPay();
         initDate();
+        initRadio();
     }
 
     private void initTop() {
@@ -162,6 +164,11 @@ public class ShippingActivity extends BasePickActivity {
 
     private void initDate() {
         tmiPickDate.setText(DateUtil.getDateAndHour(new Date(System.currentTimeMillis())));
+    }
+
+    private void initRadio() {
+        tvPayNow.setOnCheckedChangeListener(this);
+        tvPayReceive.setOnCheckedChangeListener(this);
     }
 
     @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add,
@@ -229,20 +236,35 @@ public class ShippingActivity extends BasePickActivity {
                     save();
                 }
                 break;
-            case R.id.tv_pay_now:
-                switchPay(view, 1);
-                break;
-            case R.id.tv_pay_receive:
-                switchPay(view, 3);
-                break;
-            case R.id.tv_pay_month:
-                switchPay(view, 2);
-                break;
+//            case R.id.tv_pay_now:
+//                switchPay(view, 1);
+//                break;
+//            case R.id.tv_pay_receive:
+//                switchPay(view, 3);
+//                break;
+//            case R.id.tv_pay_month:
+//                switchPay(view, 2);
+//                break;
             default:
                 break;
         }
     }
-
+    @Override
+    public void onCheckedChanged(CompoundButton view, boolean b) {
+        if (b) {
+            switch (view.getId()) {
+                case R.id.tv_pay_now:
+                    switchPay(view, 1);
+                    break;
+                case R.id.tv_pay_receive:
+                    switchPay(view, 3);
+                    break;
+                case R.id.tv_pay_month:
+                    switchPay(view, 2);
+                    break;
+            }
+        }
+    }
     private void selectCompany(View view) {
         if (companySelect == null) {
             companySelect = new CompanySelect(this);
@@ -324,7 +346,7 @@ public class ShippingActivity extends BasePickActivity {
                 new Intent()
                         .setClass(this, ShippingValueAddActivity.class)
                         .putExtra("data", addValue == null ? "" : new Gson().toJson(addValue))
-                        .putExtra("fee", new Gson().toJson(addValue))
+                        .putExtra("fee", new Gson().toJson(addValueFeeB))
                 , CodeUtil.ShipAddValue);
     }
 
@@ -519,6 +541,7 @@ public class ShippingActivity extends BasePickActivity {
     private boolean canSave() {
         if (goods == null || goods.isEmpty()) {
             Toast(getString(R.string.send_goods_empty));
+            return false;
         }
         return true;
     }
@@ -569,4 +592,6 @@ public class ShippingActivity extends BasePickActivity {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
+
+
 }

@@ -183,6 +183,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
             public void onTabSelected(TabLayout.Tab tab) {
                 currentTab = tab.getPosition();
                 clear();
+                orderP.resetPage();
                 orderP.getData();
             }
 

@@ -13,18 +13,18 @@ public class ShipAddValueFeeB {
      * qianPaper : 0
      */
 
-    private int baoAskLimit;
-    private int baoPriceLimit;
-    private double baoRate;
-    private int companyId;
-    private int daiPriceLimit;
-    private double daiRate;
-    private int id;
-    private int qianEle;
-    private int qianPaper;
+    private Integer baoAskLimit;
+    private Integer baoPriceLimit;
+    private Double baoRate;
+    private Integer companyId;
+    private Integer daiPriceLimit;
+    private Double daiRate;
+    private Integer id;
+    private Integer qianEle;
+    private Integer qianPaper;
 
     public int getBaoAskLimit() {
-        return baoAskLimit;
+        return baoAskLimit == null ? 0 : baoAskLimit;
     }
 
     public void setBaoAskLimit(int baoAskLimit) {
@@ -32,7 +32,7 @@ public class ShipAddValueFeeB {
     }
 
     public int getBaoPriceLimit() {
-        return baoPriceLimit;
+        return baoPriceLimit == null ? 0 : baoPriceLimit;
     }
 
     public void setBaoPriceLimit(int baoPriceLimit) {
@@ -40,7 +40,7 @@ public class ShipAddValueFeeB {
     }
 
     public double getBaoRate() {
-        return baoRate;
+        return baoRate == null ? 0 : baoRate;
     }
 
     public void setBaoRate(double baoRate) {
@@ -48,7 +48,7 @@ public class ShipAddValueFeeB {
     }
 
     public int getCompanyId() {
-        return companyId;
+        return companyId == null ? 0 : companyId;
     }
 
     public void setCompanyId(int companyId) {
@@ -56,7 +56,7 @@ public class ShipAddValueFeeB {
     }
 
     public int getDaiPriceLimit() {
-        return daiPriceLimit;
+        return daiPriceLimit == null ? 0 : daiPriceLimit;
     }
 
     public void setDaiPriceLimit(int daiPriceLimit) {
@@ -64,7 +64,7 @@ public class ShipAddValueFeeB {
     }
 
     public double getDaiRate() {
-        return daiRate;
+        return daiRate == null ? 0 : daiRate;
     }
 
     public void setDaiRate(double daiRate) {
@@ -72,7 +72,7 @@ public class ShipAddValueFeeB {
     }
 
     public int getId() {
-        return id;
+        return id == null ? 0 : id;
     }
 
     public void setId(int id) {
@@ -80,7 +80,7 @@ public class ShipAddValueFeeB {
     }
 
     public int getQianEle() {
-        return qianEle;
+        return qianEle == null ? 0 : qianEle;
     }
 
     public void setQianEle(int qianEle) {
@@ -88,7 +88,7 @@ public class ShipAddValueFeeB {
     }
 
     public int getQianPaper() {
-        return qianPaper;
+        return qianPaper == null ? 0 : qianPaper;
     }
 
     public void setQianPaper(int qianPaper) {

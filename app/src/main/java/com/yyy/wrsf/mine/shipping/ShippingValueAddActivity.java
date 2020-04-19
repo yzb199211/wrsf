@@ -7,6 +7,7 @@ import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShippingValueAddActivity extends BaseActivity {
+public class ShippingValueAddActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
 
     @BindView(R.id.top_view)
     TopView topView;
@@ -100,7 +101,7 @@ public class ShippingValueAddActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!TextUtils.isEmpty(s.toString())) {
                     int value = Integer.parseInt(s.toString());
-                    int fee = collectionFeeLimit(ShipUtil.getFee(value,shipAddValueFeeB.getDaiRate()).intValue());
+                    int fee = collectionFeeLimit(ShipUtil.getFee(value, shipAddValueFeeB.getDaiRate()).intValue());
                     tvPriceCollection.setText(rmb + fee);
                     shippingAddValue.setColletionValue(value);
                     shippingAddValue.setColletionFee(fee);
@@ -131,7 +132,7 @@ public class ShippingValueAddActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!TextUtils.isEmpty(s.toString())) {
                     int value = Integer.parseInt(s.toString());
-                    int fee = insureFeeLimit(ShipUtil.getFee(value,shipAddValueFeeB.getBaoRate()).intValue());
+                    int fee = insureFeeLimit(ShipUtil.getFee(value, shipAddValueFeeB.getBaoRate()).intValue());
                     tvPriceInsured.setText(rmb + fee);
                     shippingAddValue.setInsureFee(fee);
                     shippingAddValue.setInsureValue(value);
@@ -146,14 +147,14 @@ public class ShippingValueAddActivity extends BaseActivity {
 
     private int insureFeeLimit(int fee) {
         if (shipAddValueFeeB.getBaoPriceLimit() != 0) {
-            fee = fee > shipAddValueFeeB.getBaoPriceLimit() ? shipAddValueFeeB.getBaoPriceLimit() : fee;
+            fee = fee < shipAddValueFeeB.getBaoPriceLimit() ? shipAddValueFeeB.getBaoPriceLimit() : fee;
         }
         return fee;
     }
 
     private int collectionFeeLimit(int fee) {
         if (shipAddValueFeeB.getDaiPriceLimit() != 0) {
-            fee = fee > shipAddValueFeeB.getDaiPriceLimit() ? shipAddValueFeeB.getDaiPriceLimit() : fee;
+            fee = fee < shipAddValueFeeB.getDaiPriceLimit() ? shipAddValueFeeB.getDaiPriceLimit() : fee;
         }
         return fee;
     }
@@ -216,25 +217,25 @@ public class ShippingValueAddActivity extends BaseActivity {
             }
         });
     }
-
-    @OnClick({R.id.rb_none, R.id.rb_paper, R.id.rb_electronic, R.id.rb_yes, R.id.rb_no, R.id.btn_add})
+//    R.id.rb_none, R.id.rb_paper, R.id.rb_electronic, R.id.rb_yes, R.id.rb_no,
+    @OnClick({ R.id.btn_add})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.rb_none:
-                switchSign(view, SignB.NONE,0);
-                break;
-            case R.id.rb_paper:
-                switchSign(view, SignB.PAPER,shipAddValueFeeB.getQianPaper());
-                break;
-            case R.id.rb_electronic:
-                switchSign(view, SignB.ELECTRONIC,shipAddValueFeeB.getQianEle());
-                break;
-            case R.id.rb_yes:
-                switchNotice(view, 1);
-                break;
-            case R.id.rb_no:
-                switchNotice(view, 0);
-                break;
+//            case R.id.rb_none:
+//                switchSign(view, SignB.NONE, 0);
+//                break;
+//            case R.id.rb_paper:
+//                switchSign(view, SignB.PAPER, shipAddValueFeeB.getQianPaper());
+//                break;
+//            case R.id.rb_electronic:
+//                switchSign(view, SignB.ELECTRONIC, shipAddValueFeeB.getQianEle());
+//                break;
+//            case R.id.rb_yes:
+//                switchNotice(view, 1);
+//                break;
+//            case R.id.rb_no:
+//                switchNotice(view, 0);
+//                break;
             case R.id.btn_add:
                 save();
                 break;
@@ -243,7 +244,32 @@ public class ShippingValueAddActivity extends BaseActivity {
         }
     }
 
-    private void switchSign(View view, SignB sign,int price) {
+    @Override
+    public void onCheckedChanged(CompoundButton view, boolean b) {
+        if (b) {
+            switch (view.getId()) {
+                case R.id.rb_none:
+                    switchSign(view, SignB.NONE, 0);
+                    break;
+                case R.id.rb_paper:
+                    switchSign(view, SignB.PAPER, shipAddValueFeeB.getQianPaper());
+                    break;
+                case R.id.rb_electronic:
+                    switchSign(view, SignB.ELECTRONIC, shipAddValueFeeB.getQianEle());
+                    break;
+                case R.id.rb_yes:
+                    switchNotice(view, 1);
+                    break;
+                case R.id.rb_no:
+                    switchNotice(view, 0);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void switchSign(View view, SignB sign, int price) {
         if (view.getId() != currentSign.getId()) {
             currentSign.setChecked(false);
             currentSign.setTextColor(getColor(R.color.text_gray));
@@ -275,4 +301,6 @@ public class ShippingValueAddActivity extends BaseActivity {
         setResult(CodeUtil.ShipAddValue, new Intent().putExtra("data", new Gson().toJson(shippingAddValue)));
         finish();
     }
+
+
 }

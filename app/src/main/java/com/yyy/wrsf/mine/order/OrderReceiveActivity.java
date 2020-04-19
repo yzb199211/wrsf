@@ -2,6 +2,7 @@ package com.yyy.wrsf.mine.order;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,6 +58,7 @@ public class OrderReceiveActivity extends BaseActivity implements XRecyclerView.
     private void init() {
         initTop();
         initRecycle();
+        tabLayout.setVisibility(View.GONE);
         orderP.getTabs();
     }
 
@@ -172,6 +174,7 @@ public class OrderReceiveActivity extends BaseActivity implements XRecyclerView.
             public void onTabSelected(TabLayout.Tab tab) {
                 currentTab = tab.getPosition();
                 clear();
+                orderP.resetPage();
                 orderP.getData();
             }
 

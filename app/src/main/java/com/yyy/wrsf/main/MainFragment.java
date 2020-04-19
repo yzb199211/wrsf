@@ -25,6 +25,7 @@ import com.yyy.wrsf.main.persenter.ICycleP;
 import com.yyy.wrsf.main.view.ICycleV;
 import com.yyy.wrsf.mine.addvalue.AddValueActivity;
 import com.yyy.wrsf.mine.backOrder.BackOrderActivity;
+import com.yyy.wrsf.mine.bill.BillMonthActivity;
 import com.yyy.wrsf.mine.month.MonthApplyActivity;
 import com.yyy.wrsf.mine.order.OrderActivity;
 import com.yyy.wrsf.mine.order.OrderNoticeActivity;
@@ -119,6 +120,7 @@ public class MainFragment extends BaseFragment implements ICycleV {
                 go2AddValue();
                 break;
             case R.id.mi_statements:
+                go2Bill();
                 break;
             case R.id.mi_apply_month:
                 go2Month();
@@ -132,6 +134,11 @@ public class MainFragment extends BaseFragment implements ICycleV {
             default:
                 break;
         }
+    }
+
+    private void go2Bill() {
+        startActivity(new Intent().setClass(getActivity(), BillMonthActivity.class));
+
     }
 
     private void fo2Receive() {

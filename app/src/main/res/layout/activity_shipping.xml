@@ -272,7 +272,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/send_type"
                     android:textColor="@color/text_common"
-                    android:textSize="@dimen/text_common" />
+                    android:textSize="@dimen/text_common"
+                    />
 
                 <RadioButton
                     android:id="@+id/tv_pay_now"

@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 public class ShipUtil {
     public static Double getFee(int value,double rate) {
-        double f = StringUtil.format(StringUtil.multiply(value, 0.005));
-        return f > 10.00 ? f : 10.00;
+        double f = StringUtil.format(StringUtil.multiply(value, rate/1000));
+        return f ;
     }
 
     public static double getDensity(Double weight, Double volume) {
