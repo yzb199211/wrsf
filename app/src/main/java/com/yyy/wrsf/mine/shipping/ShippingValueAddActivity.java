@@ -100,7 +100,7 @@ public class ShippingValueAddActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!TextUtils.isEmpty(s.toString())) {
                     int value = Integer.parseInt(s.toString());
-                    double fee = ShipUtil.getFee(value);
+                    int fee = collectionFeeLimit(ShipUtil.getFee(value,shipAddValueFeeB.getDaiRate()).intValue());
                     tvPriceCollection.setText(rmb + fee);
                     shippingAddValue.setColletionValue(value);
                     shippingAddValue.setColletionFee(fee);
@@ -114,7 +114,7 @@ public class ShippingValueAddActivity extends BaseActivity {
     }
 
     private void initInsure() {
-        InputFilter[] filters = {new EditInputFilter()};
+        InputFilter[] filters = {new EditInputFilter(shipAddValueFeeB.getBaoAskLimit())};
         etInsured.setFilters(filters);
         etInsured.addTextChangedListener(new TextWatcher() {
             @Override
@@ -131,7 +131,7 @@ public class ShippingValueAddActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!TextUtils.isEmpty(s.toString())) {
                     int value = Integer.parseInt(s.toString());
-                    double fee = ShipUtil.getFee(value);
+                    int fee = insureFeeLimit(ShipUtil.getFee(value,shipAddValueFeeB.getBaoRate()).intValue());
                     tvPriceInsured.setText(rmb + fee);
                     shippingAddValue.setInsureFee(fee);
                     shippingAddValue.setInsureValue(value);
@@ -144,11 +144,27 @@ public class ShippingValueAddActivity extends BaseActivity {
         });
     }
 
+    private int insureFeeLimit(int fee) {
+        if (shipAddValueFeeB.getBaoPriceLimit() != 0) {
+            fee = fee > shipAddValueFeeB.getBaoPriceLimit() ? shipAddValueFeeB.getBaoPriceLimit() : fee;
+        }
+        return fee;
+    }
+
+    private int collectionFeeLimit(int fee) {
+        if (shipAddValueFeeB.getDaiPriceLimit() != 0) {
+            fee = fee > shipAddValueFeeB.getDaiPriceLimit() ? shipAddValueFeeB.getDaiPriceLimit() : fee;
+        }
+        return fee;
+    }
+
     private void initData() {
         rmb = getString(R.string.common_rmb);
         String data = getIntent().getStringExtra("data");
+        String fee = getIntent().getStringExtra("fee");
 //        isEmpty = TextUtils.isEmpty(data);
         shippingAddValue = TextUtils.isEmpty(data) ? new ShippingAddValueB() : new Gson().fromJson(data, ShippingAddValueB.class);
+        shipAddValueFeeB = new Gson().fromJson(fee, ShipAddValueFeeB.class);
         setAddValueView();
     }
 
@@ -205,13 +221,13 @@ public class ShippingValueAddActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rb_none:
-                switchSign(view, SignB.NONE);
+                switchSign(view, SignB.NONE,0);
                 break;
             case R.id.rb_paper:
-                switchSign(view, SignB.PAPER);
+                switchSign(view, SignB.PAPER,shipAddValueFeeB.getQianPaper());
                 break;
             case R.id.rb_electronic:
-                switchSign(view, SignB.ELECTRONIC);
+                switchSign(view, SignB.ELECTRONIC,shipAddValueFeeB.getQianEle());
                 break;
             case R.id.rb_yes:
                 switchNotice(view, 1);
@@ -227,7 +243,7 @@ public class ShippingValueAddActivity extends BaseActivity {
         }
     }
 
-    private void switchSign(View view, SignB sign) {
+    private void switchSign(View view, SignB sign,int price) {
         if (view.getId() != currentSign.getId()) {
             currentSign.setChecked(false);
             currentSign.setTextColor(getColor(R.color.text_gray));
@@ -235,8 +251,8 @@ public class ShippingValueAddActivity extends BaseActivity {
             currentSign.setTextColor(getColor(R.color.white));
             currentSign.setChecked(true);
             shippingAddValue.setSignType(sign.getType());
-            shippingAddValue.setSignFee(sign.getPrice());
-            tvPriceSignback.setText(rmb + sign.getPrice());
+            shippingAddValue.setSignFee(price);
+            tvPriceSignback.setText(rmb + price);
         } else {
             currentSign.setChecked(true);
         }
