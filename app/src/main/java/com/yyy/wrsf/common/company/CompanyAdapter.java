@@ -37,10 +37,10 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.VH> {
     public void onBindViewHolder(@NonNull VH holder, int position) {
 //        ((TextView) holder.itemView).setText(list.get(position).getTransCompanyName());
         holder.tvCompany.setText(list.get(position).getTransCompanyName());
-        holder.tvSend.setText(list.get(position).getSendRegion().getDetailAdd());
-        holder.tvSendTel.setText(list.get(position).getSendRegion().getSendTel());
-        holder.tvReceiveTel.setText(list.get(position).getRecRegion().getRecTel());
-        holder.tvReceive.setText(list.get(position).getRecRegion().getDetailAdd());
+        holder.tvSend.setText(context.getString(R.string.company_shop_send) + list.get(position).getSendRegion().getDetailAdd());
+        holder.tvSendTel.setText(context.getString(R.string.company_shop_send_tel) + list.get(position).getSendRegion().getSendTel());
+        holder.tvReceiveTel.setText(context.getString(R.string.company_shop_rec) + list.get(position).getRecRegion().getRecTel());
+        holder.tvReceive.setText(context.getString(R.string.company_shop_rec_tel) + list.get(position).getRecRegion().getDetailAdd());
         holder.itemView.setOnClickListener((View view) -> {
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(position);

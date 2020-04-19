@@ -31,11 +31,21 @@
         app:ecTextPadding="@dimen/dp_0"
         app:ecType="img" />
 
+    <com.yyy.wrsf.view.radioSelect.RadioSelectView
+        android:id="@+id/radios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:visibility="gone"
+        android:background="@color/white"/>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:visibility="gone"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/default_blue"
         app:tabIndicatorFullWidth="false"

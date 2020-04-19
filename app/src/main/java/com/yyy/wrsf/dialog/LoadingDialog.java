@@ -19,7 +19,7 @@ public class LoadingDialog {
      * 加载数据对话框
      */
     public static Dialog mLoadingDialog;
-
+    public static boolean isShow = false;
 
     /**
      * 显示加载对话框
@@ -30,7 +30,7 @@ public class LoadingDialog {
      */
     public static Dialog showDialogForLoading(Context context, String msg, boolean cancelable) {
         WeakReference<Context> wr = new WeakReference<>(context);
-        if (mLoadingDialog == null) {
+        if (isShow == false) {
             View view = LayoutInflater.from(wr.get()).inflate(R.layout.dialog_loading, null);
             avi = view.findViewById(R.id.avi);
             mLoadingDialog = new Dialog(wr.get(), R.style.LoadingDialogStyle);
@@ -44,7 +44,7 @@ public class LoadingDialog {
     }
 
     public static Dialog showDialogForLoading(Context context) {
-        if (mLoadingDialog == null) {
+        if (isShow == false) {
             WeakReference<Context> wr = new WeakReference<>(context);
             View view = LayoutInflater.from(wr.get()).inflate(R.layout.dialog_loading, null);
             avi = view.findViewById(R.id.avi);
@@ -65,6 +65,7 @@ public class LoadingDialog {
         if (mLoadingDialog != null) {
             mLoadingDialog.cancel();
             avi.hide();
+            isShow = false;
         }
     }
 

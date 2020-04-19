@@ -3,10 +3,20 @@ package com.yyy.wrsf.beans;
 public class TabB {
     private Integer id;
     private String name;
+    private boolean checked;
 
     public TabB(Integer id, String name) {
         this.id = id;
         this.name = name;
+        checked = false;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     public Integer getId() {

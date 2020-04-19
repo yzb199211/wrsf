@@ -224,6 +224,10 @@
     <string name="company_member">客户管理</string>
     <string name="company_worker">员工管理</string>
     <string name="company_driver">驾驶员</string>
+    <string name="company_shop_send">发货网点</string>
+    <string name="company_shop_send_tel">发货电话:</string>
+    <string name="company_shop_rec">收货网点:</string>
+    <string name="company_shop_rec_tel">收货电话:</string>
     <!--网点-->
     <string name="outlet_name">网点名称</string>
     <string name="outlet_address">网点地址</string>

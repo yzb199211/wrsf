@@ -1,40 +1,28 @@
 package com.yyy.wrsf.company.order;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.beans.TabB;
 import com.yyy.wrsf.company.order.persenter.OrderP;
 import com.yyy.wrsf.company.order.view.IOrderV;
 import com.yyy.wrsf.dialog.LoadingDialog;
-
-
-import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.mine.order.OrderDetailActivity;
 import com.yyy.wrsf.utils.CodeUtil;
-import com.yyy.wrsf.utils.net.net.NetConfig;
-import com.yyy.wrsf.utils.net.net.NetParams;
-import com.yyy.wrsf.utils.net.net.NetUtil;
-import com.yyy.wrsf.utils.net.net.PagerRequestBean;
-import com.yyy.wrsf.utils.net.net.RequstType;
-import com.yyy.wrsf.utils.net.net.ResponseListener;
-import com.yyy.wrsf.utils.net.net.Result;
-import com.yyy.wrsf.utils.net.order.OrderUrl;
+import com.yyy.wrsf.view.radioSelect.RadioSelectView;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.TopView;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +37,8 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     XRecyclerView recyclerView;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
+    @BindView(R.id.radios)
+    RadioSelectView radios;
 
     private List<OrderBean> orders = new ArrayList<>();
     private OrderAdapter adapter;
@@ -70,7 +60,18 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     private void init() {
         initTop();
         initRecycle();
+        initRadios();
         orderP.getTabs();
+    }
+
+    private void initRadios() {
+        radios.setVisibility(View.VISIBLE);
+        radios.setOnItemClickListener(pos -> {
+            currentTab = pos;
+            clear();
+            orderP.resetPage();
+            orderP.getData();
+        });
     }
 
     private void initTop() {

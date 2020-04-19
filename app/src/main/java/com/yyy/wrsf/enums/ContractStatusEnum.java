@@ -29,8 +29,8 @@ public enum ContractStatusEnum {
 
     FINISH(6, "已完成"),
 
-    ERROR(11, "异常"),
-
+//    ERROR(11, "异常"),
+//
     CANCEL(12, "已取消");
 
     private Integer status;

@@ -41,6 +41,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.setIsRecyclable(false);
+        holder.tvCompany.setText(list.get(position).getCompanyName() + "");
         holder.tvOrderNo.setText(context.getString(R.string.order_no) + "：" + list.get(position).getContractNo());
         holder.tvOrderType.setText(ContractStatusEnum.getDescByStatus(list.get(position).getContractStatus()));
 //        holder.tvCompany.setText(list.get(position));
