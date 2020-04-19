@@ -88,6 +88,9 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
     LinearLayout llMore;
     @BindView(R.id.ecv_wait_notice)
     EditClearView ecvWaitNotice;
+    @BindView(R.id.ecv_sign)
+    EditClearView ecvSign;
+
 
     private OrderBean order;
     private LogPersenter logPersenter;
@@ -161,6 +164,7 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
         ecvFeeInsure.setText(getString(R.string.common_rmb) + order.getBaoAsk());
         ecvFeeCollection.setText(getString(R.string.common_rmb) + order.getDaiTotal());
         ecvWaitNotice.setText(order.getNoticeYesNo() == 0 ? getString(R.string.common_no) : getString(R.string.common_yes));
+        ecvSign.setText(order.getQianTypeName());
     }
 
     private void initList() {

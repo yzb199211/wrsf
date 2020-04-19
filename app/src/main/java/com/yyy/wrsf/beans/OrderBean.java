@@ -2,6 +2,9 @@ package com.yyy.wrsf.beans;
 
 import android.text.TextUtils;
 
+import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
+import com.yyy.wrsf.beans.ship.ShipRegionB;
 import com.yyy.wrsf.utils.StringUtil;
 
 public class OrderBean {
@@ -114,6 +117,7 @@ public class OrderBean {
     private double unpaid;
     private String updateDate;
     private int weight;
+
 
     public String getCompanyName() {
         return TextUtils.isEmpty(companyName) ? "" : companyName;
@@ -357,6 +361,19 @@ public class OrderBean {
 
     public int getQianType() {
         return qianType;
+    }
+
+    public String getQianTypeName() {
+        switch (qianType) {
+            case 1:
+                return BaseApplication.getInstance().getString(R.string.sign_back_none);
+            case 2:
+                return BaseApplication.getInstance().getString(R.string.sign_back_paper);
+            case 3:
+                return BaseApplication.getInstance().getString(R.string.sign_back_electronic);
+            default:
+                return BaseApplication.getInstance().getString(R.string.sign_back_none);
+        }
     }
 
     public void setQianType(int qianType) {

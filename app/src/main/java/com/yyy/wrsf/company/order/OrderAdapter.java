@@ -43,13 +43,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         holder.tvOrderNo.setText(context.getString(R.string.order_no) + "：" + list.get(position).getContractNo());
         holder.tvOrderType.setText(ContractStatusEnum.getDescByStatus(list.get(position).getContractStatus()));
         holder.tvCompany.setText(list.get(position).getCompanyName());
-        holder.tvDateLast.setText(DateUtil.getDate(list.get(position).getUpdateDate(), 2));
+        holder.tvDateLast.setText(DateUtil.getDate(list.get(position).getContractDate(), 2));
         holder.tvSendArea.setText(list.get(position).getSendAdd());
         holder.tvSendPerson.setText(list.get(position).getSendName());
         holder.tvReceiveArea.setText(list.get(position).getRecAdd());
         holder.tvReceivePerson.setText(list.get(position).getRecName());
         holder.tvOrderGoods.setText(list.get(position).getGoodsName());
         holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + list.get(position).getContractTotal());
+        holder.tvNotice.setText(list.get(position).getNoticeYesNo() == 1 ? context.getString(R.string.order_notice) : "");
         if (list.get(position).getContractStatus() > 3 || list.get(position).getContractStatus() == -1) {
             holder.tvOrderCancle.setVisibility(View.INVISIBLE);
         }
@@ -60,10 +61,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
             if (onItemClickListener != null) onItemClickListener.onItemClick(position);
         });
         holder.tvPay.setOnClickListener(view -> {
-            if (onConfirmListener!=null) onConfirmListener.onConfirm(position);
+            if (onConfirmListener != null) onConfirmListener.onConfirm(position);
         });
         holder.tvOrderCancle.setOnClickListener(view -> {
-            if (onCancleListener!=null) onCancleListener.onCancle(position);
+            if (onCancleListener != null) onCancleListener.onCancle(position);
         });
     }
 
@@ -85,6 +86,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         private TextView tvOrderCost;
         private TextView tvPay;
         private TextView tvOrderCancle;
+        private TextView tvNotice;
 
         public VH(View v) {
             super(v);
@@ -100,6 +102,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
             tvOrderCost = v.findViewById(R.id.tv_order_cost);
             tvPay = v.findViewById(R.id.tv_pay);
             tvOrderCancle = v.findViewById(R.id.tv_order_cancle);
+            tvNotice = v.findViewById(R.id.tv_notice);
         }
     }
 

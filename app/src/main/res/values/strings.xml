@@ -200,6 +200,7 @@
     <string name="order_fee_collection">代收货款：</string>
     <string name="order_wait_notice_yes">放货</string>
     <string name="order_wait_notice">等通知放货：</string>
+    <string name="order_sign">签收单类型：</string>
 
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>
@@ -266,6 +267,7 @@
 
     <string name="order_no">订单号</string>
     <string name="order_cost">运费</string>
+    <string name="order_notice">等通知发货</string>
 
     <!--申请月结-->
     <string name="month_title">申请月结</string>

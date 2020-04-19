@@ -11,7 +11,7 @@
         android:id="@+id/tv_order_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="订单号：sf123465"
+        android:text=""
         android:textColor="@color/text_common"
         android:textSize="@dimen/text_common_min" />
 
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="代付款"
+        android:text=""
         android:textColor="@color/order_yellow"
         android:textSize="@dimen/text_common_min" />
 
@@ -31,7 +31,7 @@
         android:layout_below="@id/tv_order_no"
         android:layout_marginTop="@dimen/margin_common"
         android:singleLine="true"
-        android:text="万瑞三富"
+        android:text=""
         android:textColor="@color/text_gray"
         android:textSize="@dimen/text_common_min" />
 
@@ -43,7 +43,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/margin_common"
         android:singleLine="true"
-        android:text="更新日期2018-10-10 12:20:20"
+        android:text=""
         android:textColor="@color/text_gray"
         android:textSize="@dimen/text_common_min" />
 
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="嘉兴市"
+                android:text=""
                 android:textColor="@color/text_common"
                 android:textSize="@dimen/text_common" />
 
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="张三"
+                android:text=""
                 android:textColor="@color/text_gray2"
                 android:textSize="@dimen/text_common_min" />
         </LinearLayout>
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="嘉兴市"
+                android:text=""
                 android:textColor="@color/text_common"
                 android:textSize="@dimen/text_common" />
 
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="张三"
+                android:text=""
                 android:textColor="@color/text_gray2"
                 android:textSize="@dimen/text_common_min" />
         </LinearLayout>
@@ -143,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_middle"
         android:singleLine="true"
-        android:text="服装货物、支架"
+        android:text=""
         android:textColor="@color/text_gray2"
         android:textSize="@dimen/text_common" />
 
@@ -154,7 +154,7 @@
         android:layout_below="@+id/ll_middle"
         android:layout_alignParentRight="true"
         android:singleLine="true"
-        android:text="运费：¥5000"
+        android:text=""
         android:textColor="@color/text_gray2"
         android:textSize="@dimen/text_common" />
 

@@ -495,6 +495,23 @@
                     app:ecTitleColor="@color/text_common"
                     app:ecTitleSize="@dimen/text_common_min"
                     app:ecType="tv" />
+
+                <com.yyy.wrsf.view.editclear.EditClearView
+                    android:id="@+id/ecv_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    app:ecEditable="false"
+                    app:ecFormatTitle="false"
+                    app:ecHasDetele="false"
+                    app:ecTextColor="@color/order_yellow"
+                    app:ecTextGravity="right"
+                    app:ecTextSize="@dimen/text_common_min"
+                    app:ecTitle="@string/order_sign"
+                    app:ecTitleColor="@color/text_common"
+                    app:ecTitleSize="@dimen/text_common_min"
+                    app:ecType="tv" />
             </LinearLayout>
 
             <View
