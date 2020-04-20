@@ -76,21 +76,22 @@
                     app:miSrc="@mipmap/company_order"
                     app:miTitle="@string/company_order" />
 
-                <com.yyy.wrsf.view.MenuItem
-                    android:id="@+id/mi_car"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/dp_60"
-                    android:layout_weight="1"
-                    app:miSrc="@mipmap/company_car"
-                    app:miTitle="@string/company_car" />
 
                 <com.yyy.wrsf.view.MenuItem
-                    android:id="@+id/mi_outlets"
+                    android:id="@+id/mi_pending_payment"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="@dimen/dp_60"
                     android:layout_weight="1"
-                    app:miSrc="@mipmap/company_outlets"
-                    app:miTitle="@string/company_outlets" />
+                    app:miSrc="@mipmap/compant_pending_payment"
+                    app:miTitle="@string/main_pending_payment" />
+
+                <com.yyy.wrsf.view.MenuItem
+                    android:id="@+id/mi_wait"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_weight="1"
+                    app:miSrc="@mipmap/company_wait"
+                    app:miTitle="@string/main_send_notice" />
 
                 <com.yyy.wrsf.view.MenuItem
                     android:id="@+id/mi_check_bill"
@@ -141,10 +142,33 @@
             app:tmiTitle="@string/company_driver" />
 
         <com.yyy.wrsf.view.textselect.TextMenuItem
-            android:id="@+id/tmi_company_worker"
+            android:id="@+id/tmi_car"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_common"
             android:layout_below="@id/tmi_company_driver"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/compant_car2"
+            app:tmiTitle="@string/company_car" />
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_outlets"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_car"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/company_outlets2"
+            app:tmiTitle="@string/company_outlets" />
+
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_company_worker"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_outlets"
             android:layout_marginTop="@dimen/dp_1"
             android:background="@color/white"
             android:paddingLeft="@dimen/dp_15"

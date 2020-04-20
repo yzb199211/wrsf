@@ -17,8 +17,10 @@ import com.yyy.wrsf.company.car.CarAdapter;
 import com.yyy.wrsf.company.driver.DriverActivity;
 import com.yyy.wrsf.company.month.MonthActivity;
 import com.yyy.wrsf.company.order.OrderActivity;
+import com.yyy.wrsf.company.order.OrderWaitActivity;
 import com.yyy.wrsf.company.outlets.OutletActivity;
 import com.yyy.wrsf.company.worker.WorkerActivity;
+import com.yyy.wrsf.mine.wait.WaitActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,18 +49,18 @@ public class CompanyFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.mi_order, R.id.mi_car, R.id.mi_outlets, R.id.mi_check_bill, R.id.tmi_company_detail,
-            R.id.tmi_company_member, R.id.tmi_company_driver, R.id.tmi_company_worker})
+    @OnClick({R.id.mi_order, R.id.tmi_car, R.id.tmi_outlets, R.id.mi_check_bill, R.id.tmi_company_detail,
+            R.id.tmi_company_member, R.id.tmi_company_driver, R.id.tmi_company_worker, R.id.mi_pending_payment, R.id.mi_wait})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.mi_order:
                 go2Order();
                 break;
-            case R.id.mi_car:
-                go2Car();
+            case R.id.mi_wait:
+                go2Wait();
                 break;
-            case R.id.mi_outlets:
-                go2Outlet();
+            case R.id.mi_pending_payment:
+                go2Pending();
                 break;
             case R.id.mi_check_bill:
                 break;
@@ -67,6 +69,12 @@ public class CompanyFragment extends Fragment {
                 break;
             case R.id.tmi_company_member:
                 go2Month();
+                break;
+            case R.id.tmi_car:
+                go2Car();
+                break;
+            case R.id.tmi_outlets:
+                go2Outlet();
                 break;
             case R.id.tmi_company_driver:
                 go2Driver();
@@ -77,6 +85,13 @@ public class CompanyFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    private void go2Pending() {
+    }
+
+    private void go2Wait() {
+        startActivity(new Intent().setClass(getActivity(), OrderWaitActivity.class));
     }
 
 

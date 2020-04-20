@@ -37,6 +37,6 @@ public class ShipProtocolActivity extends AppCompatActivity {
             setResult(CodeUtil.CONFIRM);
             finish();
         });
-        tvContent.setText(Html.fromHtml(FileUtil.readToText(("ship_protocol.html"))));
+        tvContent.setText(Html.fromHtml(FileUtil.readToText2(("ship_protocol.html"))));
     }
 }

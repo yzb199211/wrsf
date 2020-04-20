@@ -27,6 +27,17 @@ public class OrderM extends BaseM implements IOrderM {
     }
 
     @Override
+    public OrderFilterB getWaitFilter(String orderNo, Integer orderType) {
+        OrderFilterB orderFilterB = new OrderFilterB();
+        orderFilterB.setNoticeYesNo(1);
+        if (TextUtils.isEmpty(orderNo) || orderType != null) {
+            orderFilterB.setContractNo(TextUtils.isEmpty(orderNo) ? null : orderNo);
+            orderFilterB.setContractStatus(orderType);
+        }
+        return orderFilterB;
+    }
+
+    @Override
     public List<TabB> getTabs() {
         List<TabB> tabs = new ArrayList<>();
         tabs.add(new TabB(null, BaseApplication.getInstance().getString(R.string.common_all)));
