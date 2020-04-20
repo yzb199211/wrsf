@@ -158,6 +158,7 @@
     <string name="send_total">预估费用：</string>
     <string name="send_protocol">查看并同意《万瑞三富物流服务协议》</string>
     <string name="send_protocol_title">《服务协议》</string>
+    <string name="send_protocol_check">未同意服务协议</string>
 
     <string name="send_goods_name">货物名称</string>
     <string name="send_good_remark">备注信息</string>

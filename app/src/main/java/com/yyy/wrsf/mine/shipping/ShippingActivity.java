@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -15,7 +16,6 @@ import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.beans.address.AddressB;
-import com.yyy.wrsf.beans.company.CompanyB;
 import com.yyy.wrsf.beans.filter.ShipCompanyFilterB;
 import com.yyy.wrsf.beans.price.PriceBackB;
 import com.yyy.wrsf.beans.ship.ShipAddValueFeeB;
@@ -102,6 +102,8 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
     TextMenuItem tmiBaseFee;
     @BindView(R.id.tmi_value_add_fee)
     TextMenuItem tmiValueAddFee;
+    @BindView(R.id.cb_protocol)
+    CheckBox cbProtocol;
 
     private RadioButton currentPay;
     private CompanySelect companySelect;
@@ -149,6 +151,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         initPay();
         initDate();
         initRadio();
+        initProtocol();
     }
 
     private void initTop() {
@@ -171,8 +174,12 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         tvPayReceive.setOnCheckedChangeListener(this);
     }
 
+    private void initProtocol() {
+
+    }
+
     @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add,
-            R.id.tmi_pick_date, R.id.tmi_remark, R.id.tv_total, R.id.tv_protocol, R.id.tv_submit, R.id.tv_pay_now, R.id.tv_pay_receive, R.id.tv_pay_month})
+            R.id.tmi_pick_date, R.id.tmi_remark, R.id.tv_total, R.id.ll_protocol, R.id.tv_submit, R.id.tv_pay_now, R.id.tv_pay_receive, R.id.tv_pay_month})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_address_send:
@@ -228,8 +235,9 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                 break;
             case R.id.tv_total:
                 break;
-            case R.id.tv_protocol:
-                go2Protocol();
+            case R.id.ll_protocol:
+                if (!cbProtocol.isChecked()) go2Protocol();
+                else cbProtocol.setChecked(false);
                 break;
             case R.id.tv_submit:
                 if (canSave()) {
@@ -397,7 +405,6 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
     }
 
     private void setData(int requestCode, Intent data) {
-        Log.e("data", data.getStringExtra("data"));
         switch (requestCode) {
             case CodeUtil.AddressSend:
                 addressSend = new Gson().fromJson(data.getStringExtra("data"), AddressB.class);
@@ -433,6 +440,9 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
             case CodeUtil.ADD:
                 tmiRemark.setText(data.getStringExtra("data"));
 //                shipping.set
+                break;
+            case CodeUtil.CONFIRM:
+                cbProtocol.setChecked(true);
                 break;
             default:
                 break;
@@ -549,6 +559,10 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
     private boolean canSave() {
         if (goods == null || goods.isEmpty()) {
             Toast(getString(R.string.send_goods_empty));
+            return false;
+        }
+        if (!cbProtocol.isChecked()) {
+            Toast(getString(R.string.send_protocol_check));
             return false;
         }
         return true;

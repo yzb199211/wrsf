@@ -272,8 +272,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/send_type"
                     android:textColor="@color/text_common"
-                    android:textSize="@dimen/text_common"
-                    />
+                    android:textSize="@dimen/text_common" />
 
                 <RadioButton
                     android:id="@+id/tv_pay_now"
@@ -336,16 +335,31 @@
             android:text="@string/send_total"
             android:textColor="@color/text_common" />
 
-        <TextView
-            android:id="@+id/tv_protocol"
+        <LinearLayout
+            android:id="@+id/ll_protocol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_toLeftOf="@+id/tv_submit"
+            android:gravity="center_vertical"
             android:paddingTop="@dimen/dp_2"
-            android:paddingBottom="@dimen/dp_2"
-            android:text="@string/send_protocol" />
+            android:paddingBottom="@dimen/dp_2">
+
+            <CheckBox
+                android:id="@+id/cb_protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"/>
+
+            <TextView
+                android:id="@+id/tv_protocol"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="@string/send_protocol" />
+        </LinearLayout>
 
 
         <TextView

@@ -120,8 +120,8 @@ public class BillMonthActivity extends BasePickActivity {
                 BillMonthActivity.this.date = DateUtil.getYearAndMonth(date);
                 tvMonth.setText(BillMonthActivity.this.date + getString(R.string.common_select_img));
             }
-        }).setRangDate(TimeUtil.str2calendar(getString(R.string.common_date_min)), calendar)
-                .setRangDate(calendarLast, calendar)
+        }).setRangDate(calendarLast, calendar)
+                .setDate(calendar)
                 .setType(new boolean[]{true, true, false, false, false, false})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .setContentTextSize(18)

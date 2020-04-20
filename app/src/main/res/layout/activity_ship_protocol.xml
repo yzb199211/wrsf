@@ -14,7 +14,11 @@
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
         app:topTitle="@string/send_protocol_title"
-        app:topTitleColor="@color/white" />
+        app:topTitleColor="@color/white"
+        app:topRightTvShow="true"
+        app:topRightTextColor="@color/white"
+        app:topRightTextSize="@dimen/dp_12"
+        app:topRightText="@string/common_confirm"/>
 
     <ScrollView
         android:layout_width="match_parent"

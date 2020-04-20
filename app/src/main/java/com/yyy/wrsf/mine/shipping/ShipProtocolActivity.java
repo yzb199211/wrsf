@@ -2,6 +2,7 @@ package com.yyy.wrsf.mine.shipping;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class ShipProtocolActivity extends AppCompatActivity {
             finish();
         });
         topView.setOnRightClickListener(() -> {
-            setResult(CodeUtil.CONFIRM);
+            setResult(CodeUtil.CONFIRM, new Intent());
             finish();
         });
         tvContent.setText(Html.fromHtml(FileUtil.readToText2(("ship_protocol.html"))));
