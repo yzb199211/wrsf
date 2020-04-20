@@ -28,7 +28,7 @@ public class WorkerDetailM extends BaseM {
 
     public String canSave(LinearLayout llContent) {
         for (int i = 0; i < llContent.getChildCount(); i++) {
-            if (TextUtils.isEmpty(((EditClearView) llContent.getChildAt(i)).getText())) {
+            if (llContent.getChildAt(i) instanceof EditClearView&&TextUtils.isEmpty(((EditClearView) llContent.getChildAt(i)).getText())) {
                 return ((EditClearView) llContent.getChildAt(i)).getHint();
             }
         }

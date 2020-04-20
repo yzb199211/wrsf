@@ -126,7 +126,7 @@
             android:background="@color/white"
             android:paddingLeft="@dimen/dp_15"
             android:paddingRight="@dimen/dp_15"
-            app:tmiLeftSrc="@mipmap/company_member"
+            app:tmiLeftSrc="@mipmap/company_customer"
             app:tmiTitle="@string/company_member" />
 
         <com.yyy.wrsf.view.textselect.TextMenuItem

@@ -59,44 +59,48 @@
                 app:ecTitle="@string/person_phone_num"
                 app:ecType="tv" />
 
-<!--            <com.yyy.wrsf.view.editclear.EditClearView-->
-<!--                android:id="@+id/ecv_petname"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/row_common"-->
-<!--                android:layout_marginTop="@dimen/dp_5"-->
-<!--                android:background="@color/white"-->
-<!--                android:paddingLeft="@dimen/dp_5"-->
-<!--                android:paddingRight="@dimen/dp_5"-->
-<!--                app:ecEditable="false"-->
-<!--                app:ecHint="@string/person_nick_name"-->
-<!--                app:ecTitle="@string/person_nick_name"-->
-<!--                app:ecType="tv" />-->
+            <!--            <com.yyy.wrsf.view.editclear.EditClearView-->
+            <!--                android:id="@+id/ecv_petname"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="@dimen/row_common"-->
+            <!--                android:layout_marginTop="@dimen/dp_5"-->
+            <!--                android:background="@color/white"-->
+            <!--                android:paddingLeft="@dimen/dp_5"-->
+            <!--                android:paddingRight="@dimen/dp_5"-->
+            <!--                app:ecEditable="false"-->
+            <!--                app:ecHint="@string/person_nick_name"-->
+            <!--                app:ecTitle="@string/person_nick_name"-->
+            <!--                app:ecType="tv" />-->
 
-<!--            <com.yyy.wrsf.view.editclear.EditClearView-->
-<!--                android:id="@+id/ecv_sex"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/row_common"-->
-<!--                android:layout_marginTop="@dimen/dp_5"-->
-<!--                android:background="@color/white"-->
-<!--                android:paddingLeft="@dimen/dp_5"-->
-<!--                android:paddingRight="@dimen/dp_5"-->
-<!--                android:visibility="gone"-->
-<!--                app:ecEditable="false"-->
-<!--                app:ecHint="@string/person_sex"-->
-<!--                app:ecTitle="@string/person_sex"-->
-<!--                app:ecType="tv" />-->
+            <!--            <com.yyy.wrsf.view.editclear.EditClearView-->
+            <!--                android:id="@+id/ecv_sex"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="@dimen/row_common"-->
+            <!--                android:layout_marginTop="@dimen/dp_5"-->
+            <!--                android:background="@color/white"-->
+            <!--                android:paddingLeft="@dimen/dp_5"-->
+            <!--                android:paddingRight="@dimen/dp_5"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:ecEditable="false"-->
+            <!--                app:ecHint="@string/person_sex"-->
+            <!--                app:ecTitle="@string/person_sex"-->
+            <!--                app:ecType="tv" />-->
 
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_20"
+                android:background="@drawable/btn_login"
+                android:gravity="center"
+                android:text="@string/common_submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_common" />
         </LinearLayout>
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/btn_add"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/row_common"
-        android:background="@drawable/btn_yellow"
-        android:gravity="center"
-        android:text="@string/common_edit"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_common" />
+
 </LinearLayout>

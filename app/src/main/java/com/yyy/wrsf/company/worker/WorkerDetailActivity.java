@@ -1,37 +1,25 @@
 package com.yyy.wrsf.company.worker;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
-import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.beans.WorkerB;
-import com.yyy.wrsf.beans.publicm.PublicBean;
 import com.yyy.wrsf.beans.publicm.Sex;
 import com.yyy.wrsf.company.worker.persenter.WorkerDetailP;
-import com.yyy.wrsf.company.worker.persenter.WorkerP;
 import com.yyy.wrsf.company.worker.view.IWorkweDetailV;
 import com.yyy.wrsf.dialog.JudgeDialog;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.enums.StatusEnum;
-import com.yyy.wrsf.mine.bill.BillActivity;
 import com.yyy.wrsf.utils.CodeUtil;
-import com.yyy.wrsf.utils.PublicCode;
-import com.yyy.wrsf.utils.SexUtil;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.topview.TopView;
-import com.yyy.yyylibrary.pick.builder.OptionsPickerBuilder;
-import com.yyy.yyylibrary.pick.listener.OnOptionsSelectListener;
 import com.yyy.yyylibrary.pick.view.OptionsPickerView;
 
 import java.util.List;
@@ -54,8 +42,10 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
 //    EditClearView ecvSex;
     @BindView(R.id.ll_content)
     LinearLayout llContent;
-    @BindView(R.id.btn_add)
-    TextView btnAdd;
+    @BindView(R.id.btn_confirm)
+    Button btnConfirm;
+    //    @BindView(R.id.btn_add)
+//    TextView btnAdd;
     private OptionsPickerView pvSex;
     private WorkerB workerB;
     private WorkerDetailP workerP;
@@ -89,15 +79,16 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
         initTop();
 //        initSex();
         initStatus();
-        if (pos == -1) {
-            workerP.setEdit(true);
-            btnAdd.setText(getString(R.string.common_save));
+//        if (pos == -1) {
+        workerP.setEdit(true);
+        setView();
+//            btnAdd.setText(getString(R.string.common_save));
 //            ecvSex.setText(sexes.get(0).getPickerViewText());
 //            workerB.setMemberSex(sexes.get(0).getSex());
-        } else {
-            workerP.setEdit(false);
-            setView();
-        }
+//        } else {
+//            workerP.setEdit(false);
+//            setView();
+//        }
     }
 
     private void initTop() {
@@ -173,17 +164,24 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
 //        ecvSex.setText(workerB.getMemberSex());
     }
 
-    @OnClick(R.id.btn_add)
+    @OnClick(R.id.btn_confirm)
     public void onViewClicked() {
         if (pos == -1) workerP.insert();
-        else if (!editable) {
-            workerP.setEdit(true);
-            editable = true;
-            btnAdd.setText(getString(R.string.common_save));
-        } else {
+        else {
             workerP.modify();
         }
     }
+//    @OnClick(R.id.btn_add)
+//    public void onViewClicked() {
+//        if (pos == -1) workerP.insert();
+//        else if (!editable) {
+//            workerP.setEdit(true);
+//            editable = true;
+//            btnAdd.setText(getString(R.string.common_save));
+//        } else {
+//            workerP.modify();
+//        }
+//    }
 
     @Override
     public int getCode() {
@@ -234,4 +232,6 @@ public class WorkerDetailActivity extends BasePickActivity implements IWorkweDet
         workerP.detachView();
         super.onDestroy();
     }
+
+
 }
