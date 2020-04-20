@@ -81,6 +81,15 @@ public class ShippingValueAddActivity extends BaseActivity implements CompoundBu
         initData();
         initInsure();
         initCollection();
+        initRadio();
+    }
+
+    private void initRadio() {
+        rbNone.setOnCheckedChangeListener(this);
+        rbPaper.setOnCheckedChangeListener(this);
+        rbElectronic.setOnCheckedChangeListener(this);
+        rbYes.setOnCheckedChangeListener(this);
+        rbNo.setOnCheckedChangeListener(this);
     }
 
     private void initCollection() {
@@ -217,8 +226,9 @@ public class ShippingValueAddActivity extends BaseActivity implements CompoundBu
             }
         });
     }
-//    R.id.rb_none, R.id.rb_paper, R.id.rb_electronic, R.id.rb_yes, R.id.rb_no,
-    @OnClick({ R.id.btn_add})
+
+    //    R.id.rb_none, R.id.rb_paper, R.id.rb_electronic, R.id.rb_yes, R.id.rb_no,
+    @OnClick({R.id.btn_add})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 //            case R.id.rb_none:

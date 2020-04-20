@@ -33,14 +33,14 @@
         android:singleLine="true"
         android:text=""
         android:textColor="@color/text_gray"
-        android:textSize="@dimen/text_common_min" />
+        android:textSize="@dimen/text_common_min"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_date_last"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_order_no"
-
         android:layout_marginTop="@dimen/margin_common"
         android:singleLine="true"
         android:text="更新日期2018-10-10 12:20:20"
@@ -55,7 +55,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/margin_common"
         android:singleLine="true"
-        android:text=""
+        android:text="123"
         android:textColor="@color/text_red"
         android:textSize="@dimen/text_common_min" />
 

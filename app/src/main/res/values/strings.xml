@@ -89,7 +89,7 @@
     <string name="main_menu_company">物流公司</string>
     <string name="main_menu_mine">我的</string>
     <string name="main_receipt">签回单</string>
-    <string name="main_send_notice">待发货通知</string>
+    <string name="main_send_notice">等通知放货</string>
     <string name="main_pending_payment">待结货款</string>
     <string name="main_insured_transportation">保价运输</string>
     <string name="main_statements">对账单</string>

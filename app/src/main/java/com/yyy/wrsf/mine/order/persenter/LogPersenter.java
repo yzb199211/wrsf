@@ -38,7 +38,7 @@ public class LogPersenter implements ILogPersenter {
         iLogM.getLog(getParams(), NetConfig.address + LogUrl.orderLog, RequstType.GET, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
-                Log.e("log", string);
+//                Log.e("log", string);
                 if (!destroyFlag)
                     handler.post(new Runnable() {
                         @Override

@@ -26,11 +26,13 @@ import com.yyy.wrsf.main.view.ICycleV;
 import com.yyy.wrsf.mine.addvalue.AddValueActivity;
 import com.yyy.wrsf.mine.backOrder.BackOrderActivity;
 import com.yyy.wrsf.mine.bill.BillMonthActivity;
+import com.yyy.wrsf.mine.collection.CollectionActivity;
 import com.yyy.wrsf.mine.month.MonthApplyActivity;
 import com.yyy.wrsf.mine.order.OrderActivity;
 import com.yyy.wrsf.mine.order.OrderNoticeActivity;
 import com.yyy.wrsf.mine.order.OrderReceiveActivity;
 import com.yyy.wrsf.mine.order.OrderSearchActivity;
+import com.yyy.wrsf.mine.wait.WaitActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.ImageLoaderUtil;
 import com.yyy.wrsf.utils.Toasts;
@@ -115,6 +117,7 @@ public class MainFragment extends BaseFragment implements ICycleV {
                 go2Notice();
                 break;
             case R.id.mi_pending_payment:
+                go2Collection();
                 break;
             case R.id.mi_insured_tansportation:
                 go2AddValue();
@@ -136,9 +139,12 @@ public class MainFragment extends BaseFragment implements ICycleV {
         }
     }
 
+    private void go2Collection() {
+        startActivity(new Intent().setClass(getActivity(), CollectionActivity.class));
+    }
+
     private void go2Bill() {
         startActivity(new Intent().setClass(getActivity(), BillMonthActivity.class));
-
     }
 
     private void fo2Receive() {
@@ -146,7 +152,7 @@ public class MainFragment extends BaseFragment implements ICycleV {
     }
 
     private void go2Notice() {
-        startActivity(new Intent().setClass(getActivity(), OrderNoticeActivity.class));
+        startActivity(new Intent().setClass(getActivity(), WaitActivity.class));
     }
 
     private void go2Order() {

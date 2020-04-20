@@ -32,7 +32,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/row_common"
                 android:layout_marginBottom="@dimen/row_common"
-                android:src="@mipmap/icon_logo" />
+                android:src="@mipmap/icon_logo"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_content"

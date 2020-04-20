@@ -22,8 +22,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".mine.wait.WaitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mine.collection.CollectionActivity"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".service.killSelfService" />
 
         <activity
             android:name=".mine.bill.BillMonthActivity"
@@ -208,6 +213,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <service android:name=".service.killSelfService" />
     </application>
 
 </manifest>
