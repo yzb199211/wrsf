@@ -6,6 +6,7 @@ public class CodeUtil {
     public static final int MODIFY = 0x0000898;
     public static final int DELETE = 0x0000897;
     public static final int SCAN = 0x0000896;
+    public static final int CONFIRM = 0x0000895;
 
 
     public static final int PersonInfo = 0x0000701;

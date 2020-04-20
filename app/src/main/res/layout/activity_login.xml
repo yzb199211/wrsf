@@ -44,10 +44,10 @@
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_10"
                 app:ecHint="@string/login_user"
+                app:ecText=""
                 app:ecTextType="num"
                 app:ecTitle="@string/login_user"
-                app:ecType="tv"
-                app:ecText=""/>
+                app:ecType="tv" />
 
             <View
                 android:layout_width="match_parent"
@@ -60,16 +60,26 @@
                 android:layout_height="@dimen/row_common"
                 android:layout_marginTop="@dimen/dp_10"
                 app:ecHint="@string/login_pwd"
+                app:ecText=""
                 app:ecTextType="pwd"
                 app:ecTitle="@string/login_pwd"
-                app:ecType="tv"
-                app:ecText="654321"/>
+                app:ecType="tv" />
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_0_5"
                 android:background="@color/line_color" />
 
+            <CheckBox
+                android:id="@+id/cb_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="@string/login_pwd_remember"
+                android:textColor="@color/text_common"
+                android:textSize="@dimen/text_common_min" />
 
             <include layout="@layout/btn_login" />
 

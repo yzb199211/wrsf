@@ -229,6 +229,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
             case R.id.tv_total:
                 break;
             case R.id.tv_protocol:
+                go2Protocol();
                 break;
             case R.id.tv_submit:
                 if (canSave()) {
@@ -249,6 +250,8 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                 break;
         }
     }
+
+
     @Override
     public void onCheckedChanged(CompoundButton view, boolean b) {
         if (b) {
@@ -265,6 +268,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
             }
         }
     }
+
     private void selectCompany(View view) {
         if (companySelect == null) {
             companySelect = new CompanySelect(this);
@@ -378,6 +382,10 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         setDialog(pvDate);
         initDialogWindow(pvDate.getDialog().getWindow());
         pvDate.show();
+    }
+
+    private void go2Protocol() {
+        startActivityForResult(new Intent().setClass(this, ShipProtocolActivity.class), CodeUtil.CONFIRM);
     }
 
     @Override

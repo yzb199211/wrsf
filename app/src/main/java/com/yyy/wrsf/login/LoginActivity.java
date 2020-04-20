@@ -2,20 +2,21 @@ package com.yyy.wrsf.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
-import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.bean.MemberBean;
 import com.yyy.wrsf.dialog.LoadingDialog;
-import com.yyy.wrsf.login.view.ILoginV;
 import com.yyy.wrsf.login.persenter.LoginVP;
+import com.yyy.wrsf.login.view.ILoginV;
 import com.yyy.wrsf.main.MainActivity;
 import com.yyy.wrsf.utils.AESUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -34,7 +35,10 @@ public class LoginActivity extends BaseActivity implements ILoginV {
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
     SharedPreferencesHelper preferencesHelper;
+    @BindView(R.id.cb_pwd)
+    CheckBox cbPwd;
     private LoginVP loginVP;
+    private boolean remember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +48,39 @@ public class LoginActivity extends BaseActivity implements ILoginV {
         preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
         loginVP = new LoginVP(this);
         initView();
-        try {
-            AESUtil.getCode("huanxin.wanruisf", "123456");
-            Log.e("pwd", AESUtil.getCode("huanxin.wanruisf", "123456"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            AESUtil.getCode("huanxin.wanruisf", "123456");
+////            Log.e("pwd", AESUtil.getCode("huanxin.wanruisf", "123456"));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void initView() {
         btnConfirm.setText(getString(R.string.common_login));
         ecvUser.setText((String) preferencesHelper.getSharedPreference("tel", ""));
+        initPwd();
+    }
+
+    private void initPwd() {
+        Log.e("pwd", (String) preferencesHelper.getSharedPreference("pwd", ""));
+        remember = (boolean) preferencesHelper.getSharedPreference("remember", false);
+        cbPwd.setChecked(remember);
+        if (remember) {
+            ecvPwd.setText((String) preferencesHelper.getSharedPreference("pwd", ""));
+        }
+        initRemember();
+    }
+
+    private void initRemember() {
+        cbPwd.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                preferencesHelper.put("remember", true);
+            } else {
+                preferencesHelper.put("pwd", "");
+                preferencesHelper.put("remember", false);
+            }
+        });
     }
 
     @OnClick({R.id.tv_pwd_switch, R.id.tv_register, R.id.btn_confirm})
@@ -101,6 +127,8 @@ public class LoginActivity extends BaseActivity implements ILoginV {
 
     @Override
     public void setPreference(MemberBean model) {
+        if (remember)
+            preferencesHelper.put("pwd", getPwd());
         preferencesHelper.put("member", new Gson().toJson(model));
         preferencesHelper.put("recNo", model.getRecNo());
         preferencesHelper.put("tel", model.getMemberTel());

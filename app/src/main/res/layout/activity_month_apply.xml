@@ -29,18 +29,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.yyy.wrsf.view.editclear.EditClearView
-                android:id="@+id/ecv_trans"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_common"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@color/white"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
-                app:ecEditable="false"
-                app:ecHint="@string/company_titlte"
-                app:ecTitle="@string/company_titlte"
-                app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_company"
@@ -77,6 +65,19 @@
                 android:paddingRight="@dimen/dp_5"
                 app:ecHint="@string/address_detail"
                 app:ecTitle="@string/address_detail"
+                app:ecType="tv" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_trans"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                app:ecEditable="false"
+                app:ecHint="@string/company_titlte"
+                app:ecTitle="@string/company_titlte"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
@@ -251,7 +252,8 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:singleLine="true"
                     android:text="@string/company_upload_protocol"
-                    android:textSize="@dimen/text_common_min" />
+                    android:textSize="@dimen/text_common_min"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
 

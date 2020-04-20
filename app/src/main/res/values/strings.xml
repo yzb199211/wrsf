@@ -82,6 +82,7 @@
     <string name="login_register_phone">手机号注册</string>
     <string name="login_enter_user">密码登录</string>
     <string name="login_enter_phone">验证码登录</string>
+    <string name="login_pwd_remember">记住密码</string>
     <!--主页-->
     <string name="main_menu">主页</string>
     <string name="main_menu_send">寄快递</string>
@@ -156,6 +157,7 @@
     <string name="send_sumbit">提交订单</string>
     <string name="send_total">预估费用：</string>
     <string name="send_protocol">查看并同意《万瑞三富物流服务协议》</string>
+    <string name="send_protocol_title">《服务协议》</string>
 
     <string name="send_goods_name">货物名称</string>
     <string name="send_good_remark">备注信息</string>
@@ -181,6 +183,7 @@
     <string name="sign_back_electronic">电子签收单</string>
     <string name="send_empty_address">请选择寄件人和发件人</string>
     <string name="send_empty_company">请选择物流公司</string>
+
     <!--order-->
     <string name="order_fee_total">费用信息</string>
     <string name="order_msg">订单信息</string>

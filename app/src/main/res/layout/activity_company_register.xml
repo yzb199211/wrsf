@@ -238,7 +238,8 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:singleLine="true"
                     android:text="@string/company_upload_protocol"
-                    android:textSize="@dimen/text_common_min" />
+                    android:textSize="@dimen/text_common_min"
+                    android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
 
