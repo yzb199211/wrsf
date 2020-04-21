@@ -13,6 +13,48 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
 public class FileUtil {
+
+    /*创建一级目录*/
+    public static File creatDir(String uri) {
+        File file = new File(uri);
+        if (!file.exists()) {
+            try {
+                //创建文件
+                file.mkdir();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+    }
+
+    /*新建文件*/
+    public static File creatFile(String uri) {
+        File file = new File(uri);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+    }
+
+    /*新建文件*/
+    public static File creatFile(File dirFlie, String uri) {
+        File file = new File(dirFlie, uri);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+
+    }
+
     public static String readToText(String filePath) {//按字节流读取可保留原格式，但是有部分乱码情况，根据每次读取的byte数组大小而变化
         StringBuffer txtContent = new StringBuffer();
         byte[] b = new byte[2048];
@@ -40,6 +82,7 @@ public class FileUtil {
         }
         return txtContent.toString();
     }
+
     public static String readToText2(String filePath) {//按字节流读取可保留原格式，但是有部分乱码情况，根据每次读取的byte数组大小而变化
         StringBuffer txtContent = new StringBuffer();
         byte[] b = new byte[6144];

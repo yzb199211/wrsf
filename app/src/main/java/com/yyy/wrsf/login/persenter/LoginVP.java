@@ -7,14 +7,18 @@ import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.bean.MemberBean;
+import com.yyy.wrsf.beans.MemberB;
+import com.yyy.wrsf.beans.VersionB;
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.login.model.ILoginM;
 import com.yyy.wrsf.login.model.LoginM;
 import com.yyy.wrsf.login.view.ILoginV;
+import com.yyy.wrsf.utils.VersionUtil;
 import com.yyy.wrsf.utils.net.member.MemberURL;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.RequstType;
+import com.yyy.wrsf.utils.net.net.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,10 +74,44 @@ public class LoginVP implements ILoginVP {
         });
     }
 
+    @Override
+    public void getVersion() {
+        iLoginV.startLoading();
+        iLoginM.login(versionParams(), NetConfig.address + MemberURL.getVersionById, RequstType.GET, new OnResultListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iLoginV.finishLoading(null);
+                        VersionB versionB = new Gson().fromJson(data, VersionB.class);
+                        if (versionB.getVersion() != null && versionB.getVersionId() > VersionUtil.getAppVersionCode(BaseApplication.getInstance())) {
+                            iLoginV.judgeDownloadPermission();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                if (!destroyFlag)
+                    handler.post(() -> {
+                        iLoginV.finishLoading(error);
+                    });
+
+            }
+        });
+    }
+
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("memberTel", iLoginV.getUser()));
         params.add(new NetParams("password", iLoginV.getPwd()));
+        return params;
+    }
+
+    private List<NetParams> versionParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("id", "1"));
         return params;
     }
 

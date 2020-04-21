@@ -13,4 +13,6 @@ public interface ILoginV extends ILoadingV {
 
     void setPreference(MemberBean model);
 
+    void judgeDownloadPermission();
+
 }
