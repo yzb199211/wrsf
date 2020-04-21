@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.interfaces.OnCancleListener;
 import com.yyy.wrsf.interfaces.OnConfirmListener;
@@ -51,10 +52,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         holder.tvOrderGoods.setText(list.get(position).getGoodsName());
         holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + list.get(position).getContractTotal());
         holder.tvNotice.setText(list.get(position).getNoticeYesNo() == 1 ? context.getString(R.string.order_notice) : "");
-        if (list.get(position).getContractStatus() > 3 || list.get(position).getContractStatus() == -1) {
+        int status = list.get(position).getContractStatus();
+        if (status > 3 || status == -1) {
             holder.tvOrderCancle.setVisibility(View.INVISIBLE);
+        } else {
+            holder.tvOrderCancle.setVisibility(View.VISIBLE);
         }
-        if (list.get(position).getPayStatus() != 1) {
+        if (status == 1) {
+            holder.tvPay.setVisibility(View.VISIBLE);
+            holder.tvPay.setText(BaseApplication.getInstance().getString(R.string.common_comfirm));
+        } else {
             holder.tvPay.setVisibility(View.GONE);
         }
         holder.itemView.setOnClickListener(view -> {

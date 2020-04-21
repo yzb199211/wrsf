@@ -273,6 +273,7 @@
     <string name="order_date_last">更新时间：</string>
     <string name="order_cost">运费</string>
     <string name="order_notice">等通知发货</string>
+    <string name="order_outlets_arrive">网点收货</string>
 
     <!--申请月结-->
     <string name="month_title">申请月结</string>

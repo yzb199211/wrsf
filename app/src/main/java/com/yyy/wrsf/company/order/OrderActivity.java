@@ -100,7 +100,9 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
             go2Detail(pos);
         });
         adapter.setOnConfirmListener((int pos) -> {
-            orderP.confirmGet(pos, orders.get(pos).getContractNo());
+            int status = orders.get(pos).getContractStatus();
+            if (status == 5) orderP.confirmGet(pos, orders.get(pos).getContractNo());
+            else orderP.confirm(pos, orders.get(pos).getContractNo());
         });
         adapter.setOnCancleListener((int pos) -> {
             orderP.cancel(pos, orders.get(pos).getContractNo());

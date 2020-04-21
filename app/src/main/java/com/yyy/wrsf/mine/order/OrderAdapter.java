@@ -52,11 +52,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         holder.tvReceivePerson.setText(list.get(position).getRecName());
         holder.tvOrderGoods.setText(list.get(position).getGoodsName());
         holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + list.get(position).getContractTotal());
-        if (list.get(position).getContractStatus() > 3 || list.get(position).getContractStatus() == -1) {
+        if (list.get(position).getContractStatus() > 1 || list.get(position).getContractStatus() == -1) {
             holder.tvOrderCancle.setVisibility(View.INVISIBLE);
+        } else {
+            holder.tvOrderCancle.setVisibility(View.VISIBLE);
         }
-        if (list.get(position).getPayStatus() != 1) {
+        if (list.get(position).getContractStatus() != 0) {
             holder.tvPay.setVisibility(View.GONE);
+        } else {
+            holder.tvPay.setVisibility(View.VISIBLE);
         }
         holder.tvOrderCancle.setOnClickListener(new View.OnClickListener() {
             @Override

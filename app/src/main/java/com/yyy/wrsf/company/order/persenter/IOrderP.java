@@ -7,6 +7,8 @@ public interface IOrderP {
 
     void confirmGet(int pos, String id);
 
+    void confirm(int pos, String id);
+
     void pay(int pos);
 
     void getTabs();

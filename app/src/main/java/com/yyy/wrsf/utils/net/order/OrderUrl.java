@@ -8,4 +8,5 @@ public class OrderUrl {
     public final static String shopRecConfirm = "/contractInfo/shopRecConfirm";
     public final static String SendNoticeByCustomer = "/contractInfo/SendNoticeByCustomer";
     public final static String getMyRecPageList = "/contractInfo/getMyRecPageList";
+    public final static String shopConfirm = "/contractInfo/shopConfirm";
 }

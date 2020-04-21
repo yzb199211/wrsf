@@ -115,13 +115,39 @@ public class OrderP implements IOrderP {
     @Override
     public void confirmGet(int pos, String id) {
         iOrderV.startLoading();
-        iOrderM.Requset(comfirmParams(id), NetConfig.address + OrderUrl.shopRecConfirm, RequstType.PUT, new OnResultListener() {
+        iOrderM.Requset(comfirmRecParams(id), NetConfig.address + OrderUrl.shopRecConfirm, RequstType.PUT, new OnResultListener() {
             @Override
             public void onSuccess(String data) {
                 if (!destroyFlag) {
                     handler.post(() -> {
                         iOrderV.finishLoading(BaseApplication.getInstance().getString(R.string.common_cancel_success));
                         iOrderV.setItemType(pos, ContractStatusEnum.WAIT_REC.getStatus());
+                        iOrderV.refreshList();
+                    });
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iOrderV.finishLoading(error);
+                    });
+                }
+            }
+        });
+    }
+
+    @Override
+    public void confirm(int pos, String id) {
+        iOrderV.startLoading();
+        iOrderM.Requset(comfirmParams(id), NetConfig.address + OrderUrl.shopConfirm, RequstType.GET, new OnResultListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iOrderV.finishLoading(BaseApplication.getInstance().getString(R.string.common_cancel_success));
+                        iOrderV.setItemType(pos, ContractStatusEnum.CONFIRM.getStatus());
                         iOrderV.refreshList();
                     });
                 }
@@ -164,11 +190,18 @@ public class OrderP implements IOrderP {
         return list;
     }
 
-    private List<NetParams> comfirmParams(String id) {
+    private List<NetParams> comfirmRecParams(String id) {
         List<NetParams> list = new ArrayList<>();
         list.add(new NetParams("contractNo", id));
         list.add(new NetParams("remark", ""));
         list.add(new NetParams("type", ""));
+        list.add(new NetParams("confirmStatus", "1"));
+        return list;
+    }
+
+    private List<NetParams> comfirmParams(String id) {
+        List<NetParams> list = new ArrayList<>();
+        list.add(new NetParams("contractNo", id));
         list.add(new NetParams("confirmStatus", "1"));
         return list;
     }
