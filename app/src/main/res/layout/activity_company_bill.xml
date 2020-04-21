@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".company.bill.CompanyBillActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/company_detail"
+        app:topTitleColor="@color/white" />
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        app:layout_constraintBottom_toTopOf="@id/tv_bill"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_view"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <RadioButton
+        android:id="@+id/tv_bill"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_bg_gray"
+        android:button="@null"
+        android:checked="true"
+        android:drawableTop="@drawable/radio_bill"
+        android:drawablePadding="@dimen/dp_3"
+        android:gravity="center"
+        android:text="@string/common_confirm"
+        android:textColor="@color/default_blue"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_total" />
+
+    <RadioButton
+        android:id="@+id/tv_total"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_bg_gray"
+        android:button="@null"
+        android:drawableTop="@drawable/radio_total"
+        android:drawablePadding="@dimen/dp_3"
+        android:gravity="center"
+        android:textColor="@color/gray2"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_bill"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

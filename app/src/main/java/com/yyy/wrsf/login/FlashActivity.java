@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.yyy.wrsf.company.bill.CompanyBillActivity;
 import com.yyy.wrsf.main.MainActivity;
 import com.yyy.wrsf.R;
 
@@ -23,7 +24,7 @@ public class FlashActivity extends AppCompatActivity {
         public void run() {
             // TODO Auto-generated method stub
             Intent intent = new Intent();
-            intent.setClass(FlashActivity.this, LoginActivity.class);
+            intent.setClass(FlashActivity.this, CompanyBillActivity.class);
             startActivity(intent);
             finish();
         }

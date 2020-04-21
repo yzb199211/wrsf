@@ -66,6 +66,11 @@ public class LoginCodeVP implements ILoginVP {
         });
     }
 
+    @Override
+    public void getVersion() {
+
+    }
+
     public List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("memberTel", iLoginCodeV.getTel()));
