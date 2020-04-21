@@ -17,6 +17,7 @@ import com.yyy.wrsf.beans.publicm.PublicArray;
 import com.yyy.wrsf.beans.publicm.PublicBean;
 import com.yyy.wrsf.beans.ship.ShipGoodsB;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.enums.TransTypeEnum;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.PublicCode;
 import com.yyy.wrsf.utils.StringUtil;
@@ -135,6 +136,7 @@ public class ShippingGoodsActivity extends BaseActivity {
         initPublicFilter();
         initGoodsModel();
         initPriceCal();
+        initTransData();
     }
 
     private void initGoodsModel() {
@@ -149,8 +151,23 @@ public class ShippingGoodsActivity extends BaseActivity {
         priceCal.setRecRegion(getIntent().getIntExtra("receiveRec", 0));
         priceCal.setSendRegion(getIntent().getIntExtra("sendRec", 0));
         priceCal.setTransCompanyRecNo(getIntent().getIntExtra("company", 0));
-        priceCal.setTransShopRecNo(getIntent().getIntExtra("sendShop",0));
-        priceCal.setTransRecShopRecNo(getIntent().getIntExtra("recShop",0));
+        priceCal.setTransShopRecNo(getIntent().getIntExtra("sendShop", 0));
+        priceCal.setTransRecShopRecNo(getIntent().getIntExtra("recShop", 0));
+    }
+
+    private void initTransData() {
+        switch (getIntent().getStringExtra("type")) {
+            case "1":
+                trans.add(new PublicBean(TransTypeEnum.PRICE_COMMON.getTransType(), TransTypeEnum.PRICE_COMMON.getDesc()));
+                break;
+            case "2":
+                trans.add(new PublicBean(TransTypeEnum.PRICE_TWO.getTransType(), TransTypeEnum.PRICE_TWO.getDesc()));
+                break;
+            default:
+                trans.add(new PublicBean(TransTypeEnum.PRICE_COMMON.getTransType(), TransTypeEnum.PRICE_COMMON.getDesc()));
+                trans.add(new PublicBean(TransTypeEnum.PRICE_TWO.getTransType(), TransTypeEnum.PRICE_TWO.getDesc()));
+                break;
+        }
     }
 
     private void setGoodsView() {
@@ -212,9 +229,10 @@ public class ShippingGoodsActivity extends BaseActivity {
                 send.addAll(array.getPlantPublicDetails());
             } else if (array.equals(PublicCode.DeliveryType) && array.getPlantPublicDetails() != null) {
                 delivery.addAll(array.getPlantPublicDetails());
-            } else if (array.equals(PublicCode.transType) && array.getPlantPublicDetails() != null) {
-                trans.addAll(array.getPlantPublicDetails());
             }
+//            else if (array.equals(PublicCode.transType) && array.getPlantPublicDetails() != null) {
+//                trans.addAll(array.getPlantPublicDetails());
+//            }
         }
     }
 

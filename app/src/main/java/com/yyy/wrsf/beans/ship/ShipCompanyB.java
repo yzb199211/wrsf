@@ -14,6 +14,16 @@ public class ShipCompanyB {
     private String transCompanyName;
     private ShipRegionB sendRegion;
     private ShipRegionB recRegion;
+    private ShipAddValueFeeB companyFee;
+
+    public ShipAddValueFeeB getCompanyFee() {
+        return companyFee;
+    }
+
+    public void setCompanyFee(ShipAddValueFeeB companyFee) {
+        this.companyFee = companyFee;
+    }
+
     private String type;
 
     public int getTransCompanyRecno() {

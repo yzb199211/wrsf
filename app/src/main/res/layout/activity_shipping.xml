@@ -211,6 +211,7 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
+                android:visibility="gone"
                 app:tmiSelected="true"
                 app:tmiTextColor="@color/text_common"
                 app:tmiTitle="@string/send_value_add"
@@ -224,6 +225,7 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
+                android:visibility="gone"
                 app:tmiSelected="false"
                 app:tmiTextColor="@color/order_yellow"
                 app:tmiTitle="@string/send_value_add_fee"
@@ -350,7 +352,7 @@
                 android:id="@+id/cb_protocol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="false"/>
+                android:clickable="false" />
 
             <TextView
                 android:id="@+id/tv_protocol"

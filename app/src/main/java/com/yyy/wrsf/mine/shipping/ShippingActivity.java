@@ -137,7 +137,6 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
     private void initModel() {
         companyFilter = new ShipCompanyFilterB();
         initShip();
-
     }
 
     private void initShip() {
@@ -151,7 +150,6 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         initPay();
         initDate();
         initRadio();
-        initProtocol();
     }
 
     private void initTop() {
@@ -174,9 +172,6 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         tvPayReceive.setOnCheckedChangeListener(this);
     }
 
-    private void initProtocol() {
-
-    }
 
     @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add,
             R.id.tmi_pick_date, R.id.tmi_remark, R.id.tv_total, R.id.ll_protocol, R.id.tv_submit, R.id.tv_pay_now, R.id.tv_pay_receive, R.id.tv_pay_month})
@@ -209,15 +204,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                 go2Goods();
                 break;
             case R.id.tmi_value_add:
-                if (company != null && company.getTransCompanyRecno() != 0) {
-                    if (addValueFeeB == null) {
-                        getAddValueFee();
-                    } else {
-                        go2ValueAdd();
-                    }
-                } else {
-                    Toast(getString(R.string.send_empty_company));
-                }
+                go2ValueAdd();
                 break;
             case R.id.tmi_pick_date:
                 try {
@@ -289,12 +276,25 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                 shipping.setTransCompanyRecNo(company.getTransCompanyRecno());
                 shipping.setTransRecShopRecNo(company.getRecRegion().getRecNo());
                 shipping.setTransShopRecNo(company.getSendRegion().getRecNo());
+
+                initAddValue();
                 clearGoods();
             });
         }
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         setEventBus();
 
+    }
+
+    private void initAddValue() {
+        if (company.getCompanyFee() == null) {
+            tmiValueAdd.setVisibility(View.GONE);
+            tmiValueAddFee.setVisibility(View.GONE);
+        } else {
+            addValueFeeB = company.getCompanyFee();
+            tmiValueAddFee.setVisibility(View.VISIBLE);
+            tmiValueAdd.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setEventBus() {
@@ -350,6 +350,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                         .putExtra("company", company.getTransCompanyRecno())
                         .putExtra("sendShop", company.getSendRegion().getRecNo())
                         .putExtra("recShop", company.getRecRegion().getRecNo())
+                        .putExtra("type", company.getType())
                 , CodeUtil.ShipGoods);
     }
 
@@ -516,45 +517,6 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         tvAddressDetailReceive.setText(addressReceive.getFirstAdd() + addressReceive.getSecondAdd() + addressReceive.getThirdAdd() + addressReceive.getDetailAdd());
     }
 
-    private void getAddValueFee() {
-        LoadingDialog.showDialogForLoading(this);
-        new NetUtil(AddValueFeeParams(), NetConfig.address + ShipUrl.getFeeByCompany, RequstType.GET, new ResponseListener() {
-            @Override
-            public void onSuccess(String string) {
-                try {
-                    Result result = new Result(string);
-                    if (result.isSuccess()) {
-                        LoadingFinish(null);
-                        addValueFeeB = new Gson().fromJson(result.getData(), ShipAddValueFeeB.class);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                go2ValueAdd();
-                            }
-                        });
-                    } else {
-                        LoadingFinish(result.getMsg());
-                    }
-                } catch (Exception e) {
-                    LoadingFinish(e.getMessage());
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                LoadingFinish(e.getMessage());
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private List<NetParams> AddValueFeeParams() {
-        List<NetParams> params = new ArrayList<>();
-        params.add(new NetParams("companyId", company.getTransCompanyRecno() + ""));
-        return params;
-    }
 
     private boolean canSave() {
         if (goods == null || goods.isEmpty()) {

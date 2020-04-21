@@ -45,7 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         holder.tvOrderNo.setText(context.getString(R.string.order_no) + "：" + list.get(position).getContractNo());
         holder.tvOrderType.setText(ContractStatusEnum.getDescByStatus(list.get(position).getContractStatus()));
 //        holder.tvCompany.setText(list.get(position));
-        holder.tvDateLast.setText(DateUtil.getDate(list.get(position).getContractDate(), 2));
+        holder.tvDateLast.setText(context.getString(R.string.order_date_last) + DateUtil.getDate(list.get(position).getUpdateDate(), 2));
         holder.tvSendArea.setText(list.get(position).getSendAdd());
         holder.tvSendPerson.setText(list.get(position).getSendName());
         holder.tvReceiveArea.setText(list.get(position).getRecAdd());

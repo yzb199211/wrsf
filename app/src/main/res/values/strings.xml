@@ -270,6 +270,7 @@
     <string name="order_hint_receive">请输入收货人信息</string>
 
     <string name="order_no">订单号</string>
+    <string name="order_date_last">更新时间：</string>
     <string name="order_cost">运费</string>
     <string name="order_notice">等通知发货</string>
 

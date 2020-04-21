@@ -533,7 +533,7 @@ public class OrderBean {
     }
 
     public String getUpdateDate() {
-        return updateDate;
+        return TextUtils.isEmpty(updateDate)?"":updateDate;
     }
 
     public void setUpdateDate(String updateDate) {
