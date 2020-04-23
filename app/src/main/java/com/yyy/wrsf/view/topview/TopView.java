@@ -26,12 +26,13 @@ public class TopView extends RelativeLayout {
     private TextView tvTitle;
     private TextView tvRight;
     private boolean leftIvShow;
-
+    private int leftId = 0x00000100;
     private int leftSrc;
     private String title;
     @ColorInt
     private int titleColor;
     private int titleSize;
+    private int titleGravity;
     private boolean rightTvShow;
     private String rightText;
     @ColorInt
@@ -59,6 +60,7 @@ public class TopView extends RelativeLayout {
         title = array.getString(R.styleable.TopView_topTitle);
         titleColor = array.getColor(R.styleable.TopView_topTitleColor, context.getResources().getColor(R.color.text_common));
         titleSize = array.getDimensionPixelSize(R.styleable.TopView_topTitleSize, context.getResources().getDimensionPixelSize(R.dimen.text_title_max));
+        titleGravity = array.getInt(R.styleable.TopView_topTitlteGravity, 4);
         rightTvShow = array.getBoolean(R.styleable.TopView_topRightTvShow, false);
         rightText = array.getString(R.styleable.TopView_topRightText);
         rightColor = array.getColor(R.styleable.TopView_topRightTextColor, context.getResources().getColor(R.color.text_common));
@@ -67,10 +69,10 @@ public class TopView extends RelativeLayout {
     }
 
     private void initView() {
-
-        initTitle();
         if (leftIvShow)
             initLeft();
+        initTitle();
+
         if (rightTvShow)
             initRight();
     }
@@ -90,6 +92,7 @@ public class TopView extends RelativeLayout {
         ivLeft = new ImageView(context);
         ivLeft.setImageResource(leftSrc);
         ivLeft.setLayoutParams(leftIvParams());
+        ivLeft.setId(leftId);
         ivLeft.setPadding(context.getResources().getDimensionPixelSize(R.dimen.padding_common), context.getResources().getDimensionPixelSize(R.dimen.padding_common), context.getResources().getDimensionPixelSize(R.dimen.padding_common), context.getResources().getDimensionPixelSize(R.dimen.padding_common));
         ivLeft.setOnClickListener(new OnClickListener() {
             @Override
@@ -124,7 +127,13 @@ public class TopView extends RelativeLayout {
 
     private LayoutParams titleParams() {
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        if (titleGravity == 3 && leftIvShow) {
+            params.addRule(RelativeLayout.RIGHT_OF, leftId);
+        } else if (titleGravity == 3 && !leftIvShow) {
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        } else {
+            params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        }
         return params;
     }
 

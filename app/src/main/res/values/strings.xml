@@ -66,6 +66,8 @@
     <string name="common_stop_invisiable">隐藏停用</string>
     <string name="common_loadmore">点击加载全部▼</string>
     <string name="common_dialog_delete">确认是否删除？</string>
+    <!--bill-->
+    <string name="common_bill_total">统计</string>
     <!--hint-->
     <string name="hint_pwd">6-20位密码</string>
     <string name="hint_address_detail">街道、门牌号等信息</string>
@@ -142,6 +144,9 @@
     <string name="bill_total">应付账款</string>
     <string name="bill_paid">已付账款</string>
     <string name="bill_unpay">未付账款</string>
+    <string name="bill_rec_total">应收账款</string>
+    <string name="bill_rec_paid">已收账款</string>
+    <string name="bill_rec_unpay">未收账款</string>
     <!--寄件-->
     <string name="send_company">物流公司</string>
     <string name="send_goods">货物信息</string>
@@ -224,7 +229,7 @@
     <string name="company_order">订单中心</string>
     <string name="company_car">车辆管理</string>
     <string name="company_outlets">网点管理</string>
-    <string name="company_checkbill">对账</string>
+    <string name="company_checkbill">账单</string>
     <string name="company_detail">公司资料</string>
     <string name="company_member">客户管理</string>
     <string name="company_worker">员工管理</string>
@@ -270,6 +275,7 @@
     <string name="order_hint_receive">请输入收货人信息</string>
 
     <string name="order_no">订单号</string>
+    <string name="order_num">单数</string>
     <string name="order_date_last">更新时间：</string>
     <string name="order_cost">运费</string>
     <string name="order_notice">等通知发货</string>

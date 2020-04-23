@@ -8,5 +8,5 @@ public class MemberURL {
     public final static String updateMember = "/member/updateMember";
     public final static String stopMember = "/member/stopMember";
     public final static String getShopPersonList = "/shopPerson/getShopPersonList";
-    public final static String getVersionById = "appVersion/getById";
+    public final static String getVersionById = "/appVersion/getById";
 }

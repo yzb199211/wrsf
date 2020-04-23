@@ -20,7 +20,7 @@ public class PagerRequestBean<T> implements Serializable {
 
     private String endDate;
 
-    private Date beginTime;
+    private String beginTime;
 
     private Date endTime;
 
@@ -92,11 +92,11 @@ public class PagerRequestBean<T> implements Serializable {
         this.endDate = endDate;
     }
 
-    public Date getBeginTime() {
+    public String getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Date beginTime) {
+    public void setBeginTime(String beginTime) {
         this.beginTime = beginTime;
     }
 

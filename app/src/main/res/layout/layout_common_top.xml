@@ -11,9 +11,9 @@
 
     <ImageView
         android:id="@+id/iv_scan"
-        android:layout_width="@dimen/dp_50"
+        android:layout_width="@dimen/top_size"
         android:layout_height="match_parent"
-        android:padding="@dimen/dp_13"
+        android:padding="@dimen/dp_5"
         android:src="@mipmap/icon_scan" />
 
     <LinearLayout

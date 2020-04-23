@@ -19,7 +19,7 @@
 	<dimen name="row_common_add_one">68.3333dp</dimen>
 	<dimen name="padding_common">8.3333dp</dimen>
 	<dimen name="margin_common">8.3333dp</dimen>
-	<dimen name="top_size">83.3333dp</dimen>
+	<dimen name="top_size">66.6667dp</dimen>
 	<dimen name="margin_top">5.0000dp</dimen>
 	<dimen name="dp_0">0.0000dp</dimen>
 	<dimen name="dp_0_5">0.8333dp</dimen>

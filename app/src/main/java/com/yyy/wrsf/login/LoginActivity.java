@@ -83,7 +83,7 @@ public class LoginActivity extends BaseActivity implements ILoginV {
     private void init() {
         initVersion();
         initView();
-        loginVP.login();
+        loginVP.getVersion();
     }
 
     private void initVersion() {

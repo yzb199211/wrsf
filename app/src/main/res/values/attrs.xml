@@ -79,6 +79,11 @@
         <attr name="topTitle" format="string" />
         <attr name="topTitleColor" format="color" />
         <attr name="topTitleSize" format="dimension" />
+        <attr name="topTitlteGravity">
+            <enum name="right" value="5"></enum>
+            <enum name="center" value="4"></enum>
+            <enum name="left" value="3"></enum>
+        </attr>
         <attr name="topRightTvShow" format="boolean" />
         <attr name="topRightText" format="string" />
         <attr name="topRightTextColor" format="color" />

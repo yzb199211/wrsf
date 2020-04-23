@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.company.CompanyDetailActivity;
+import com.yyy.wrsf.company.bill.CompanyBillActivity;
 import com.yyy.wrsf.company.car.CarActivity;
 import com.yyy.wrsf.company.car.CarAdapter;
 import com.yyy.wrsf.company.driver.DriverActivity;
@@ -63,6 +64,7 @@ public class CompanyFragment extends Fragment {
                 go2Pending();
                 break;
             case R.id.mi_check_bill:
+                go2Bill();
                 break;
             case R.id.tmi_company_detail:
                 go2Detail();
@@ -85,6 +87,10 @@ public class CompanyFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    private void go2Bill() {
+        startActivity(new Intent().setClass(getActivity(), CompanyBillActivity.class));
     }
 
     private void go2Pending() {

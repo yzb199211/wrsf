@@ -83,10 +83,15 @@ public class LoginVP implements ILoginVP {
                 if (!destroyFlag) {
                     handler.post(() -> {
                         iLoginV.finishLoading(null);
-                        VersionB versionB = new Gson().fromJson(data, VersionB.class);
-                        if (versionB.getVersion() != null && versionB.getVersionId() > VersionUtil.getAppVersionCode(BaseApplication.getInstance())) {
-                            iLoginV.judgeDownloadPermission();
+                        try {
+                            VersionB versionB = new Gson().fromJson(data, VersionB.class);
+                            if (versionB.getVersion() != null && versionB.getVersionId() > VersionUtil.getAppVersionCode(BaseApplication.getInstance())) {
+                                iLoginV.judgeDownloadPermission();
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
                         }
+
                     });
                 }
             }
