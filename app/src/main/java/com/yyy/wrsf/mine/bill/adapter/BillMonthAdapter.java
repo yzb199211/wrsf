@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.beans.person.PersonBillB;
 import com.yyy.wrsf.interfaces.OnBillApplyListener;
 import com.yyy.wrsf.interfaces.OnItemClickListener;
 import com.yyy.wrsf.interfaces.OnPayListener;
@@ -21,9 +22,9 @@ public class BillMonthAdapter extends RecyclerView.Adapter<BillMonthAdapter.VH> 
     private OnItemClickListener onItemClickListener;
     private OnPayListener onPayListener;
     private OnBillApplyListener onBillApplyListener;
-    private List<Object> list;
+    private List<PersonBillB> list;
 
-    public BillMonthAdapter(Context context, List<Object> list) {
+    public BillMonthAdapter(Context context, List<PersonBillB> list) {
         this.context = context;
         this.list = list;
     }
@@ -37,6 +38,11 @@ public class BillMonthAdapter extends RecyclerView.Adapter<BillMonthAdapter.VH> 
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
+        holder.tvCompany.setText(list.get(position).getTransCompanyName());
+        holder.tvNum.setText(context.getString(R.string.common_total) + list.get(position).getOrderCount() + context.getString(R.string.unit_order));
+        holder.tvTotal.setText(list.get(position).getContractTotal() + "");
+        holder.tvPaid.setText(list.get(position).getPaid() + "");
+        holder.tvUnpay.setText(list.get(position).getUnpaid() + "");
         holder.itemView.setOnClickListener(view -> {
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(position);
@@ -56,7 +62,7 @@ public class BillMonthAdapter extends RecyclerView.Adapter<BillMonthAdapter.VH> 
 
     @Override
     public int getItemCount() {
-        return 3;
+        return list.size();
     }
 
     public class VH extends RecyclerView.ViewHolder {

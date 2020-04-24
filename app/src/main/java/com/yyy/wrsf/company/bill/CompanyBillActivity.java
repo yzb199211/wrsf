@@ -68,7 +68,6 @@ public class CompanyBillActivity extends BasePickActivity implements ICompanyBil
     private CompanyBillP companyBillP;
     private CompanyBillAdapter adapter;
     private List<CompanyBillB> list;
-    private List<BaseSelectBean> monthSelect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +94,6 @@ public class CompanyBillActivity extends BasePickActivity implements ICompanyBil
 
     private void initList() {
         list = new ArrayList<>();
-        monthSelect = new ArrayList<>();
     }
 
 

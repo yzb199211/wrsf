@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="应付账款¥3000"
+            android:text=""
             android:textColor="@color/default_blue"
             android:textSize="@dimen/text_common_min" />
 
@@ -50,7 +50,7 @@
             android:layout_below="@+id/tv_total"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp_5"
-            android:text="未付账款¥2700"
+            android:text=""
             android:textColor="@color/text_red"
             android:textSize="@dimen/text_common_min" />
     </RelativeLayout>

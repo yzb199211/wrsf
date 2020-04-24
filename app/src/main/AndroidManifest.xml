@@ -22,9 +22,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".company.bill.CompanyBillDetailActivity"></activity>
-        <activity android:name=".company.bill.CompanyBillActivity" />
-        <activity android:name=".mine.shipping.ShipProtocolActivity" />
+        <activity
+            android:name=".mine.bill.BillMonthDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".company.bill.CompanyBillDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".company.bill.CompanyBillActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mine.shipping.ShipProtocolActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".mine.wait.WaitActivity"
             android:screenOrientation="portrait" />

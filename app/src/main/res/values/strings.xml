@@ -23,6 +23,7 @@
     <string name="unit_weight">KG</string>
     <string name="unit_size">m³</string>
     <string name="unit_num">件</string>
+    <string name="unit_order">单</string>
 
 
     <!--常用-->
@@ -61,9 +62,10 @@
     <string name="common_yes">是</string>
     <string name="common_no">否</string>
     <string name="common_rmb">¥</string>
-    <string name="common_conjunction">-\u2000-</string>
+    <string name="common_conjunction">-</string>
     <string name="common_select_img">\u3000▼</string>
     <string name="common_all">全部</string>
+    <string name="common_total">合计</string>
     <string name="common_normal">正常</string>
     <string name="common_stop">停用</string>
     <string name="common_stop_success">停用成功</string>
