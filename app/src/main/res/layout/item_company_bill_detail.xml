@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@drawable/bg_order"
+    android:padding="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/tv_order"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="订单号：5674389571398"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_date"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="下单日期：2020-02-02"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintLeft_toRightOf="@+id/tv_order"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:singleLine="true"
+        android:text="签收人：嘉兴"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order" />
+
+    <TextView
+        android:id="@+id/tv_deliver"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="送货方式：自提"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_num"
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="件数：1件"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintLeft_toRightOf="@+id/tv_deliver"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_weight"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="重量：90KG"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_size"
+        app:layout_constraintTop_toBottomOf="@+id/tv_deliver" />
+
+    <TextView
+        android:id="@+id/tv_size"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="体积：90m³"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintLeft_toRightOf="@id/tv_weight"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_deliver" />
+
+    <TextView
+        android:id="@+id/tv_unpaid"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="未收帐款：￥100000000"
+        android:textColor="@color/text_red"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_total"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="应收帐款：￥100000000"
+        android:textColor="@color/default_blue"
+        android:textSize="@dimen/text_common_min"
+        app:layout_constraintLeft_toRightOf="@id/tv_unpaid"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

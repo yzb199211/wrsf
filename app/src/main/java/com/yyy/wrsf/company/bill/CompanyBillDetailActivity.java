@@ -12,6 +12,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.beans.company.bill.CompanyBillB;
+import com.yyy.wrsf.beans.company.bill.CompanyBillDetailB;
 import com.yyy.wrsf.company.bill.adapter.CompanyBillAdapter;
 import com.yyy.wrsf.company.bill.adapter.CompanyBillDetailAdapter;
 import com.yyy.wrsf.company.bill.persenter.CompanyBillDetailP;
@@ -21,6 +22,9 @@ import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.TopView;
 import com.yyy.yyylibrary.pick.view.TimePickerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,8 +37,7 @@ public class CompanyBillDetailActivity extends BaseActivity implements XRecycler
     XRecyclerView recyclerView;
 
     private String month;
-    private int customerId;
-
+    private List<CompanyBillDetailB> billDetailBS = new ArrayList<>();
     private CompanyBillDetailAdapter adapter;
     private CompanyBillDetailP companyBillDetailP;
     private CompanyBillB companyBillB;
@@ -81,21 +84,26 @@ public class CompanyBillDetailActivity extends BaseActivity implements XRecycler
         recyclerView.setLoadingMoreEnabled(true);
         recyclerView.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.VERTICAL));
         recyclerView.setLoadingListener(this);
-//        recyclerView.setAdapter(initAdapter());
+        recyclerView.setAdapter(initAdapter());
     }
 
     private CompanyBillDetailAdapter initAdapter() {
+        adapter = new CompanyBillDetailAdapter(this, billDetailBS);
+        adapter.setOnItemClickListener(pos -> {
+
+        });
         return adapter;
     }
 
     @Override
     public void onRefresh() {
+        setLoad(true);
 
     }
 
     @Override
     public void onLoadMore() {
-
+        companyBillDetailP.getData();
     }
 
     @Override
@@ -119,6 +127,11 @@ public class CompanyBillDetailActivity extends BaseActivity implements XRecycler
     }
 
     @Override
+    public void addList(List<CompanyBillDetailB> list) {
+        billDetailBS.addAll(list);
+    }
+
+    @Override
     public void refreshList() {
         adapter.notifyDataSetChanged();
     }
@@ -136,5 +149,11 @@ public class CompanyBillDetailActivity extends BaseActivity implements XRecycler
     @Override
     public void toast(String s) {
         Toast(s);
+    }
+
+    @Override
+    protected void onDestroy() {
+        companyBillDetailP.detachView();
+        super.onDestroy();
     }
 }

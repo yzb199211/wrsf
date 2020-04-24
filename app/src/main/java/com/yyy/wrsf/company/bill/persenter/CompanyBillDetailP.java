@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.yyy.wrsf.beans.company.bill.CompanyBillDetailB;
 import com.yyy.wrsf.company.bill.model.CompamgBillDetailM;
 import com.yyy.wrsf.company.bill.view.ICompanyBillDetailV;
 import com.yyy.wrsf.interfaces.OnResultListener;
@@ -30,15 +32,30 @@ public class CompanyBillDetailP implements ICompanyBillDetailP {
 
     @Override
     public void getData() {
+        companyBillDetailV.startLoading();
         compamgBillDetailM.Requset(getParams(), NetConfig.address + BillUrl.getCompanyFinanceReportDetail, RequstType.POST, new OnResultListener() {
             @Override
             public void onSuccess(String data) {
-                Log.e("data", data);
+                if (!destroyFlag) {
+                    companyBillDetailV.finishLoading(null);
+                    List<CompanyBillDetailB> list = new Gson().fromJson(data, new TypeToken<List<CompanyBillDetailB>>() {
+                    }.getType());
+                    handler.post(() -> {
+                        if (list != null && list.size() > 0) {
+                            companyBillDetailV.addList(list);
+                            companyBillDetailV.refreshList();
+                        }
+                        if (list.size() < pageSize) {
+                            companyBillDetailV.setLoad(false);
+                        } else pageIndex += pageIndex;
+                    });
+                }
             }
 
             @Override
             public void onFail(String error) {
                 Log.e("error", error);
+                companyBillDetailV.finishLoading(error);
             }
         });
     }
@@ -54,5 +71,9 @@ public class CompanyBillDetailP implements ICompanyBillDetailP {
                                 companyBillDetailV.getCustomerId(),
                                 companyBillDetailV.getCustomerTypeId()))));
         return params;
+    }
+    public void detachView() {
+        destroyFlag = true;
+        this.companyBillDetailV = null;
     }
 }

@@ -101,6 +101,8 @@ public class CompanyBillP implements ICompanyBillP {
             companyBillV.addList(list);
             handler.post(() -> {
                 companyBillV.refreshList();
+                if (list.size() < pageIndex) companyBillV.loadMore(false);
+                else pageIndex += pageIndex;
             });
         }
     }

@@ -58,7 +58,7 @@ public class CompanyBillActivity extends BasePickActivity implements ICompanyBil
     @BindView(R.id.tv_title_total)
     TextView tvTitleTotal;
 
-//    private Popwin<BaseSelectBean> popMonth;
+    //    private Popwin<BaseSelectBean> popMonth;
     private TimePickerView pvDate;
 
     private int current = 0;
@@ -264,6 +264,7 @@ public class CompanyBillActivity extends BasePickActivity implements ICompanyBil
     public void onRefresh() {
         list.clear();
         refreshList();
+        loadMore(true);
         companyBillP.resetPage(0);
         companyBillP.getBill();
     }
