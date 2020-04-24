@@ -45,9 +45,9 @@
             android:layout_centerInParent="true"
             android:background="@drawable/bg_month_gray"
             android:gravity="center"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
-            android:text="2020年"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            android:text=""
             android:textColor="@color/text_common"
             android:textSize="@dimen/text_common"
             android:textStyle="bold" />
@@ -75,10 +75,11 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_month">
 
         <TextView
+            android:id="@+id/tv_title_unpay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bill_rec_unpay"
-            android:textColor="@color/text_gray2"
+            android:textColor="@color/text_common"
             android:textSize="@dimen/text_common" />
 
         <TextView
@@ -86,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
-            android:text="￥123465"
+            android:text="@string/common_conjunction"
             android:textColor="@color/text_common"
             android:textSize="@dimen/text_common_max" />
     </LinearLayout>
@@ -107,16 +108,16 @@
         android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
-
         app:layout_constraintLeft_toRightOf="@+id/ll_unpay"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_month">
 
         <TextView
+            android:id="@+id/tv_title_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bill_rec_total"
-            android:textColor="@color/text_gray2"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/text_common" />
 
         <TextView
@@ -124,8 +125,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
-            android:text="￥123465"
-            android:textColor="@color/text_common"
+            android:text="@string/common_conjunction"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/text_common_max" />
     </LinearLayout>
 
@@ -133,8 +134,9 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_total"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_total" />
 </androidx.constraintlayout.widget.ConstraintLayout>

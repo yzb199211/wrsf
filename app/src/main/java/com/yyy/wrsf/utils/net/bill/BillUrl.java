@@ -7,6 +7,8 @@ public class BillUrl {
 
 
     public final static String getCompanyFinanceReport = "/FinanceReport/getCompanyFinanceReport";
+    public final static String getCompanyFinanceReportTotal = "/FinanceReport/getCompanyFinanceReportTotal";
+    public final static String getCompanyFinanceReportDetail = "/FinanceReport/getCompanyFinanceReportDetail";
 
 
 }

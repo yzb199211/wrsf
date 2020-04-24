@@ -2,10 +2,13 @@ package com.yyy.wrsf.company.bill.persenter;
 
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.beans.company.bill.CompanyBillB;
+import com.yyy.wrsf.beans.company.bill.CompanyBillTotalB;
+import com.yyy.wrsf.beans.filter.CompanyBillTotalF;
 import com.yyy.wrsf.company.bill.model.CompamgBillM;
 import com.yyy.wrsf.company.bill.view.ICompanyBillV;
 import com.yyy.wrsf.interfaces.OnResultListener;
@@ -32,6 +35,33 @@ public class CompanyBillP implements ICompanyBillP {
     }
 
     @Override
+    public void getData() {
+        compamgBillM.Requset(getDataParams(), NetConfig.address + BillUrl.getCompanyFinanceReportTotal, RequstType.POST, new OnResultListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (!destroyFlag) {
+                    try {
+                        Log.e("data", data);
+                        CompanyBillTotalB totalB = new Gson().fromJson(data, CompanyBillTotalB.class);
+                        handler.post(() -> {
+                            companyBillV.setTotal(totalB);
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                if (!destroyFlag) {
+                    finish(error);
+                }
+            }
+        });
+    }
+
+    @Override
     public void getBill() {
         companyBillV.startLoading();
         compamgBillM.Requset(getParams(), NetConfig.address + BillUrl.getCompanyFinanceReport, RequstType.POST, new OnResultListener() {
@@ -44,6 +74,7 @@ public class CompanyBillP implements ICompanyBillP {
                         }.getType());
                         refreshList(list);
                     } catch (Exception e) {
+                        e.printStackTrace();
                         finish(e.getMessage());
                     }
                 }
@@ -77,6 +108,12 @@ public class CompanyBillP implements ICompanyBillP {
     @Override
     public void resetPage(int pageIndex) {
         this.pageIndex = pageIndex;
+    }
+
+    private List<NetParams> getDataParams() {
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("params", new Gson().toJson(new CompanyBillTotalF().setMonth(companyBillV.getMonth()))));
+        return params;
     }
 
     private List<NetParams> getParams() {

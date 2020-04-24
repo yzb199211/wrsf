@@ -2,43 +2,42 @@ package com.yyy.wrsf.beans.company.bill;
 
 import android.text.TextUtils;
 
-import java.math.BigDecimal;
 
 public class CompanyBillB {
-    private Long contractTotal;//contractTotal(number,optional):总金额,
-    private Long paid;         //paid(number,optional):已付金额,
-    private Long unpaid;       // unpaid(number,optional):未付金额
+    private Double contractTotal;//contractTotal(number,optional):总金额,
+    private Double paid;         //paid(number,optional):已付金额,
+    private Double unpaid;       // unpaid(number,optional):未付金额
     private String customer;   //customer(string,optional):客户,
-    private int customerId;    //customerId(integer,optional):客户Id,
-    private int customerType;  //customerType(integer,optional):客户类型,
+    private Integer customerId;    //customerId(integer,optional):客户Id,
+    private Integer customerType;  //customerType(integer,optional):客户类型,
     private String customerTypeName;
     private String month;      //month(string,optional):月份,
     private Integer orderCount;    //orderCount(integer,optional):订单数量,
     private String transCompanyName; //transCompanyName(string,optional):物流公司名称,
-    private int transCompanyRecNo;   //transCompanyRecNo(integer,optional):物流公司Id,
-    private int transShopRecNo;      //transShopRecNo(integer,optional):发货网点Id,
+    private Integer transCompanyRecNo;   //transCompanyRecNo(integer,optional):物流公司Id,
+    private Integer transShopRecNo;      //transShopRecNo(integer,optional):发货网点Id,
 
-    public Long getContractTotal() {
+    public Double getContractTotal() {
         return contractTotal == null ? 0 : contractTotal;
     }
 
-    public void setContractTotal(Long contractTotal) {
+    public void setContractTotal(Double contractTotal) {
         this.contractTotal = contractTotal;
     }
 
-    public Long getPaid() {
+    public Double getPaid() {
         return paid == null ? 0 : paid;
     }
 
-    public void setPaid(Long paid) {
+    public void setPaid(Double paid) {
         this.paid = paid;
     }
 
-    public Long getUnpaid() {
+    public Double getUnpaid() {
         return unpaid == null ? 0 : unpaid;
     }
 
-    public void setUnpaid(Long unpaid) {
+    public void setUnpaid(Double unpaid) {
         this.unpaid = unpaid;
     }
 

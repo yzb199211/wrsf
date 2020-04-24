@@ -39,6 +39,9 @@ public class CompanyBillAdapter extends RecyclerView.Adapter<CompanyBillAdapter.
         holder.tvNum.setText(list.get(position).getOrderCount() + "");
         holder.tvUnpay.setText(context.getString(R.string.common_rmb) + list.get(position).getUnpaid());
         holder.tvType.setText(list.get(position).getCustomerTypeName());
+        holder.itemView.setOnClickListener(view -> {
+            if (onItemClickListener != null) onItemClickListener.onItemClick(position);
+        });
     }
 
     @Override
@@ -60,6 +63,7 @@ public class CompanyBillAdapter extends RecyclerView.Adapter<CompanyBillAdapter.
             tvNum = itemView.findViewById(R.id.tv_num);
             tvUnpay = itemView.findViewById(R.id.tv_unpay);
             tvTotal = itemView.findViewById(R.id.tv_total);
+            tvType = itemView.findViewById(R.id.tv_customer_type);
         }
     }
 

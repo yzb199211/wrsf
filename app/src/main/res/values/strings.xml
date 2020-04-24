@@ -57,6 +57,7 @@
     <string name="common_yes">是</string>
     <string name="common_no">否</string>
     <string name="common_rmb">¥</string>
+    <string name="common_conjunction">-\u2000-</string>
     <string name="common_select_img">\u3000▼</string>
     <string name="common_all">全部</string>
     <string name="common_normal">正常</string>
@@ -230,6 +231,7 @@
     <string name="company_car">车辆管理</string>
     <string name="company_outlets">网点管理</string>
     <string name="company_checkbill">账单</string>
+    <string name="company_checkbillDetail">账单详情</string>
     <string name="company_detail">公司资料</string>
     <string name="company_member">客户管理</string>
     <string name="company_worker">员工管理</string>
