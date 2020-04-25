@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_gray"
+    tools:context=".mine.pay.PayActivity">
+
+    <com.yyy.wrsf.view.topview.TopView
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_size"
+        android:background="@color/default_blue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:topLeftIvShow="true"
+        app:topLeftSrc="@mipmap/icon_back"
+        app:topTitle="@string/pay_title"
+        app:topTitleColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_money"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/dp_30"
+        app:layout_constraintTop_toBottomOf="@+id/top_view" />
+
+    <LinearLayout
+        android:id="@+id/ll_weixin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_money">
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:padding="@dimen/dp_5"
+            android:src="@mipmap/icon_weixin" />
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/pay_weixin"
+            android:textColor="@color/text_common"
+            android:textSize="@dimen/text_common" />
+
+        <RadioButton
+            android:id="@+id/rb_weixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_alibaba"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_weixin">
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:padding="@dimen/dp_5"
+            android:src="@mipmap/icon_alibaba" />
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/pay_alibaba"
+            android:textColor="@color/text_common"
+            android:textSize="@dimen/text_common" />
+
+        <RadioButton
+            android:id="@+id/rb_alibaba"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@color/default_blue"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_common_max"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_alibaba" />
+</androidx.constraintlayout.widget.ConstraintLayout>
