@@ -156,6 +156,8 @@
     <string name="bill_rec_total">应收账款</string>
     <string name="bill_rec_paid">已收账款</string>
     <string name="bill_rec_unpay">未收账款</string>
+    <string name="bill_clear">已结清</string>
+    <string name="bill_unclear">未结清</string>
     <!--寄件-->
     <string name="send_company">物流公司</string>
     <string name="send_goods">货物信息</string>

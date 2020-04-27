@@ -25,7 +25,7 @@ public class FlashActivity extends AppCompatActivity {
         public void run() {
             // TODO Auto-generated method stub
             Intent intent = new Intent();
-            intent.setClass(FlashActivity.this, PayActivity.class);
+            intent.setClass(FlashActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }

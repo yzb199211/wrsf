@@ -13,4 +13,7 @@ public class BillUrl {
     public final static String getCustomerFinanceReportDetailPageList = "/FinanceReport/getCustomerFinanceReportDetailPageList";
     public final static String getCustomerFinanceReportTotal = "/FinanceReport/getCustomerFinanceReportTotal";
 
+
+    public final static String getDaiContractReport = "/FinanceReport/getDaiContractReport";
+
 }

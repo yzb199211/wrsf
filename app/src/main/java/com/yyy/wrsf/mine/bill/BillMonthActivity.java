@@ -233,4 +233,10 @@ public class BillMonthActivity extends BasePickActivity implements XRecyclerView
     public void toast(String s) {
         Toast(s);
     }
+
+    @Override
+    protected void onDestroy() {
+        billMonthP.detachView();
+        super.onDestroy();
+    }
 }

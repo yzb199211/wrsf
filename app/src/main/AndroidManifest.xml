@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".mine.pay.PayActivity"></activity>
+        <activity android:name=".company.collection.CollectionActivity"></activity>
+        <activity android:name=".mine.pay.PayActivity" />
         <activity
             android:name=".mine.bill.BillMonthDetailActivity"
             android:screenOrientation="portrait" />

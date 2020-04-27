@@ -114,4 +114,8 @@ public class BillMonthP implements IBillMonthP
     public void resetPage(int pageIndex) {
         this.pageIndex = pageIndex;
     }
+    public void detachView() {
+        destroyFlag = true;
+        this.billMonthV = null;
+    }
 }

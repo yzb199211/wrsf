@@ -15,6 +15,7 @@ import com.yyy.wrsf.company.CompanyDetailActivity;
 import com.yyy.wrsf.company.bill.CompanyBillActivity;
 import com.yyy.wrsf.company.car.CarActivity;
 import com.yyy.wrsf.company.car.CarAdapter;
+import com.yyy.wrsf.company.collection.CollectionActivity;
 import com.yyy.wrsf.company.driver.DriverActivity;
 import com.yyy.wrsf.company.month.MonthActivity;
 import com.yyy.wrsf.company.order.OrderActivity;
@@ -94,6 +95,7 @@ public class CompanyFragment extends Fragment {
     }
 
     private void go2Pending() {
+        startActivity(new Intent().setClass(getActivity(), CollectionActivity.class));
     }
 
     private void go2Wait() {

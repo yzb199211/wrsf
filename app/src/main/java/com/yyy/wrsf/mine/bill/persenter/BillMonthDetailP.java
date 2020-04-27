@@ -71,10 +71,12 @@ public class BillMonthDetailP implements IBillMonthDetailP {
                                 pageIndex,
                                 pageSize,
                                 billMonthDetailV.getMonth(),
-                                billMonthDetailV.getCompanyId()
-                               ))));
+                                billMonthDetailV.getCompanyId(),
+                                billMonthDetailV.getCustomerTypeId()
+                        ))));
         return params;
     }
+
     public void detachView() {
         destroyFlag = true;
         this.billMonthDetailV = null;

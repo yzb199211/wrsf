@@ -6,6 +6,15 @@ public class OrderFilterB implements Serializable {
     private String contractNo;
     private Integer contractStatus;
     private Integer noticeYesNo;
+    private Integer daiStatus;
+
+    public Integer getDaiStatus() {
+        return daiStatus;
+    }
+
+    public void setDaiStatus(Integer daiStatus) {
+        this.daiStatus = daiStatus;
+    }
 
     public String getContractNo() {
         return contractNo;
