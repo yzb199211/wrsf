@@ -42,7 +42,9 @@ public class CollectionP implements ICollectionP {
             public void onSuccess(String data) {
                 Log.e("data", data);
                 CompanyBillCollectionTotalB companyBillCollectionTotalB = new Gson().fromJson(data, CompanyBillCollectionTotalB.class);
-                collectionV.setTotal(companyBillCollectionTotalB);
+                handler.post(()->{
+                    collectionV.setTotal(companyBillCollectionTotalB);
+                });
             }
 
             @Override

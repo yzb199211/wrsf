@@ -222,4 +222,10 @@ public class BaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    @Override
+    public void startActivity(Intent intent) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        super.startActivity(intent);
+    }
 }

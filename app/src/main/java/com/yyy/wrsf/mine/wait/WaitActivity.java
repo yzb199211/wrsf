@@ -34,6 +34,6 @@ public class WaitActivity extends BaseActivity {
         topView.setOnLeftClickListener(() -> {
             finish();
         });
-        tvContent.setText(Html.fromHtml(FileUtil.readToText(("collection.html"))));
+        tvContent.setText(Html.fromHtml(FileUtil.readToText(("notice.html"))));
     }
 }

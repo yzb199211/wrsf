@@ -276,9 +276,9 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                 shipping.setTransCompanyRecNo(company.getTransCompanyRecno());
                 shipping.setTransRecShopRecNo(company.getRecRegion().getRecNo());
                 shipping.setTransShopRecNo(company.getSendRegion().getRecNo());
-
-                initAddValue();
                 clearGoods();
+                initAddValue();
+
             });
         }
         companySelect.showAtLocation(view, Gravity.BOTTOM, 0, 0);

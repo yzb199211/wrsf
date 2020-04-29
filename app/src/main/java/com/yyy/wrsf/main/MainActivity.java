@@ -2,6 +2,7 @@ package com.yyy.wrsf.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -183,4 +184,16 @@ public class MainActivity extends BaseActivity implements IMainV {
     public String getAuthority() {
         return role;
     }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.MAIN");
+            intent.addCategory("android.intent.category.HOME");
+            startActivity(intent);
+        }
+        return false;
+    }
+
 }
