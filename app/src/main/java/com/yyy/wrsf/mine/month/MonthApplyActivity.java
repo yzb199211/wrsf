@@ -216,7 +216,7 @@ public class MonthApplyActivity extends BaseActivity {
                 LoadingDialog.showDialogForLoading(MonthApplyActivity.this);
             }
         });
-        new NetUtil(getCompanyParams(), NetConfig.address + CompanyUrl.getPageList, RequstType.POST, new ResponseListener() {
+        new NetUtil(getCompanyParams(), NetConfig.address + CompanyUrl.getCompany, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {
                 Log.e(MonthApplyActivity.this.getClass().getName(), "data:" + string);
