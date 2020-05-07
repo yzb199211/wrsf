@@ -430,7 +430,7 @@ public class MonthApplyActivity extends BaseActivity {
         if (fileOne == null && fileTwo == null && fileThree == null) {
             Toast(getString(R.string.company_upload_license));
         }
-        if (fileObverse == null || fileReverse == null) {
+        if (fileObverse == null && fileReverse == null) {
             Toast(getString(R.string.company_upload_IDCard));
         }
         setUploadData();
