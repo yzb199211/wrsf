@@ -23,6 +23,7 @@ import com.yyy.wrsf.company.order.OrderWaitActivity;
 import com.yyy.wrsf.company.outlets.OutletActivity;
 import com.yyy.wrsf.company.worker.WorkerActivity;
 import com.yyy.wrsf.mine.wait.WaitActivity;
+import com.yyy.wrsf.utils.SharedPreferencesHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +36,7 @@ public class CompanyFragment extends Fragment {
     TextView tvName;
     @BindView(R.id.cardView)
     CardView cardView;
-
+    SharedPreferencesHelper preferencesHelper;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,13 @@ public class CompanyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_company, container, false);
         ButterKnife.bind(this, view);
+        preferencesHelper = new SharedPreferencesHelper(getActivity(),getString(R.string.preferenceCache));
+        initView();
         return view;
+    }
+
+    private void initView() {
+        tvName.setText((String) preferencesHelper.getSharedPreference("companyName",""));
     }
 
 

@@ -9,7 +9,7 @@ public class CompanyBillTotalB {
      */
 
     private double unpaid;
-    private int paid;
+    private double paid;
     private double contractTotal;
 
     public double getUnpaid() {
@@ -20,11 +20,11 @@ public class CompanyBillTotalB {
         this.unpaid = unpaid;
     }
 
-    public int getPaid() {
+    public double getPaid() {
         return paid;
     }
 
-    public void setPaid(int paid) {
+    public void setPaid(double paid) {
         this.paid = paid;
     }
 

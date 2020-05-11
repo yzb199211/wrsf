@@ -83,7 +83,7 @@ public class OrderBean {
     private int noticeYesNo;
     private double otherTotal;
     private int packNumber;
-    private int paid;
+    private double paid;
     private int payStatus;
     private int payType;
     private double picTotal;
@@ -279,11 +279,11 @@ public class OrderBean {
         this.packNumber = packNumber;
     }
 
-    public int getPaid() {
+    public double getPaid() {
         return paid;
     }
 
-    public void setPaid(int paid) {
+    public void setPaid(double paid) {
         this.paid = paid;
     }
 
