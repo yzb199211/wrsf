@@ -102,7 +102,7 @@
     <string name="main_menu_mine">我的</string>
     <string name="main_receipt">签回单</string>
     <string name="main_send_notice">等通知放货</string>
-    <string name="main_pending_payment">待结货款</string>
+    <string name="main_pending_payment">待收货款</string>
     <string name="main_insured_transportation">保价运输</string>
     <string name="main_statements">对账单</string>
     <string name="main_apply_month">申请月结</string>
@@ -132,9 +132,12 @@
     <string name="address_area">收货地区</string>
     <string name="address_area_send">发货地区</string>
     <string name="address_company">收货公司</string>
+    <string name="address_company_send">发货公司</string>
     <string name="address_contract">联系人</string>
     <string name="address_contract_tel">联系电话</string>
     <string name="address_menu">地址簿</string>
+    <string name="address_ship_company">公司名称</string>
+    <string name="address_ship_area">公司地区</string>
     <!--网点-->
     <string name="outlets_search_title">网点查询</string>
     <!--开票资料-->

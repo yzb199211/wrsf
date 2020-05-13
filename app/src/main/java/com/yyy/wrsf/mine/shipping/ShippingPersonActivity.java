@@ -114,6 +114,7 @@ public class ShippingPersonActivity extends BaseActivity {
     private void initView() {
         initTop();
         initArea();
+
     }
 
     private void initArea() {

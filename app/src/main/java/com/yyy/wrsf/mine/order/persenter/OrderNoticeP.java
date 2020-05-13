@@ -34,7 +34,6 @@ public class OrderNoticeP implements IOrderP {
         this.iOrderV = iOrderV;
         iOrderM = new OrderM();
         initPager();
-
     }
 
     private void initPager() {
@@ -53,16 +52,20 @@ public class OrderNoticeP implements IOrderP {
                 if (!destroyFlag) {
                     handler.post(() -> {
                         iOrderV.finishLoading(null);
-                        List<OrderBean> list = new Gson().fromJson(string, new TypeToken<List<OrderBean>>() {
-                        }.getType());
-                        if (list.size() > 0) {
-                            iOrderV.addDatas(list);
-                            iOrderV.refreshList();
-                        }
-                        if (list.size() < pageSize) {
-                            iOrderV.cancelLoadMore();
-                        } else {
-                            pageIndex += 1;
+                        try {
+                            List<OrderBean> list = new Gson().fromJson(string, new TypeToken<List<OrderBean>>() {
+                            }.getType());
+                            if (list.size() > 0) {
+                                iOrderV.addDatas(list);
+                                iOrderV.refreshList();
+                            }
+                            if (list.size() < pageSize) {
+                                iOrderV.cancelLoadMore();
+                            } else {
+                                pageIndex += 1;
+                            }
+                        }catch (Exception e){
+
                         }
                     });
                 }

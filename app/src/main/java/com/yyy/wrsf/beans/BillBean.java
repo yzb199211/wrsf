@@ -105,7 +105,7 @@ public class BillBean {
     }
 
     public int getRecNo() {
-        return recNo;
+        return recNo==null?-1:recNo;
     }
 
     public void setRecNo(int recNo) {

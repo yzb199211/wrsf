@@ -95,16 +95,19 @@ public class LoginCodeActivity extends BaseActivity implements ILoginCodeV {
 
     @Override
     public void setPreference(MemberBean model) {
-        preferencesHelper.put("member", new Gson().toJson(model));
-        preferencesHelper.put("recNo", model.getRecNo());
-        preferencesHelper.put("tel", model.getMemberTel());
-        preferencesHelper.put("sex", model.getMemberSex());
-        preferencesHelper.put("petname", model.getMemberPetname());
-        preferencesHelper.put("main", model.getMail());
-        preferencesHelper.put("companyName", model.getCompanyName());
-        preferencesHelper.put("roleType", (int) model.getRoleType());
-        preferencesHelper.put("token", model.getToken());
-        preferencesHelper.put("authority", model.getRoles().get(0).getName());
+        try {
+            preferencesHelper.put("member", new Gson().toJson(model));
+            preferencesHelper.put("recNo", model.getRecNo());
+            preferencesHelper.put("tel", model.getMemberTel());
+            preferencesHelper.put("sex", model.getMemberSex());
+            preferencesHelper.put("petname", model.getMemberPetname());
+            preferencesHelper.put("main", model.getMail());
+            preferencesHelper.put("companyName", model.getCompanyName());
+            preferencesHelper.put("roleType", (int) model.getRoleType());
+            preferencesHelper.put("token", model.getToken());
+            preferencesHelper.put("authority", model.getRoles().get(0).getName());
+        }catch (Exception e){}
+
     }
 
 

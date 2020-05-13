@@ -16,7 +16,7 @@
         android:background="@color/default_blue"
         app:topLeftIvShow="false"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitle="@string/login_pwd_bcak"
+        app:topTitle="@string/login_enter_phone"
         app:topTitleColor="@color/white" />
 
     <ScrollView

@@ -44,15 +44,17 @@ public class LogPersenter implements ILogPersenter {
                         @Override
                         public void run() {
                             iLogView.finishLoading(null);
-                            list = new Gson().fromJson(string, new TypeToken<List<LogBean>>() {
-                            }.getType());
-                            if (list != null) {
-                                iLogView.addLog(list.size() > 3 ? list.subList(0, 3) : list);
-                                iLogView.refreshList();
-                            }
-                            if (list != null && list.size() < 4) {
-                                iLogView.hideLoad();
-                            }
+                            try {
+                                list = new Gson().fromJson(string, new TypeToken<List<LogBean>>() {
+                                }.getType());
+                                if (list != null) {
+                                    iLogView.addLog(list.size() > 3 ? list.subList(0, 3) : list);
+                                    iLogView.refreshList();
+                                }
+                                if (list != null && list.size() < 4) {
+                                    iLogView.hideLoad();
+                                }
+                            }catch (Exception e){}
                         }
                     });
 

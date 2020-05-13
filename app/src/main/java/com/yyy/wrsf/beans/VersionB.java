@@ -17,7 +17,7 @@ public class VersionB {
     private Integer isUpdate;
 
     public Integer getId() {
-        return id;
+        return id==null?-1:id;
     }
 
     public void setId(Integer id) {

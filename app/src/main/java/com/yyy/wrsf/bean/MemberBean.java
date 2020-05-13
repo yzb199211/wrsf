@@ -121,7 +121,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public int getRecNo() {
-        return recNo;
+        return recNo==null?-1:recNo;
     }
 
     public void setRecNo(int recNo) {
@@ -129,7 +129,7 @@ public class MemberBean implements IPickerViewData {
     }
 
     public int getRoleType() {
-        return roleType;
+        return roleType==null?-1:roleType;
     }
 
     public void setRoleType(int roleType) {

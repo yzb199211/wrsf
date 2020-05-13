@@ -74,7 +74,7 @@ public class PwdBackActivity extends BaseActivity implements IBackPwdV {
     }
 
     private void initConfirm() {
-        btnConfirm.setText(getString(R.string.login_register));
+        btnConfirm.setText(getString(R.string.common_submit));
     }
 
     private void initCode() {

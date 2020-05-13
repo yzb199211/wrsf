@@ -36,8 +36,8 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
-                app:ecHint="@string/address_company"
-                app:ecTitle="@string/address_company"
+                app:ecHint="@string/address_ship_company"
+                app:ecTitle="@string/address_ship_company"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
@@ -74,8 +74,8 @@
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
                 app:ecEditable="false"
-                app:ecHint="@string/address_area"
-                app:ecTitle="@string/address_area"
+                app:ecHint="@string/address_ship_area"
+                app:ecTitle="@string/address_ship_area"
                 app:ecType="tv" />
 
             <com.yyy.wrsf.view.editclear.EditClearView

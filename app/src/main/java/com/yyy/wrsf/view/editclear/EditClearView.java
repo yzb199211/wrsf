@@ -395,6 +395,13 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
         return TextUtils.isEmpty(hint) ? "" : context.getString(R.string.common_input) + hint;
     }
 
+    public void  setHint(String hint){
+        if (editText!=null){
+            this.hint = hint;
+            editText.setHint(context.getString(R.string.common_input) +hint);
+        }
+    }
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }

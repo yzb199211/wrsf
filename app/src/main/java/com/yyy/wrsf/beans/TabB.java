@@ -20,7 +20,7 @@ public class TabB {
     }
 
     public Integer getId() {
-        return id;
+        return id==null?-1:id;
     }
 
     public void setId(Integer id) {

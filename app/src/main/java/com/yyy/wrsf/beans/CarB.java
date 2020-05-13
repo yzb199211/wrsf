@@ -29,7 +29,7 @@ public class CarB implements Serializable {
     private String driverCer;
 
     public int getRecNo() {
-        return recNo;
+        return recNo==null?-1:recNo;
     }
 
     public void setRecNo(int recNo) {

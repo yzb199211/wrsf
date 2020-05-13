@@ -46,12 +46,14 @@
                 app:ecHint="@string/login_phone"
                 app:ecTextType="num"
                 app:ecTitle="@string/login_phone"
-                app:ecType="tv" />
+                app:ecType="tv"
+                android:visibility="gone"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_0_5"
-                android:background="@color/line_color" />
+                android:background="@color/line_color"
+                android:visibility="gone"/>
 
             <com.yyy.wrsf.view.VerificationCode
                 android:id="@+id/vc_code"

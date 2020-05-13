@@ -89,7 +89,7 @@ public class WorkerB {
     }
 
     public int getStopYesno() {
-        return stopYesno;
+        return stopYesno==null?0:stopYesno;
     }
 
     public void setStopYesno(int stopYesno) {
@@ -121,7 +121,7 @@ public class WorkerB {
     }
 
     public Integer getRoleId() {
-        return roleId;
+        return roleId==null?-1:roleId;
     }
 
     public void setRoleId(Integer roleId) {
