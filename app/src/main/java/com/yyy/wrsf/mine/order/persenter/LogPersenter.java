@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.mine.order.bean.LogBean;
@@ -54,7 +55,7 @@ public class LogPersenter implements ILogPersenter {
                                 if (list != null && list.size() < 4) {
                                     iLogView.hideLoad();
                                 }
-                            }catch (Exception e){}
+                            }catch (JsonSyntaxException e){}
                         }
                     });
 

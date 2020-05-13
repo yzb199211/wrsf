@@ -96,13 +96,13 @@
     <string name="login_pwd_remember">记住密码</string>
     <!--主页-->
     <string name="main_menu">主页</string>
-    <string name="main_menu_send">寄快递</string>
+    <string name="main_menu_send">下单</string>
     <string name="main_menu_notice">通知</string>
     <string name="main_menu_company">物流公司</string>
     <string name="main_menu_mine">我的</string>
     <string name="main_receipt">签回单</string>
     <string name="main_send_notice">等通知放货</string>
-    <string name="main_pending_payment">待收货款</string>
+    <string name="main_pending_payment">代收货款</string>
     <string name="main_insured_transportation">保价运输</string>
     <string name="main_statements">对账单</string>
     <string name="main_apply_month">申请月结</string>

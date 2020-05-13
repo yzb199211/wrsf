@@ -142,6 +142,7 @@ public class AddressDetailReceiveActivity extends BaseActivity {
     }
 
     private void initTop() {
+        topView.setTitle(getString(R.string.address_title_receive));
         topView.setOnLeftClickListener(new OnLeftClickListener() {
             @Override
             public void onLeft() {
@@ -205,7 +206,7 @@ public class AddressDetailReceiveActivity extends BaseActivity {
         if (addressModel == null) {
             addressModel = new AddressB();
         }
-        addressModel.setCompanyName(ecvCompany.getText());
+        addressModel.setCompanyName(TextUtils.isEmpty(ecvCompany.getText())?ecvContract.getText():ecvCompany.getText());
         addressModel.setContractPerson(ecvContract.getText());
         addressModel.setContractTel(ecvPhone.getText());
         addressModel.setFirstAdd(province.getAreaName());
@@ -219,8 +220,8 @@ public class AddressDetailReceiveActivity extends BaseActivity {
     }
 
     private boolean canSave() {
-        if (TextUtils.isEmpty(ecvCompany.getText())) {
-            Toast(ecvCompany.getHint());
+        if (TextUtils.isEmpty(ecvCompany.getText())&&TextUtils.isEmpty(ecvContract.getText())) {
+            Toast(ecvContract.getHint());
             return false;
         }
         if (TextUtils.isEmpty(ecvContract.getText())) {

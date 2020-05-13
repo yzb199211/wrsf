@@ -149,7 +149,7 @@ public class OrderReceiveActivity extends BaseActivity implements XRecyclerView.
 
     @Override
     public Integer getType() {
-        return tabs.get(currentTab).getId();
+        return null;
     }
 
     @Override

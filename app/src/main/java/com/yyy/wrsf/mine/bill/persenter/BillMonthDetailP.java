@@ -41,17 +41,19 @@ public class BillMonthDetailP implements IBillMonthDetailP {
             public void onSuccess(String data) {
                 if (!destroyFlag) {
                     billMonthDetailV.finishLoading(null);
-                    List<CompanyBillDetailB> list = new Gson().fromJson(data, new TypeToken<List<CompanyBillDetailB>>() {
-                    }.getType());
-                    handler.post(() -> {
-                        if (list != null && list.size() > 0) {
-                            billMonthDetailV.addList(list);
-                            billMonthDetailV.refreshList();
-                        }
-                        if (list.size() < pageSize) {
-                            billMonthDetailV.setLoad(false);
-                        } else pageIndex += pageIndex;
-                    });
+                    try {
+                        List<CompanyBillDetailB> list = new Gson().fromJson(data, new TypeToken<List<CompanyBillDetailB>>() {
+                        }.getType());
+                        handler.post(() -> {
+                            if (list != null && list.size() > 0) {
+                                billMonthDetailV.addList(list);
+                                billMonthDetailV.refreshList();
+                            }
+                            if (list.size() < pageSize) {
+                                billMonthDetailV.setLoad(false);
+                            } else pageIndex += pageIndex;
+                        });
+                    }catch (NumberFormatException  e){}
                 }
             }
 

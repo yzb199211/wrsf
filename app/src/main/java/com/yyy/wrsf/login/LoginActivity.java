@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ import com.yyy.wrsf.main.MainActivity;
 import com.yyy.wrsf.utils.AESUtil;
 import com.yyy.wrsf.utils.FileUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
+import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.VersionUtil;
 import com.yyy.wrsf.utils.net.net.NetUtil;
 import com.yyy.wrsf.view.editclear.EditClearView;
@@ -93,7 +95,8 @@ public class LoginActivity extends BaseActivity implements ILoginV {
     private void initView() {
         btnConfirm.setText(getString(R.string.common_login));
         ecvUser.setText((String) preferencesHelper.getSharedPreference("tel", ""));
-        initPwd();
+        if (StringUtil.isNotEmpty((String) preferencesHelper.getSharedPreference("tel", "")))
+            initPwd();
     }
 
     private void initPwd() {

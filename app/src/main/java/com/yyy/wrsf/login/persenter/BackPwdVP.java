@@ -39,7 +39,7 @@ public class BackPwdVP implements IBackPwdVP {
             iBackPwdV.toast(BaseApplication.getInstance().getString(R.string.error_pwd_length));
             return;
         }
-        if (iBackPwdV.getPwd().equals(iBackPwdV.getPwdComfir())) {
+        if (!iBackPwdV.getPwd().equals(iBackPwdV.getPwdComfir())) {
             iBackPwdV.toast(BaseApplication.getInstance().getString(R.string.error_pwd_confirm));
             return;
         }

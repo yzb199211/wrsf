@@ -239,7 +239,7 @@ public class AddressSendActivity extends BaseActivity {
 
 
     private void initTop() {
-        topView.setTitle(getString(R.string.address_area_send));
+        topView.setTitle(getString(R.string.address_title_send));
         topView.setOnLeftClickListener(new OnLeftClickListener() {
             @Override
             public void onLeft() {

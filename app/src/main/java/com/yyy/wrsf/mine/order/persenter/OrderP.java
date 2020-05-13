@@ -3,6 +3,7 @@ package com.yyy.wrsf.mine.order.persenter;
 import android.os.Handler;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
@@ -65,7 +66,7 @@ public class OrderP implements IOrderP {
                             } else {
                                 pageIndex += 1;
                             }
-                        }catch (Exception e){
+                        }catch (JsonSyntaxException e){
 
                         }
                     });

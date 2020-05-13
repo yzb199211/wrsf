@@ -570,7 +570,13 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         params.add(new NetParams("param", new Gson().toJson(shipping)));
         return params;
     }
-
+    @Override
+    public void onBackPressed() {
+        if (companySelect != null && companySelect.isShowing()) {
+            companySelect.dismiss();
+        }else
+        super.onBackPressed();
+    }
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);

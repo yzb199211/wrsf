@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.beans.company.bill.CompanyBillDetailB;
 import com.yyy.wrsf.company.bill.model.CompamgBillDetailM;
@@ -38,17 +39,20 @@ public class CompanyBillDetailP implements ICompanyBillDetailP {
             public void onSuccess(String data) {
                 if (!destroyFlag) {
                     companyBillDetailV.finishLoading(null);
-                    List<CompanyBillDetailB> list = new Gson().fromJson(data, new TypeToken<List<CompanyBillDetailB>>() {
-                    }.getType());
-                    handler.post(() -> {
-                        if (list != null && list.size() > 0) {
-                            companyBillDetailV.addList(list);
-                            companyBillDetailV.refreshList();
-                        }
-                        if (list.size() < pageSize) {
-                            companyBillDetailV.setLoad(false);
-                        } else pageIndex += pageIndex;
-                    });
+                    try {
+                        List<CompanyBillDetailB> list = new Gson().fromJson(data, new TypeToken<List<CompanyBillDetailB>>() {
+                        }.getType());
+                        handler.post(() -> {
+                            if (list != null && list.size() > 0) {
+                                companyBillDetailV.addList(list);
+                                companyBillDetailV.refreshList();
+                            }
+                            if (list.size() < pageSize) {
+                                companyBillDetailV.setLoad(false);
+                            } else pageIndex += pageIndex;
+                        });
+                    }catch (JsonSyntaxException e){}
+
                 }
             }
 

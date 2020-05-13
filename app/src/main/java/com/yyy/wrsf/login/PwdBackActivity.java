@@ -115,7 +115,7 @@ public class PwdBackActivity extends BaseActivity implements IBackPwdV {
 
     @Override
     public String getTel() {
-        return ecvPhone.getText();
+        return (String) preferencesHelper.getSharedPreference("tel", "");
     }
 
     @Override

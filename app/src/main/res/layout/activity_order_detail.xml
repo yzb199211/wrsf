@@ -247,7 +247,7 @@
                 android:background="@color/default_bg_gray" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
-                android:id="@+id/ecv_receive_tel"
+                android:id="@+id/ecv_send_tel"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:background="@color/white"
@@ -288,7 +288,7 @@
                 android:background="@color/default_bg_gray" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
-                android:id="@+id/ecv_send_tel"
+                android:id="@+id/ecv_receive_tel"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
                 android:background="@color/white"

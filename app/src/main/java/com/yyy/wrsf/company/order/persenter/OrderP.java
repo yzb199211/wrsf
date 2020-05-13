@@ -3,6 +3,7 @@ package com.yyy.wrsf.company.order.persenter;
 import android.os.Handler;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.application.BaseApplication;
@@ -54,17 +55,25 @@ public class OrderP implements IOrderP {
                 if (!destroyFlag) {
                     handler.post(() -> {
                         iOrderV.finishLoading(null);
-                        List<OrderBean> list = new Gson().fromJson(string, new TypeToken<List<OrderBean>>() {
-                        }.getType());
-                        if (list.size() > 0) {
-                            iOrderV.addDatas(list);
-                            iOrderV.refreshList();
-                        }
-                        if (list.size() < pageSize) {
-                            iOrderV.cancelLoadMore();
-                        } else {
-                            pageIndex += 1;
-                        }
+                        try {
+                            try {
+                                List<OrderBean> list = new Gson().fromJson(string, new TypeToken<List<OrderBean>>() {
+                                }.getType());
+                                if (list.size() > 0) {
+                                    iOrderV.addDatas(list);
+                                    iOrderV.refreshList();
+                                }
+                                if (list.size() < pageSize) {
+                                    iOrderV.cancelLoadMore();
+                                } else {
+                                    pageIndex += 1;
+                                }
+                            }catch (JsonSyntaxException e){
+
+                            }
+
+                        }catch (NumberFormatException e){}
+
                     });
                 }
 
