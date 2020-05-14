@@ -6,6 +6,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
+import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.mine.order.bean.LogBean;
 import com.yyy.wrsf.mine.order.model.ILogM;
@@ -15,6 +18,7 @@ import com.yyy.wrsf.utils.net.log.LogUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.RequstType;
+import com.yyy.wrsf.utils.net.order.OrderUrl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,12 +86,68 @@ public class LogPersenter implements ILogPersenter {
         }
     }
 
+    public void confirm() {
+        iLogView.startLoading();
+        iLogM.getLog(comfirmParams(), NetConfig.address + OrderUrl.shopConfirm, RequstType.GET, new OnResultListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iLogView.finishLoading(BaseApplication.getInstance().getString(R.string.common_cancel_success));
+
+                    });
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                       iLogView.finishLoading(error);
+                    });
+                }
+            }
+        });
+    }
+    public void cancel() {
+        iLogView.startLoading();
+        iLogM.getLog(cancelParams(), NetConfig.address + OrderUrl.cancelOrder, RequstType.DELETE, new OnResultListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iLogView.finishLoading(BaseApplication.getInstance().getString(R.string.common_cancel_success));
+
+                    });
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                if (!destroyFlag) {
+                    handler.post(() -> {
+                        iLogView.finishLoading(error);
+                    });
+                }
+            }
+        });
+    }
+    private List<NetParams> comfirmParams() {
+        List<NetParams> list = new ArrayList<>();
+        list.add(new NetParams("contractNo", iLogView.getContractNo()));
+        list.add(new NetParams("confirmStatus", "1"));
+        return list;
+    }
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
         params.add(new NetParams("contractNo", iLogView.getContractNo()));
         return params;
     }
-
+    private List<NetParams> cancelParams() {
+        List<NetParams> list = new ArrayList<>();
+        list.add(new NetParams("contractNo", iLogView.getContractNo()));
+        return list;
+    }
     public void detachView() {
         destroyFlag = true;
         this.iLogView = null;

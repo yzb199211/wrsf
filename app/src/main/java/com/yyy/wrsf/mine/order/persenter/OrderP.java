@@ -15,6 +15,7 @@ import com.yyy.wrsf.mine.order.view.IOrderV;
 import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
+import com.yyy.wrsf.utils.net.net.NetUtil;
 import com.yyy.wrsf.utils.net.net.PagerRequestBean;
 import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.order.OrderUrl;
@@ -66,7 +67,7 @@ public class OrderP implements IOrderP {
                             } else {
                                 pageIndex += 1;
                             }
-                        }catch (JsonSyntaxException e){
+                        } catch (JsonSyntaxException e) {
 
                         }
                     });
@@ -117,7 +118,8 @@ public class OrderP implements IOrderP {
     }
 
     @Override
-    public void pay(int pos) {
+    public void pay(String orderNo) {
+
     }
 
     @Override
@@ -141,6 +143,8 @@ public class OrderP implements IOrderP {
         list.add(new NetParams("contractNo", id));
         return list;
     }
+
+
 
     public void detachView() {
         destroyFlag = true;

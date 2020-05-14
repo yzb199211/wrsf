@@ -116,8 +116,10 @@ public class OrderReceiveP implements IOrderP {
     }
 
     @Override
-    public void pay(int pos) {
+    public void pay(String orderNo) {
+
     }
+
 
     @Override
     public void getTabs() {

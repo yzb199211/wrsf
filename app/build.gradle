@@ -1,6 +1,21 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    signingConfigs {
+        release {
+
+            storeFile file { "D:/keystore/huanxin.jks" }//存放签名key的本地路径
+            //签名密码
+            storePassword "huanxin0501"
+            //别名
+            keyAlias "key0"
+            //别名密码
+            keyPassword "huanxin0501"
+        }
+    }
+
+
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
     lintOptions {
@@ -19,7 +34,16 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //引用正式签名
+            debuggable true
+            signingConfig signingConfigs.release
+
         }
+        //引用正式签名
+        debug {
+            signingConfig signingConfigs.release
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -1,5 +1,6 @@
 package com.yyy.wrsf.mine.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.yyy.wrsf.enums.PayTypeEnum;
 import com.yyy.wrsf.mine.order.bean.LogBean;
 import com.yyy.wrsf.mine.order.persenter.LogPersenter;
 import com.yyy.wrsf.mine.order.view.ILogView;
+import com.yyy.wrsf.mine.pay.PayActivity;
+import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.view.editclear.EditClearView;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -90,6 +93,12 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
     EditClearView ecvWaitNotice;
     @BindView(R.id.ecv_sign)
     EditClearView ecvSign;
+    @BindView(R.id.tv_cancel)
+    TextView tvCancel;
+    @BindView(R.id.tv_pay)
+    TextView tvPay;
+    @BindView(R.id.ll_bottom)
+    LinearLayout llBottom;
 
 
     private OrderBean order;
@@ -97,6 +106,7 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
 
     private List<LogBean> logs = new ArrayList<>();
     private LogAdapter logAdapter;
+    private boolean isCompany = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +114,7 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
         setContentView(R.layout.activity_order_detail);
         ButterKnife.bind(this);
         logPersenter = new LogPersenter(this);
+
         init();
         getLog();
     }
@@ -123,6 +134,8 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
 
     private void initData() {
         order = new Gson().fromJson(getIntent().getStringExtra("data"), OrderBean.class);
+        initBottom(getIntent().getIntExtra("cancle", 0), getIntent().getIntExtra("confirm", 0));
+        isCompany = getIntent().getBooleanExtra("isCompany", false);
         Log.e("order", getIntent().getStringExtra("data"));
     }
 
@@ -130,6 +143,17 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
         topView.setOnLeftClickListener(() -> {
             finish();
         });
+    }
+
+    private void initBottom(int cancle, int confirm) {
+        if (cancle != 0) {
+            llBottom.setVisibility(View.VISIBLE);
+            tvCancel.setVisibility(View.VISIBLE);
+        }
+        if (confirm != 0) {
+            llBottom.setVisibility(View.VISIBLE);
+            tvPay.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initOrder() {
@@ -155,7 +179,7 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
 
     private void initFee() {
         ecvFeeType.setText(PayTypeEnum.getName(order.getPayType()));
-        ecvTotal.setText(getString(R.string.common_rmb) + order.getContractTotal());
+        ecvTotal.setText(getString(R.string.common_rmb) + order.getContractTotalDetail());
         ecvFeeUser.setText(order.getPlantMemberName());
         ecvFeeBase.setText(getString(R.string.common_rmb) + order.getTransTotal());
         ecvFeePick.setText(getString(R.string.common_rmb) + order.getPicTotal());
@@ -223,6 +247,11 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
     }
 
     @Override
+    public void finishs() {
+        finish();
+    }
+
+    @Override
     protected void onDestroy() {
         logPersenter.detachView();
         super.onDestroy();
@@ -233,4 +262,29 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
         hideLoad();
         logPersenter.showAll();
     }
+
+    @OnClick({R.id.tv_cancel, R.id.tv_pay})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_cancel:
+                logPersenter.cancel();
+                break;
+            case R.id.tv_pay:
+                if (!isCompany) {
+                    go2Pay();
+                } else {
+                    logPersenter.confirm();
+                }
+                break;
+        }
+    }
+
+    private void go2Pay() {
+        startActivityForResult(
+                new Intent()
+                        .setClass(this, PayActivity.class)
+                        .putExtra("data", new Gson().toJson(order))
+                , CodeUtil.PAY);
+    }
+
 }

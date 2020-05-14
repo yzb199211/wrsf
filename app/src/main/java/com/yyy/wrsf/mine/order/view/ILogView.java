@@ -13,4 +13,5 @@ public interface ILogView extends ILoadingV {
     void refreshList();
 
     void hideLoad();
+    void finishs();
 }

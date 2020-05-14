@@ -9,5 +9,6 @@ public interface IPayV extends ILoadingV {
 
     void setOrder();
 
-
+    String getPayType();
+    void pay(String orderInfo);
 }

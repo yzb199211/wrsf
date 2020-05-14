@@ -72,6 +72,7 @@ public class OrderBean {
     private int contractPerson;
     private int contractStatus;
     private double contractTotal;
+    private Double discountPrice;
     private String createDate;
     private double daiPrice;
     private double daiTotal;
@@ -184,6 +185,9 @@ public class OrderBean {
     }
 
     public double getContractTotal() {
+        return discountPrice!=null?discountPrice:contractTotal;
+    }
+    public double getContractTotalDetail() {
         return contractTotal;
     }
 

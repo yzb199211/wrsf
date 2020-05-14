@@ -18,6 +18,7 @@ import com.yyy.wrsf.beans.TabB;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.mine.order.persenter.OrderP;
 import com.yyy.wrsf.mine.order.view.IOrderV;
+import com.yyy.wrsf.mine.pay.PayActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.view.radioSelect.RadioSelectView;
 import com.yyy.wrsf.view.topview.TopView;
@@ -130,6 +131,11 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     }
 
     private void go2Pay(int pos) {
+        startActivityForResult(
+                new Intent()
+                        .setClass(this, PayActivity.class)
+                        .putExtra("data", new Gson().toJson(orders.get(pos)))
+                , CodeUtil.PAY);
     }
 
     private void clear() {

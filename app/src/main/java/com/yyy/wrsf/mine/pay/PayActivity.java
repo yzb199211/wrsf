@@ -13,22 +13,32 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alipay.sdk.app.PayTask;
+import com.google.gson.Gson;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
+import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.beans.PayResult;
+import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.mine.pay.persenter.PayP;
+import com.yyy.wrsf.mine.pay.view.IPayV;
+import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.view.topview.TopView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PayActivity extends BaseActivity {
-
+public class PayActivity extends BaseActivity implements IPayV {
+    private final static String weixin = "WXPAY_APP";
+    private final static String alibaba = "ALIPAY_APP";
     @BindView(R.id.top_view)
     TopView topView;
     @BindView(R.id.tv_money)
@@ -40,52 +50,74 @@ public class PayActivity extends BaseActivity {
     @BindView(R.id.tv_pay)
     TextView tvPay;
 
-    private RadioButton current;
+    private int current;
     private static final int SDK_PAY_FLAG = 1;
+    private OrderBean orderBean;
+    private String payType = alibaba;
+    private PayP payP;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
         ButterKnife.bind(this);
+        payP = new PayP(this);
         init();
     }
 
     private void init() {
         initRadio();
+        initData();
     }
 
     private void initRadio() {
+        current = R.id.rb_alibaba;
         rbAlibaba.setButtonDrawable(R.drawable.rb_check);
         rbWeixin.setButtonDrawable(R.drawable.rb_check);
+    }
+
+    private void initData() {
+        String data = getIntent().getStringExtra("data");
+        orderBean = new Gson().fromJson(data, OrderBean.class);
+        tvMoney.setText(getString(R.string.common_rmb) + orderBean.getContractTotal());
+        tvPay.setText(getString(R.string.pay_alibaba) + getString(R.string.common_rmb) + orderBean.getContractTotal());
     }
 
     @OnClick({R.id.ll_weixin, R.id.ll_alibaba, R.id.tv_pay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_weixin:
+                switchRadio(R.id.rb_weixin, getString(R.string.pay_weixin));
+                payType = weixin;
                 break;
             case R.id.ll_alibaba:
+                switchRadio(R.id.rb_alibaba, getString(R.string.pay_alibaba));
+                payType = alibaba;
                 break;
             case R.id.tv_pay:
+                payP.pay();
                 break;
             default:
                 break;
         }
     }
 
-    private void switchRadio(RadioButton view, String text) {
-        if (view.getId() != current.getId()) {
-            current.setChecked(false);
-            current = view;
-            current.setChecked(true);
-            tvPay.setText(text + tvMoney.getText().toString());
+    private void switchRadio(int viewId, String text) {
+        if (viewId != current) {
+            RadioButton radioButton = findViewById(current);
+            radioButton.setChecked(false);
+            current = viewId;
+            RadioButton radioButton1 = findViewById(current);
+            radioButton1.setChecked(true);
+            tvPay.setText(text + getString(R.string.common_rmb) + orderBean.getContractTotal());
         }
     }
 
-    private void pay(String orderInfo) {
-        final Runnable payRunnable = new Runnable() {
 
+    @Override
+    public void pay(String orderInfo) {
+        final Runnable payRunnable = new Runnable() {
             @Override
             public void run() {
                 PayTask alipay = new PayTask(PayActivity.this);
@@ -98,7 +130,6 @@ public class PayActivity extends BaseActivity {
                 mHandler.sendMessage(msg);
             }
         };
-
         // 必须异步调用
         Thread payThread = new Thread(payRunnable);
         payThread.start();
@@ -147,5 +178,40 @@ public class PayActivity extends BaseActivity {
                 .setPositiveButton(R.string.common_comfirm, null)
                 .setOnDismissListener(onDismiss)
                 .show();
+    }
+
+    @Override
+    public void getOrder() {
+
+    }
+
+    @Override
+    public String getOrderNo() {
+        return orderBean.getContractNo();
+    }
+
+    @Override
+    public void setOrder() {
+
+    }
+
+    @Override
+    public String getPayType() {
+        return payType;
+    }
+
+    @Override
+    public void startLoading() {
+        LoadingDialog.showDialogForLoading(this);
+    }
+
+    @Override
+    public void finishLoading(@Nullable String s) {
+        LoadingFinish(s);
+    }
+
+    @Override
+    public void toast(String s) {
+        Toast(s);
     }
 }

@@ -576,4 +576,30 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_common"
+        android:background="@color/white"
+        android:gravity="right"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:background="@color/order_yellow"
+            android:textColor="@color/white"
+            android:text="@string/common_cancel"
+            android:gravity="center"
+            android:textSize="@dimen/text_common"/>
+        <TextView
+            android:id="@+id/tv_pay"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:background="@color/default_blue"
+            android:textColor="@color/white"
+            android:text="@string/common_pay"
+            android:gravity="center"
+            android:textSize="@dimen/text_common"/>
+    </LinearLayout>
 </LinearLayout>

@@ -6,7 +6,7 @@ public interface IOrderP {
     void cancel(int pos, String id);
 
 
-    void pay(int pos);
+    void pay(String orderNo);
 
     void getTabs();
 

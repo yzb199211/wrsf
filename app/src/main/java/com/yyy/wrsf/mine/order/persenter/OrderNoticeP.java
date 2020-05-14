@@ -115,6 +115,11 @@ public class OrderNoticeP implements IOrderP {
         });
     }
 
+    @Override
+    public void pay(String orderNo) {
+
+    }
+
     public void notice(int pos, String id) {
         iOrderV.startLoading();
         iOrderM.Requset(cancelParams(id), NetConfig.address + OrderUrl.SendNoticeByCustomer, RequstType.GET, new OnResultListener() {
@@ -140,10 +145,6 @@ public class OrderNoticeP implements IOrderP {
         });
     }
 
-    @Override
-    public void pay(int pos) {
-
-    }
 
     @Override
     public void getTabs() {
