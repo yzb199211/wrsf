@@ -10,16 +10,20 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.lxj.matisse.Matisse;
 import com.lxj.matisse.MimeType;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.beans.company.CompanyB;
 import com.yyy.wrsf.common.address.AreaSelect;
 import com.yyy.wrsf.common.address.OnBackAreaListener;
 import com.yyy.wrsf.dialog.LoadingDialog;
@@ -84,6 +88,10 @@ public class CompanyRegisterActivity extends BaseActivity {
     ImageView ivThree;
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
+    @BindView(R.id.ll_empty)
+    LinearLayout llEmpty;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
 
     SharedPreferencesHelper preferencesHelper;
 
@@ -104,7 +112,52 @@ public class CompanyRegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_company_register);
         ButterKnife.bind(this);
         preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
+        initData();
         init();
+    }
+
+    private void initData() {
+        getData();
+    }
+
+    private void getData() {
+        LoadingDialog.showDialogForLoading(this);
+        new NetUtil(getParams(), NetConfig.address + CompanyUrl.getApplyCompany, RequstType.GET, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                try {
+                    Result result = new Result(string);
+                    if (result.isSuccess()) {
+                        LoadingFinish(null);
+                        CompanyB companyModel = new Gson().fromJson(result.getData(), CompanyB.class);
+                        if (companyModel.getCheckFinish() != null && companyModel.getCheckFinish().intValue() == 4) {
+                            showEmpty();
+                        } else {
+                            shoDetail();
+                        }
+                    } else {
+                        LoadingFinish(result.getMsg());
+                    }
+                } catch (JsonSyntaxException e) {
+                    LoadingFinish(e.getMessage());
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    LoadingFinish(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                e.printStackTrace();
+                LoadingFinish(e.getMessage());
+            }
+        });
+    }
+
+    private List<NetParams> getParams() {
+        List<NetParams> params = new ArrayList<>();
+        return params;
     }
 
     private void init() {
@@ -112,6 +165,25 @@ public class CompanyRegisterActivity extends BaseActivity {
         initArea();
         initSubmit();
         initTop();
+    }
+
+    private void showEmpty() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                llEmpty.setVisibility(View.VISIBLE);
+            }
+        });
+
+    }
+
+    private void shoDetail() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void initTop() {

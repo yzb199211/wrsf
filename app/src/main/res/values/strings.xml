@@ -253,6 +253,7 @@
     <string name="company_shop_send_tel">发货电话:</string>
     <string name="company_shop_rec">收货网点:</string>
     <string name="company_shop_rec_tel">收货电话:</string>
+    <string name="company_checking">物流公司审核中...</string>
     <!--网点-->
     <string name="outlet_name">网点名称</string>
     <string name="outlet_address">网点地址</string>

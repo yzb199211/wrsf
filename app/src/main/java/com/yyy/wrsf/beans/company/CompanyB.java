@@ -39,6 +39,7 @@ public class CompanyB implements Serializable, IPickerViewData {
     private int plantSystemAccountRecno;
     private String plantSystemName;
     private String checkDate;
+    private Integer checkFinish;
 
     public int getRecNo() {
         return recNo;
@@ -150,6 +151,14 @@ public class CompanyB implements Serializable, IPickerViewData {
 
     public void setCheckDate(String checkDate) {
         this.checkDate = checkDate;
+    }
+
+    public Integer getCheckFinish() {
+        return checkFinish;
+    }
+
+    public void setCheckFinish(Integer checkFinish) {
+        this.checkFinish = checkFinish;
     }
 
     @Override
