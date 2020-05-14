@@ -43,6 +43,8 @@ public class BillMonthAdapter extends RecyclerView.Adapter<BillMonthAdapter.VH> 
         holder.tvTotal.setText(list.get(position).getContractTotal() + "");
         holder.tvPaid.setText(list.get(position).getPaid() + "");
         holder.tvUnpay.setText(list.get(position).getUnpaid() + "");
+        holder.tvPay.setVisibility(View.GONE);
+        holder.tvBill.setVisibility(View.GONE);
         holder.itemView.setOnClickListener(view -> {
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(position);

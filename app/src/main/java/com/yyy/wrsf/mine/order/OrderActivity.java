@@ -112,7 +112,6 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
 
     @Override
     public void onRefresh() {
-
     }
 
     @Override

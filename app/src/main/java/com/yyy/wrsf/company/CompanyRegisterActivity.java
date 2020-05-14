@@ -130,7 +130,7 @@ public class CompanyRegisterActivity extends BaseActivity {
                     if (result.isSuccess()) {
                         LoadingFinish(null);
                         CompanyB companyModel = new Gson().fromJson(result.getData(), CompanyB.class);
-                        if (companyModel.getCheckFinish() != null && companyModel.getCheckFinish().intValue() == 4) {
+                        if (companyModel != null && companyModel.getCheckFinish() != null && companyModel.getCheckFinish().intValue() == 4) {
                             showEmpty();
                         } else {
                             shoDetail();
