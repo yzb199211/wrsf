@@ -16,6 +16,7 @@ import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.beans.OrderBean;
 import com.yyy.wrsf.beans.TabB;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.enums.ContractStatusEnum;
 import com.yyy.wrsf.mine.order.persenter.OrderP;
 import com.yyy.wrsf.mine.order.view.IOrderV;
 import com.yyy.wrsf.mine.pay.PayActivity;
@@ -46,6 +47,8 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     private List<TabLayout.Tab> tabsV = new ArrayList<>();
     private OrderP orderP;
     private int currentTab = 0;
+
+    private int payPos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +134,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     }
 
     private void go2Pay(int pos) {
+        payPos = pos;
         startActivityForResult(
                 new Intent()
                         .setClass(this, PayActivity.class)
@@ -225,5 +229,14 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
     protected void onDestroy() {
         orderP.detachView();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == CodeUtil.PAY) {
+            orders.get(payPos).setContractStatus(ContractStatusEnum.PLACE_ORDER.getStatus());
+            refreshList();
+        }
     }
 }

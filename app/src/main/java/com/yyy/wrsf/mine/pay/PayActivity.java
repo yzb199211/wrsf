@@ -25,6 +25,7 @@ import com.yyy.wrsf.beans.PayResult;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.mine.pay.persenter.PayP;
 import com.yyy.wrsf.mine.pay.view.IPayV;
+import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.view.topview.TopView;
 
@@ -68,7 +69,14 @@ public class PayActivity extends BaseActivity implements IPayV {
 
     private void init() {
         initRadio();
+        initTop();
         initData();
+    }
+
+    private void initTop() {
+        topView.setOnLeftClickListener(() -> {
+            finish();
+        });
     }
 
     private void initRadio() {
@@ -151,8 +159,9 @@ public class PayActivity extends BaseActivity implements IPayV {
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-
-                        showAlert(PayActivity.this, getString(R.string.common_pay_success) + payResult);
+                        showAlert(PayActivity.this, getString(R.string.common_pay_success));
+                        setResult(CodeUtil.PAY);
+                        finish();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         showAlert(PayActivity.this, getString(R.string.common_pay_fail) + payResult);

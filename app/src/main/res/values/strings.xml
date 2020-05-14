@@ -38,7 +38,7 @@
     <string name="common_select">请选择</string>
     <string name="common_select_order">订单号查询</string>
     <string name="common_pay">付款</string>
-    <string name="common_pay_success">支付成功：</string>
+    <string name="common_pay_success">支付成功</string>
     <string name="common_pay_fail">支付失败：</string>
     <string name="common_bill_apply">申请开票</string>
     <string name="common_comfirm">确认</string>
