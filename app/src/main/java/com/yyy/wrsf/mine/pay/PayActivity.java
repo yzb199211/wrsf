@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -166,12 +167,12 @@ public class PayActivity extends BaseActivity implements IPayV {
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        showAlert(PayActivity.this, getString(R.string.common_pay_success));
+                        Toast(getString(R.string.common_pay_success));
                         setResult(CodeUtil.PAY);
                         finish();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                        showAlert(PayActivity.this, getString(R.string.common_pay_fail) + payResult);
+                        Toast(getString(R.string.common_pay_fail) + payResult);
                     }
                     break;
                 }
@@ -193,6 +194,12 @@ public class PayActivity extends BaseActivity implements IPayV {
                 .setMessage(info)
                 .setPositiveButton(R.string.common_comfirm, null)
                 .setOnDismissListener(onDismiss)
+                .setOnKeyListener(new DialogInterface.OnKeyListener() {
+                    @Override
+                    public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
+                        return false;
+                    }
+                })
                 .show();
     }
 

@@ -165,6 +165,7 @@
     <string name="send_company">物流公司</string>
     <string name="send_goods">货物信息</string>
     <string name="send_order_total">订单总价</string>
+    <string name="send_order_distotal">优惠金额</string>
     <string name="send_logistics">物流信息</string>
     <string name="send_base_fee">基础运费</string>
     <string name="send_goods_empty">请完善货物信息</string>

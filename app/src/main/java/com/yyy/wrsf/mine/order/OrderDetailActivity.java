@@ -99,6 +99,10 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
     TextView tvPay;
     @BindView(R.id.ll_bottom)
     LinearLayout llBottom;
+    @BindView(R.id.ecv_dis_total)
+    EditClearView ecvDisTotal;
+    @BindView(R.id.ecv_goods_num)
+    EditClearView ecvGoodsNum;
 
 
     private OrderBean order;
@@ -175,11 +179,13 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
         ecvGoodsName.setText(order.getGoodsName() + "");
         ecvGoodsWeight.setText(order.getWeight() + "");
         ecvGoodsVolume.setText(order.getSize() + "");
+        ecvGoodsNum.setText(order.getPackNumber() + "");
     }
 
     private void initFee() {
         ecvFeeType.setText(PayTypeEnum.getName(order.getPayType()));
         ecvTotal.setText(getString(R.string.common_rmb) + order.getContractTotalDetail());
+        ecvDisTotal.setText(getString(R.string.common_rmb) + order.getContractTotal());
         ecvFeeUser.setText(order.getPlantMemberName());
         ecvFeeBase.setText(getString(R.string.common_rmb) + order.getTransTotal());
         ecvFeePick.setText(getString(R.string.common_rmb) + order.getPicTotal());

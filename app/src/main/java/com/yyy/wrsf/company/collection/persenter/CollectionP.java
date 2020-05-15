@@ -76,7 +76,6 @@ public class CollectionP implements ICollectionP {
                         }
                     });
                 }
-
             }
 
             @Override
