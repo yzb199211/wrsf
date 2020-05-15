@@ -42,7 +42,7 @@ public class PayP implements IPayP {
             public void onSuccess(String data) {
                 payV.finishLoading(null);
                 PaymentB paymentB = new Gson().fromJson(data, PaymentB.class);
-                payV.pay(paymentB.getContractNo());
+                payV.pay(paymentB.getQrCode());
             }
 
             @Override

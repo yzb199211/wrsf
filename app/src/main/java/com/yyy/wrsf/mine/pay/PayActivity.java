@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.beans.OrderBean;
@@ -87,9 +88,15 @@ public class PayActivity extends BaseActivity implements IPayV {
 
     private void initData() {
         String data = getIntent().getStringExtra("data");
-        orderBean = new Gson().fromJson(data, OrderBean.class);
-        tvMoney.setText(getString(R.string.common_rmb) + orderBean.getContractTotal());
-        tvPay.setText(getString(R.string.pay_alibaba) + getString(R.string.common_rmb) + orderBean.getContractTotal());
+        try {
+            orderBean = new Gson().fromJson(data, OrderBean.class);
+            tvMoney.setText(getString(R.string.common_rmb) + orderBean.getContractTotal());
+            tvPay.setText(getString(R.string.pay_alibaba) + getString(R.string.common_rmb) + orderBean.getContractTotal());
+        }catch (JsonSyntaxException e){
+
+        }
+
+
     }
 
     @OnClick({R.id.ll_weixin, R.id.ll_alibaba, R.id.tv_pay})

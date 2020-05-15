@@ -199,7 +199,7 @@ public class EditClearView extends LinearLayout implements View.OnKeyListener {
             return EditorInfo.TYPE_CLASS_NUMBER;
         }
         if (textType == 3) {
-            return EditorInfo.TYPE_NUMBER_FLAG_DECIMAL;
+            return InputType.TYPE_CLASS_NUMBER |EditorInfo.TYPE_NUMBER_FLAG_DECIMAL;
         }
         return InputType.TYPE_CLASS_TEXT;
     }

@@ -51,18 +51,18 @@ public class ShippingB implements Serializable {
      * payType:0
      */
 
-    private int baoAsk;
-    private double baoPrice;//保价价格
+    private int baoAsk=0;
+    private double baoPrice=0;//保价价格
     private String contractNo;
     private int contractStatus;
     private double contractTotal;//总金额
     private String createDate;
-    private double daiPrice;
-    private int daiTotal;//代收货款
+    private double daiPrice=0;
+    private int daiTotal=0;//代收货款
     private int deliveryType;
     private double density;
     private String goodsName;
-    private int noticeYesNo;
+    private int noticeYesNo=0;
     private long packNumber;//数量
     private double picTotal;//提货价格
     private String pickDate;
@@ -70,8 +70,8 @@ public class ShippingB implements Serializable {
     private int platMemberRecNo;
     private String platMemberTel;
     private double price;//单价
-    private double qianPrice;//签单费
-    private int qianType;
+    private double qianPrice=0;//签单费
+    private int qianType=1;
     private String recDetail;
     private String recName;
     private int recRegion;

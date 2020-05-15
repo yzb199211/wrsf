@@ -27,6 +27,7 @@ import com.yyy.wrsf.common.company.CompanySelect;
 import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.mine.address.AddressReceiveActivity;
 import com.yyy.wrsf.mine.address.AddressSendActivity;
+import com.yyy.wrsf.mine.pay.PayActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.utils.StringUtil;
@@ -543,6 +544,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if (shipping.getPayType() == 1) go2Pay(result.getData());
                                 finish();
                             }
                         });
@@ -565,18 +567,31 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         });
     }
 
+    private void go2Pay(String order) {
+        startActivity(
+                new Intent()
+                        .setClass(this, PayActivity.class)
+                        .putExtra("data", order)
+        );
+    }
+
     private List<NetParams> saveParams() {
         List<NetParams> params = new ArrayList<>();
+        if(shipping.getQianType()==0){
+            shipping.setQianType(1);
+        }
         params.add(new NetParams("param", new Gson().toJson(shipping)));
         return params;
     }
+
     @Override
     public void onBackPressed() {
         if (companySelect != null && companySelect.isShowing()) {
             companySelect.dismiss();
-        }else
-        super.onBackPressed();
+        } else
+            super.onBackPressed();
     }
+
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
