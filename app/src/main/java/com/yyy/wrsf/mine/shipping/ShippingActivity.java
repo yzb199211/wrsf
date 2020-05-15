@@ -577,7 +577,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
 
     private List<NetParams> saveParams() {
         List<NetParams> params = new ArrayList<>();
-        if(shipping.getQianType()==0){
+        if (shipping.getQianType() == 0) {
             shipping.setQianType(1);
         }
         params.add(new NetParams("param", new Gson().toJson(shipping)));
@@ -597,6 +597,5 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
-
 
 }
