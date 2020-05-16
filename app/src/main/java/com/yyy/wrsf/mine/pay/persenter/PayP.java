@@ -3,9 +3,11 @@ package com.yyy.wrsf.mine.pay.persenter;
 import android.os.Handler;
 
 import com.google.gson.Gson;
+import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.yyy.wrsf.base.model.BaseM;
 import com.yyy.wrsf.base.model.IBaseM;
 import com.yyy.wrsf.beans.PaymentB;
+import com.yyy.wrsf.beans.WeiXinPay;
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.mine.pay.view.IPayV;
 import com.yyy.wrsf.utils.net.net.NetConfig;
@@ -40,14 +42,18 @@ public class PayP implements IPayP {
         baseM.Requset(payParams(), NetConfig.address + PayUrl.pay, RequstType.GET, new OnResultListener() {
             @Override
             public void onSuccess(String data) {
-                payV.finishLoading(null);
-                PaymentB paymentB = new Gson().fromJson(data, PaymentB.class);
-                payV.pay(paymentB.getQrCode());
+                if (!destroyFlag)
+                    handler.post(() -> {
+                        payV.finishLoading(null);
+                        PaymentB paymentB = new Gson().fromJson(data, PaymentB.class);
+                        payV.pay(paymentB.getQrCode());
+                    });
+
             }
 
             @Override
             public void onFail(String error) {
-                payV.finishLoading(error);
+                if (!destroyFlag) payV.finishLoading(error);
             }
         });
 
@@ -63,5 +69,22 @@ public class PayP implements IPayP {
     private List<NetParams> getParams() {
         List<NetParams> params = new ArrayList<>();
         return params;
+    }
+
+    public PayReq getWexinReq(String order) {
+        WeiXinPay pay = new Gson().fromJson(order, WeiXinPay.class);
+        PayReq request = new PayReq();
+        request.appId = pay.getAppid();
+        request.prepayId = pay.getPrepayid();
+        request.partnerId = pay.getPartnerid();
+        request.packageValue = "Sign=WXPay";
+        request.nonceStr = pay.getNoncestr();
+        request.timeStamp = pay.getTimestamp();
+        request.sign = pay.getSign();
+        return request;
+    }
+    public void detachView() {
+        destroyFlag = true;
+        this.payV = null;
     }
 }

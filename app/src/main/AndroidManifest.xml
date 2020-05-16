@@ -12,18 +12,37 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
     <application
         android:name=".application.BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_wrsf"
         android:label="@string/app_name1"
         android:networkSecurityConfig="@xml/network_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".company.collection.CollectionActivity"></activity>
-        <activity android:name=".mine.pay.PayActivity" />
+        <activity android:name=".mine.pay.PayActivity"
+            android:screenOrientation="portrait"
+           />
+<!--        <activity-->
+<!--            android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
+<!--            android:name=".wxapi.WXEntryActivity"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:configChanges="keyboardHidden|screenSize|orientation"-->
+<!--            android:exported="true"-->
+<!--            android:launchMode="singleTop"-->
+<!--            android:label="@string/app_name1"/>-->
+<!--        <activity-->
+<!--            android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
+<!--            android:name=".wxapi.WXPayEntryActivity"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:configChanges="keyboardHidden|screenSize|orientation"-->
+<!--            android:exported="true"-->
+<!--            android:launchMode="singleTop"-->
+<!--            android:label="@string/app_name1"/>-->
         <activity
             android:name=".mine.bill.BillMonthDetailActivity"
             android:launchMode="singleTop"
@@ -254,6 +273,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity-->
+<!--            android:name=".wxapi.WXEntryActivity"-->
+<!--            android:label="@string/app_name"-->
+<!--            android:exported="true"-->
+<!--            android:launchMode="singleTop">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW"/>-->
+<!--                <category android:name="android.intent.category.DEFAULT"/>-->
+<!--                <data android:scheme="wx191cbb7ec0178fcb"/>-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
         <activity
             android:name=".main.MainActivity"
             android:launchMode="singleTop"

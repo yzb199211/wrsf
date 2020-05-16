@@ -39,8 +39,6 @@ public class ImageLoaderUtil {
                 .load(url)
                 .apply(new RequestOptions()
                         .centerInside()
-                        .placeholder(R.mipmap.icon_logo)
-                        .error(R.mipmap.icon_logo)
                         .diskCacheStrategy(DiskCacheStrategy.ALL))
 
                 .into(v);
@@ -53,7 +51,7 @@ public class ImageLoaderUtil {
                         .fitCenter()
                         .placeholder(placeholder)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .error(R.mipmap.icon_logo))
+                      )
                 .into(v);
     }
 

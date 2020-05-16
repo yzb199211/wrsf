@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.yyy.wrsf.interfaces.WeChatPayCallback;
 import com.yyy.wrsf.utils.net.net.TokenInterceptor;
 
 import java.lang.reflect.Field;
@@ -39,7 +40,7 @@ public class BaseApplication extends Application {
         return baseApplication;
     }
 
-
+    public WeChatPayCallback weChatPayCallback;
     public OkHttpClient getClient() {
         if (okHttpClient == null) {
             okHttpClient = new OkHttpClient.Builder()

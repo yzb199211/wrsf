@@ -42,7 +42,7 @@
                 android:layout_height="@dimen/dp_50"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
-                android:src="@mipmap/icon_logo" />
+                android:src="@mipmap/icon_default_photo" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_20"
                 android:singleLine="true"
-                android:text="张三"
+                android:text=""
                 android:textColor="@color/text_common"
                 android:textSize="@dimen/text_common"
                 android:textStyle="bold" />
@@ -65,7 +65,7 @@
                 android:layout_marginTop="@dimen/dp_50"
                 android:layout_marginRight="@dimen/dp_20"
                 android:singleLine="true"
-                android:text="15868396666"
+                android:text=""
                 android:textColor="@color/text_common"
                 android:textSize="@dimen/text_common" />
 

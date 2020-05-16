@@ -43,7 +43,7 @@
                 android:layout_height="@dimen/dp_50"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
-                android:src="@mipmap/icon_default_photo" />
+                 />
 
             <TextView
                 android:id="@+id/tv_name"

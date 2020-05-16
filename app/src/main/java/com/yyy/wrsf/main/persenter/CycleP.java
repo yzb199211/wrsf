@@ -74,7 +74,12 @@ public class CycleP implements ICycleP {
         PagerRequestBean pager = new PagerRequestBean();
         pager.setPageIndex(0);
         pager.setPageSize(6);
+        pager.setQueryParam(new userType());
         return pager;
+    }
+
+    private class userType{
+        int useType=1;
     }
 
     private List<DataBean> getImgs(String string) {
