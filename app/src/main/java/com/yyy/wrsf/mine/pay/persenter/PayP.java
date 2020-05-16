@@ -3,13 +3,17 @@ package com.yyy.wrsf.mine.pay.persenter;
 import android.os.Handler;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
 import com.yyy.wrsf.base.model.BaseM;
 import com.yyy.wrsf.base.model.IBaseM;
 import com.yyy.wrsf.beans.PaymentB;
 import com.yyy.wrsf.beans.WeiXinPay;
 import com.yyy.wrsf.interfaces.OnResultListener;
 import com.yyy.wrsf.mine.pay.view.IPayV;
+import com.yyy.wrsf.utils.Toasts;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
@@ -72,17 +76,23 @@ public class PayP implements IPayP {
     }
 
     public PayReq getWexinReq(String order) {
-        WeiXinPay pay = new Gson().fromJson(order, WeiXinPay.class);
         PayReq request = new PayReq();
-        request.appId = pay.getAppid();
-        request.prepayId = pay.getPrepayid();
-        request.partnerId = pay.getPartnerid();
-        request.packageValue = "Sign=WXPay";
-        request.nonceStr = pay.getNoncestr();
-        request.timeStamp = pay.getTimestamp();
-        request.sign = pay.getSign();
-        return request;
+        try {
+            WeiXinPay pay = new Gson().fromJson(order, WeiXinPay.class);
+            request.appId = pay.getAppid();
+            request.prepayId = pay.getPrepayid();
+            request.partnerId = pay.getPartnerid();
+            request.packageValue = "Sign=WXPay";
+            request.nonceStr = pay.getNoncestr();
+            request.timeStamp = pay.getTimestamp();
+            request.sign = pay.getSign();
+            return request;
+        } catch (JsonSyntaxException e) {
+            payV.toast(BaseApplication.getInstance().getString(R.string.error_json));
+            return request;
+        }
     }
+
     public void detachView() {
         destroyFlag = true;
         this.payV = null;
