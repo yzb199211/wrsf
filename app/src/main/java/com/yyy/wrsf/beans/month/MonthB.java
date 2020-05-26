@@ -18,7 +18,7 @@ public class MonthB {
      * zhiZhao : string
      * zhiZhaoPics : string
      */
-
+    private String transCompanyName;
     private String companyName;
     private String contractPersonPics;
     private String detailAdd;
@@ -32,6 +32,41 @@ public class MonthB {
     private int firstId;
     private int secondId;
     private int thirdId;
+    private Integer recNo;
+    private Integer checkFinish;
+    private String contractTel;
+
+    public String getContractTel() {
+        return contractTel;
+    }
+
+    public void setContractTel(String contractTel) {
+        this.contractTel = contractTel;
+    }
+
+    public String getTransCompanyName() {
+        return transCompanyName;
+    }
+
+    public void setTransCompanyName(String transCompanyName) {
+        this.transCompanyName = transCompanyName;
+    }
+
+    public Integer getRecNo() {
+        return recNo;
+    }
+
+    public void setRecNo(Integer recNo) {
+        this.recNo = recNo;
+    }
+
+    public int getCheckFinish() {
+        return checkFinish==null?-1:checkFinish;
+    }
+
+    public void setCheckFinish(Integer checkFinish) {
+        this.checkFinish = checkFinish;
+    }
 
     public String getCompanyName() {
         return TextUtils.isEmpty(companyName) ? "" : companyName;

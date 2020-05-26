@@ -23,19 +23,28 @@ public class MonthFilterB {
     private String companyName;
     private String contractPerson;
     private String contractTel;
-    private int customerStatus;
+    private Integer customerStatus;
     private String detailAdd;
     private String firstAdd;
-    private int firstId;
+    private Integer firstId;
     private String person;
-    private int recNo;
+    private Integer recNo;
     private String secondAdd;
-    private int secondId;
+    private Integer secondId;
     private String thirdAdd;
-    private int thirdId;
-    private int transCompanyRecNo;
-    private int yskTotal;
+    private Integer thirdId;
+    private Integer transCompanyRecNo;
+    private Integer yskTotal;
     private String zhiZhao;
+    private Integer checkFinish;
+
+    public Integer getCheckFinish() {
+        return checkFinish;
+    }
+
+    public void setCheckFinish(Integer checkFinish) {
+        this.checkFinish = checkFinish;
+    }
 
     public String getCompanyName() {
         return companyName;

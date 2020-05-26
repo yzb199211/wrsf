@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_10"
+    android:background="@drawable/bg_order"
+    android:padding="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/tv_trans_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text=""
+        android:textColor="@color/order_yellow" />
+
+    <TextView
+        android:id="@+id/tv_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_trans_company"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_company"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_company"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common" />
+
+    <TextView
+        android:id="@+id/tv_business_license"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_person"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/text_gray2"
+        android:textSize="@dimen/text_common" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1_5"
+        android:layout_below="@+id/tv_business_license"
+        android:layout_marginTop="@dimen/dp_3"
+        android:background="@drawable/bg_line_dotted" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_18"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/bg_order_btn_yellow"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/common_edit"
+            android:textColor="@color/order_yellow"
+            android:textSize="@dimen/text_common_min"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</RelativeLayout>

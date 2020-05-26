@@ -4,6 +4,7 @@
     <!--error-->
     <string name="error_net">请求错误：</string>
     <string name="error_scan">扫描失败</string>
+    <string name="error_empty">无数据</string>
     <string name="error_json">数据解析</string>
     <string name="error_other">未知错误</string>
     <string name="error_data">返回数据错误</string>
@@ -302,6 +303,7 @@
 
     <!--申请月结-->
     <string name="month_title">申请月结</string>
+    <string name="month_list_title">月结列表</string>
     <string name="month_bill">开票资料</string>
     <string name="month_bill_company">开票名称</string>
     <string name="month_bill_company_hint">开票公司抬头</string>
@@ -311,6 +313,9 @@
     <string name="month_bill_tel_hint">开票公司电话</string>
     <string name="month_bill_tax">税号</string>
     <string name="month_bill_tax_hint">开票公司税号</string>
+    <string name="month_status_fail">未通过</string>
+    <string name="month_status_wait">审核中</string>
+    <string name="month_status_success">已通过</string>
 
     <string name="company_bill_orderNo">订单号：</string>
     <string name="company_bill_receiver">签收人：</string>
@@ -460,28 +465,30 @@
     <string name="send_img">发送图片</string>
 
 
-    -<string-array name="send_img_item">
+    -
+    <string-array name="send_img_item">
 
-    <item>发送图片的二进制数据</item>
+        <item>发送图片的二进制数据</item>
 
-    <item>发送图片的本地路径</item>
+        <item>发送图片的本地路径</item>
 
-    <item>发送图片的URL</item>
+        <item>发送图片的URL</item>
 
-</string-array>
+    </string-array>
 
     <string name="send_img_file_not_exist">文件不存在</string>
 
     <string name="send_file">发送文件</string>
 
 
-    -<string-array name="send_file_item">
+    -
+    <string-array name="send_file_item">
 
-    <item>发送文件的二进制数据</item>
+        <item>发送文件的二进制数据</item>
 
-    <item>发送文件的本地路径</item>
+        <item>发送文件的本地路径</item>
 
-</string-array>
+    </string-array>
 
     <string name="send_file_file_not_exist">文件不存在</string>
 
@@ -490,66 +497,72 @@
     <string name="send_music">发送音乐</string>
 
 
-    -<string-array name="send_music_item">
+    -
+    <string-array name="send_music_item">
 
-    <item>发送音乐url</item>
+        <item>发送音乐url</item>
 
-    <item>发送低带宽音乐url</item>
+        <item>发送低带宽音乐url</item>
 
-</string-array>
+    </string-array>
 
     <string name="send_video">发送视频</string>
 
 
-    -<string-array name="send_video_item">
+    -
+    <string-array name="send_video_item">
 
-    <item>发送视频url</item>
+        <item>发送视频url</item>
 
-    <item>发送低带宽视频url</item>
+        <item>发送低带宽视频url</item>
 
-</string-array>
+    </string-array>
 
     <string name="send_webpage">发送网页</string>
 
 
-    -<string-array name="send_webpage_item">
+    -
+    <string-array name="send_webpage_item">
 
-    <item>发送网页url</item>
+        <item>发送网页url</item>
 
-</string-array>
+    </string-array>
 
     <string name="send_appdata">发送app消息</string>
 
 
-    -<string-array name="send_appdata_item">
+    -
+    <string-array name="send_appdata_item">
 
-    <item>发送app文件本地路径</item>
+        <item>发送app文件本地路径</item>
 
-    <item>发送app二进制数据</item>
+        <item>发送app二进制数据</item>
 
-    <item>发送无附件的app</item>
+        <item>发送无附件的app</item>
 
-</string-array>
+    </string-array>
 
     <string name="send_emoji">发送表情消息</string>
 
 
-    -<string-array name="send_emoji_item">
+    -
+    <string-array name="send_emoji_item">
 
-    <item>发送表情本地路径</item>
+        <item>发送表情本地路径</item>
 
-    <item>发送表情二进制数据</item>
+        <item>发送表情二进制数据</item>
 
-</string-array>
+    </string-array>
 
 
-    -<string-array name="send_emoji_item_format">
+    -
+    <string-array name="send_emoji_item_format">
 
-    <item>发送GIF图片</item>
+        <item>发送GIF图片</item>
 
-    <item>发送非GIF图片</item>
+        <item>发送非GIF图片</item>
 
-</string-array>
+    </string-array>
 
     <!-- GetFromWXActivity -->
 

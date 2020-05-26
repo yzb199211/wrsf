@@ -11,6 +11,9 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.yyy.wrsf.R;
+import com.yyy.wrsf.application.BaseApplication;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -267,5 +270,30 @@ public class StringUtil {
 ////设置小数点后的位数
 //        df.setMaximumFractionDigits(1);
 //        return df.format(d);
+    }
+
+    public static String getMonthApplyStatus(int i) {
+        switch (i) {
+            case 0:
+                return BaseApplication.getInstance().getString(R.string.month_status_fail);
+            case 4:
+                return BaseApplication.getInstance().getString(R.string.month_status_wait);
+            case 5:
+                return BaseApplication.getInstance().getString(R.string.month_status_success);
+            default:
+                return "";
+        }
+    }
+    public static int getMonthApplyStatusColor(int i) {
+        switch (i) {
+            case 0:
+                return BaseApplication.getInstance().getColor(R.color.text_red);
+            case 4:
+                return BaseApplication.getInstance().getColor(R.color.order_yellow);
+            case 5:
+                return BaseApplication.getInstance().getColor(R.color.text_gray);
+            default:
+                return BaseApplication.getInstance().getColor(R.color.text_gray);
+        }
     }
 }
