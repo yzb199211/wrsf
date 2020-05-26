@@ -15,7 +15,7 @@
         android:background="@color/default_blue"
         app:topLeftIvShow="true"
         app:topLeftSrc="@mipmap/icon_back"
-        app:topTitle="@string/address_title_receive"
+        app:topTitle="@string/person_address"
         app:topTitleColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
