@@ -534,6 +534,7 @@ public class MonthApplyActivity extends BaseActivity {
                         try {
                             Result result = new Result(string);
                             if (result.isSuccess()) {
+                                LoadingFinish(getString(R.string.common_add_success));
                                 finish();
                             } else {
                                 LoadingFinish(result.getMsg());
