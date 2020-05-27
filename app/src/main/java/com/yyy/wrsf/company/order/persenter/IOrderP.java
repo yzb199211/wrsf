@@ -1,7 +1,7 @@
 package com.yyy.wrsf.company.order.persenter;
 
 public interface IOrderP {
-    void getData();
+    void getData(int type);
 
     void cancel(int pos, String id);
 

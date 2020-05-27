@@ -44,10 +44,7 @@ public class MonthFragment extends BaseFragment implements IMonthApplyV, XRecycl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         monthApplyP = new MonthApplyP(this);
-        monthApplyP.getData();
-    }
-
-    private void getData() {
+        monthApplyP.getData(0);
     }
 
     @Nullable
@@ -60,8 +57,8 @@ public class MonthFragment extends BaseFragment implements IMonthApplyV, XRecycl
     }
 
     private void init() {
-        initRecycle();
         initAdapter();
+        initRecycle();
     }
 
 
@@ -111,6 +108,8 @@ public class MonthFragment extends BaseFragment implements IMonthApplyV, XRecycl
         return status;
     }
 
+
+
     @Override
     public void startLoading() {
         LoadingDialog.showDialogForLoading(getActivity());
@@ -131,16 +130,27 @@ public class MonthFragment extends BaseFragment implements IMonthApplyV, XRecycl
         monthApplyP.detachView();
         super.onDestroy();
     }
+    @Override
+    public void stopLoad() {
+        recyclerView.loadMoreComplete();
+    }
 
     @Override
+    public void stopRefresh() {
+        recyclerView.refreshComplete();
+    }
+    @Override
     public void onRefresh() {
+        list.clear();
+        refreshList();
         monthApplyP.resetPageIndex();
         forbidLoad(true);
-        monthApplyP.getData();
+        monthApplyP.getData(1);
     }
 
     @Override
     public void onLoadMore() {
-        monthApplyP.getData();
+        monthApplyP.getData(2);
     }
+
 }

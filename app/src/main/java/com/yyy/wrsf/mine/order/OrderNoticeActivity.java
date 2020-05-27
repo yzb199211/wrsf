@@ -52,7 +52,7 @@ public class OrderNoticeActivity extends BaseActivity implements XRecyclerView.L
         ButterKnife.bind(this);
         orderP = new OrderNoticeP(this);
         init();
-        orderP.getData();
+        orderP.getData(0);
     }
 
     private void init() {
@@ -106,7 +106,7 @@ public class OrderNoticeActivity extends BaseActivity implements XRecyclerView.L
 
     @Override
     public void onLoadMore() {
-        orderP.getData();
+        orderP.getData(1);
     }
 
 
@@ -164,6 +164,11 @@ public class OrderNoticeActivity extends BaseActivity implements XRecyclerView.L
         initTabs();
     }
 
+    @Override
+    public void stopLoad() {
+        recyclerView.loadMoreComplete();
+    }
+
     private void initTabs() {
         for (TabB tabB : tabs) {
             TabLayout.Tab tab = tabLayout.newTab().setText(tabB.getName());
@@ -175,7 +180,7 @@ public class OrderNoticeActivity extends BaseActivity implements XRecyclerView.L
             public void onTabSelected(TabLayout.Tab tab) {
                 currentTab = tab.getPosition();
                 clear();
-                orderP.getData();
+                orderP.getData(0);
             }
 
             @Override

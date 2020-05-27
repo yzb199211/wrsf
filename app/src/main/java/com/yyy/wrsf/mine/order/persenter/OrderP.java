@@ -46,7 +46,7 @@ public class OrderP implements IOrderP {
     }
 
     @Override
-    public void getData() {
+    public void getData(int type) {
         initParams();
         iOrderV.startLoading();
         iOrderM.Requset(getParams(), NetConfig.address + OrderUrl.getPageList, RequstType.POST, new OnResultListener() {
@@ -55,6 +55,7 @@ public class OrderP implements IOrderP {
                 if (!destroyFlag) {
                     handler.post(() -> {
                         iOrderV.finishLoading(null);
+                        if(type==1) iOrderV.stopLoad();
                         try {
                             List<OrderBean> list = new Gson().fromJson(string, new TypeToken<List<OrderBean>>() {
                             }.getType());
@@ -79,6 +80,7 @@ public class OrderP implements IOrderP {
             public void onFail(String string) {
                 if (!destroyFlag) {
                     handler.post(() -> {
+                        if(type==1) iOrderV.stopLoad();
                         iOrderV.finishLoading(string);
                     });
                 }

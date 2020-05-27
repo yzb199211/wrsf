@@ -88,7 +88,7 @@
             android:text="@string/common_edit"
             android:textColor="@color/order_yellow"
             android:textSize="@dimen/text_common_min"
-            android:visibility="gone" />
+            android:visibility="invisible" />
     </LinearLayout>
 
 </RelativeLayout>

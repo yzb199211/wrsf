@@ -10,4 +10,6 @@ public interface IMonthApplyV extends ILoadingV {
     void refreshList();
     void setList(List<MonthB> list);
     int getStatus();
+    void stopLoad();
+    void stopRefresh();
 }

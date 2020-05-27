@@ -18,6 +18,7 @@ import com.yyy.wrsf.mine.address.AddressActivity;
 import com.yyy.wrsf.mine.address.AddressReceiveActivity;
 import com.yyy.wrsf.mine.bill.BillActivity;
 import com.yyy.wrsf.mine.bill.BillMonthActivity;
+import com.yyy.wrsf.mine.month.MonthActivity;
 import com.yyy.wrsf.mine.order.OrderActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
@@ -76,7 +77,10 @@ public class MineFragment extends Fragment {
         tmiPersonCompany.setText(company);
     }
 
-    @OnClick({R.id.iv_setting, R.id.mi_order, R.id.mi_invoice, R.id.mi_address, R.id.mi_detail, R.id.cardView, R.id.tmi_about, R.id.tmi_person_bill, R.id.tmi_person_company, R.id.tmi_modify_pwd, R.id.tv_exit})
+    @OnClick({R.id.iv_setting, R.id.mi_order, R.id.mi_invoice,
+            R.id.mi_address, R.id.mi_detail, R.id.cardView,
+            R.id.tmi_about, R.id.tmi_person_bill, R.id.tmi_person_company,
+            R.id.tmi_person_month, R.id.tmi_modify_pwd, R.id.tv_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_setting:
@@ -100,6 +104,9 @@ public class MineFragment extends Fragment {
             case R.id.tmi_person_bill:
                 go2Bill();
                 break;
+            case R.id.tmi_person_month:
+                go2Month();
+                break;
             case R.id.tmi_person_company:
                 break;
             case R.id.tmi_modify_pwd:
@@ -113,8 +120,13 @@ public class MineFragment extends Fragment {
         }
     }
 
+
     private void go2Bill() {
         startActivity(new Intent().setClass(getActivity(), BillMonthActivity.class));
+    }
+
+    private void go2Month() {
+        startActivity(new Intent().setClass(getActivity(), MonthActivity.class));
     }
 
     private void go2Order() {

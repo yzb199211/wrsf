@@ -29,7 +29,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_company, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_month_apply, parent, false);
         return new VH(view);
     }
 

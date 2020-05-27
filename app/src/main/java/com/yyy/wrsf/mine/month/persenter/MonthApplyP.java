@@ -1,6 +1,5 @@
 package com.yyy.wrsf.mine.month.persenter;
 
-import android.content.Context;
 import android.os.Handler;
 
 import com.google.gson.Gson;
@@ -35,34 +34,41 @@ public class MonthApplyP implements IMonthApplyP {
     }
 
     @Override
-    public void getData() {
+    public void getData(int type) {
         iMonthApplyV.startLoading();
         monthApplyM.Requset(getParams(), NetConfig.address + MonthUrl.selectMemberPageList, RequstType.POST, new OnResultListener() {
             @Override
             public void onSuccess(String data) {
                 if (!destroyFlag)
-                handler.post(()->{
-                    try {
-                        List<MonthB> list  = new Gson().fromJson(data,new TypeToken<List<MonthB>>(){}.getType());
-                        if (list!=null&&list.size()>0){
-                            if(list.size()<pageIndex) iMonthApplyV.forbidLoad(false);
-                            else pageIndex +=1;
-                            iMonthApplyV.setList(list);
-                        }else {
-                           iMonthApplyV.finishLoading(BaseApplication.getInstance().getString(R.string.error_empty));
+                    handler.post(() -> {
+                        try {
+                            if (type==1) iMonthApplyV.stopRefresh();
+                            else if (type==2) iMonthApplyV.stopLoad();
+                            List<MonthB> list = new Gson().fromJson(data, new TypeToken<List<MonthB>>() {
+                            }.getType());
+                            if (list != null && list.size() > 0) {
+                                if (list.size() < pageIndex) iMonthApplyV.forbidLoad(false);
+                                else pageIndex += 1;
+                                iMonthApplyV.setList(list);
+                                iMonthApplyV.finishLoading(null);
+                            } else {
+                                iMonthApplyV.finishLoading(BaseApplication.getInstance().getString(R.string.error_empty));
+                            }
+
+                        } catch (JsonSyntaxException e) {
+                            iMonthApplyV.finishLoading(BaseApplication.getInstance().getString(R.string.error_json));
                         }
-                    }catch (JsonSyntaxException e){
-                        iMonthApplyV.finishLoading(BaseApplication.getInstance().getString(R.string.error_json));
-                    }
-                });
+                    });
             }
 
             @Override
             public void onFail(String error) {
                 if (!destroyFlag)
-                handler.post(()->{
-                   iMonthApplyV.finishLoading(error);
-                });
+                    handler.post(() -> {
+                        if (type==1) iMonthApplyV.stopRefresh();
+                        else if (type==2) iMonthApplyV.stopLoad();
+                        iMonthApplyV.finishLoading(error);
+                    });
             }
         });
     }

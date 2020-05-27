@@ -20,4 +20,5 @@ public interface IOrderV extends ILoadingV {
     String getOrderName();
 
     void setTabs(List<TabB> tabs);
+    void stopLoad();
 }

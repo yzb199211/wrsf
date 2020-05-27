@@ -54,7 +54,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
         ButterKnife.bind(this);
         orderP = new OrderP(this);
         init();
-        orderP.getData();
+        orderP.getData(0);
     }
 
     private void init() {
@@ -70,7 +70,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
             currentTab = pos;
             clear();
             orderP.resetPage();
-            orderP.getData();
+            orderP.getData(0);
         });
     }
 
@@ -126,7 +126,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
 
     @Override
     public void onLoadMore() {
-        orderP.getData();
+        orderP.getData(1);
     }
 
     @Override
@@ -165,6 +165,11 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
         initTabs();
     }
 
+    @Override
+    public void stopLoad() {
+        recyclerView.loadMoreComplete();
+    }
+
     private void initTabs() {
         for (TabB tabB : tabs) {
             TabLayout.Tab tab = tabLayout.newTab().setText(tabB.getName());
@@ -177,7 +182,7 @@ public class OrderActivity extends BaseActivity implements XRecyclerView.Loading
                 currentTab = tab.getPosition();
                 clear();
                 orderP.resetPage();
-                orderP.getData();
+                orderP.getData(0);
             }
 
             @Override

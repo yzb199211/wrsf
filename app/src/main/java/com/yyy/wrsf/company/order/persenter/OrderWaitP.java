@@ -44,7 +44,7 @@ public class OrderWaitP implements IOrderP {
     }
 
     @Override
-    public void getData() {
+    public void getData(int type) {
         initParams();
         iOrderV.startLoading();
         iOrderM.Requset(getParams(), NetConfig.address + OrderUrl.getCompanyPageList, RequstType.POST, new OnResultListener() {
@@ -52,8 +52,9 @@ public class OrderWaitP implements IOrderP {
             public void onSuccess(String string) {
                 if (!destroyFlag) {
                     handler.post(() -> {
+                        if (type == 1) iOrderV.stopLoad();
                         iOrderV.finishLoading(null);
-                        try{
+                        try {
                             List<OrderBean> list = new Gson().fromJson(string, new TypeToken<List<OrderBean>>() {
                             }.getType());
                             if (list.size() > 0) {
@@ -65,7 +66,8 @@ public class OrderWaitP implements IOrderP {
                             } else {
                                 pageIndex += 1;
                             }
-                        }catch (NumberFormatException e){}
+                        } catch (NumberFormatException e) {
+                        }
 
                     });
                 }
@@ -76,6 +78,7 @@ public class OrderWaitP implements IOrderP {
             public void onFail(String string) {
                 if (!destroyFlag) {
                     handler.post(() -> {
+                        if (type == 1) iOrderV.stopLoad();
                         iOrderV.finishLoading(string);
                     });
                 }
