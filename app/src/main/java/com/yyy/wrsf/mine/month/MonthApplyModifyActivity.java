@@ -129,7 +129,7 @@ public class MonthApplyModifyActivity extends BasePickActivity {
         initData();
         initPagerData();
         initArea();
-        initCompany();
+//        initCompany();
         initSubmit();
         initTop();
         setView();
