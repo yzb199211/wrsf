@@ -159,14 +159,15 @@ public class AreaSelect extends PopupWindow implements View.OnClickListener {
             getData(province.getId());
             tvProvince.setText(province.getAreaName());
             tvCity.setVisibility(View.VISIBLE);
-        } else if (province != null && city != null && districts == null) {
+        } else if (province != null && city != null && district == null) {
             areaLevel = AreaLevel.DISTRICT;
             getData(city.getId());
             tvProvince.setText(province.getAreaName());
             tvCity.setText(city.getAreaName());
             tvCity.setVisibility(View.VISIBLE);
             tvDistrict.setVisibility(View.VISIBLE);
-        } else if (province != null && city != null && districts != null) {
+        }
+        else if (province != null && city != null && district != null) {
             areaLevel = AreaLevel.DISTRICT;
             getData(city.getId());
             tvProvince.setText(province.getAreaName());

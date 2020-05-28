@@ -37,6 +37,7 @@ import com.yyy.wrsf.dialog.LoadingDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
+import com.yyy.wrsf.utils.StringUtil;
 import com.yyy.wrsf.utils.net.company.CompanyUrl;
 import com.yyy.wrsf.utils.net.month.MonthUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
@@ -111,6 +112,9 @@ public class MonthApplyModifyActivity extends BasePickActivity {
 
     private OptionsPickerView pvCompany;
 
+    private int pos;
+//    private MonthB item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,13 +126,66 @@ public class MonthApplyModifyActivity extends BasePickActivity {
 
     private void init() {
         monthModel = new MonthB();
+        initData();
         initPagerData();
         initArea();
         initCompany();
         initSubmit();
         initTop();
+        setView();
     }
 
+    private void initData() {
+        pos = getIntent().getIntExtra("pos", 0);
+        monthModel = new Gson().fromJson(getIntent().getStringExtra("data"), MonthB.class);
+        initAreaData();
+        clearPics();
+    }
+
+    private void initAreaData() {
+
+        if (monthModel.getFirstId()!=0&& StringUtil.isNotEmpty(monthModel.getFirstAdd())){
+            province = new AreaB();
+            province.setAreaName(monthModel.getFirstAdd());
+            province.setDisplayName(monthModel.getFirstAdd());
+            province.setId(monthModel.getFirstId());
+        }else {
+            return;
+        }
+        if (monthModel.getSecondId()!=0&& StringUtil.isNotEmpty(monthModel.getSecondAdd())){
+            city = new AreaB();
+            city.setAreaName(monthModel.getSecondAdd());
+            city.setDisplayName(monthModel.getSecondAdd());
+            city.setId(monthModel.getSecondId());
+            city.setParentId(monthModel.getFirstId());
+        }else {
+            return;
+        }
+        if (monthModel.getThirdId()!=0&& StringUtil.isNotEmpty(monthModel.getThirdAdd())){
+            district = new AreaB();
+            district.setAreaName(monthModel.getThirdAdd());
+            district.setDisplayName(monthModel.getThirdAdd());
+            district.setId(monthModel.getThirdId());
+            district.setParentId(monthModel.getSecondId());
+        }else {
+            return;
+        }
+    }
+
+    private void clearPics() {
+        monthModel.setContractPersonPics(null);
+        monthModel.setZhiZhaoPics(null);
+        monthModel.setCheckFinish(null);
+    }
+
+    private void setView() {
+        ecvTrans.setText(monthModel.getTransCompanyName());
+        ecvCompany.setText(monthModel.getCompanyName());
+        ecvArea.setText(monthModel.getFirstAdd()+"\u3000"+monthModel.getSecondAdd()+"\u3000"+monthModel.getThirdAdd());
+        ecvAddressDetail.setText(monthModel.getDetailAdd());
+        ecvBusinessLicense.setText(monthModel.getZhiZhao());
+        ecvLegalPerson.setText(monthModel.getPerson());
+    }
     private void initTop() {
         topView.setOnLeftClickListener(new OnLeftClickListener() {
             @Override
@@ -406,6 +463,10 @@ public class MonthApplyModifyActivity extends BasePickActivity {
             Toast(ecvArea.getText());
             return false;
         }
+        if (district==null){
+            Toast(getString(R.string.error_area));
+            return false;
+        }
         if (TextUtils.isEmpty(ecvAddressDetail.getText())) {
             Toast(ecvAddressDetail.getHint());
             return false;
@@ -519,8 +580,8 @@ public class MonthApplyModifyActivity extends BasePickActivity {
         });
 
         new NetUtil(uploadParams(),
-                NetConfig.address + MonthUrl.insert,
-                RequstType.POST,
+                NetConfig.address + MonthUrl.modify,
+                RequstType.PUT,
                 new ResponseListener() {
                     @Override
                     public void onSuccess(String string) {
@@ -529,7 +590,7 @@ public class MonthApplyModifyActivity extends BasePickActivity {
                         try {
                             Result result = new Result(string);
                             if (result.isSuccess()) {
-                                LoadingFinish(getString(R.string.common_add_success));
+                                LoadingFinish(getString(R.string.common_save_success));
                                 finish();
                             } else {
                                 LoadingFinish(result.getMsg());

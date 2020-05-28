@@ -16,6 +16,7 @@
     <string name="error_plate">请输入正确的车牌号</string>
     <string name="error_user">用户名不能为空</string>
     <string name="error_license">营业执照错误</string>
+    <string name="error_area">三级地址不能为空</string>
     <!--net-->
     <string name="net_empty_data">未获取到详细信息</string>
     <!--empty-->

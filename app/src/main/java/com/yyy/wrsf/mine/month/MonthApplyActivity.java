@@ -325,7 +325,6 @@ public class MonthApplyActivity extends BaseActivity {
     private void initPhoto(int requestCode, String path) {
         switch (requestCode) {
             case CodeUtil.Photo_Obverse:
-
                 fileObverse = new File(path);
                 if (fileObverse.exists()) {
                     Glide.with(this).load(fileObverse).into(ivObverse);
@@ -409,6 +408,10 @@ public class MonthApplyActivity extends BaseActivity {
         }
         if (TextUtils.isEmpty(ecvArea.getText())) {
             Toast(ecvArea.getText());
+            return false;
+        }
+        if (district==null){
+            Toast(getString(R.string.error_area));
             return false;
         }
         if (TextUtils.isEmpty(ecvAddressDetail.getText())) {

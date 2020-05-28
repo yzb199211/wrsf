@@ -31,7 +31,7 @@ public class MonthB {
     private String zhiZhaoPics;
     private int firstId;
     private int secondId;
-    private int thirdId;
+    private int thridId;
     private Integer recNo;
     private Integer checkFinish;
     private String contractTel;
@@ -168,10 +168,10 @@ public class MonthB {
     }
 
     public int getThirdId() {
-        return thirdId;
+        return thridId;
     }
 
     public void setThirdId(int thirdId) {
-        this.thirdId = thirdId;
+        this.thridId = thirdId;
     }
 }

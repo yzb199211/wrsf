@@ -44,6 +44,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
         holder.tvBusLic.setText(list.get(position).getZhiZhao());
         holder.tvEdit.setOnClickListener(view -> {
             if (onItemClickListener != null && list.get(position).getCheckFinish()==0) onItemClickListener.onItemClick(position);
+//            if (onItemClickListener != null) onItemClickListener.onItemClick(position);
         });
         holder.tvEdit.setVisibility(list.get(position).getCheckFinish()==0?View.VISIBLE:View.INVISIBLE);
     }

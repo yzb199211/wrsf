@@ -234,15 +234,6 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                     save();
                 }
                 break;
-//            case R.id.tv_pay_now:
-//                switchPay(view, 1);
-//                break;
-//            case R.id.tv_pay_receive:
-//                switchPay(view, 3);
-//                break;
-//            case R.id.tv_pay_month:
-//                switchPay(view, 2);
-//                break;
             default:
                 break;
         }
