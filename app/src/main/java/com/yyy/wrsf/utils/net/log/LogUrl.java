@@ -1,5 +1,5 @@
 package com.yyy.wrsf.utils.net.log;
 
 public class LogUrl {
-    public final static String orderLog = "/orderLog/getListByOrderNo";
+    public final static String orderLog = "/orderLog/getAppListByOrderNo";
 }

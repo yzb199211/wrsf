@@ -18,6 +18,7 @@ public class ShipGoodsB {
     private int transId;
     private String transName;
 
+
     public double getDensity() {
         return density;
     }

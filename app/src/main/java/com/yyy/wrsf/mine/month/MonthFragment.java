@@ -65,12 +65,16 @@ public class MonthFragment extends BaseFragment implements IMonthApplyV, XRecycl
     private void initAdapter() {
         monthAdapter = new MonthAdapter(getActivity(), list);
         monthAdapter.setOnItemClickListener(pos -> {
-            go2Detail(new Gson().toJson(list.get(pos)));
+            go2Detail(pos);
         });
     }
 
-    private void go2Detail(String item) {
-        startActivityForResult(new Intent().setClass(getActivity(), MonthApplyActivity.class), CodeUtil.MODIFY);
+    private void go2Detail(int pos) {
+        startActivityForResult(new Intent()
+                .setClass(getActivity(), MonthApplyModifyActivity.class)
+                .putExtra("pos",pos)
+                .putExtra("data",new Gson().toJson(list.get(pos)))
+                , CodeUtil.MODIFY);
     }
 
     private void initRecycle() {
@@ -153,4 +157,8 @@ public class MonthFragment extends BaseFragment implements IMonthApplyV, XRecycl
         monthApplyP.getData(2);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

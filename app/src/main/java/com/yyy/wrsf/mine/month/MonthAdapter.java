@@ -45,6 +45,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.VH> {
         holder.tvEdit.setOnClickListener(view -> {
             if (onItemClickListener != null && list.get(position).getCheckFinish()==0) onItemClickListener.onItemClick(position);
         });
+        holder.tvEdit.setVisibility(list.get(position).getCheckFinish()==0?View.VISIBLE:View.INVISIBLE);
     }
 
     @Override

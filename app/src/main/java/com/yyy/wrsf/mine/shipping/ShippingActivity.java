@@ -171,6 +171,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
     private void initRadio() {
         tvPayNow.setOnCheckedChangeListener(this);
         tvPayReceive.setOnCheckedChangeListener(this);
+        tvPayMonth.setOnCheckedChangeListener(this);
     }
 
 
@@ -433,6 +434,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                 shipping.setGoodsPrice(priceBackM);
                 setGoods();
                 setTotal();
+                setMonth();
                 break;
             case CodeUtil.ShipAddValue:
                 addValue = new Gson().fromJson(data.getStringExtra("data"), ShippingAddValueB.class);
@@ -448,6 +450,17 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                 break;
             default:
                 break;
+        }
+    }
+
+    private void setMonth() {
+        if (priceBackM!=null && priceBackM.getTransCustomerMonthRecNo()!=0){
+            tvPayMonth.setVisibility(View.VISIBLE);
+        }else {
+            tvPayMonth.setVisibility(View.GONE);
+            if (currentPay==tvPayMonth){
+                switchPay(tvPayNow, 1);
+            }
         }
     }
 
@@ -487,12 +500,14 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
 
     private void clearGoods() {
         goods = null;
+        priceBackM=null;
         shipping.clear();
         tmiGoods.setText("");
         tmiBaseFee.setText("");
         String sTotal = getString(R.string.send_total) + getString(R.string.common_rmb) + 0;
         tvTotal.setText(StringUtil.getSpanStr(sTotal, 5, getColor(R.color.order_yellow)));
         clearAddValue();
+        setMonth();
     }
 
     private void clearAddValue() {

@@ -23,11 +23,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".mine.month.MonthActivity"></activity>
-        <activity android:name=".company.collection.CollectionActivity" />
+        <activity android:name=".mine.month.MonthActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".company.collection.CollectionActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".mine.pay.PayActivity"
-            android:screenOrientation="portrait" /> <!-- <activity -->
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- <activity -->
         <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar" -->
         <!-- android:name=".wxapi.WXEntryActivity" -->
         <!-- android:screenOrientation="portrait" -->
@@ -204,6 +209,11 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".mine.month.MonthApplyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".mine.month.MonthApplyModifyActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
