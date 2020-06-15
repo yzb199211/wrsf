@@ -1,5 +1,7 @@
 package com.yyy.wrsf.mine.order.bean;
 
+import android.text.TextUtils;
+
 public class LogBean {
 
     /**
@@ -17,6 +19,7 @@ public class LogBean {
     private String operationName;
     private String logTitle;
     private String createDate;
+    private String content;
 
     public int getId() {
         return id;
@@ -64,5 +67,13 @@ public class LogBean {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    public String getContent() {
+        return TextUtils.isEmpty(content) ? "" : content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

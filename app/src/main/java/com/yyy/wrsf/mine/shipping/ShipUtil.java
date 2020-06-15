@@ -13,7 +13,9 @@ public class ShipUtil {
     public static double getDensity(Double weight, Double volume) {
         try {
             BigDecimal bigDecimal = new BigDecimal(new Double( weight/volume/1000)+"");
-            return bigDecimal.setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+            return bigDecimal.setScale(3, BigDecimal.ROUND_HALF_UP).compareTo(new BigDecimal(0.01))==1
+                    ?bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()
+                    :0.01;
 //            BigDecimal b1 = new BigDecimal(weight + "");
 //            BigDecimal b2 = new BigDecimal(volume + "");
 //            BigDecimal b3 = new BigDecimal(1000 + "");
