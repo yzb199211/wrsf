@@ -216,6 +216,7 @@
     <string name="order_receive_add">收件地址</string>
     <string name="order_send_tel">寄件电话</string>
     <string name="order_send_add">寄件地址</string>
+    <string name="order_pay_notice">支付说明</string>
 
     <string name="order_fee_type">付款方式：</string>
     <string name="order_fee_user">付款账号：</string>
@@ -229,6 +230,7 @@
     <string name="order_wait_notice_yes">放货</string>
     <string name="order_wait_notice">等通知放货：</string>
     <string name="order_sign">签收单类型：</string>
+
 
     <!--物流公司-->
     <string name="company_titlte">物流公司</string>

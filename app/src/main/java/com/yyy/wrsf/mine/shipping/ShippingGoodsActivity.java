@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
@@ -79,8 +81,10 @@ public class ShippingGoodsActivity extends BaseActivity {
     private Popwin popTrans;
     private Popwin popDelivery;
     private ShipGoodsB goodsModel;
+
     private PriceCalB priceCal;
     private boolean isEmpty;
+    private boolean isConfirm = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -334,14 +338,21 @@ public class ShippingGoodsActivity extends BaseActivity {
     }
 
     private void save() {
+
         if (goodsModel.isEmpty()) {
             LoadingFinish(getString(R.string.send_goods_empty));
             return;
         }
-        setPriceCal();
-        getPrice();
+        if (!isConfirm) {
+            go2confirm();
+            return;
+        }
 //        setResult(CodeUtil.ShipGoods, new Intent().putExtra("data", new Gson().toJson(goodsModel)));
 //        finish();
+    }
+
+    private void go2confirm() {
+        startActivityForResult(new Intent().setClass(this, ShipPayNoticeActivity.class), CodeUtil.CONFIRM);
     }
 
     private void getPrice() {
@@ -408,5 +419,14 @@ public class ShippingGoodsActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == CodeUtil.CONFIRM) {
+            setPriceCal();
+            getPrice();
+        }
     }
 }
