@@ -14,7 +14,6 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.company.CompanyDetailActivity;
 import com.yyy.wrsf.company.bill.CompanyBillActivity;
 import com.yyy.wrsf.company.car.CarActivity;
-import com.yyy.wrsf.company.car.CarAdapter;
 import com.yyy.wrsf.company.collection.CollectionActivity;
 import com.yyy.wrsf.company.driver.DriverActivity;
 import com.yyy.wrsf.company.month.MonthActivity;
@@ -22,8 +21,8 @@ import com.yyy.wrsf.company.order.OrderActivity;
 import com.yyy.wrsf.company.order.OrderWaitActivity;
 import com.yyy.wrsf.company.outlets.OutletActivity;
 import com.yyy.wrsf.company.worker.WorkerActivity;
-import com.yyy.wrsf.mine.wait.WaitActivity;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
+import com.yyy.wrsf.view.textselect.TextMenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +35,15 @@ public class CompanyFragment extends Fragment {
     TextView tvName;
     @BindView(R.id.cardView)
     CardView cardView;
+    @BindView(R.id.tmi_company_member)
+    TextMenuItem tmiCompanyMember;
+    @BindView(R.id.tmi_outlets)
+    TextMenuItem tmiOutlets;
+
     SharedPreferencesHelper preferencesHelper;
+    int roleType;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +55,16 @@ public class CompanyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_company, container, false);
         ButterKnife.bind(this, view);
-        preferencesHelper = new SharedPreferencesHelper(getActivity(),getString(R.string.preferenceCache));
+        preferencesHelper = new SharedPreferencesHelper(getActivity(), getString(R.string.preferenceCache));
+        roleType = (int) preferencesHelper.getSharedPreference("roleType", 3);
         initView();
         return view;
     }
 
     private void initView() {
-        tvName.setText((String) preferencesHelper.getSharedPreference("companyName",""));
+        tvName.setText((String) preferencesHelper.getSharedPreference("companyName", ""));
+        tmiCompanyMember.setVisibility(roleType == 2 ? View.VISIBLE : View.GONE);
+        tmiOutlets.setVisibility(roleType == 2 ? View.VISIBLE : View.GONE);
     }
 
 
