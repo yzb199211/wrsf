@@ -56,6 +56,12 @@ allprojects {
         jcenter()
 //        jcenter { url "http://jcenter.bintray.com/" }
         maven { url 'https://jitpack.io' }
+
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+
     }
 }
 repositories {

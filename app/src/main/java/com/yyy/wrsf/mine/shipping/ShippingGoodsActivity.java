@@ -141,6 +141,7 @@ public class ShippingGoodsActivity extends BaseActivity {
         initGoodsModel();
         initPriceCal();
         initTransData();
+
     }
 
     private void initGoodsModel() {
@@ -148,6 +149,54 @@ public class ShippingGoodsActivity extends BaseActivity {
         isEmpty = TextUtils.isEmpty(data);
         goodsModel = isEmpty ? new ShipGoodsB() : new Gson().fromJson(data, ShipGoodsB.class);
         setGoodsView();
+
+    }
+
+    private void initSelect() {
+        runOnUiThread(()->{
+            if (goods != null && goods.size() > 0)
+                initSelectGood();
+            if (send!=null && send.size()>0)
+                initSelectSend();
+            if (delivery!=null && delivery.size()>0){
+                initSelectDeliver();
+            }
+            if (trans!=null&& trans.size()>0){
+                initSelectTrans();
+            }
+        });
+    }
+
+    private void initSelectTrans() {
+        String type = trans.get(0).getPickerViewText();
+        tmiTrans.setText(type);
+        goodsModel.setTransId(trans.get(0).getDetailCode());
+        goodsModel.setTransName(trans.get(0).getPickerViewText());
+    }
+
+    private void initSelectDeliver() {
+        String type = delivery.get(0).getPickerViewText();
+        tmiDelivery.setText(type);
+        goodsModel.setDeliveryId(delivery.get(0).getDetailCode());
+        goodsModel.setDeliveryName(delivery.get(0).getPickerViewText());
+    }
+
+    private void initSelectGood() {
+        tmiGoodsName.setText(goods.get(0).getPickerViewText());
+        goodsModel.setGoodsId(goods.get(0).getDetailCode());
+        goodsModel.setGoodsName(goods.get(0).getPickerViewText());
+        if (goods.get(0).getPickerViewText().equals(getString(R.string.send_good_other))) {
+            ecvGoodsName.setVisibility(View.VISIBLE);
+        } else {
+            ecvGoodsName.setText("");
+            ecvGoodsName.setVisibility(View.GONE);
+        }
+    }
+    private void initSelectSend() {
+        String type = send.get(0).getPickerViewText();
+        tmiSend.setText(type);
+        goodsModel.setSendId(send.get(0).getDetailCode());
+        goodsModel.setSendName(send.get(0).getPickerViewText());
     }
 
     private void initPriceCal() {
@@ -193,7 +242,9 @@ public class ShippingGoodsActivity extends BaseActivity {
         list.add(PublicCode.DeliveryType);
         list.add(PublicCode.transType);
         publicFilter.setPublicCodes(list);
+
     }
+
 
     private void getData() {
         LoadingDialog.showDialogForLoading(this);
@@ -238,6 +289,7 @@ public class ShippingGoodsActivity extends BaseActivity {
 //                trans.addAll(array.getPlantPublicDetails());
 //            }
         }
+        if (isEmpty) initSelect();
     }
 
     private List<NetParams> getParams() {

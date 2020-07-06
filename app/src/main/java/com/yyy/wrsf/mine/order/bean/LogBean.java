@@ -20,6 +20,7 @@ public class LogBean {
     private String logTitle;
     private String createDate;
     private String content;
+    private int type;
 
     public int getId() {
         return id;
@@ -75,5 +76,13 @@ public class LogBean {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

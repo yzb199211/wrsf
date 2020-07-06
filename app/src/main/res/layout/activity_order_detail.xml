@@ -363,6 +363,21 @@
                 app:ecTitleColor="@color/text_common"
                 app:ecType="tv" />
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_price"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecFormatTitle="false"
+                app:ecHasDetele="false"
+                app:ecTextColor="@color/order_yellow"
+                app:ecTextGravity="right"
+                app:ecTitle="@string/send_order_price"
+                app:ecTitleColor="@color/text_common"
+                app:ecType="tv" />
+            <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_dis_total"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"

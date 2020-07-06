@@ -42,8 +42,9 @@ public class CollectionP implements ICollectionP {
             public void onSuccess(String data) {
                 Log.e("data", data);
                 CompanyBillCollectionTotalB companyBillCollectionTotalB = new Gson().fromJson(data, CompanyBillCollectionTotalB.class);
-                handler.post(()->{
-                    collectionV.setTotal(companyBillCollectionTotalB);
+                handler.post(() -> {
+                    if (companyBillCollectionTotalB != null)
+                        collectionV.setTotal(companyBillCollectionTotalB);
                 });
             }
 
@@ -57,9 +58,10 @@ public class CollectionP implements ICollectionP {
     @Override
     public void getOrder() {
         collectionV.startLoading();
-        collectionM.Requset(getCollettionParams(), NetConfig.address + OrderUrl.getCompanyPageList, RequstType.POST, new OnResultListener() {
+        collectionM.Requset(getCollettionParams(), NetConfig.address + OrderUrl.getDaiPageList, RequstType.POST, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
+                Log.e("data", string);
                 if (!destroyFlag) {
                     handler.post(() -> {
                         collectionV.finishLoading(null);

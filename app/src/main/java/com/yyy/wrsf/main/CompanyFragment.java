@@ -119,7 +119,6 @@ public class CompanyFragment extends Fragment {
         startActivity(new Intent().setClass(getActivity(), OrderWaitActivity.class));
     }
 
-
     private void go2Order() {
         startActivity(new Intent().setClass(getActivity(), OrderActivity.class));
     }

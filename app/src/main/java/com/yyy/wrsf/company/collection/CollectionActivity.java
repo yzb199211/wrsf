@@ -1,5 +1,6 @@
 package com.yyy.wrsf.company.collection;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yyy.wrsf.R;
@@ -18,6 +20,8 @@ import com.yyy.wrsf.company.collection.persenter.CollectionP;
 import com.yyy.wrsf.company.collection.persenter.ICollectionP;
 import com.yyy.wrsf.company.collection.view.ICollectionV;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.mine.order.OrderDetailActivity;
+import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
 import com.yyy.wrsf.view.recycle.RecyclerViewDivider;
 import com.yyy.wrsf.view.topview.TopView;
@@ -107,7 +111,6 @@ public class CollectionActivity extends BasePickActivity implements ICollectionV
         recyclerView.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.VERTICAL));
         recyclerView.setLoadingListener(this);
         recyclerView.setAdapter(initAdapter());
-
     }
 
     private void initMonth() {
@@ -116,9 +119,19 @@ public class CollectionActivity extends BasePickActivity implements ICollectionV
 
     private OrderCollectionAdapter initAdapter() {
         adapter = new OrderCollectionAdapter(this, list);
+        adapter.setOnItemClickListener(pos -> {
+            go2Detail(pos);
+        });
         return adapter;
     }
-
+    private void go2Detail(int pos) {
+        startActivityForResult(
+                new Intent()
+                        .setClass(this, OrderDetailActivity.class)
+                        .putExtra("pos", pos)
+                        .putExtra("data", new Gson().toJson(list.get(pos)))
+                , CodeUtil.MODIFY);
+    }
     @OnClick({R.id.ll_unpay, R.id.ll_total, R.id.tv_month})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -142,6 +155,7 @@ public class CollectionActivity extends BasePickActivity implements ICollectionV
                 break;
         }
     }
+
     private void setUnpaid() {
         payType = 0;
         tvUnpay.setTextColor(getColor(R.color.text_common));
@@ -150,6 +164,7 @@ public class CollectionActivity extends BasePickActivity implements ICollectionV
         tvTitleTotal.setTextColor(getColor(R.color.text_gray));
         onRefresh();
     }
+
     private void setPaid() {
         payType = 1;
         tvTotal.setTextColor(getColor(R.color.text_common));
@@ -158,6 +173,7 @@ public class CollectionActivity extends BasePickActivity implements ICollectionV
         tvTitleUnpay.setTextColor(getColor(R.color.text_gray));
         onRefresh();
     }
+
     private void initPvDate() {
         Calendar calendar = Calendar.getInstance();
         Calendar calendarLast = Calendar.getInstance();
@@ -212,8 +228,8 @@ public class CollectionActivity extends BasePickActivity implements ICollectionV
 
     @Override
     public void setTotal(CompanyBillCollectionTotalB total) {
-        tvUnpay.setText(total.getUnpaidTotal() + "");
-        tvTotal.setText(total.getPaidTotal() + "");
+        tvUnpay.setText(total.getUnpaidTotal() == null ? "" : total.getUnpaidTotal() + "");
+        tvTotal.setText(total.getPaidTotal() == null ? "" : total.getPaidTotal() + "");
     }
 
     @Override

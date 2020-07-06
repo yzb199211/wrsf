@@ -7,19 +7,19 @@ public class CompanyBillCollectionTotalB {
      * unpaidTotal : 0
      */
 
-    private double paidTotal;
-    private double unpaidTotal;
+    private Double paidTotal;
+    private Double unpaidTotal;
 
-    public double getPaidTotal() {
-        return paidTotal;
+    public Double getPaidTotal() {
+        return paidTotal==null?0:paidTotal;
     }
 
     public void setPaidTotal(double paidTotal) {
         this.paidTotal = paidTotal;
     }
 
-    public double getUnpaidTotal() {
-        return unpaidTotal;
+    public Double getUnpaidTotal() {
+        return unpaidTotal==null?0:unpaidTotal;
     }
 
     public void setUnpaidTotal(double unpaidTotal) {

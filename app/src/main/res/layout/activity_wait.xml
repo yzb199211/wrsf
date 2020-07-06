@@ -15,7 +15,6 @@
         app:topLeftSrc="@mipmap/icon_back"
         app:topTitle="@string/main_send_notice"
         app:topTitleColor="@color/white" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"

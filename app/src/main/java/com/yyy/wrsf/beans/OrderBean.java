@@ -92,7 +92,7 @@ public class OrderBean {
     private String plantMemberName;
     private int plantMemberRecNo;
     private String plantMemberTel;
-    private double price;
+    private String price;
     private double qianPrice;
     private int qianType;
     private String recDetail;
@@ -347,11 +347,11 @@ public class OrderBean {
         this.plantMemberTel = plantMemberTel;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

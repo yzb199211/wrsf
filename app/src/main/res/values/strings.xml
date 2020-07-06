@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name1">万瑞三富</string>
+    <string name="app_name1">三富科技</string>
     <string name="preferenceCache">hnwrsf</string>
     <!--error-->
     <string name="error_net">请求错误：</string>
@@ -27,7 +27,8 @@
     <string name="unit_num">件</string>
     <string name="unit_order">单</string>
 
-
+    <string name="status_order_get">正在提货</string>
+    <string name="status_order_send">正在送货</string>
     <!--常用-->
     <string name="common_exit">退出登录</string>
     <string name="common_login">登录</string>
@@ -169,6 +170,7 @@
     <string name="send_company">物流公司</string>
     <string name="send_goods">货物信息</string>
     <string name="send_order_total">订单总价</string>
+    <string name="send_order_price">订单单价</string>
     <string name="send_order_distotal">优惠金额</string>
     <string name="send_logistics">物流信息</string>
     <string name="send_base_fee">基础运费</string>

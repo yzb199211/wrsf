@@ -44,7 +44,13 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.VH> {
         } else {
             holder.line.setVisibility(View.VISIBLE);
         }
-        holder.tvTitle.setText(list.get(position).getLogTitle());
+        if (list.get(position).getType() == 13) {
+            holder.tvTitle.setText(context.getString(R.string.status_order_send));
+        } else if (list.get(position).getType() == 4){
+            holder.tvTitle.setText(context.getString(R.string.status_order_get));
+        }else{
+            holder.tvTitle.setText(list.get(position).getLogTitle());
+        }
         holder.tvDate.setText(list.get(position).getCreateDate());
         holder.line.setLayoutParams(getParams((RelativeLayout.LayoutParams) holder.line.getLayoutParams(), true));
         holder.tvDetail.setText(list.get(position).getContent());
