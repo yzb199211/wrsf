@@ -88,9 +88,33 @@
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
                 app:ecHint="@string/address_detail"
+                app:ecSingleLine="false"
                 app:ecTitle="@string/address_detail"
-                app:ecType="tv"
-                app:ecSingleLine="false"/>
+                app:ecType="tv" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/address_ship_area_default"
+                    android:textColor="@color/text_common"
+                    android:textSize="@dimen/text_common" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/sw_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

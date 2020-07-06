@@ -143,6 +143,7 @@
     <string name="address_menu">地址簿</string>
     <string name="address_ship_company">公司名称</string>
     <string name="address_ship_area">公司地区</string>
+    <string name="address_ship_area_default">设为默认地址</string>
     <!--网点-->
     <string name="outlets_search_title">网点查询</string>
     <!--开票资料-->

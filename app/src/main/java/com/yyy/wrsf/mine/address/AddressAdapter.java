@@ -46,6 +46,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.VH> {
         holder.tvPhone.setText(StringUtil.formatString(item.getContractTel()));
         holder.tvAddress.setText(item.getWholeAddress());
         holder.tvCompany.setText(StringUtil.formatString(item.getCompanyName()));
+        holder.tvDefault.setVisibility(item.getIsDefault() == 1 ? View.VISIBLE : View.GONE);
         holder.bwiEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

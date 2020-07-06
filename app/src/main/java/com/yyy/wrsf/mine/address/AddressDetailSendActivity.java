@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.google.gson.Gson;
 import com.yyy.wrsf.R;
@@ -56,6 +57,8 @@ public class AddressDetailSendActivity extends BaseActivity {
     EditClearView ecvArea;
     @BindView(R.id.ecv_address_detail)
     EditClearView ecvAddressDetail;
+    @BindView(R.id.sw_default)
+    SwitchCompat swDefault;
 
     private AreaSelect areaSelect;
     private AreaB province;
@@ -96,6 +99,7 @@ public class AddressDetailSendActivity extends BaseActivity {
             initAreaData();
             setArea();
             setDetail();
+            initDefault();
         }
     }
 
@@ -124,7 +128,8 @@ public class AddressDetailSendActivity extends BaseActivity {
         ecvContract.setText(addressModel.getContractPerson());
     }
 
-    private void intDefaultData() {
+    private void initDefault() {
+        swDefault.setChecked(addressModel.getIsDefault() == 1);
     }
 
     private void initView() {
@@ -206,7 +211,7 @@ public class AddressDetailSendActivity extends BaseActivity {
         if (addressModel == null) {
             addressModel = new AddressB();
         }
-        addressModel.setCompanyName(TextUtils.isEmpty(ecvCompany.getText())?ecvContract.getText():ecvCompany.getText());
+        addressModel.setCompanyName(TextUtils.isEmpty(ecvCompany.getText()) ? ecvContract.getText() : ecvCompany.getText());
         addressModel.setContractPerson(ecvContract.getText());
         addressModel.setContractTel(ecvPhone.getText());
         addressModel.setFirstAdd(province.getAreaName());
@@ -217,10 +222,11 @@ public class AddressDetailSendActivity extends BaseActivity {
         addressModel.setThirdId(district.getId());
         addressModel.setDetailAdd(ecvAddressDetail.getText());
         addressModel.setPlatMemberRecNo(memberId);
+        addressModel.setIsDefault(swDefault.isChecked()?1:0);
     }
 
     private boolean canSave() {
-        if (TextUtils.isEmpty(ecvCompany.getText())&&TextUtils.isEmpty(ecvContract.getText())) {
+        if (TextUtils.isEmpty(ecvCompany.getText()) && TextUtils.isEmpty(ecvContract.getText())) {
             Toast(ecvContract.getHint());
             return false;
         }

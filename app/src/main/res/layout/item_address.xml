@@ -36,10 +36,10 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/dp_10"
         android:background="@color/order_yellow_shallow"
-        android:padding="@dimen/dp_2"
+        android:padding="@dimen/dp_4"
         android:text="@string/common_default"
         android:textColor="@color/order_yellow"
-        android:textSize="@dimen/text_common_max"
+        android:textSize="@dimen/text_common_min"
         android:visibility="gone" />
 
     <TextView

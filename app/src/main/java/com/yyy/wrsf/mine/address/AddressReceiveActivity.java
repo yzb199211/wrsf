@@ -267,14 +267,27 @@ public class AddressReceiveActivity extends BaseActivity {
             if (data != null) {
                 int pos = data.getIntExtra("pos", -1);
                 if (pos > -1 && pos < addresses.size()) {
-                    addresses.set(pos, new Gson().fromJson(data.getStringExtra("data"), AddressB.class));
+                    AddressB item = new Gson().fromJson(data.getStringExtra("data"), AddressB.class);
+                    if (addresses.get(pos).getIsDefault() != 1 && item.getIsDefault() == 1) {
+                        resetDefault();
+                    }
+                    addresses.set(pos, item);
 //                    addresses.get(pos) = ;
+
                     refrishList();
                 }
             }
         }
     }
 
+    private void resetDefault() {
+        for (AddressB item : addresses) {
+            if (item.getIsDefault() == 1) {
+                item.setIsDefault(0);
+                return;
+            }
+        }
+    }
 
 
     @Override

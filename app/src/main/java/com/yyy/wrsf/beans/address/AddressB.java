@@ -30,6 +30,7 @@ public class AddressB implements Serializable {
     private int firstId;
     private int secondId;
     private int thirdId;
+    private int isDefault;
 
     public String getCompanyName() {
         return TextUtils.isEmpty(companyName) ? "" : companyName;
@@ -126,6 +127,14 @@ public class AddressB implements Serializable {
 
     public void setThirdId(int thirdId) {
         this.thirdId = thirdId;
+    }
+
+    public int getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(int isDefault) {
+        this.isDefault = isDefault;
     }
 
     public String getWholeAddress() {

@@ -177,10 +177,22 @@ public class AddressSendFragment extends BaseFragment implements IAddressV {
             if (data != null) {
                 int pos = data.getIntExtra("pos", -1);
                 if (pos > -1 && pos < addressList.size()) {
-                    addressList.set(pos, new Gson().fromJson(data.getStringExtra("data"), AddressB.class));
+                    AddressB item = new Gson().fromJson(data.getStringExtra("data"), AddressB.class);
+                    if (addressList.get(pos).getIsDefault() != 1 && item.getIsDefault() == 1) {
+                        resetDefault();
+                    }
+                    addressList.set(pos, item);
 //                    addresses.get(pos) = ;
                     refreshList();
                 }
+            }
+        }
+    }
+    private void resetDefault() {
+        for (AddressB item : addressList) {
+            if (item.getIsDefault() == 1) {
+                item.setIsDefault(0);
+                return;
             }
         }
     }
