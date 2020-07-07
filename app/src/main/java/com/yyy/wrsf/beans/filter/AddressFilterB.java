@@ -31,6 +31,15 @@ public class AddressFilterB implements Serializable {
     private Integer secondId;
     private String thirdAdd;
     private Integer thirdId;
+    private Integer isDefault;
+
+    public Integer getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Integer isDefault) {
+        this.isDefault = isDefault;
+    }
 
     public String getCompanyName() {
         return companyName;

@@ -13,9 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BasePickActivity;
 import com.yyy.wrsf.beans.address.AddressB;
+import com.yyy.wrsf.beans.filter.AddressFilterB;
 import com.yyy.wrsf.beans.filter.ShipCompanyFilterB;
 import com.yyy.wrsf.beans.price.PriceBackB;
 import com.yyy.wrsf.beans.ship.ShipAddValueFeeB;
@@ -30,10 +32,13 @@ import com.yyy.wrsf.mine.address.AddressSendActivity;
 import com.yyy.wrsf.mine.pay.PayActivity;
 import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.DateUtil;
+import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.utils.StringUtil;
+import com.yyy.wrsf.utils.net.address.AddressUrl;
 import com.yyy.wrsf.utils.net.net.NetConfig;
 import com.yyy.wrsf.utils.net.net.NetParams;
 import com.yyy.wrsf.utils.net.net.NetUtil;
+import com.yyy.wrsf.utils.net.net.PagerRequestBean;
 import com.yyy.wrsf.utils.net.net.RequstType;
 import com.yyy.wrsf.utils.net.net.ResponseListener;
 import com.yyy.wrsf.utils.net.net.Result;
@@ -121,19 +126,26 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
     private PriceBackB priceBackM;
 
     private boolean refreshCompany = true;
+    private SharedPreferencesHelper preferencesHelper;
+    private int memberId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipping);
         ButterKnife.bind(this);
+        preferencesHelper = new SharedPreferencesHelper(this, getString(R.string.preferenceCache));
         init();
     }
 
     private void init() {
+        memberId = (Integer) preferencesHelper.getSharedPreference("recNo", 0);
         initModel();
         initView();
+        initPagerData();
+        getDefaultData();
     }
+
 
     private void initModel() {
         companyFilter = new ShipCompanyFilterB();
@@ -174,6 +186,114 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
         tvPayMonth.setOnCheckedChangeListener(this);
     }
 
+    /**
+     * 获取默认数据
+     */
+    private void getDefaultData() {
+        getRecPerson();
+        getSendPerson();
+    }
+
+    private void getSendPerson() {
+        LoadingDialog.showDialogForLoading(this);
+        new NetUtil(getParams(), NetConfig.address + AddressUrl.getAddressSendList, RequstType.POST, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                try {
+                    Result result = new Result(string);
+                    LoadingFinish(null);
+                    if (result.isSuccess()) {
+                        List<AddressB> list = new Gson().fromJson(result.getData(), new TypeToken<List<AddressB>>() {
+                        }.getType());
+                        if (list != null && list.size() > 0) {
+                            addressSend = list.get(0);
+                            if (addressSend.getThirdId() != companyFilter.getSendRegion()) {
+                                refreshCompany = true;
+                                companyFilter.setSendRegion(addressSend.getThirdId());
+                            }
+                            runOnUiThread(()->{
+                                clearCompany();
+                                setSend();
+                            });
+                        }
+                    } else {
+                        LoadingFinish(result.getMsg());
+                        Log.e(AddressSendActivity.class.getName(), result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                e.printStackTrace();
+                LoadingFinish(e.getMessage());
+            }
+        });
+    }
+
+    private void getRecPerson() {
+        LoadingDialog.showDialogForLoading(this);
+        new NetUtil(getParams(), NetConfig.address + AddressUrl.getAddressList, RequstType.POST, new ResponseListener() {
+            @Override
+            public void onSuccess(String string) {
+                try {
+                    Result result = new Result(string);
+                    LoadingFinish(null);
+                    if (result.isSuccess()) {
+                        List<AddressB> list = new Gson().fromJson(result.getData(), new TypeToken<List<AddressB>>() {
+                        }.getType());
+                        if (list != null && list.size() > 0) {
+                            addressReceive = list.get(0);
+                            if (addressReceive.getThirdId() != companyFilter.getRecRegion()) {
+                                refreshCompany = true;
+                                companyFilter.setRecRegion(addressReceive.getThirdId());
+                            }
+                            runOnUiThread(() -> {
+                                clearCompany();
+                                setReceive();
+                            });
+                        }
+                    } else {
+                        LoadingFinish(result.getMsg());
+                        Log.e(AddressSendActivity.class.getName(), result.getMsg());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    LoadingFinish(e.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                e.printStackTrace();
+                LoadingFinish(e.getMessage());
+            }
+        });
+    }
+
+    private List<NetParams> getParams() {
+
+        List<NetParams> params = new ArrayList<>();
+        params.add(new NetParams("platMemberRecaddBo", new Gson().toJson(pager)));
+        return params;
+    }
+
+    private PagerRequestBean<AddressFilterB> pager;
+
+    private void initPagerData() {
+        pager = new PagerRequestBean();
+        pager.setPageIndex(0);
+        pager.setPageSize(1);
+        AddressFilterB filterModel = new AddressFilterB();
+        filterModel.setRecNo(memberId);
+        filterModel.setIsDefault(1);
+        pager.setQueryParam(filterModel);
+//        String s = new Gson().toJson(filterModel);
+    }
 
     @OnClick({R.id.tv_address_send, R.id.ll_send, R.id.tv_address_receive, R.id.ll_receive, R.id.tmi_company, R.id.tmi_goods, R.id.tmi_value_add,
             R.id.tmi_pick_date, R.id.tmi_remark, R.id.tv_total, R.id.ll_protocol, R.id.tv_submit, R.id.tv_pay_now, R.id.tv_pay_receive, R.id.tv_pay_month})
@@ -445,11 +565,11 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
     }
 
     private void setMonth() {
-        if (priceBackM!=null && priceBackM.getTransCustomerMonthRecNo()!=0){
+        if (priceBackM != null && priceBackM.getTransCustomerMonthRecNo() != 0) {
             tvPayMonth.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             tvPayMonth.setVisibility(View.GONE);
-            if (currentPay==tvPayMonth){
+            if (currentPay == tvPayMonth) {
                 switchPay(tvPayNow, 1);
             }
         }
@@ -491,7 +611,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
 
     private void clearGoods() {
         goods = null;
-        priceBackM=null;
+        priceBackM = null;
         shipping.clear();
         tmiGoods.setText("");
         tmiBaseFee.setText("");
