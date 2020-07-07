@@ -197,7 +197,7 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
         ecvFeeCollection.setText(getString(R.string.common_rmb) + order.getDaiTotal());
         ecvWaitNotice.setText(order.getNoticeYesNo() == 0 ? getString(R.string.common_no) : getString(R.string.common_yes));
         ecvSign.setText(order.getQianTypeName());
-        ecvPrice.setText((getString(R.string.common_rmb) + order.getPrice()));
+        ecvPrice.setText(order.getPrice());
     }
 
     private void initList() {

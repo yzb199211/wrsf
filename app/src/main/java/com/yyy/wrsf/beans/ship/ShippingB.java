@@ -69,7 +69,7 @@ public class ShippingB implements Serializable {
     private String platMemberName;
     private int platMemberRecNo;
     private String platMemberTel;
-    private double price;//单价
+    private String price;//单价
     private double qianPrice=0;//签单费
     private int qianType=1;
     private String recDetail;
@@ -237,11 +237,11 @@ public class ShippingB implements Serializable {
         this.platMemberTel = platMemberTel;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

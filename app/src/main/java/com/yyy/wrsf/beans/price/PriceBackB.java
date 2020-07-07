@@ -17,7 +17,7 @@ public class PriceBackB {
     private double fixTotal;
     private double mixTotal;
     private double picTotal;
-    private double price;
+    private String price;
     private double sendTotal;
     private int transCustomerMonthRecNo;
     private double transTotal;
@@ -56,11 +56,11 @@ public class PriceBackB {
         this.picTotal = picTotal;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
