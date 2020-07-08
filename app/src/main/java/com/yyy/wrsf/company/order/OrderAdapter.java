@@ -50,7 +50,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         holder.tvReceiveArea.setText(list.get(position).getRecAdd());
         holder.tvReceivePerson.setText(list.get(position).getRecName());
         holder.tvOrderGoods.setText(list.get(position).getGoodsName());
-        holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + list.get(position).getContractTotal());
+        holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + (list.get(position).getContractTotal()!=0?list.get(position).getContractTotal():list.get(position).getContractTotalDetail()));
         holder.tvNotice.setText(list.get(position).getNoticeYesNo() == 1 ? context.getString(R.string.order_notice) : "");
         int status = list.get(position).getContractStatus();
         if (status > 3 || status == -1) {

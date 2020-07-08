@@ -100,7 +100,7 @@ public class OrderP implements IOrderP {
     @Override
     public void cancel(int pos, String id) {
         iOrderV.startLoading();
-        iOrderM.Requset(cancelParams(id), NetConfig.address + OrderUrl.cancelOrder, RequstType.DELETE, new OnResultListener() {
+        iOrderM.Requset(cancelParams(id), NetConfig.address + OrderUrl.cancelOrder, RequstType.GET, new OnResultListener() {
             @Override
             public void onSuccess(String data) {
                 if (!destroyFlag) {
@@ -131,7 +131,7 @@ public class OrderP implements IOrderP {
             public void onSuccess(String data) {
                 if (!destroyFlag) {
                     handler.post(() -> {
-                        iOrderV.finishLoading(BaseApplication.getInstance().getString(R.string.common_cancel_success));
+                        iOrderV.finishLoading(BaseApplication.getInstance().getString(R.string.common_confirm_success));
                         iOrderV.setItemType(pos, ContractStatusEnum.WAIT_REC.getStatus());
                         iOrderV.refreshList();
                     });
@@ -198,6 +198,7 @@ public class OrderP implements IOrderP {
     private List<NetParams> cancelParams(String id) {
         List<NetParams> list = new ArrayList<>();
         list.add(new NetParams("contractNo", id));
+        list.add(new NetParams("confirmStatus", "0"));
         return list;
     }
 

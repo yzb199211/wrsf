@@ -57,6 +57,7 @@
     <string name="common_order_success">下单成功</string>
     <string name="common_cancel">取消</string>
     <string name="common_cancel_success">取消成功</string>
+    <string name="common_confirm_success">确认成功</string>
     <string name="common_noticce_success">通知成功</string>
     <string name="common_confirm">确认</string>
     <string name="common_info">提示</string>
