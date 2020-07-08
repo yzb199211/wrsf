@@ -98,8 +98,8 @@ public class PayActivity extends BaseActivity implements IPayV, WeChatPayCallbac
         String data = getIntent().getStringExtra("data");
         try {
             orderBean = new Gson().fromJson(data, OrderBean.class);
-            tvMoney.setText(getString(R.string.common_rmb) + orderBean.getContractTotal());
-            tvPay.setText(getString(R.string.pay_alibaba) + getString(R.string.common_rmb) + orderBean.getContractTotal());
+            tvMoney.setText(getString(R.string.common_rmb) + orderBean.getUnpaid());
+            tvPay.setText(getString(R.string.pay_alibaba) + getString(R.string.common_rmb) + orderBean.getUnpaid());
         } catch (JsonSyntaxException e) {
 
         }
@@ -133,7 +133,7 @@ public class PayActivity extends BaseActivity implements IPayV, WeChatPayCallbac
             current = viewId;
             RadioButton radioButton1 = findViewById(current);
             radioButton1.setChecked(true);
-            tvPay.setText(text + getString(R.string.common_rmb) + orderBean.getContractTotal());
+            tvPay.setText(text + getString(R.string.common_rmb) + orderBean.getUnpaid());
         }
     }
 

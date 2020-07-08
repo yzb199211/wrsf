@@ -51,7 +51,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.VH> {
         holder.tvReceiveArea.setText(list.get(position).getRecAdd());
         holder.tvReceivePerson.setText(list.get(position).getRecName());
         holder.tvOrderGoods.setText(list.get(position).getGoodsName());
-        holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + list.get(position).getContractTotal());
+        holder.tvOrderCost.setText(context.getString(R.string.order_cost) + "：¥" + (list.get(position).getContractTotal()!=0?list.get(position).getContractTotal():list.get(position).getContractTotalDetail()));
         if (list.get(position).getContractStatus() > 1 || list.get(position).getContractStatus() == -1) {
             holder.tvOrderCancle.setVisibility(View.INVISIBLE);
         } else {

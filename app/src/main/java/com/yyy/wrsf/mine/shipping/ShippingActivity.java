@@ -190,7 +190,6 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
      * 获取默认数据
      */
     private void getDefaultData() {
-        getRecPerson();
         getSendPerson();
     }
 
@@ -201,7 +200,7 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
             public void onSuccess(String string) {
                 try {
                     Result result = new Result(string);
-                    LoadingFinish(null);
+//                    LoadingFinish(null);
                     if (result.isSuccess()) {
                         List<AddressB> list = new Gson().fromJson(result.getData(), new TypeToken<List<AddressB>>() {
                         }.getType());
@@ -211,31 +210,34 @@ public class ShippingActivity extends BasePickActivity implements CompoundButton
                                 refreshCompany = true;
                                 companyFilter.setSendRegion(addressSend.getThirdId());
                             }
-                            runOnUiThread(()->{
+                            runOnUiThread(() -> {
                                 clearCompany();
                                 setSend();
                             });
                         }
                     } else {
-                        LoadingFinish(result.getMsg());
+//                        LoadingFinish(result.getMsg());
                         Log.e(AddressSendActivity.class.getName(), result.getMsg());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    LoadingFinish(e.getMessage());
+//                    LoadingFinish(e.getMessage());
+                }finally {
+                    getRecPerson();
                 }
             }
 
             @Override
             public void onFail(Exception e) {
                 e.printStackTrace();
-                LoadingFinish(e.getMessage());
+                getRecPerson();
+//                LoadingFinish(e.getMessage());
             }
         });
     }
 
     private void getRecPerson() {
-        LoadingDialog.showDialogForLoading(this);
+
         new NetUtil(getParams(), NetConfig.address + AddressUrl.getAddressList, RequstType.POST, new ResponseListener() {
             @Override
             public void onSuccess(String string) {

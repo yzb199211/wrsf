@@ -185,7 +185,7 @@ public class OrderBean {
     }
 
     public double getContractTotal() {
-        return discountPrice!=null?discountPrice:contractTotal;
+        return discountPrice!=null?discountPrice:0;
     }
     public double getContractTotalDetail() {
         return contractTotal;

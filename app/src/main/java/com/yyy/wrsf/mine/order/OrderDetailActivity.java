@@ -187,6 +187,8 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
     private void initFee() {
         ecvFeeType.setText(PayTypeEnum.getName(order.getPayType()));
         ecvTotal.setText(getString(R.string.common_rmb) + order.getContractTotalDetail());
+        if (order.getContractTotal() == 0)
+            ecvDisTotal.setVisibility(View.GONE);
         ecvDisTotal.setText(getString(R.string.common_rmb) + order.getContractTotal());
         ecvFeeUser.setText(order.getPlantMemberName());
         ecvFeeBase.setText(getString(R.string.common_rmb) + order.getTransTotal());
