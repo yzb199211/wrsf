@@ -218,8 +218,10 @@
     <string name="order_msg">订单信息</string>
     <string name="order_receive_tel">收件电话</string>
     <string name="order_receive_add">收件地址</string>
+    <string name="order_receive_area">收件地区</string>
     <string name="order_send_tel">寄件电话</string>
     <string name="order_send_add">寄件地址</string>
+    <string name="order_send_area">寄件地区</string>
     <string name="order_pay_notice">支付说明</string>
 
     <string name="order_fee_type">付款方式：</string>

@@ -118,7 +118,25 @@ public class OrderBean {
     private double unpaid;
     private String updateDate;
     private int weight;
+    private String sendAddDetail;
+    private String recAddDetail;
 
+
+    public String getSendAddDetail() {
+        return sendAddDetail;
+    }
+
+    public void setSendAddDetail(String sendAddDetail) {
+        this.sendAddDetail = sendAddDetail;
+    }
+
+    public String getRecAddDetail() {
+        return recAddDetail;
+    }
+
+    public void setRecAddDetail(String recAddDetail) {
+        this.recAddDetail = recAddDetail;
+    }
 
     public String getCompanyName() {
         return TextUtils.isEmpty(companyName) ? "" : companyName;

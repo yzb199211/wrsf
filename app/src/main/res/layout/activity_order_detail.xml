@@ -231,6 +231,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
                 android:background="@color/default_bg_gray" />
+
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_goods_num"
                 android:layout_width="match_parent"
@@ -251,6 +252,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_5"
                 android:background="@color/default_bg_gray" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
@@ -277,6 +279,27 @@
                 app:ecTextColor="@color/text_common"
                 app:ecTextGravity="right"
                 app:ecTitle="@string/order_send_tel"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_send_area"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecHasDetele="false"
+                app:ecSingleLine="false"
+                app:ecTextColor="@color/text_common"
+                app:ecTextGravity="right"
+                app:ecTitle="@string/order_send_area"
                 app:ecTitleColor="@color/text_gray2"
                 app:ecType="tv" />
 
@@ -327,6 +350,27 @@
                 android:background="@color/default_bg_gray" />
 
             <com.yyy.wrsf.view.editclear.EditClearView
+                android:id="@+id/ecv_receive_area"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_common"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                app:ecEditable="false"
+                app:ecHasDetele="false"
+                app:ecSingleLine="false"
+                app:ecTextColor="@color/text_common"
+                app:ecTextGravity="right"
+                app:ecTitle="@string/order_receive_area"
+                app:ecTitleColor="@color/text_gray2"
+                app:ecType="tv" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/default_bg_gray" />
+
+            <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_receive_add"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_common"
@@ -362,6 +406,7 @@
                 app:ecTitle="@string/send_order_total"
                 app:ecTitleColor="@color/text_common"
                 app:ecType="tv" />
+
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_dis_total"
                 android:layout_width="match_parent"
@@ -377,6 +422,7 @@
                 app:ecTitle="@string/send_order_distotal"
                 app:ecTitleColor="@color/text_common"
                 app:ecType="tv" />
+
             <com.yyy.wrsf.view.editclear.EditClearView
                 android:id="@+id/ecv_price"
                 android:layout_width="match_parent"
@@ -392,6 +438,7 @@
                 app:ecTitle="@string/send_order_price"
                 app:ecTitleColor="@color/text_common"
                 app:ecType="tv" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -409,12 +456,12 @@
                     app:ecEditable="false"
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
+                    app:ecTextColor="@color/order_yellow"
                     app:ecTextGravity="right"
                     app:ecTextSize="@dimen/text_common_min"
                     app:ecTitle="@string/order_fee_type"
                     app:ecTitleColor="@color/text_common"
                     app:ecTitleSize="@dimen/text_common_min"
-                    app:ecTextColor="@color/order_yellow"
                     app:ecType="tv" />
 
                 <com.yyy.wrsf.view.editclear.EditClearView
@@ -423,6 +470,7 @@
                     android:layout_height="@dimen/dp_30"
                     android:paddingLeft="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
+                    android:visibility="gone"
                     app:ecEditable="false"
                     app:ecFormatTitle="false"
                     app:ecHasDetele="false"
@@ -430,8 +478,7 @@
                     app:ecTitle="@string/order_fee_user"
                     app:ecTitleColor="@color/text_common"
                     app:ecTitleSize="@dimen/text_common_min"
-                    app:ecType="tv"
-                    android:visibility="gone"/>
+                    app:ecType="tv" />
 
                 <com.yyy.wrsf.view.editclear.EditClearView
                     android:id="@+id/ecv_fee_base"
@@ -627,6 +674,7 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
@@ -634,23 +682,25 @@
         android:background="@color/white"
         android:gravity="right"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/tv_cancel"
             android:layout_width="@dimen/dp_80"
             android:layout_height="match_parent"
             android:background="@color/order_yellow"
-            android:textColor="@color/white"
-            android:text="@string/common_cancel"
             android:gravity="center"
-            android:textSize="@dimen/text_common"/>
+            android:text="@string/common_cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_common" />
+
         <TextView
             android:id="@+id/tv_pay"
             android:layout_width="@dimen/dp_80"
             android:layout_height="match_parent"
             android:background="@color/default_blue"
-            android:textColor="@color/white"
-            android:text="@string/common_pay"
             android:gravity="center"
-            android:textSize="@dimen/text_common"/>
+            android:text="@string/common_pay"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_common" />
     </LinearLayout>
 </LinearLayout>

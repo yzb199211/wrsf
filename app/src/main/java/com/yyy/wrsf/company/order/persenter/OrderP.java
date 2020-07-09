@@ -157,7 +157,7 @@ public class OrderP implements IOrderP {
             public void onSuccess(String data) {
                 if (!destroyFlag) {
                     handler.post(() -> {
-                        iOrderV.finishLoading(BaseApplication.getInstance().getString(R.string.common_cancel_success));
+                        iOrderV.finishLoading(BaseApplication.getInstance().getString(R.string.common_confirm_success));
                         iOrderV.setItemType(pos, ContractStatusEnum.CONFIRM.getStatus());
                         iOrderV.refreshList();
                     });

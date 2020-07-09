@@ -105,6 +105,10 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
     EditClearView ecvPrice;
     @BindView(R.id.ecv_goods_num)
     EditClearView ecvGoodsNum;
+    @BindView(R.id.ecv_send_area)
+    EditClearView ecvSendArea;
+    @BindView(R.id.ecv_receive_area)
+    EditClearView ecvReceiveArea;
 
 
     private OrderBean order;
@@ -173,8 +177,10 @@ public class OrderDetailActivity extends BaseActivity implements ILogView {
 
         ecvSendAdd.setText(order.getSendDetail());
         ecvSendTel.setText(order.getSendTel());
-        ecvReceiveAdd.setText(order.getRecDetail());
+        ecvSendArea.setText(order.getSendAddDetail());
+        ecvReceiveAdd.setText( order.getRecDetail());
         ecvReceiveTel.setText(order.getRecTel());
+        ecvReceiveArea.setText(order.getRecAddDetail());
     }
 
     private void initGoods() {

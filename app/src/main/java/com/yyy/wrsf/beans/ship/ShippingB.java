@@ -92,6 +92,24 @@ public class ShippingB implements Serializable {
     private String updateDate;
     private int weight;//重量
     private int payType;
+    private String recAddDetail;
+    private String sendAddDetail;
+
+    public String getRecAddDetail() {
+        return recAddDetail;
+    }
+
+    public void setRecAddDetail(String recAddDetail) {
+        this.recAddDetail = recAddDetail;
+    }
+
+    public String getSendAddDetail() {
+        return sendAddDetail;
+    }
+
+    public void setSendAddDetail(String sendAddDetail) {
+        this.sendAddDetail = sendAddDetail;
+    }
 
     public int getBaoAsk() {
         return baoAsk;
@@ -480,11 +498,11 @@ public class ShippingB implements Serializable {
         setSendName(send.getContractPerson());
         setSendTel(send.getContractTel());
         setSendRegion(send.getThirdId());
-        setSendDetail(send.getWholeAddress());
+        setSendDetail(send.getDetailAdd());
     }
 
     public void setReceive(AddressB receive) {
-        setRecDetail(receive.getWholeAddress());
+        setRecDetail(receive.getDetailAdd());
         setRecTel(receive.getContractTel());
         setRecRegion(receive.getThirdId());
         setRecName(receive.getContractPerson());
