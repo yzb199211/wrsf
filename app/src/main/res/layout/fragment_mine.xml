@@ -23,7 +23,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_10"
             android:padding="@dimen/dp_10"
-            android:src="@mipmap/icon_setting" />
+            android:src="@mipmap/icon_setting"
+            android:visibility="invisible"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -113,18 +114,7 @@
         </androidx.cardview.widget.CardView>
 
 
-        <com.yyy.wrsf.view.textselect.TextMenuItem
-            android:id="@+id/tmi_about"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/row_common"
-            android:layout_below="@id/cardView"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/white"
-            android:paddingLeft="@dimen/dp_15"
-            android:paddingRight="@dimen/dp_15"
-            app:tmiLeftSrc="@mipmap/mine_about"
-            app:tmiText=""
-            app:tmiTitle="@string/person_about" />
+
 
 
 
@@ -132,10 +122,11 @@
             android:id="@+id/tmi_person_bill"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_common"
-            android:layout_below="@id/tmi_about"
-            android:layout_marginTop="@dimen/dp_1"
+            android:layout_below="@id/cardView"
+            android:layout_marginTop="@dimen/dp_10"
             android:background="@color/white"
             android:paddingLeft="@dimen/dp_15"
+
             android:paddingRight="@dimen/dp_15"
             app:tmiLeftSrc="@mipmap/mine_bill"
             app:tmiTitle="@string/person_bill" />
@@ -175,7 +166,19 @@
             android:paddingRight="@dimen/dp_15"
             app:tmiLeftSrc="@mipmap/mine_pwd"
             app:tmiTitle="@string/person_modify_pwd" />
-
+        <com.yyy.wrsf.view.textselect.TextMenuItem
+            android:id="@+id/tmi_about"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_common"
+            android:layout_below="@id/tmi_modify_pwd"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            app:tmiLeftSrc="@mipmap/mine_about"
+            app:tmiText=""
+            app:tmiTitle="@string/person_about"
+            android:visibility="gone"/>
         <TextView
             android:id="@+id/tv_exit"
             android:layout_width="match_parent"

@@ -68,7 +68,7 @@ public class LoginCodeActivity extends BaseActivity implements ILoginCodeV {
         });
     }
 
-    @OnClick({R.id.tv_pwd_switch, R.id.tv_register, R.id.btn_confirm})
+    @OnClick({R.id.tv_pwd_switch, R.id.tv_register, R.id.btn_confirm, R.id.tv_private})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_pwd_switch:
@@ -80,11 +80,17 @@ public class LoginCodeActivity extends BaseActivity implements ILoginCodeV {
             case R.id.btn_confirm:
                 loginCodeVP.login();
                 break;
+            case R.id.tv_private:
+                go2Private();
+                break;
             default:
                 break;
         }
     }
 
+    private void go2Private() {
+        startActivity(new Intent().setClass(this, PrivateActivity.class));
+    }
 
     @Override
     public void go2Main() {
@@ -106,7 +112,8 @@ public class LoginCodeActivity extends BaseActivity implements ILoginCodeV {
             preferencesHelper.put("roleType", (int) model.getRoleType());
             preferencesHelper.put("token", model.getToken());
             preferencesHelper.put("authority", model.getRoles().get(0).getName());
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
     }
 

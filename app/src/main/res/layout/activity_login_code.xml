@@ -94,6 +94,16 @@
                     android:text="@string/login_register"
                     android:textColor="@color/text_common"
                     android:textSize="@dimen/text_common" />
+
+                <TextView
+                    android:id="@+id/tv_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_private"
+                    android:textColor="@color/default_blue"
+                    android:layout_below="@+id/tv_pwd_switch"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_5"/>
             </RelativeLayout>
         </LinearLayout>
 

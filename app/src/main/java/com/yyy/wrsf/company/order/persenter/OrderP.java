@@ -49,7 +49,7 @@ public class OrderP implements IOrderP {
     public void getData(int type) {
         initParams();
         iOrderV.startLoading();
-        iOrderM.Requset(getParams(), NetConfig.address + OrderUrl.getCompanyPageList, RequstType.POST, new OnResultListener() {
+        iOrderM.Requset(getParams(), NetConfig.address + (iOrderV.getType()==null?OrderUrl.getAllCompanyPageList:OrderUrl.getCompanyPageList), RequstType.POST, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
                 if (!destroyFlag) {

@@ -26,6 +26,7 @@ import com.yyy.wrsf.R;
 import com.yyy.wrsf.base.BaseActivity;
 import com.yyy.wrsf.bean.MemberBean;
 import com.yyy.wrsf.dialog.LoadingDialog;
+import com.yyy.wrsf.dialog.PrivateDialog;
 import com.yyy.wrsf.interfaces.PermissionListener;
 import com.yyy.wrsf.login.persenter.LoginVP;
 import com.yyy.wrsf.login.view.ILoginV;
@@ -64,6 +65,7 @@ public class LoginActivity extends BaseActivity implements ILoginV {
     ProgressDialog progressDialog;
     //    Dialog loading;
     private File file;
+    private PrivateDialog privateDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +85,26 @@ public class LoginActivity extends BaseActivity implements ILoginV {
     }
 
     private void init() {
+        initPrivate();
         initVersion();
         initView();
         loginVP.getVersion();
+    }
+
+    private void initPrivate() {
+        boolean isPrivate = (boolean) preferencesHelper.getSharedPreference("private", false);
+        if (!isPrivate) {
+            privateDialog = new PrivateDialog(this);
+            privateDialog.setOnCloseListener(confirm -> {
+                if (confirm) {
+                    preferencesHelper.put("private", true);
+                } else {
+                    finish();
+                }
+            });
+            privateDialog.show();
+        }
+
     }
 
     private void initVersion() {
@@ -120,7 +139,7 @@ public class LoginActivity extends BaseActivity implements ILoginV {
         });
     }
 
-    @OnClick({R.id.tv_pwd_switch, R.id.tv_register, R.id.btn_confirm})
+    @OnClick({R.id.tv_pwd_switch, R.id.tv_register, R.id.btn_confirm, R.id.tv_private})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_pwd_switch:
@@ -132,7 +151,16 @@ public class LoginActivity extends BaseActivity implements ILoginV {
             case R.id.btn_confirm:
                 loginVP.login();
                 break;
+            case R.id.tv_private:
+                go2Private();
+                break;
+            default:
+                break;
         }
+    }
+
+    private void go2Private() {
+        startActivity(new Intent().setClass(this, PrivateActivity.class));
     }
 
     @Override
@@ -313,5 +341,4 @@ public class LoginActivity extends BaseActivity implements ILoginV {
 
 
     }
-
 }

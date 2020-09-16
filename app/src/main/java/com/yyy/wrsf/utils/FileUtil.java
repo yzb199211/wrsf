@@ -57,7 +57,7 @@ public class FileUtil {
 
     public static String readToText(String filePath) {//按字节流读取可保留原格式，但是有部分乱码情况，根据每次读取的byte数组大小而变化
         StringBuffer txtContent = new StringBuffer();
-        byte[] b = new byte[2048];
+        byte[] b = new byte[20480];
 //        File file = new File(filePath);
         InputStream in = null;
         try {
