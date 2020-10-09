@@ -1,6 +1,8 @@
 package com.yyy.wrsf.main;
 
+import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
 import com.yyy.wrsf.R;
+import com.yyy.wrsf.base.BaseFragment;
+import com.yyy.wrsf.interfaces.PermissionListener;
 import com.yyy.wrsf.login.LoginActivity;
 import com.yyy.wrsf.login.PwdBackActivity;
 import com.yyy.wrsf.mine.MineActivity;
 import com.yyy.wrsf.mine.address.AddressActivity;
-import com.yyy.wrsf.mine.address.AddressReceiveActivity;
 import com.yyy.wrsf.mine.bill.BillActivity;
 import com.yyy.wrsf.mine.bill.BillMonthActivity;
 import com.yyy.wrsf.mine.month.MonthActivity;
@@ -24,12 +25,14 @@ import com.yyy.wrsf.utils.CodeUtil;
 import com.yyy.wrsf.utils.SharedPreferencesHelper;
 import com.yyy.wrsf.view.textselect.TextMenuItem;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment {
 
     @BindView(R.id.iv_logo)
     ImageView ivLogo;
@@ -41,6 +44,8 @@ public class MineFragment extends Fragment {
     TextMenuItem tmiPersonCompany;
 
     SharedPreferencesHelper preferencesHelper;
+    @BindView(R.id.tmi_about)
+    TextMenuItem tmiAbout;
     private String tel;
     private String petname;
     private String company;
@@ -100,6 +105,7 @@ public class MineFragment extends Fragment {
             case R.id.cardView:
                 break;
             case R.id.tmi_about:
+                callPermission(tmiAbout.getText());
                 break;
             case R.id.tmi_person_bill:
                 go2Bill();
@@ -153,5 +159,30 @@ public class MineFragment extends Fragment {
     private void exit() {
         startActivity(new Intent().setClass(getActivity(), LoginActivity.class));
         getActivity().finish();
+    }
+
+    /**
+     * 调用拨号界面
+     *
+     * @param phone 电话号码
+     */
+    private void call(String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void callPermission(String string) {
+        requestRunPermisssion(new String[]{Manifest.permission.CALL_PHONE}, new PermissionListener() {
+            @Override
+            public void onGranted() {
+                call(string);
+            }
+
+            @Override
+            public void onDenied(List<String> deniedPermission) {
+                Toast(getString(R.string.error_permission));
+            }
+        });
     }
 }

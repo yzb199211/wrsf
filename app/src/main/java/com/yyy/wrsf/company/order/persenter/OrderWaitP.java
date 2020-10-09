@@ -47,7 +47,7 @@ public class OrderWaitP implements IOrderP {
     public void getData(int type) {
         initParams();
         iOrderV.startLoading();
-        iOrderM.Requset(getParams(), NetConfig.address + OrderUrl.getCompanyPageList, RequstType.POST, new OnResultListener() {
+        iOrderM.Requset(getParams(), NetConfig.address + OrderUrl.getDaiPageList, RequstType.POST, new OnResultListener() {
             @Override
             public void onSuccess(String string) {
                 if (!destroyFlag) {

@@ -175,15 +175,15 @@
             android:background="@color/white"
             android:paddingLeft="@dimen/dp_15"
             android:paddingRight="@dimen/dp_15"
-            app:tmiLeftSrc="@mipmap/mine_about"
-            app:tmiText=""
-            app:tmiTitle="@string/person_about"
-            android:visibility="gone"/>
+            app:tmiLeftSrc="@mipmap/icon_phone"
+            app:tmiText="400-926-6767"
+            app:tmiTitle="@string/person_phone"
+          />
         <TextView
             android:id="@+id/tv_exit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_common"
-            android:layout_below="@id/tmi_modify_pwd"
+            android:layout_below="@id/tmi_about"
             android:layout_marginTop="@dimen/dp_10"
             android:background="@color/white"
             android:gravity="center"
